@@ -23,8 +23,8 @@
             --color-border: #E5E8EC;
             --shadow-card: 0 4px 16px rgba(0, 85, 164, 0.08);
             --shadow-card-hover: 0 12px 40px rgba(0, 85, 164, 0.15);
-            --radius-card: 16px;
-            --radius-header: 20px;
+            --radius-card: 0px;
+            --radius-header: 0px;
             --transition: 0.3s ease;
         }
 
@@ -299,15 +299,15 @@
         }
         
         /* ================================================================
-           ШАПКА — логотип слева, заголовок по центру
+           ШАПКА — логотип справа, заголовок по центру
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-header);
-            padding: 20px 28px;
-            margin-bottom: 24px;
+            border-radius: 0px;
+            padding: 24px 32px;
+            margin-bottom: 28px;
             box-shadow: 0 8px 40px rgba(0, 85, 164, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
@@ -315,10 +315,10 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            min-height: 100px;
+            min-height: 110px;
         }
         
-        /* Волнистые пересекающиеся линии вместо синей полосы */
+        /* Волнистые пересекающиеся линии */
         .header::before {
             content: '';
             position: absolute;
@@ -329,7 +329,6 @@
             z-index: 0;
             pointer-events: none;
             background: 
-                /* Первая волнистая линия */
                 repeating-linear-gradient(
                     15deg,
                     transparent 0px,
@@ -340,7 +339,6 @@
                     transparent 83px,
                     transparent 160px
                 ),
-                /* Вторая волнистая линия (другой угол) */
                 repeating-linear-gradient(
                     -25deg,
                     transparent 0px,
@@ -351,7 +349,6 @@
                     transparent 126px,
                     transparent 240px
                 ),
-                /* Третья волнистая линия (более пологая) */
                 repeating-linear-gradient(
                     5deg,
                     transparent 0px,
@@ -362,7 +359,6 @@
                     transparent 209px,
                     transparent 400px
                 ),
-                /* Четвёртая волнистая линия (обратный угол) */
                 repeating-linear-gradient(
                     -40deg,
                     transparent 0px,
@@ -376,30 +372,15 @@
             opacity: 0.5;
         }
         
-        /* Логотип слева */
+        /* Левая часть — пустая для баланса */
         .header-left {
-            flex: 0 0 auto;
+            flex: 0 0 50px;
             z-index: 1;
-            display: flex;
-            align-items: center;
-        }
-        
-        .header-left .logo-img {
-            display: block;
-            max-height: 50px;
-            width: auto;
-            filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
-            transition: filter var(--transition);
-            cursor: pointer;
-        }
-        
-        .header-left .logo-img:hover {
-            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
         }
         
         /* Заголовок по центру */
         .header-center {
-            flex: 1;
+            flex: 2;
             z-index: 1;
             text-align: center;
             padding: 0 20px;
@@ -407,71 +388,92 @@
         
         .header-center h1 {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: 42px;
-            font-weight: 300;
-            letter-spacing: 5px;
+            font-size: 52px;
+            font-weight: 200;
+            letter-spacing: 6px;
             color: #000000;
             text-transform: uppercase;
-            line-height: 1.1;
+            line-height: 1.05;
         }
         
         .header-center .subtitle {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: 13px;
-            font-weight: 300;
+            font-size: 17px;
+            font-weight: 200;
             color: var(--color-text-secondary);
-            margin-top: 2px;
-            letter-spacing: 1px;
+            margin-top: 4px;
+            letter-spacing: 2px;
         }
         
-        /* Правая часть — пустая для баланса */
+        /* Логотип справа */
         .header-right {
-            flex: 0 0 50px;
+            flex: 0 0 auto;
             z-index: 1;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        
+        .header-right .logo-img {
+            display: block;
+            max-height: 55px;
+            width: auto;
+            filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
+            transition: filter var(--transition);
+            cursor: pointer;
+        }
+        
+        .header-right .logo-img:hover {
+            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
         }
         
         /* ================================================================
-           СЕТКА КАТАЛОГА
+           СЕТКА КАТАЛОГА — параллелограммы
            ================================================================ */
         .grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 16px;
             width: 100%;
+            margin: 0 auto;
         }
         
         /* ================================================================
-           КАРТОЧКА ТОВАРА (без описания)
+           КАРТОЧКА-ПАРАЛЛЕЛОГРАММ (без описания)
            ================================================================ */
         .card {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: var(--radius-card);
+            border-radius: 0px;
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 85, 164, 0.06);
             cursor: pointer;
             transition: transform var(--transition), box-shadow var(--transition);
             border: 1px solid rgba(255, 255, 255, 0.3);
+            transform: skewX(-3deg) scale(1);
+            position: relative;
         }
         
         .card:hover {
-            transform: translateY(-8px) scale(1.01);
+            transform: skewX(-3deg) translateY(-8px) scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.12);
             border-color: rgba(0, 85, 164, 0.15);
             background: rgba(255, 255, 255, 0.98);
         }
         
         .card:active {
-            transform: scale(0.97);
+            transform: skewX(-3deg) scale(0.97);
         }
         
+        /* Выравниваем содержимое внутри параллелограмма */
         .card .image {
             width: 100%;
             height: 200px;
             object-fit: cover;
             display: block;
             background: #E8ECF0;
+            transform: skewX(3deg) scale(1.02);
         }
         
         .card .image-placeholder {
@@ -483,18 +485,20 @@
             font-size: 56px;
             background: #E8ECF0;
             color: #B0B8C0;
+            transform: skewX(3deg);
         }
         
         .card .info {
             padding: 16px 18px 20px;
             text-align: center;
+            transform: skewX(3deg);
         }
         
         .card .name {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-weight: 400;
+            font-weight: 300;
             font-size: 17px;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             color: #000000;
             text-transform: uppercase;
         }
@@ -502,26 +506,44 @@
         .card .price {
             color: var(--color-primary);
             font-size: 16px;
-            font-weight: 500;
+            font-weight: 400;
             margin-top: 4px;
+            letter-spacing: 0.5px;
         }
         
-        .card .badge {
-            display: inline-block;
-            padding: 3px 14px;
-            background: rgba(0, 85, 164, 0.06);
-            border-radius: 12px;
-            font-size: 11px;
-            color: var(--color-primary);
-            text-transform: uppercase;
-            margin-top: 8px;
-            letter-spacing: 0.8px;
-            font-weight: 500;
-            border: 1px solid rgba(0, 85, 164, 0.04);
+        /* Первая и последняя карточки — завершают прямоугольник */
+        .card:first-child {
+            transform: skewX(-5deg) scale(1);
+            border-left: 2px solid rgba(0, 85, 164, 0.1);
+        }
+        
+        .card:first-child:hover {
+            transform: skewX(-5deg) translateY(-8px) scale(1.02);
+        }
+        
+        .card:last-child {
+            transform: skewX(0deg) scale(1);
+            border-right: 2px solid rgba(0, 85, 164, 0.1);
+        }
+        
+        .card:last-child:hover {
+            transform: skewX(0deg) translateY(-8px) scale(1.02);
+        }
+        
+        .card:first-child .image,
+        .card:first-child .image-placeholder,
+        .card:first-child .info {
+            transform: skewX(5deg);
+        }
+        
+        .card:last-child .image,
+        .card:last-child .image-placeholder,
+        .card:last-child .info {
+            transform: skewX(0deg);
         }
         
         /* ================================================================
-           ФУТЕР (без логотипа)
+           ФУТЕР
            ================================================================ */
         .footer {
             grid-column: 1 / -1;
@@ -583,7 +605,7 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: var(--radius-header);
+            border-radius: 0px;
             max-width: 520px;
             width: 100%;
             padding: 32px 28px 28px;
@@ -617,8 +639,8 @@
         .modal h2 {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 22px;
-            font-weight: 300;
-            letter-spacing: 1px;
+            font-weight: 200;
+            letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
             margin-top: 4px;
@@ -628,7 +650,7 @@
         .modal .modal-price {
             font-size: 20px;
             color: var(--color-primary);
-            font-weight: 500;
+            font-weight: 400;
             margin-bottom: 12px;
         }
         
@@ -653,7 +675,7 @@
             color: var(--color-text-light);
             text-transform: uppercase;
             margin-bottom: 4px;
-            font-weight: 500;
+            font-weight: 400;
         }
         
         .modal .modal-section p {
@@ -672,11 +694,11 @@
             background: var(--color-primary);
             color: var(--color-white);
             border: none;
-            border-radius: 12px;
+            border-radius: 0px;
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
-            font-weight: 400;
-            letter-spacing: 1px;
+            font-weight: 300;
+            letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all var(--transition);
@@ -693,7 +715,19 @@
            АДАПТИВНОСТЬ
            ================================================================ */
         @media (max-width: 1024px) {
-            .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 14px; }
+            
+            .card:first-child { transform: skewX(-3deg) scale(1); }
+            .card:first-child:hover { transform: skewX(-3deg) translateY(-8px) scale(1.02); }
+            .card:first-child .image,
+            .card:first-child .image-placeholder,
+            .card:first-child .info { transform: skewX(3deg); }
+            
+            .card:last-child { transform: skewX(-3deg) scale(1); }
+            .card:last-child:hover { transform: skewX(-3deg) translateY(-8px) scale(1.02); }
+            .card:last-child .image,
+            .card:last-child .image-placeholder,
+            .card:last-child .info { transform: skewX(3deg); }
         }
         
         @media (max-width: 768px) {
@@ -703,21 +737,48 @@
                 flex-direction: column;
                 align-items: center;
                 padding: 16px 20px;
-                gap: 8px;
+                gap: 6px;
                 min-height: auto;
             }
             
-            .header-left { flex: none; }
-            .header-left .logo-img { max-height: 40px; }
+            .header-left { display: none; }
             
             .header-center { padding: 0; }
-            .header-center h1 { font-size: 28px; letter-spacing: 3px; }
-            .header-center .subtitle { font-size: 12px; }
+            .header-center h1 { font-size: 32px; letter-spacing: 4px; }
+            .header-center .subtitle { font-size: 14px; }
             
-            .header-right { display: none; }
+            .header-right { flex: none; margin-left: 0; }
+            .header-right .logo-img { max-height: 40px; }
             
             .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
             .card .image { height: 150px; }
+            
+            /* На мобильных убираем наклон */
+            .card,
+            .card:first-child,
+            .card:last-child {
+                transform: skewX(0deg) scale(1);
+                border-left: none;
+                border-right: none;
+            }
+            
+            .card:hover,
+            .card:first-child:hover,
+            .card:last-child:hover {
+                transform: skewX(0deg) translateY(-8px) scale(1.02);
+            }
+            
+            .card .image,
+            .card .image-placeholder,
+            .card .info,
+            .card:first-child .image,
+            .card:first-child .image-placeholder,
+            .card:first-child .info,
+            .card:last-child .image,
+            .card:last-child .image-placeholder,
+            .card:last-child .info {
+                transform: skewX(0deg);
+            }
             
             .geo-shape:nth-child(1),
             .geo-shape:nth-child(2),
@@ -728,18 +789,19 @@
             .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
             .card .image { height: 120px; }
             .card .info { padding: 10px 12px 14px; }
-            .card .name { font-size: 14px; }
+            .card .name { font-size: 14px; letter-spacing: 1px; }
             .card .price { font-size: 13px; }
-            .header-center h1 { font-size: 22px; letter-spacing: 2px; }
-            .header-left .logo-img { max-height: 32px; }
+            .header-center h1 { font-size: 26px; letter-spacing: 3px; }
+            .header-center .subtitle { font-size: 12px; }
+            .header-right .logo-img { max-height: 32px; }
             .modal { padding: 24px 16px 20px; }
             .geo-shape:nth-child(3),
             .geo-shape:nth-child(4) { display: none; }
         }
         
         .modal::-webkit-scrollbar { width: 4px; }
-        .modal::-webkit-scrollbar-track { background: var(--color-light-bg); border-radius: 4px; }
-        .modal::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 4px; }
+        .modal::-webkit-scrollbar-track { background: var(--color-light-bg); border-radius: 0px; }
+        .modal::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 0px; }
     </style>
 </head>
 <body>
@@ -758,19 +820,19 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ШАПКА: логотип слева, заголовок по центру -->
+        <!-- ШАПКА: логотип справа, заголовок по центру -->
         <div class="header">
-            <div class="header-left">
+            <div class="header-left"></div>
+            <div class="header-center">
+                <h1>Террасная доска</h1>
+                <div class="subtitle">Премиальные материалы для вашей террасы</div>
+            </div>
+            <div class="header-right">
                 <img class="logo-img" 
                      src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
                      alt="PRINCIP FLOOR"
                      onclick="window.open('https://principfloor.ru/', '_blank')">
             </div>
-            <div class="header-center">
-                <h1>Террасная доска</h1>
-                <div class="subtitle">Премиальные материалы для вашей террасы</div>
-            </div>
-            <div class="header-right"></div>
         </div>
 
         <!-- СЕТКА КАТАЛОГА -->
@@ -914,14 +976,13 @@
                     <div class="info">
                         <div class="name">${cat.name}</div>
                         <div class="price">${cat.price}</div>
-                        <div class="badge">${cat.badge}</div>
                     </div>
                 `;
                 card.onclick = () => openModal(cat.id);
                 grid.appendChild(card);
             });
             
-            // Футер (без логотипа)
+            // Футер
             const footer = document.createElement('div');
             footer.className = 'footer';
             footer.innerHTML = `
