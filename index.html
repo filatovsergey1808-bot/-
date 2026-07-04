@@ -29,7 +29,7 @@
         }
 
         /* ================================================================
-           ОБЪЕМНЫЙ ФОН С ГЕОМЕТРИЕЙ
+           ОСНОВНОЙ ФОН
            ================================================================ */
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
@@ -41,7 +41,7 @@
             overflow-x: hidden;
         }
         
-        /* --- СЛОЙ 1: Глубокий градиентный фон --- */
+        /* --- СЛОЙ 1: Базовый градиент --- */
         body::before {
             content: '';
             position: fixed;
@@ -53,12 +53,12 @@
             background: 
                 radial-gradient(ellipse at 20% 50%, rgba(0, 85, 164, 0.05) 0%, transparent 60%),
                 radial-gradient(ellipse at 80% 30%, rgba(0, 85, 164, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(0, 85, 164, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(0, 85, 165, 0.03) 0%, transparent 50%),
                 linear-gradient(180deg, #F8F9FC 0%, #E8ECF4 100%);
             pointer-events: none;
         }
         
-        /* --- СЛОЙ 2: Объёмные диагональные полосы с 3D-эффектом --- */
+        /* --- СЛОЙ 2: Сетка с разной геометрией --- */
         body::after {
             content: '';
             position: fixed;
@@ -69,53 +69,99 @@
             z-index: 0;
             pointer-events: none;
             background: 
-                /* Полосы с тенью для объёма */
+                /* ---- УЗКИЕ КОРОТКИЕ ЛИНИИ (45°) ---- */
                 repeating-linear-gradient(
                     45deg,
                     transparent 0px,
-                    transparent 80px,
-                    rgba(0, 85, 164, 0.04) 80px,
-                    rgba(0, 85, 164, 0.08) 81px,
-                    rgba(0, 85, 164, 0.04) 82px,
-                    transparent 83px,
-                    transparent 160px
+                    transparent 60px,
+                    rgba(0, 85, 164, 0.04) 60px,
+                    rgba(0, 85, 164, 0.07) 61px,
+                    rgba(0, 85, 164, 0.04) 62px,
+                    transparent 63px,
+                    transparent 120px
                 ),
+                /* ---- ШИРОКИЕ ДЛИННЫЕ ЛИНИИ (-45°) ---- */
                 repeating-linear-gradient(
                     -45deg,
                     transparent 0px,
-                    transparent 100px,
-                    rgba(0, 85, 164, 0.03) 100px,
-                    rgba(0, 85, 164, 0.06) 101px,
-                    rgba(0, 85, 164, 0.03) 102px,
-                    transparent 103px,
-                    transparent 200px
+                    transparent 200px,
+                    rgba(0, 85, 164, 0.025) 200px,
+                    rgba(0, 85, 164, 0.06) 202px,
+                    rgba(0, 85, 164, 0.025) 204px,
+                    transparent 206px,
+                    transparent 400px
                 ),
-                /* Широкие объёмные полосы */
+                /* ---- УЗКИЕ ДЛИННЫЕ ЛИНИИ (30°) ---- */
                 repeating-linear-gradient(
-                    45deg,
+                    30deg,
+                    transparent 0px,
+                    transparent 140px,
+                    rgba(0, 85, 164, 0.02) 140px,
+                    rgba(0, 85, 164, 0.05) 141px,
+                    rgba(0, 85, 164, 0.02) 142px,
+                    transparent 143px,
+                    transparent 280px
+                ),
+                /* ---- ШИРОКИЕ КОРОТКИЕ ЛИНИИ (-30°) ---- */
+                repeating-linear-gradient(
+                    -30deg,
+                    transparent 0px,
+                    transparent 90px,
+                    rgba(0, 85, 164, 0.03) 90px,
+                    rgba(0, 85, 164, 0.08) 92px,
+                    rgba(0, 85, 164, 0.03) 94px,
+                    transparent 96px,
+                    transparent 180px
+                ),
+                /* ---- СРЕДНИЕ ЛИНИИ С ПРОМЕЖУТКАМИ (15°) ---- */
+                repeating-linear-gradient(
+                    15deg,
+                    transparent 0px,
+                    transparent 160px,
+                    rgba(0, 85, 164, 0.015) 160px,
+                    rgba(0, 85, 164, 0.04) 162px,
+                    rgba(0, 85, 164, 0.015) 164px,
+                    transparent 166px,
+                    transparent 320px
+                ),
+                /* ---- СРЕДНИЕ ЛИНИИ С ПРОМЕЖУТКАМИ (-15°) ---- */
+                repeating-linear-gradient(
+                    -15deg,
                     transparent 0px,
                     transparent 240px,
-                    rgba(0, 85, 164, 0.02) 240px,
-                    rgba(0, 85, 164, 0.05) 242px,
-                    rgba(0, 85, 164, 0.02) 244px,
-                    transparent 246px,
+                    rgba(0, 85, 164, 0.01) 240px,
+                    rgba(0, 85, 164, 0.035) 243px,
+                    rgba(0, 85, 164, 0.01) 246px,
+                    transparent 249px,
                     transparent 480px
                 ),
+                /* ---- ОЧЕНЬ ШИРОКИЕ РЕДКИЕ ЛИНИИ (50°) ---- */
                 repeating-linear-gradient(
-                    -45deg,
+                    50deg,
                     transparent 0px,
-                    transparent 300px,
-                    rgba(0, 85, 164, 0.015) 300px,
-                    rgba(0, 85, 164, 0.04) 302px,
-                    rgba(0, 85, 164, 0.015) 304px,
-                    transparent 306px,
-                    transparent 600px
+                    transparent 350px,
+                    rgba(0, 85, 164, 0.01) 350px,
+                    rgba(0, 85, 164, 0.03) 354px,
+                    rgba(0, 85, 164, 0.01) 358px,
+                    transparent 362px,
+                    transparent 700px
+                ),
+                /* ---- ОЧЕНЬ УЗКИЕ ЧАСТЫЕ ЛИНИИ (-50°) ---- */
+                repeating-linear-gradient(
+                    -50deg,
+                    transparent 0px,
+                    transparent 40px,
+                    rgba(0, 85, 164, 0.02) 40px,
+                    rgba(0, 85, 164, 0.05) 41px,
+                    rgba(0, 85, 164, 0.02) 42px,
+                    transparent 43px,
+                    transparent 80px
                 );
-            transform: rotate(0deg) scale(1.2);
-            animation: geometryFloat 20s ease-in-out infinite alternate;
+            transform: rotate(0deg) scale(1.1);
+            animation: gridFloat 25s ease-in-out infinite alternate;
         }
         
-        /* --- СЛОЙ 3: Тонкие световые линии для объёма --- */
+        /* --- СЛОЙ 3: Световые акценты для объёма --- */
         .geometry-overlay {
             position: fixed;
             top: -50%;
@@ -125,26 +171,52 @@
             z-index: 0;
             pointer-events: none;
             background: 
+                /* Тонкие светлые линии для бликов */
                 repeating-linear-gradient(
                     35deg,
                     transparent 0px,
-                    transparent 150px,
-                    rgba(255, 255, 255, 0.03) 150px,
-                    rgba(255, 255, 255, 0.01) 151px,
-                    transparent 152px,
-                    transparent 300px
+                    transparent 180px,
+                    rgba(255, 255, 255, 0.04) 180px,
+                    rgba(255, 255, 255, 0.01) 181px,
+                    transparent 182px,
+                    transparent 360px
                 ),
                 repeating-linear-gradient(
                     -35deg,
                     transparent 0px,
-                    transparent 180px,
-                    rgba(255, 255, 255, 0.02) 180px,
-                    rgba(255, 255, 255, 0.01) 181px,
-                    transparent 182px,
-                    transparent 360px
-                );
-            transform: rotate(0deg) scale(1.2);
-            animation: geometryFloat 25s ease-in-out infinite alternate-reverse;
+                    transparent 220px,
+                    rgba(255, 255, 255, 0.03) 220px,
+                    rgba(255, 255, 255, 0.01) 221px,
+                    transparent 222px,
+                    transparent 440px
+                ),
+                /* Точечные световые пятна */
+                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.02) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.015) 0%, transparent 40%);
+            transform: rotate(0deg) scale(1.1);
+            animation: gridFloat 20s ease-in-out infinite alternate-reverse;
+        }
+        
+        /* --- АНИМАЦИЯ ДВИЖЕНИЯ СЕТКИ --- */
+        @keyframes gridFloat {
+            0% {
+                transform: rotate(0deg) scale(1.05) translate(0, 0);
+            }
+            20% {
+                transform: rotate(0.5deg) scale(1.08) translate(1%, -1%);
+            }
+            40% {
+                transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%);
+            }
+            60% {
+                transform: rotate(0.8deg) scale(1.1) translate(1%, 1%);
+            }
+            80% {
+                transform: rotate(-0.5deg) scale(1.06) translate(-1%, -1%);
+            }
+            100% {
+                transform: rotate(0.3deg) scale(1.12) translate(0, 0);
+            }
         }
         
         /* --- СЛОЙ 4: Парящие геометрические фигуры --- */
@@ -163,145 +235,164 @@
             position: absolute;
             border: 1px solid rgba(0, 85, 164, 0.04);
             border-radius: 2px;
-            animation: shapeFloat 15s ease-in-out infinite alternate;
+            animation: shapeFloat 18s ease-in-out infinite alternate;
         }
         
+        /* Разные фигуры */
         .geo-shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
+            width: 400px;
+            height: 200px;
             top: -50px;
             right: -100px;
             transform: rotate(25deg);
-            background: linear-gradient(135deg, rgba(0, 85, 164, 0.02), rgba(0, 85, 164, 0.06));
-            animation-duration: 18s;
+            background: linear-gradient(135deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
+            animation-duration: 22s;
         }
         
         .geo-shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
+            width: 150px;
+            height: 300px;
             bottom: 50px;
-            left: -80px;
+            left: -60px;
             transform: rotate(-15deg);
-            background: linear-gradient(225deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
-            animation-duration: 22s;
-            animation-delay: -5s;
+            background: linear-gradient(225deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
+            animation-duration: 26s;
+            animation-delay: -6s;
         }
         
         .geo-shape:nth-child(3) {
-            width: 150px;
-            height: 150px;
-            top: 40%;
-            left: 60%;
+            width: 100px;
+            height: 100px;
+            top: 35%;
+            left: 55%;
             transform: rotate(45deg);
-            background: linear-gradient(45deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
-            animation-duration: 25s;
-            animation-delay: -10s;
+            background: linear-gradient(45deg, rgba(0, 85, 164, 0.02), rgba(0, 85, 164, 0.06));
+            animation-duration: 30s;
+            animation-delay: -12s;
         }
         
         .geo-shape:nth-child(4) {
-            width: 100px;
-            height: 100px;
-            top: 20%;
-            left: 20%;
+            width: 250px;
+            height: 150px;
+            top: 15%;
+            left: 15%;
             transform: rotate(60deg);
-            background: linear-gradient(135deg, rgba(0, 85, 164, 0.02), rgba(0, 85, 164, 0.06));
-            animation-duration: 20s;
-            animation-delay: -3s;
+            background: linear-gradient(135deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
+            animation-duration: 24s;
+            animation-delay: -4s;
         }
         
         .geo-shape:nth-child(5) {
-            width: 250px;
-            height: 250px;
-            bottom: -50px;
-            right: 30%;
+            width: 180px;
+            height: 180px;
+            bottom: -30px;
+            right: 25%;
             transform: rotate(-30deg);
-            background: linear-gradient(225deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
+            background: linear-gradient(225deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
             animation-duration: 28s;
-            animation-delay: -8s;
+            animation-delay: -9s;
         }
         
-        /* --- АНИМАЦИИ --- */
-        @keyframes geometryFloat {
-            0% {
-                transform: rotate(0deg) scale(1.1) translate(0, 0);
-            }
-            25% {
-                transform: rotate(1deg) scale(1.15) translate(1%, -1%);
-            }
-            50% {
-                transform: rotate(-0.5deg) scale(1.08) translate(-1%, 1%);
-            }
-            75% {
-                transform: rotate(0.5deg) scale(1.12) translate(1%, 1%);
-            }
-            100% {
-                transform: rotate(-1deg) scale(1.18) translate(-1%, -1%);
-            }
+        .geo-shape:nth-child(6) {
+            width: 80px;
+            height: 250px;
+            top: 55%;
+            right: 10%;
+            transform: rotate(75deg);
+            background: linear-gradient(135deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.035));
+            animation-duration: 20s;
+            animation-delay: -2s;
+        }
+        
+        .geo-shape:nth-child(7) {
+            width: 200px;
+            height: 100px;
+            top: 5%;
+            left: 40%;
+            transform: rotate(-45deg);
+            background: linear-gradient(225deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
+            animation-duration: 32s;
+            animation-delay: -15s;
         }
         
         @keyframes shapeFloat {
             0% {
                 transform: rotate(25deg) translate(0, 0) scale(1);
-                opacity: 0.6;
+                opacity: 0.4;
             }
             33% {
-                transform: rotate(35deg) translate(10px, -15px) scale(1.05);
-                opacity: 1;
+                transform: rotate(35deg) translate(12px, -18px) scale(1.06);
+                opacity: 0.9;
             }
             66% {
-                transform: rotate(15deg) translate(-10px, 10px) scale(0.95);
-                opacity: 0.7;
+                transform: rotate(15deg) translate(-12px, 12px) scale(0.94);
+                opacity: 0.5;
             }
             100% {
-                transform: rotate(30deg) translate(5px, -5px) scale(1.02);
-                opacity: 0.8;
+                transform: rotate(30deg) translate(6px, -6px) scale(1.03);
+                opacity: 0.7;
             }
         }
         
         @keyframes shapeFloat2 {
             0% {
                 transform: rotate(-15deg) translate(0, 0) scale(1);
-                opacity: 0.5;
+                opacity: 0.3;
             }
             50% {
-                transform: rotate(-25deg) translate(-15px, 10px) scale(1.08);
-                opacity: 0.9;
+                transform: rotate(-25deg) translate(-18px, 12px) scale(1.08);
+                opacity: 0.8;
             }
             100% {
-                transform: rotate(-5deg) translate(10px, -10px) scale(0.95);
-                opacity: 0.6;
+                transform: rotate(-5deg) translate(12px, -12px) scale(0.94);
+                opacity: 0.5;
             }
         }
         
         @keyframes shapeFloat3 {
             0% {
                 transform: rotate(45deg) translate(0, 0) scale(1);
-                opacity: 0.4;
+                opacity: 0.3;
             }
             100% {
-                transform: rotate(55deg) translate(8px, -12px) scale(1.1);
+                transform: rotate(55deg) translate(10px, -15px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+        
+        @keyframes shapeFloat4 {
+            0% {
+                transform: rotate(60deg) translate(0, 0) scale(1);
+                opacity: 0.2;
+            }
+            100% {
+                transform: rotate(70deg) translate(-8px, 14px) scale(1.12);
+                opacity: 0.7;
+            }
+        }
+        
+        @keyframes shapeFloat5 {
+            0% {
+                transform: rotate(-30deg) translate(0, 0) scale(1);
+                opacity: 0.3;
+            }
+            100% {
+                transform: rotate(-40deg) translate(15px, -10px) scale(1.05);
                 opacity: 0.8;
             }
         }
         
         /* Применяем разные анимации к фигурам */
-        .geo-shape:nth-child(2) {
-            animation-name: shapeFloat2;
-        }
+        .geo-shape:nth-child(2) { animation-name: shapeFloat2; }
+        .geo-shape:nth-child(3) { animation-name: shapeFloat3; }
+        .geo-shape:nth-child(4) { animation-name: shapeFloat4; }
+        .geo-shape:nth-child(5) { animation-name: shapeFloat5; }
+        .geo-shape:nth-child(6) { animation-name: shapeFloat2; }
+        .geo-shape:nth-child(7) { animation-name: shapeFloat3; }
         
-        .geo-shape:nth-child(3) {
-            animation-name: shapeFloat3;
-        }
-        
-        .geo-shape:nth-child(4) {
-            animation-name: shapeFloat2;
-        }
-        
-        .geo-shape:nth-child(5) {
-            animation-name: shapeFloat3;
-        }
-        
-        /* --- ОСНОВНОЙ КОНТЕНТ --- */
+        /* ================================================================
+           ОСНОВНОЙ КОНТЕНТ
+           ================================================================ */
         #app {
             position: relative;
             z-index: 1;
@@ -339,12 +430,8 @@
         }
         
         @keyframes gradientMove {
-            0%, 100% {
-                background-position: 0% 0%;
-            }
-            50% {
-                background-position: 100% 0%;
-            }
+            0%, 100% { background-position: 0% 0%; }
+            50% { background-position: 100% 0%; }
         }
         
         .header h1 {
@@ -686,97 +773,44 @@
            АДАПТИВНОСТЬ
            ================================================================ */
         @media (max-width: 1024px) {
-            .grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 16px;
-            }
+            .grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
         }
         
         @media (max-width: 768px) {
-            body {
-                padding: 12px;
-            }
-            
-            .grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 12px;
-            }
-            
-            .card .image {
-                height: 150px;
-            }
-            
-            .header h1 {
-                font-size: 22px;
-                letter-spacing: 3px;
-            }
-            
-            .header {
-                padding: 24px 16px 20px;
-            }
-            
-            .logo-wrapper img {
-                width: 180px;
-            }
-            
+            body { padding: 12px; }
+            .grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+            .card .image { height: 150px; }
+            .header h1 { font-size: 22px; letter-spacing: 3px; }
+            .header { padding: 24px 16px 20px; }
+            .logo-wrapper img { width: 180px; }
             .geo-shape:nth-child(1),
             .geo-shape:nth-child(2),
-            .geo-shape:nth-child(5) {
-                display: none;
-            }
+            .geo-shape:nth-child(5),
+            .geo-shape:nth-child(6),
+            .geo-shape:nth-child(7) { display: none; }
         }
         
         @media (max-width: 480px) {
-            .grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 10px;
-            }
-            
-            .card .image {
-                height: 120px;
-            }
-            
-            .card .info {
-                padding: 10px 12px 14px;
-            }
-            
-            .card .name {
-                font-size: 14px;
-            }
-            
-            .card .price {
-                font-size: 13px;
-            }
-            
-            .header h1 {
-                font-size: 18px;
-                letter-spacing: 2px;
-            }
-            
-            .modal {
-                padding: 24px 16px 20px;
-            }
+            .grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .card .image { height: 120px; }
+            .card .info { padding: 10px 12px 14px; }
+            .card .name { font-size: 14px; }
+            .card .price { font-size: 13px; }
+            .header h1 { font-size: 18px; letter-spacing: 2px; }
+            .modal { padding: 24px 16px 20px; }
+            .geo-shape:nth-child(3),
+            .geo-shape:nth-child(4) { display: none; }
         }
         
         /* Стилизация скроллбара */
-        .modal::-webkit-scrollbar {
-            width: 4px;
-        }
-        
-        .modal::-webkit-scrollbar-track {
-            background: var(--color-light-bg);
-            border-radius: 4px;
-        }
-        
-        .modal::-webkit-scrollbar-thumb {
-            background: var(--color-primary);
-            border-radius: 4px;
-        }
+        .modal::-webkit-scrollbar { width: 4px; }
+        .modal::-webkit-scrollbar-track { background: var(--color-light-bg); border-radius: 4px; }
+        .modal::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 4px; }
     </style>
 </head>
 <body>
 
-    <!-- ДОПОЛНИТЕЛЬНЫЙ СЛОЙ ГЕОМЕТРИИ -->
+    <!-- СВЕТОВОЙ СЛОЙ -->
     <div class="geometry-overlay"></div>
     
     <!-- ПАРЯЩИЕ ГЕОМЕТРИЧЕСКИЕ ФИГУРЫ -->
@@ -786,18 +820,18 @@
         <div class="geo-shape"></div>
         <div class="geo-shape"></div>
         <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
+        <div class="geo-shape"></div>
     </div>
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ШАПКА -->
         <div class="header">
             <h1>Террасная <span>доска</span></h1>
             <div class="subtitle">Премиальные материалы для вашей террасы</div>
             <div class="accent-line"></div>
         </div>
 
-        <!-- СЕТКА -->
         <div class="grid" id="grid"></div>
     </div>
 
