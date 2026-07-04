@@ -15,6 +15,25 @@
     
     <style>
         /* ================================================================
+           CSS ПЕРЕМЕННЫЕ — ПАЛИТРА PRINCIP FLOOR
+           ================================================================ */
+        :root {
+            --color-background: #F9F6F2;
+            --color-text-primary: #2C2C2C;
+            --color-text-secondary: #8C8C8C;
+            --color-accent: #C9A87C;
+            --color-accent-hover: #B8986A;
+            --color-white: #FFFFFF;
+            --color-border: #EBE7E2;
+            --color-card-bg: #FFFFFF;
+            --shadow-card: 0 4px 16px rgba(44, 44, 44, 0.06);
+            --shadow-card-hover: 0 12px 40px rgba(44, 44, 44, 0.10);
+            --radius-card: 16px;
+            --radius-header: 20px;
+            --transition: 0.3s ease;
+        }
+
+        /* ================================================================
            ОСНОВНЫЕ СТИЛИ
            ================================================================ */
         * {
@@ -26,8 +45,8 @@
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
-            background: #f5f0eb;
-            color: #2c2825;
+            background: var(--color-background);
+            color: var(--color-text-primary);
             padding: 20px;
         }
         
@@ -40,31 +59,31 @@
            ШАПКА
            ================================================================ */
         .header {
-            background: #ffffff;
-            border-radius: 20px;
+            background: var(--color-white);
+            border-radius: var(--radius-header);
             padding: 32px 24px 28px 24px;
             margin-bottom: 24px;
             text-align: center;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-            border: 1px solid rgba(44, 40, 37, 0.06);
+            box-shadow: var(--shadow-card);
+            border: 1px solid var(--color-border);
         }
         
         .header h1 {
             font-size: 28px;
             font-weight: 300;
             letter-spacing: 4px;
-            color: #2c2825;
+            color: var(--color-text-primary);
             text-transform: uppercase;
         }
         
         .header h1 span {
-            color: #c9a87c;
+            color: var(--color-accent);
         }
         
         .header .subtitle {
             font-size: 15px;
             font-weight: 300;
-            color: #8a8580;
+            color: var(--color-text-secondary);
             margin-top: 6px;
             letter-spacing: 0.5px;
         }
@@ -72,7 +91,7 @@
         .header .accent-line {
             width: 50px;
             height: 2px;
-            background: #c9a87c;
+            background: var(--color-accent);
             margin: 12px auto 0;
             border-radius: 2px;
         }
@@ -91,18 +110,18 @@
            КАРТОЧКА ТОВАРА
            ================================================================ */
         .card {
-            background: #ffffff;
-            border-radius: 16px;
+            background: var(--color-card-bg);
+            border-radius: var(--radius-card);
             overflow: hidden;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            box-shadow: var(--shadow-card);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid rgba(44, 40, 37, 0.06);
+            transition: transform var(--transition), box-shadow var(--transition);
+            border: 1px solid var(--color-border);
         }
         
         .card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-card-hover);
             border-color: rgba(201, 168, 124, 0.2);
         }
         
@@ -115,7 +134,7 @@
             height: 200px;
             object-fit: cover;
             display: block;
-            background: #e8e0d8;
+            background: #E8E0D8;
         }
         
         .card .image-placeholder {
@@ -125,8 +144,8 @@
             align-items: center;
             justify-content: center;
             font-size: 56px;
-            background: #e8e0d8;
-            color: #b8b0a8;
+            background: #E8E0D8;
+            color: #B8B0A8;
         }
         
         .card .info {
@@ -138,12 +157,12 @@
             font-weight: 400;
             font-size: 17px;
             letter-spacing: 1px;
-            color: #2c2825;
+            color: var(--color-text-primary);
             text-transform: uppercase;
         }
         
         .card .price {
-            color: #c9a87c;
+            color: var(--color-accent);
             font-size: 16px;
             font-weight: 400;
             margin-top: 4px;
@@ -155,53 +174,10 @@
             background: rgba(201, 168, 124, 0.12);
             border-radius: 12px;
             font-size: 11px;
-            color: #c9a87c;
+            color: var(--color-accent);
             text-transform: uppercase;
             margin-top: 8px;
             letter-spacing: 0.8px;
-        }
-        
-        /* ================================================================
-           КНОПКИ
-           ================================================================ */
-        .card-full {
-            grid-column: 1 / -1;
-        }
-        
-        .btn-card {
-            background: rgba(44, 40, 37, 0.03);
-            border: 1px solid rgba(44, 40, 37, 0.08);
-            border-radius: 16px;
-            padding: 24px 14px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .btn-card:hover {
-            background: rgba(201, 168, 124, 0.06);
-            border-color: rgba(201, 168, 124, 0.2);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-        }
-        
-        .btn-card:active {
-            transform: scale(0.97);
-        }
-        
-        .btn-card .name {
-            font-weight: 400;
-            font-size: 17px;
-            letter-spacing: 1px;
-            color: #2c2825;
-            text-transform: uppercase;
-        }
-        
-        .btn-card .sub {
-            font-size: 13px;
-            color: #8a8580;
-            font-weight: 300;
-            margin-top: 4px;
         }
         
         /* ================================================================
@@ -213,7 +189,7 @@
             padding: 20px 14px 8px 14px;
             background: transparent !important;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            transition: transform var(--transition);
         }
         
         .logo-wrapper:hover {
@@ -231,7 +207,7 @@
             margin: 0 auto;
             background: transparent !important;
             filter: drop-shadow(0 4px 20px rgba(201, 168, 124, 0.15));
-            transition: filter 0.3s ease;
+            transition: filter var(--transition);
         }
         
         .logo-wrapper:hover img {
@@ -245,12 +221,12 @@
             grid-column: 1 / -1;
             text-align: center;
             padding: 28px 14px 12px 14px;
-            border-top: 1px solid rgba(44, 40, 37, 0.06);
+            border-top: 1px solid var(--color-border);
             margin-top: 8px;
         }
         
         .footer p {
-            color: #8a8580;
+            color: var(--color-text-secondary);
             font-size: 14px;
             font-weight: 300;
             letter-spacing: 0.3px;
@@ -259,17 +235,17 @@
         .footer .contacts {
             margin-top: 6px;
             font-size: 13px;
-            color: #b8b0a8;
+            color: #B8B0A8;
         }
         
         .footer .contacts a {
-            color: #c9a87c;
+            color: var(--color-accent);
             text-decoration: none;
-            transition: color 0.3s;
+            transition: color var(--transition);
         }
         
         .footer .contacts a:hover {
-            color: #b8986a;
+            color: var(--color-accent-hover);
         }
         
         /* ================================================================
@@ -282,8 +258,9 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(44, 40, 37, 0.6);
+            background: rgba(44, 44, 44, 0.6);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -295,13 +272,15 @@
         }
         
         .modal {
-            background: #ffffff;
-            border-radius: 20px;
+            background: var(--color-white);
+            border-radius: var(--radius-header);
             max-width: 520px;
             width: 100%;
             padding: 32px 28px 28px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.15);
             animation: modalFadeIn 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         @keyframes modalFadeIn {
@@ -320,21 +299,21 @@
             background: none;
             border: none;
             font-size: 24px;
-            color: #b8b0a8;
+            color: #B8B0A8;
             cursor: pointer;
-            transition: color 0.3s;
+            transition: color var(--transition);
             padding: 0 4px;
         }
         
         .modal .modal-close:hover {
-            color: #2c2825;
+            color: var(--color-text-primary);
         }
         
         .modal h2 {
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 1px;
-            color: #2c2825;
+            color: var(--color-text-primary);
             text-transform: uppercase;
             margin-top: 4px;
             margin-bottom: 6px;
@@ -342,14 +321,14 @@
         
         .modal .modal-price {
             font-size: 20px;
-            color: #c9a87c;
+            color: var(--color-accent);
             font-weight: 400;
             margin-bottom: 12px;
         }
         
         .modal .modal-desc {
             font-size: 15px;
-            color: #5a5550;
+            color: var(--color-text-secondary);
             font-weight: 300;
             line-height: 1.7;
             margin-bottom: 16px;
@@ -357,13 +336,13 @@
         
         .modal .modal-section {
             padding: 12px 0;
-            border-top: 1px solid rgba(44, 40, 37, 0.06);
+            border-top: 1px solid var(--color-border);
         }
         
         .modal .modal-section h4 {
             font-size: 12px;
             letter-spacing: 1px;
-            color: #b8b0a8;
+            color: #B8B0A8;
             text-transform: uppercase;
             margin-bottom: 4px;
             font-weight: 400;
@@ -371,7 +350,7 @@
         
         .modal .modal-section p {
             font-size: 15px;
-            color: #5a5550;
+            color: var(--color-text-secondary);
             font-weight: 300;
             line-height: 1.6;
             white-space: pre-line;
@@ -381,8 +360,8 @@
             width: 100%;
             padding: 14px;
             margin-top: 16px;
-            background: #c9a87c;
-            color: #ffffff;
+            background: var(--color-accent);
+            color: var(--color-white);
             border: none;
             border-radius: 12px;
             font-size: 15px;
@@ -390,11 +369,11 @@
             letter-spacing: 1px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background var(--transition);
         }
         
         .modal .btn-close-modal:hover {
-            background: #b8986a;
+            background: var(--color-accent-hover);
         }
         
         /* ================================================================
@@ -465,6 +444,21 @@
             .modal {
                 padding: 24px 16px 20px;
             }
+        }
+        
+        /* Стилизация скроллбара */
+        .modal::-webkit-scrollbar {
+            width: 4px;
+        }
+        
+        .modal::-webkit-scrollbar-track {
+            background: var(--color-background);
+            border-radius: 4px;
+        }
+        
+        .modal::-webkit-scrollbar-thumb {
+            background: var(--color-accent);
+            border-radius: 4px;
         }
     </style>
 </head>
