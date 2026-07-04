@@ -302,13 +302,13 @@
            ================================================================ */
         .top-logo {
             text-align: center;
-            padding: 16px 0 8px 0;
+            padding: 12px 0 16px 0;
             background: transparent;
         }
         
         .top-logo img {
             display: block;
-            width: 180px;
+            width: 220px;
             height: auto;
             margin: 0 auto;
             filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
@@ -321,7 +321,7 @@
         }
         
         /* ================================================================
-           ШАПКА — заголовок по центру
+           ШАПКА — с синей рамкой
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
@@ -331,7 +331,7 @@
             padding: 32px 32px 28px 32px;
             margin-bottom: 28px;
             box-shadow: 0 8px 40px rgba(0, 85, 164, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            border: 2px solid var(--color-primary);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -425,7 +425,7 @@
         }
         
         /* ================================================================
-           КАРТОЧКА
+           КАРТОЧКА — с синей подсветкой при наведении
            ================================================================ */
         .card {
             background: rgba(255, 255, 255, 0.92);
@@ -435,14 +435,14 @@
             overflow: hidden;
             box-shadow: 0 4px 24px rgba(0, 85, 164, 0.06);
             cursor: pointer;
-            transition: transform var(--transition), box-shadow var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            border: 2px solid transparent;
         }
         
         .card:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.12);
-            border-color: rgba(0, 85, 164, 0.15);
+            border-color: var(--color-primary);
             background: rgba(255, 255, 255, 0.98);
             z-index: 2;
         }
@@ -668,12 +668,13 @@
         @media (max-width: 768px) {
             body { padding: 12px; }
             
-            .top-logo img { width: 140px; }
+            .top-logo img { width: 180px; }
             
             .header {
                 padding: 24px 20px 20px 20px;
                 margin-bottom: 20px;
                 border-radius: 12px;
+                border-width: 2px;
             }
             
             .header h1 { font-size: 32px; letter-spacing: 4px; }
@@ -695,7 +696,7 @@
         }
         
         @media (max-width: 480px) {
-            .top-logo img { width: 120px; }
+            .top-logo img { width: 150px; }
             
             .header h1 { font-size: 24px; letter-spacing: 2px; }
             .header .subtitle { font-size: 12px; }
@@ -785,7 +786,7 @@
 
     <script>
         // ================================================================
-        // ДАННЫЕ — убрали Тик
+        // ДАННЫЕ
         // ================================================================
         
         const categories = [
