@@ -3,21 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Террасная доска | Купить террасную доску в Екатеринбурге | PRINCIP FLOOR</title>
-    <meta name="description" content="Купить террасную доску из лиственницы, ясеня, экзотических пород и ДПК. Широкий выбор, доставка по всей России. PRINCIP FLOOR - качество и надежность.">
-    <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, купить террасную доску, террасная доска цена, доска для террасы">
-    <link rel="canonical" href="https://principfloor.ru/">
+    <title>Террасная доска | PRINCIP FLOOR</title>
+    <meta name="description" content="Премиальная террасная доска из натурального дерева и ДПК. PRINCIP FLOOR — качество, проверенное временем.">
+    <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
     
     <!-- Open Graph -->
     <meta property="og:title" content="Террасная доска | PRINCIP FLOOR">
-    <meta property="og:description" content="Качественная террасная доска из натурального дерева и ДПК">
+    <meta property="og:description" content="Премиальная террасная доска из натурального дерева">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://principfloor.ru/">
-    <meta property="og:image" content="https://principfloor.ru/images/og-image.jpg">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="https://principfloor.ru/favicon.ico">
-    <link rel="apple-touch-icon" href="https://principfloor.ru/apple-touch-icon.png">
     
     <style>
         /* ================================================================
@@ -32,714 +26,686 @@
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
-            color: #f5f0eb;
-            background: #1a1410;
+            background: #f5f0eb;
+            color: #2c2825;
+            padding: 20px;
         }
         
-        /* ================================================================
-           ШАПКА САЙТА
-           ================================================================ */
-        .site-header {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            background: rgba(26, 20, 16, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding: 0 20px;
-        }
-        
-        .header-inner {
+        #app {
             max-width: 1200px;
             margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 12px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-        }
-        
-        .logo img {
-            height: 40px;
-            width: auto;
-        }
-        
-        .logo-text {
-            font-size: 20px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            color: #f5f0eb;
-            text-transform: uppercase;
-        }
-        
-        .logo-text span {
-            color: #c9a87c;
-        }
-        
-        /* Навигация */
-        .main-nav {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .main-nav a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            transition: color 0.3s;
-        }
-        
-        .main-nav a:hover {
-            color: #c9a87c;
-        }
-        
-        .main-nav a.active {
-            color: #f5f0eb;
-        }
-        
-        .nav-phone {
-            color: #c9a87c !important;
-            font-weight: 400 !important;
-            font-size: 16px !important;
-        }
-        
-        /* Бургер-меню для мобильных */
-        .burger {
-            display: none;
-            flex-direction: column;
-            gap: 4px;
-            cursor: pointer;
-            padding: 4px;
-        }
-        
-        .burger span {
-            display: block;
-            width: 28px;
-            height: 2px;
-            background: #f5f0eb;
-            transition: 0.3s;
         }
         
         /* ================================================================
-           ГЛАВНЫЙ БАННЕР
+           ШАПКА
            ================================================================ */
-        .hero {
-            background: linear-gradient(rgba(26, 20, 16, 0.7), rgba(26, 20, 16, 0.9)), 
-                        url('https://i.pinimg.com/1200x/fb/5a/a9/fb5aa9de090566b80e3112395cd4bcee.jpg');
-            background-size: cover;
-            background-position: center;
-            padding: 80px 20px 60px;
+        .header {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 32px 24px 28px 24px;
+            margin-bottom: 24px;
             text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid rgba(44, 40, 37, 0.06);
         }
         
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
+        .header h1 {
+            font-size: 28px;
             font-weight: 300;
             letter-spacing: 4px;
-            color: #f5f0eb;
+            color: #2c2825;
             text-transform: uppercase;
-            margin-bottom: 16px;
         }
         
-        .hero h1 span {
+        .header h1 span {
             color: #c9a87c;
         }
         
-        .hero p {
-            font-size: 18px;
-            font-weight: 300;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            max-width: 600px;
-            margin: 0 auto 30px;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 14px 36px;
-            border-radius: 30px;
+        .header .subtitle {
             font-size: 15px;
             font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-        }
-        
-        .btn-primary {
-            background: #c9a87c;
-            color: #1a1410;
-        }
-        
-        .btn-primary:hover {
-            background: #d4b88e;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(201, 168, 124, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: #f5f0eb;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        
-        .btn-secondary:hover {
-            background: rgba(255,255,255,0.05);
-            border-color: #c9a87c;
-        }
-        
-        /* ================================================================
-           КАТАЛОГ НА ГЛАВНОЙ
-           ================================================================ */
-        .section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .section-title {
-            font-size: 32px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            text-align: center;
-            margin-bottom: 12px;
-        }
-        
-        .section-title span {
-            color: #c9a87c;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-weight: 300;
-            margin-bottom: 40px;
-            font-size: 16px;
-        }
-        
-        .catalog-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-        
-        .catalog-card {
-            background: rgba(255,255,255,0.04);
-            backdrop-filter: blur(8px);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-decoration: none;
-            color: inherit;
-        }
-        
-        .catalog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-            border-color: rgba(201, 168, 124, 0.3);
-        }
-        
-        .catalog-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-        }
-        
-        .catalog-card .info {
-            padding: 16px 18px 20px;
-            text-align: center;
-        }
-        
-        .catalog-card .name {
-            font-size: 18px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        
-        .catalog-card .price {
-            color: #c9a87c;
-            font-size: 16px;
-            font-weight: 300;
-        }
-        
-        .catalog-card .badge {
-            display: inline-block;
-            padding: 2px 12px;
-            background: rgba(201, 168, 124, 0.15);
-            border-radius: 12px;
-            font-size: 11px;
-            color: #c9a87c;
-            text-transform: uppercase;
+            color: #8a8580;
             margin-top: 6px;
             letter-spacing: 0.5px;
         }
         
-        /* ================================================================
-           ПРЕИМУЩЕСТВА
-           ================================================================ */
-        .features {
-            background: rgba(255,255,255,0.02);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+        .header .accent-line {
+            width: 50px;
+            height: 2px;
+            background: #c9a87c;
+            margin: 12px auto 0;
+            border-radius: 2px;
         }
         
-        .features-grid {
+        /* ================================================================
+           СЕТКА КАТАЛОГА
+           ================================================================ */
+        .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            gap: 20px;
+            width: 100%;
         }
         
-        .feature-item {
+        /* ================================================================
+           КАРТОЧКА ТОВАРА
+           ================================================================ */
+        .card {
+            background: #ffffff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(44, 40, 37, 0.06);
+        }
+        
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            border-color: rgba(201, 168, 124, 0.2);
+        }
+        
+        .card:active {
+            transform: scale(0.97);
+        }
+        
+        .card .image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            background: #e8e0d8;
+        }
+        
+        .card .image-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 56px;
+            background: #e8e0d8;
+            color: #b8b0a8;
+        }
+        
+        .card .info {
+            padding: 16px 18px 20px;
             text-align: center;
         }
         
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 12px;
-        }
-        
-        .feature-item h3 {
-            font-size: 16px;
-            font-weight: 300;
+        .card .name {
+            font-weight: 400;
+            font-size: 17px;
             letter-spacing: 1px;
+            color: #2c2825;
             text-transform: uppercase;
-            margin-bottom: 6px;
         }
         
-        .feature-item p {
-            font-size: 14px;
-            color: rgba(255,255,255,0.5);
+        .card .price {
+            color: #c9a87c;
+            font-size: 16px;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+        
+        .card .badge {
+            display: inline-block;
+            padding: 3px 14px;
+            background: rgba(201, 168, 124, 0.12);
+            border-radius: 12px;
+            font-size: 11px;
+            color: #c9a87c;
+            text-transform: uppercase;
+            margin-top: 8px;
+            letter-spacing: 0.8px;
+        }
+        
+        /* ================================================================
+           КНОПКИ
+           ================================================================ */
+        .card-full {
+            grid-column: 1 / -1;
+        }
+        
+        .btn-card {
+            background: rgba(44, 40, 37, 0.03);
+            border: 1px solid rgba(44, 40, 37, 0.08);
+            border-radius: 16px;
+            padding: 24px 14px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-card:hover {
+            background: rgba(201, 168, 124, 0.06);
+            border-color: rgba(201, 168, 124, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+        }
+        
+        .btn-card:active {
+            transform: scale(0.97);
+        }
+        
+        .btn-card .name {
+            font-weight: 400;
+            font-size: 17px;
+            letter-spacing: 1px;
+            color: #2c2825;
+            text-transform: uppercase;
+        }
+        
+        .btn-card .sub {
+            font-size: 13px;
+            color: #8a8580;
             font-weight: 300;
-            line-height: 1.6;
+            margin-top: 4px;
+        }
+        
+        /* ================================================================
+           ЛОГОТИП
+           ================================================================ */
+        .logo-wrapper {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 20px 14px 8px 14px;
+            background: transparent !important;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-wrapper:hover {
+            transform: scale(1.03);
+        }
+        
+        .logo-wrapper:active {
+            transform: scale(0.95);
+        }
+        
+        .logo-wrapper img {
+            display: block;
+            width: 220px;
+            height: auto;
+            margin: 0 auto;
+            background: transparent !important;
+            filter: drop-shadow(0 4px 20px rgba(201, 168, 124, 0.15));
+            transition: filter 0.3s ease;
+        }
+        
+        .logo-wrapper:hover img {
+            filter: drop-shadow(0 4px 30px rgba(201, 168, 124, 0.25));
         }
         
         /* ================================================================
            ФУТЕР
            ================================================================ */
-        .site-footer {
-            background: rgba(0,0,0,0.3);
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding: 40px 20px 20px;
+        .footer {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 28px 14px 12px 14px;
+            border-top: 1px solid rgba(44, 40, 37, 0.06);
+            margin-top: 8px;
         }
         
-        .footer-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 40px;
-        }
-        
-        .footer-col h4 {
+        .footer p {
+            color: #8a8580;
             font-size: 14px;
             font-weight: 300;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 16px;
-            color: #f5f0eb;
+            letter-spacing: 0.3px;
         }
         
-        .footer-col p,
-        .footer-col a {
-            font-size: 14px;
-            font-weight: 300;
-            color: rgba(255,255,255,0.5);
-            line-height: 2;
+        .footer .contacts {
+            margin-top: 6px;
+            font-size: 13px;
+            color: #b8b0a8;
+        }
+        
+        .footer .contacts a {
+            color: #c9a87c;
             text-decoration: none;
-            display: block;
             transition: color 0.3s;
         }
         
-        .footer-col a:hover {
-            color: #c9a87c;
+        .footer .contacts a:hover {
+            color: #b8986a;
         }
         
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 30px auto 0;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.05);
+        /* ================================================================
+           МОДАЛЬНОЕ ОКНО
+           ================================================================ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(44, 40, 37, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
             display: flex;
-            justify-content: space-between;
-            font-size: 13px;
-            color: rgba(255,255,255,0.3);
+        }
+        
+        .modal {
+            background: #ffffff;
+            border-radius: 20px;
+            max-width: 520px;
+            width: 100%;
+            padding: 32px 28px 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            animation: modalFadeIn 0.3s ease;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        .modal .modal-close {
+            float: right;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: #b8b0a8;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 0 4px;
+        }
+        
+        .modal .modal-close:hover {
+            color: #2c2825;
+        }
+        
+        .modal h2 {
+            font-size: 22px;
             font-weight: 300;
+            letter-spacing: 1px;
+            color: #2c2825;
+            text-transform: uppercase;
+            margin-top: 4px;
+            margin-bottom: 6px;
+        }
+        
+        .modal .modal-price {
+            font-size: 20px;
+            color: #c9a87c;
+            font-weight: 400;
+            margin-bottom: 12px;
+        }
+        
+        .modal .modal-desc {
+            font-size: 15px;
+            color: #5a5550;
+            font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        
+        .modal .modal-section {
+            padding: 12px 0;
+            border-top: 1px solid rgba(44, 40, 37, 0.06);
+        }
+        
+        .modal .modal-section h4 {
+            font-size: 12px;
+            letter-spacing: 1px;
+            color: #b8b0a8;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            font-weight: 400;
+        }
+        
+        .modal .modal-section p {
+            font-size: 15px;
+            color: #5a5550;
+            font-weight: 300;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+        
+        .modal .btn-close-modal {
+            width: 100%;
+            padding: 14px;
+            margin-top: 16px;
+            background: #c9a87c;
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .modal .btn-close-modal:hover {
+            background: #b8986a;
         }
         
         /* ================================================================
            АДАПТИВНОСТЬ
            ================================================================ */
         @media (max-width: 1024px) {
-            .catalog-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .footer-inner {
-                grid-template-columns: 1fr 1fr;
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
             }
         }
         
         @media (max-width: 768px) {
-            .burger {
-                display: flex;
+            body {
+                padding: 12px;
             }
             
-            .main-nav {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(26, 20, 16, 0.98);
-                flex-direction: column;
-                padding: 20px;
-                gap: 16px;
-                border-bottom: 1px solid rgba(255,255,255,0.08);
-            }
-            
-            .main-nav.open {
-                display: flex;
-            }
-            
-            .hero h1 {
-                font-size: 32px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .section-title {
-                font-size: 26px;
-            }
-            
-            .catalog-grid {
-                grid-template-columns: 1fr 1fr;
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 12px;
             }
             
-            .catalog-card img {
+            .card .image {
                 height: 150px;
             }
             
-            .features-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 20px;
-                padding: 40px 20px;
+            .header h1 {
+                font-size: 22px;
+                letter-spacing: 3px;
             }
             
-            .footer-inner {
-                grid-template-columns: 1fr;
-                gap: 24px;
+            .header {
+                padding: 24px 16px 20px;
             }
             
-            .footer-bottom {
-                flex-direction: column;
-                text-align: center;
-                gap: 8px;
+            .logo-wrapper img {
+                width: 180px;
             }
         }
         
         @media (max-width: 480px) {
-            .hero {
-                padding: 50px 16px 40px;
-            }
-            
-            .hero h1 {
-                font-size: 26px;
-            }
-            
-            .catalog-grid {
+            .grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
             
-            .catalog-card img {
+            .card .image {
                 height: 120px;
             }
             
-            .catalog-card .name {
+            .card .info {
+                padding: 10px 12px 14px;
+            }
+            
+            .card .name {
                 font-size: 14px;
             }
             
-            .btn {
-                padding: 12px 24px;
+            .card .price {
                 font-size: 13px;
+            }
+            
+            .header h1 {
+                font-size: 18px;
+                letter-spacing: 2px;
+            }
+            
+            .modal {
+                padding: 24px 16px 20px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ================================================================
-    ШАПКА САЙТА
-    ================================================================ -->
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="/" class="logo">
-                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" alt="PRINCIP FLOOR">
-                <span class="logo-text">PRINCIP <span>FLOOR</span></span>
-            </a>
-            
-            <nav class="main-nav" id="mainNav">
-                <a href="/" class="active">Главная</a>
-                <a href="/catalog/">Каталог</a>
-                <a href="/about.html">О нас</a>
-                <a href="/delivery.html">Доставка</a>
-                <a href="/contacts.html">Контакты</a>
-                <a href="tel:+73433282772" class="nav-phone">+7 (343) 328-27-72</a>
-            </nav>
-            
-            <div class="burger" id="burgerBtn" onclick="toggleMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </header>
-
-    <!-- ================================================================
-    ГЛАВНЫЙ БАННЕР
-    ================================================================ -->
-    <section class="hero">
-        <div class="hero-content">
+    <div id="app">
+        <!-- ШАПКА -->
+        <div class="header">
             <h1>Террасная <span>доска</span></h1>
-            <p>Широкий выбор террасной доски из натурального дерева и ДПК. Доставка по всей России.</p>
-            <div class="hero-buttons">
-                <a href="/catalog/" class="btn btn-primary">Перейти в каталог</a>
-                <a href="/contacts.html" class="btn btn-secondary">Связаться с нами</a>
-            </div>
+            <div class="subtitle">Премиальные материалы для вашей террасы</div>
+            <div class="accent-line"></div>
         </div>
-    </section>
 
-    <!-- ================================================================
-    КАТАЛОГ
-    ================================================================ -->
-    <section class="section">
-        <h2 class="section-title">Наш <span>каталог</span></h2>
-        <p class="section-subtitle">Выберите подходящий материал для вашей террасы</p>
-        
-        <div class="catalog-grid" id="catalogGrid">
-            <!-- Карточки будут добавлены через JavaScript -->
-        </div>
-    </section>
+        <!-- СЕТКА -->
+        <div class="grid" id="grid"></div>
+    </div>
 
-    <!-- ================================================================
-    ПРЕИМУЩЕСТВА
-    ================================================================ -->
-    <section class="features">
-        <div class="features-grid">
-            <div class="feature-item">
-                <div class="feature-icon">🌲</div>
-                <h3>Натуральные материалы</h3>
-                <p>Только качественная древесина и проверенные композитные материалы</p>
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <h2 id="modalName"></h2>
+            <div class="modal-price" id="modalPrice"></div>
+            <div class="modal-desc" id="modalDesc"></div>
+            <div class="modal-section">
+                <h4>➕ Плюсы</h4>
+                <p id="modalPros"></p>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">🚚</div>
-                <h3>Бесплатная доставка</h3>
-                <p>Доставка по Екатеринбургу и области. Отправка по всей России</p>
+            <div class="modal-section">
+                <h4>➖ Минусы</h4>
+                <p id="modalCons"></p>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">🛡️</div>
-                <h3>Гарантия качества</h3>
-                <p>Гарантия на все виды террасной доски от производителя</p>
+            <div class="modal-section">
+                <h4>🧹 Уход</h4>
+                <p id="modalCare"></p>
             </div>
-            <div class="feature-item">
-                <div class="feature-icon">👨‍🔧</div>
-                <h3>Профессиональный монтаж</h3>
-                <p>Опытные мастера выполнят монтаж любой сложности</p>
+            <div class="modal-section">
+                <h4>📋 Характеристики</h4>
+                <p id="modalSpecs"></p>
             </div>
+            <button class="btn-close-modal" id="modalCloseBtn">Закрыть</button>
         </div>
-    </section>
+    </div>
 
-    <!-- ================================================================
-    ФУТЕР
-    ================================================================ -->
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <div class="footer-col">
-                <h4>PRINCIP FLOOR</h4>
-                <p>Профессиональная террасная доска для вашего дома. Качество, проверенное временем.</p>
-            </div>
-            <div class="footer-col">
-                <h4>Каталог</h4>
-                <a href="/catalog/larch.html">Лиственница</a>
-                <a href="/catalog/ash.html">Ясень</a>
-                <a href="/catalog/kumaru.html">Кумару</a>
-                <a href="/catalog/ipe.html">Ипе</a>
-                <a href="/catalog/teak.html">Тик</a>
-                <a href="/catalog/decking.html">ДПК</a>
-            </div>
-            <div class="footer-col">
-                <h4>Информация</h4>
-                <a href="/about.html">О компании</a>
-                <a href="/delivery.html">Доставка</a>
-                <a href="/contacts.html">Контакты</a>
-            </div>
-            <div class="footer-col">
-                <h4>Контакты</h4>
-                <a href="tel:+73433282772">+7 (343) 328-27-72</a>
-                <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
-                <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <span>© 2026 PRINCIP FLOOR. Все права защищены.</span>
-            <span>Сделано с ❤️ в Екатеринбурге</span>
-        </div>
-    </footer>
-
-    <!-- ================================================================
-    СКРИПТЫ
-    ================================================================ -->
     <script>
-        // Данные каталога
-        const catalogData = [
+        // ================================================================
+        // ДАННЫЕ
+        // ================================================================
+        
+        const categories = [
             {
                 id: 'larch',
                 name: 'Лиственница',
                 image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
                 price: 'от 4 500 ₽/м²',
-                badge: 'Хит продаж'
+                badge: 'Хит продаж',
+                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
+                pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
+                cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
+                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая'
             },
             {
                 id: 'ash',
                 name: 'Ясень',
                 image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
                 price: 'от 5 900 ₽/м²',
-                badge: 'Термообработанный'
+                badge: 'Термообработанный',
+                desc: 'Термообработанный ясень — натуральная древесина, прошедшая термическую обработку. Становится более устойчивой к влаге и перепадам температур.',
+                pros: '✅ Натуральный вид дерева\n✅ Устойчивость к влаге\n✅ Тёплый цвет\n✅ Экологичный материал',
+                cons: '❌ Дороже обычной древесины\n❌ Требует ухода\n❌ Может выцветать на солнце',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
+                specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая'
             },
             {
                 id: 'kumaru',
                 name: 'Кумару',
                 image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
                 price: 'от 8 500 ₽/м²',
-                badge: 'Экзотика'
+                badge: 'Экзотика',
+                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению.',
+                pros: '✅ Экзотический вид\n✅ Высокая плотность\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
+                cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
+                specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая'
             },
             {
                 id: 'ipe',
                 name: 'Ипе',
                 image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
                 price: 'от 12 000 ₽/м²',
-                badge: 'Премиум'
+                badge: 'Премиум',
+                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми.',
+                pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
+                cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
+                specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
             },
             {
                 id: 'teak',
                 name: 'Тик',
                 image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
                 price: 'от 11 000 ₽/м²',
-                badge: 'Элитный'
+                badge: 'Элитный',
+                desc: 'Тик — элитная экзотическая порода из Юго-Восточной Азии. Содержит природные масла, защищающие от влаги и насекомых.',
+                pros: '✅ Природная защита от влаги\n✅ Красивая текстура\n✅ Долговечность\n✅ Не требует частого ухода',
+                cons: '❌ Высокая цена\n❌ Ограниченный ресурс\n❌ Сложность обработки',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка по желанию',
+                specs: '⏳ Срок службы: 30-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
             },
             {
                 id: 'decking',
                 name: 'ДПК',
                 image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
                 price: 'от 3 500 ₽/м²',
-                badge: 'Композит'
+                badge: 'Композит',
+                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт.',
+                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
+                cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
+                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
+                specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК\n💧 Водостойкость: Высокая'
             },
             {
                 id: 'montazh_derevo',
                 name: 'Монтаж дерева',
                 image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
                 price: 'от 2 500 ₽/м²',
-                badge: 'Услуги'
+                badge: 'Услуги',
+                desc: 'Правильный монтаж деревянной террасной доски — залог долговечности. Важно использовать качественный крепёж и обеспечить вентиляцию.',
+                pros: '✅ Натуральный внешний вид\n✅ Экологичность\n✅ Возможность ремонта и замены\n✅ Классический стиль',
+                cons: '❌ Требует регулярного ухода\n❌ Чувствительность к влаге\n❌ Обработка антисептиками',
+                care: '🔧 Использовать нержавеющий крепёж\n📏 Соблюдать зазоры (5-8 мм)\n🌬️ Обеспечить вентиляцию\n🛡️ Обработка маслом/антисептиком',
+                specs: '⏳ Срок службы: 15-30 лет\n📊 Рекомендации: Уклон 1-2%\n💧 Требует защиты от влаги'
             },
             {
                 id: 'montazh_dpk',
                 name: 'Монтаж ДПК',
                 image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
                 price: 'от 2 000 ₽/м²',
-                badge: 'Услуги'
+                badge: 'Услуги',
+                desc: 'Монтаж ДПК — современное решение, сочетающее эстетику дерева и практичность пластика. Не требует сложного ухода, устойчиво к влаге.',
+                pros: '✅ Минимальный уход\n✅ Влагостойкость\n✅ Не требует покраски\n✅ Долговечность',
+                cons: '❌ Высокая стоимость материала\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
+                care: '🔧 Специальный крепёж для ДПК\n📏 Соблюдать зазоры (5-8 мм)\n🌬️ Обеспечить вентиляцию\n🧽 Мыть водой из шланга',
+                specs: '⏳ Срок службы: 25-30 лет\n📊 Рекомендации: Уклон 1-2%\n💧 Водостойкость: Высокая'
             }
         ];
 
-        // Рендер каталога
-        function renderCatalog() {
-            const grid = document.getElementById('catalogGrid');
+        // ================================================================
+        // РЕНДЕР
+        // ================================================================
+        
+        function renderMainMenu() {
+            const grid = document.getElementById('grid');
             grid.innerHTML = '';
             
-            catalogData.forEach(item => {
-                const card = document.createElement('a');
-                card.className = 'catalog-card';
-                card.href = `/catalog/${item.id}.html`;
-                
+            categories.forEach(cat => {
+                const card = document.createElement('div');
+                card.className = 'card';
                 card.innerHTML = `
-                    <img src="${item.image}" alt="${item.name}" loading="lazy" 
-                         onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22200%22%3E%3Crect fill=%22%23333%22 width=%22300%22 height=%22200%22/%3E%3Ctext x=%2250%%22 y=%2250%%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23666%22 font-size=%2230%22 font-family=%22sans-serif%22%3E📦%3C/text%3E%3C/svg%3E'">
+                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">📦</div>
                     <div class="info">
-                        <div class="name">${item.name}</div>
-                        <div class="price">${item.price}</div>
-                        <div class="badge">${item.badge}</div>
+                        <div class="name">${cat.name}</div>
+                        <div class="price">${cat.price}</div>
+                        <div class="badge">${cat.badge}</div>
                     </div>
                 `;
-                
+                card.onclick = () => openModal(cat.id);
                 grid.appendChild(card);
             });
+            
+            // Логотип
+            const logoWrapper = document.createElement('div');
+            logoWrapper.className = 'logo-wrapper';
+            logoWrapper.innerHTML = `
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
+                     alt="PRINCIP FLOOR">
+            `;
+            logoWrapper.onclick = () => {
+                window.open('https://principfloor.ru/', '_blank');
+            };
+            grid.appendChild(logoWrapper);
+            
+            // Футер
+            const footer = document.createElement('div');
+            footer.className = 'footer';
+            footer.innerHTML = `
+                <p>© 2026 PRINCIP FLOOR. Все права защищены.</p>
+                <div class="contacts">
+                    <a href="tel:+73433282772">+7 (343) 328-27-72</a>
+                    &nbsp;·&nbsp;
+                    <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
+                    &nbsp;·&nbsp;
+                    <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
+                </div>
+            `;
+            grid.appendChild(footer);
         }
 
-        // Бургер-меню
-        function toggleMenu() {
-            const nav = document.getElementById('mainNav');
-            nav.classList.toggle('open');
+        // ================================================================
+        // МОДАЛЬНОЕ ОКНО
+        // ================================================================
+        
+        function openModal(id) {
+            const data = categories.find(c => c.id === id);
+            if (!data) return;
+            
+            document.getElementById('modalName').textContent = data.name;
+            document.getElementById('modalPrice').textContent = data.price;
+            document.getElementById('modalDesc').textContent = data.desc;
+            document.getElementById('modalPros').textContent = data.pros;
+            document.getElementById('modalCons').textContent = data.cons;
+            document.getElementById('modalCare').textContent = data.care;
+            document.getElementById('modalSpecs').textContent = data.specs;
+            
+            document.getElementById('modalOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
-
-        // Закрытие меню при клике вне
-        document.addEventListener('click', function(e) {
-            const nav = document.getElementById('mainNav');
-            const burger = document.getElementById('burgerBtn');
-            if (!nav.contains(e.target) && !burger.contains(e.target)) {
-                nav.classList.remove('open');
-            }
+        
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Закрытие модального окна
+        document.getElementById('modalClose').onclick = closeModal;
+        document.getElementById('modalCloseBtn').onclick = closeModal;
+        document.getElementById('modalOverlay').onclick = (e) => {
+            if (e.target === e.currentTarget) closeModal();
+        };
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
         });
 
-        // Запуск
-        renderCatalog();
-
-        // Отслеживание скролла для эффекта шапки
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('.site-header');
-            if (window.scrollY > 50) {
-                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.3)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
+        // ================================================================
+        // ЗАПУСК
+        // ================================================================
+        
+        renderMainMenu();
     </script>
 </body>
 </html>
