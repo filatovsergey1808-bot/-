@@ -18,15 +18,14 @@
            CSS ПЕРЕМЕННЫЕ — ФИРМЕННЫЕ ЦВЕТА PRINCIP FLOOR
            ================================================================ */
         :root {
-            --color-primary: #0055A4;      /* Фирменный синий PRINCIP FLOOR */
-            --color-primary-dark: #003D7A;  /* Тёмно-синий для hover */
-            --color-primary-light: #E8F0F8; /* Светло-синий для фона */
+            --color-primary: #0055A4;
+            --color-primary-dark: #003D7A;
+            --color-primary-light: #E8F0F8;
             --color-white: #FFFFFF;
             --color-light-bg: #F8F9FA;
-            --color-text-primary: #1A1A2E;
+            --color-text-primary: #000000;
             --color-text-secondary: #4A4A5A;
             --color-text-light: #8A8A9A;
-            --color-accent-gold: #C9A87C;    /* Золотой акцент */
             --color-border: #E5E8EC;
             --shadow-card: 0 4px 16px rgba(0, 85, 164, 0.08);
             --shadow-card-hover: 0 12px 40px rgba(0, 85, 164, 0.12);
@@ -36,23 +35,112 @@
         }
 
         /* ================================================================
-           ОСНОВНЫЕ СТИЛИ
+           ФОН С ДИАГОНАЛЬНЫМИ ПОЛОСАМИ
            ================================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
             background: var(--color-light-bg);
             color: var(--color-text-primary);
             padding: 20px;
+            position: relative;
+        }
+        
+        /* Основной фон с диагональными полосами разных оттенков синего */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            background: 
+                /* Тонкие линии, угол 45° */
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 40px,
+                    rgba(0, 85, 164, 0.03) 40px,
+                    rgba(0, 85, 164, 0.03) 41px
+                ),
+                /* Средние линии, угол -45° */
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent 0px,
+                    transparent 60px,
+                    rgba(0, 85, 164, 0.02) 60px,
+                    rgba(0, 85, 164, 0.02) 62px
+                ),
+                /* Широкие линии, угол 45° */
+                repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 120px,
+                    rgba(0, 85, 164, 0.015) 120px,
+                    rgba(0, 85, 164, 0.015) 124px
+                ),
+                /* Широкие линии, угол -45° */
+                repeating-linear-gradient(
+                    -45deg,
+                    transparent 0px,
+                    transparent 180px,
+                    rgba(0, 85, 164, 0.01) 180px,
+                    rgba(0, 85, 164, 0.01) 185px
+                ),
+                /* Очень широкие линии, угол 30° */
+                repeating-linear-gradient(
+                    30deg,
+                    transparent 0px,
+                    transparent 250px,
+                    rgba(0, 85, 164, 0.008) 250px,
+                    rgba(0, 85, 164, 0.008) 256px
+                ),
+                /* Очень широкие линии, угол -30° */
+                repeating-linear-gradient(
+                    -30deg,
+                    transparent 0px,
+                    transparent 300px,
+                    rgba(0, 85, 164, 0.006) 300px,
+                    rgba(0, 85, 164, 0.006) 307px
+                ),
+                /* Базовый градиент фона */
+                linear-gradient(180deg, #F8F9FA 0%, #F0F3F7 100%);
+            pointer-events: none;
+        }
+        
+        /* Второй слой для дополнительной глубины */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+            background: 
+                /* Тонкие диагональные линии, угол 15° */
+                repeating-linear-gradient(
+                    15deg,
+                    transparent 0px,
+                    transparent 80px,
+                    rgba(0, 85, 164, 0.02) 80px,
+                    rgba(0, 85, 164, 0.02) 82px
+                ),
+                /* Тонкие диагональные линии, угол -15° */
+                repeating-linear-gradient(
+                    -15deg,
+                    transparent 0px,
+                    transparent 100px,
+                    rgba(0, 85, 164, 0.015) 100px,
+                    rgba(0, 85, 164, 0.015) 102px
+                );
+            pointer-events: none;
         }
         
         #app {
+            position: relative;
+            z-index: 1;
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -83,10 +171,11 @@
         }
         
         .header h1 {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 28px;
             font-weight: 300;
             letter-spacing: 4px;
-            color: var(--color-text-primary);
+            color: #000000;
             text-transform: uppercase;
         }
         
@@ -96,6 +185,7 @@
         }
         
         .header .subtitle {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
             font-weight: 300;
             color: var(--color-text-secondary);
@@ -169,10 +259,11 @@
         }
         
         .card .name {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 400;
             font-size: 17px;
             letter-spacing: 1px;
-            color: var(--color-text-primary);
+            color: #000000;
             text-transform: uppercase;
         }
         
@@ -242,6 +333,7 @@
         }
         
         .footer p {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             color: var(--color-text-secondary);
             font-size: 14px;
             font-weight: 300;
@@ -328,10 +420,11 @@
         }
         
         .modal h2 {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 22px;
             font-weight: 300;
             letter-spacing: 1px;
-            color: var(--color-text-primary);
+            color: #000000;
             text-transform: uppercase;
             margin-top: 4px;
             margin-bottom: 6px;
@@ -350,6 +443,7 @@
         }
         
         .modal .modal-desc {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
             color: var(--color-text-secondary);
             font-weight: 300;
@@ -363,6 +457,7 @@
         }
         
         .modal .modal-section h4 {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 12px;
             letter-spacing: 1px;
             color: var(--color-text-light);
@@ -372,6 +467,7 @@
         }
         
         .modal .modal-section p {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
             color: var(--color-text-secondary);
             font-weight: 300;
@@ -387,6 +483,7 @@
             color: var(--color-white);
             border: none;
             border-radius: 12px;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
             font-weight: 400;
             letter-spacing: 1px;
