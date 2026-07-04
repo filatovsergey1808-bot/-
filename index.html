@@ -299,7 +299,7 @@
         }
         
         /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — логотип по центру, контакты по бокам
+           ВЕРХНЯЯ ПАНЕЛЬ — контакты по бокам
            ================================================================ */
         .top-bar {
             display: flex;
@@ -545,35 +545,12 @@
         }
         
         /* ================================================================
-           ФУТЕР (без копирайта)
+           ФУТЕР — пустой
            ================================================================ */
         .footer {
             grid-column: 1 / -1;
-            text-align: center;
-            padding: 20px 14px 8px 14px;
-            border-top: 1px solid rgba(0, 85, 164, 0.04);
-            margin-top: 16px;
-        }
-        
-        .footer .contacts {
-            font-size: 13px;
-            color: var(--color-text-light);
-        }
-        
-        .footer .contacts a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: color var(--transition);
-            font-weight: 400;
-        }
-        
-        .footer .contacts a:hover {
-            color: var(--color-primary-dark);
-        }
-        
-        .footer .contact-divider {
-            color: var(--color-text-light);
-            margin: 0 6px;
+            padding: 12px 14px 4px 14px;
+            margin-top: 8px;
         }
         
         /* ================================================================
@@ -756,8 +733,6 @@
             .geo-shape:nth-child(1),
             .geo-shape:nth-child(2),
             .geo-shape:nth-child(5) { display: none; }
-            
-            .footer .contacts { font-size: 12px; }
         }
         
         @media (max-width: 480px) {
@@ -806,10 +781,10 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ: контакты слева, логотип центр, контакты справа -->
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ: почта слева, логотип центр, телефон справа -->
         <div class="top-bar">
             <div class="contact-left">
-                <a href="tel:+73433282772">+7 (343) 328-27-72</a>
+                <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
             </div>
             <div class="logo-center">
                 <img 
@@ -818,9 +793,7 @@
                     onclick="window.open('https://principfloor.ru/', '_blank')">
             </div>
             <div class="contact-right">
-                <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
-                <span class="contact-divider">·</span>
-                <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
+                <a href="tel:+73433282772">+7 (343) 328-27-72</a>
             </div>
         </div>
 
@@ -978,18 +951,9 @@
                 grid.appendChild(card);
             });
             
-            // Футер (только контакты, без копирайта)
+            // Пустой футер
             const footer = document.createElement('div');
             footer.className = 'footer';
-            footer.innerHTML = `
-                <div class="contacts">
-                    <a href="tel:+73433282772">+7 (343) 328-27-72</a>
-                    <span class="contact-divider">·</span>
-                    <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
-                    <span class="contact-divider">·</span>
-                    <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
-                </div>
-            `;
             grid.appendChild(footer);
         }
 
