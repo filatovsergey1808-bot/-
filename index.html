@@ -299,7 +299,7 @@
         }
         
         /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — контакты по бокам
+           ВЕРХНЯЯ ПАНЕЛЬ — иконки слева, логотип центр, телефон справа
            ================================================================ */
         .top-bar {
             display: flex;
@@ -309,24 +309,39 @@
             gap: 20px;
         }
         
-        .top-bar .contact-left {
+        .top-bar .social-left {
             flex: 1;
-            text-align: left;
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            font-weight: 300;
-            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            justify-content: flex-start;
         }
         
-        .top-bar .contact-left a {
+        .top-bar .social-left .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(0, 85, 164, 0.06);
             color: var(--color-primary);
             text-decoration: none;
-            transition: color var(--transition);
-            font-weight: 400;
+            font-size: 18px;
+            transition: all var(--transition);
+            border: 1px solid rgba(0, 85, 164, 0.06);
         }
         
-        .top-bar .contact-left a:hover {
-            color: var(--color-primary-dark);
+        .top-bar .social-left .social-icon:hover {
+            background: var(--color-primary);
+            color: #ffffff;
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.2);
+        }
+        
+        .top-bar .social-left .social-icon:active {
+            transform: scale(0.92);
         }
         
         .top-bar .logo-center {
@@ -364,11 +379,6 @@
         
         .top-bar .contact-right a:hover {
             color: var(--color-primary-dark);
-        }
-        
-        .top-bar .contact-divider {
-            color: var(--color-text-light);
-            margin: 0 6px;
         }
         
         /* ================================================================
@@ -695,19 +705,24 @@
             .top-bar {
                 flex-direction: column;
                 padding: 4px 0 12px 0;
-                gap: 8px;
+                gap: 10px;
             }
             
-            .top-bar .contact-left,
-            .top-bar .contact-right {
+            .top-bar .social-left {
                 flex: none;
-                text-align: center;
-                font-size: 13px;
+                justify-content: center;
                 width: 100%;
             }
             
             .top-bar .logo-center img {
                 width: 180px;
+            }
+            
+            .top-bar .contact-right {
+                flex: none;
+                text-align: center;
+                font-size: 13px;
+                width: 100%;
             }
             
             .header {
@@ -737,7 +752,8 @@
         
         @media (max-width: 480px) {
             .top-bar .logo-center img { width: 150px; }
-            .top-bar .contact-left,
+            .top-bar .social-left { gap: 12px; }
+            .top-bar .social-left .social-icon { width: 32px; height: 32px; font-size: 15px; }
             .top-bar .contact-right { font-size: 11px; }
             
             .header h1 { font-size: 24px; letter-spacing: 2px; }
@@ -781,10 +797,13 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ: почта слева, логотип центр, телефон справа -->
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ: иконки слева, логотип центр, телефон справа -->
         <div class="top-bar">
-            <div class="contact-left">
-                <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
+            <div class="social-left">
+                <a href="mailto:sl@principfloor.ru" class="social-icon" title="Email">✉</a>
+                <a href="https://t.me/principfloor" target="_blank" class="social-icon" title="Telegram">✈</a>
+                <a href="https://wa.me/73433282772" target="_blank" class="social-icon" title="WhatsApp">📱</a>
+                <a href="#" class="social-icon" title="Макс">М</a>
             </div>
             <div class="logo-center">
                 <img 
