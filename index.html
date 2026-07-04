@@ -23,7 +23,7 @@
             --color-border: #E5E8EC;
             --shadow-card: 0 4px 16px rgba(0, 85, 164, 0.08);
             --shadow-card-hover: 0 12px 40px rgba(0, 85, 164, 0.15);
-            --radius-card: 12px;
+            --radius-card: 16px;
             --transition: 0.3s ease;
         }
 
@@ -293,28 +293,48 @@
         #app {
             position: relative;
             z-index: 1;
-            max-width: 1200px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
         /* ================================================================
-           ШАПКА
+           ЛОГОТИП ВВЕРХУ
+           ================================================================ */
+        .top-logo {
+            text-align: center;
+            padding: 16px 0 8px 0;
+            background: transparent;
+        }
+        
+        .top-logo img {
+            display: block;
+            width: 180px;
+            height: auto;
+            margin: 0 auto;
+            filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
+            transition: filter var(--transition);
+            cursor: pointer;
+        }
+        
+        .top-logo img:hover {
+            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
+        }
+        
+        /* ================================================================
+           ШАПКА — заголовок по центру
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
-            padding: 24px 32px;
+            padding: 32px 32px 28px 32px;
             margin-bottom: 28px;
             box-shadow: 0 8px 40px rgba(0, 85, 164, 0.06);
             border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 110px;
+            text-align: center;
         }
         
         .header::before {
@@ -370,21 +390,11 @@
             opacity: 0.5;
         }
         
-        .header-left {
-            flex: 0 0 50px;
+        .header h1 {
+            position: relative;
             z-index: 1;
-        }
-        
-        .header-center {
-            flex: 2;
-            z-index: 1;
-            text-align: center;
-            padding: 0 20px;
-        }
-        
-        .header-center h1 {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: 52px;
+            font-size: 48px;
             font-weight: 200;
             letter-spacing: 6px;
             color: #000000;
@@ -392,56 +402,32 @@
             line-height: 1.05;
         }
         
-        .header-center .subtitle {
+        .header .subtitle {
+            position: relative;
+            z-index: 1;
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 200;
             color: var(--color-text-secondary);
-            margin-top: 4px;
+            margin-top: 6px;
             letter-spacing: 2px;
         }
         
-        .header-right {
-            flex: 0 0 auto;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            margin-left: auto;
-        }
-        
-        .header-right .logo-img {
-            display: block;
-            max-height: 55px;
-            width: auto;
-            filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
-            transition: filter var(--transition);
-            cursor: pointer;
-        }
-        
-        .header-right .logo-img:hover {
-            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
-        }
-        
         /* ================================================================
-           СЕТКА КАТАЛОГА — классические кнопки
+           СЕТКА КАТАЛОГА — 3 колонки, 2 ряда
            ================================================================ */
         .grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
             width: 100%;
             margin: 0 auto;
         }
         
         /* ================================================================
-           КАРТОЧКА — классическая прямоугольная
+           КАРТОЧКА
            ================================================================ */
         .card {
-            flex: 0 0 auto;
-            width: calc((100% - 96px) / 7);
-            min-width: 130px;
-            max-width: 180px;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
@@ -454,7 +440,7 @@
         }
         
         .card:hover {
-            transform: translateY(-8px) scale(1.03);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.12);
             border-color: rgba(0, 85, 164, 0.15);
             background: rgba(255, 255, 255, 0.98);
@@ -467,7 +453,7 @@
         
         .card .image {
             width: 100%;
-            height: 150px;
+            height: 220px;
             object-fit: cover;
             display: block;
             background: #E8ECF0;
@@ -475,25 +461,25 @@
         
         .card .image-placeholder {
             width: 100%;
-            height: 150px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
+            font-size: 56px;
             background: #E8ECF0;
             color: #B0B8C0;
         }
         
         .card .info {
-            padding: 14px 12px 16px;
+            padding: 18px 16px 20px;
             text-align: center;
         }
         
         .card .name {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 300;
-            font-size: 14px;
-            letter-spacing: 1px;
+            font-size: 18px;
+            letter-spacing: 1.5px;
             color: #000000;
             text-transform: uppercase;
             line-height: 1.2;
@@ -501,9 +487,9 @@
         
         .card .price {
             color: var(--color-primary);
-            font-size: 15px;
+            font-size: 17px;
             font-weight: 400;
-            margin-top: 3px;
+            margin-top: 4px;
             letter-spacing: 0.5px;
         }
         
@@ -511,11 +497,11 @@
            ФУТЕР
            ================================================================ */
         .footer {
-            flex: 0 0 100%;
+            grid-column: 1 / -1;
             text-align: center;
-            padding: 28px 14px 12px 14px;
+            padding: 32px 14px 12px 14px;
             border-top: 1px solid rgba(0, 85, 164, 0.04);
-            margin-top: 24px;
+            margin-top: 16px;
         }
         
         .footer p {
@@ -679,43 +665,29 @@
         /* ================================================================
            АДАПТИВНОСТЬ
            ================================================================ */
-        @media (max-width: 1024px) {
-            .card {
-                width: calc((100% - 80px) / 5);
-                min-width: 110px;
-            }
-            .card .image { height: 130px; }
-        }
-        
         @media (max-width: 768px) {
             body { padding: 12px; }
             
+            .top-logo img { width: 140px; }
+            
             .header {
-                flex-direction: column;
-                align-items: center;
-                padding: 16px 20px;
-                gap: 6px;
-                min-height: auto;
+                padding: 24px 20px 20px 20px;
+                margin-bottom: 20px;
                 border-radius: 12px;
             }
             
-            .header-left { display: none; }
-            .header-center { padding: 0; }
-            .header-center h1 { font-size: 32px; letter-spacing: 4px; }
-            .header-center .subtitle { font-size: 14px; }
-            .header-right { flex: none; margin-left: 0; }
-            .header-right .logo-img { max-height: 40px; }
+            .header h1 { font-size: 32px; letter-spacing: 4px; }
+            .header .subtitle { font-size: 14px; }
             
-            .grid { gap: 12px; }
-            
-            .card {
-                width: calc((100% - 36px) / 4);
-                min-width: 90px;
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
-            .card .image { height: 110px; }
-            .card .image-placeholder { height: 110px; font-size: 32px; }
-            .card .name { font-size: 12px; }
-            .card .price { font-size: 13px; }
+            
+            .card .image { height: 160px; }
+            .card .info { padding: 14px 12px 16px; }
+            .card .name { font-size: 15px; }
+            .card .price { font-size: 15px; }
             
             .geo-shape:nth-child(1),
             .geo-shape:nth-child(2),
@@ -723,22 +695,21 @@
         }
         
         @media (max-width: 480px) {
-            .grid { gap: 10px; }
+            .top-logo img { width: 120px; }
             
-            .card {
-                width: calc((100% - 30px) / 3);
-                min-width: 70px;
+            .header h1 { font-size: 24px; letter-spacing: 2px; }
+            .header .subtitle { font-size: 12px; }
+            .header { padding: 18px 14px 16px; border-radius: 10px; }
+            
+            .grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
             }
-            .card .image { height: 90px; }
-            .card .image-placeholder { height: 90px; font-size: 24px; }
-            .card .info { padding: 10px 8px 12px; }
-            .card .name { font-size: 11px; letter-spacing: 0.5px; }
-            .card .price { font-size: 12px; }
             
-            .header-center h1 { font-size: 24px; letter-spacing: 2px; }
-            .header-center .subtitle { font-size: 11px; }
-            .header-right .logo-img { max-height: 28px; }
-            .header { border-radius: 10px; padding: 12px 16px; }
+            .card .image { height: 120px; }
+            .card .info { padding: 10px 8px 12px; }
+            .card .name { font-size: 13px; letter-spacing: 0.5px; }
+            .card .price { font-size: 13px; }
             
             .geo-shape:nth-child(3),
             .geo-shape:nth-child(4) { display: none; }
@@ -767,19 +738,18 @@
 
     <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ШАПКА -->
+        <!-- ЛОГОТИП ВВЕРХУ -->
+        <div class="top-logo">
+            <img 
+                src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
+                alt="PRINCIP FLOOR"
+                onclick="window.open('https://principfloor.ru/', '_blank')">
+        </div>
+
+        <!-- ШАПКА С ЗАГОЛОВКОМ ПО ЦЕНТРУ -->
         <div class="header">
-            <div class="header-left"></div>
-            <div class="header-center">
-                <h1>Террасная доска</h1>
-                <div class="subtitle">Премиальные материалы для вашей террасы</div>
-            </div>
-            <div class="header-right">
-                <img class="logo-img" 
-                     src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
-                     alt="PRINCIP FLOOR"
-                     onclick="window.open('https://principfloor.ru/', '_blank')">
-            </div>
+            <h1>Террасная доска</h1>
+            <div class="subtitle">Премиальные материалы для вашей террасы</div>
         </div>
 
         <!-- СЕТКА КАТАЛОГА -->
@@ -815,7 +785,7 @@
 
     <script>
         // ================================================================
-        // ДАННЫЕ
+        // ДАННЫЕ — убрали Тик
         // ================================================================
         
         const categories = [
@@ -844,12 +814,6 @@
                 price: 'от 12 000 ₽/м²'
             },
             {
-                id: 'teak',
-                name: 'Тик',
-                image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-                price: 'от 11 000 ₽/м²'
-            },
-            {
                 id: 'decking',
                 name: 'ДПК',
                 image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
@@ -869,7 +833,7 @@
         
         const details = {
             'larch': {
-                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом.',
+                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
                 pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
                 cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
@@ -883,35 +847,28 @@
                 specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая'
             },
             'kumaru': {
-                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению.',
+                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
                 pros: '✅ Экзотический вид\n✅ Высокая плотность\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
                 cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
                 specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая'
             },
             'ipe': {
-                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми.',
+                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми. Идеальна для террас, причалов и зон с интенсивной нагрузкой.',
                 pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
                 cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
                 specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
             },
-            'teak': {
-                desc: 'Тик — элитная экзотическая порода из Юго-Восточной Азии. Содержит природные масла, защищающие от влаги и насекомых.',
-                pros: '✅ Природная защита от влаги\n✅ Красивая текстура\n✅ Долговечность\n✅ Не требует частого ухода',
-                cons: '❌ Высокая цена\n❌ Ограниченный ресурс\n❌ Сложность обработки',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка по желанию',
-                specs: '⏳ Срок службы: 30-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
-            },
             'decking': {
-                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт.',
+                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт и не выцветает.',
                 pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
                 cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
                 specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК\n💧 Водостойкость: Высокая'
             },
             'montazh': {
-                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества.',
+                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества на все виды работ.',
                 pros: '✅ Опытные мастера\n✅ Гарантия на работы\n✅ Используем качественный крепёж\n✅ Соблюдаем технологию',
                 cons: '❌ Требует предварительного заказа\n❌ Зависит от погодных условий',
                 care: '🔧 Используем нержавеющий крепёж\n📏 Соблюдаем зазоры (5-8 мм)\n🌬️ Обеспечиваем вентиляцию\n🛡️ Обработка защитными составами',
