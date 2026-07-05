@@ -381,9 +381,10 @@
             filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             cursor: pointer;
-            border-radius: 12px;
-            padding: 4px;
-            background: transparent;
+            border-radius: 8px;
+            padding: 0;
+            background: transparent !important;
+            border: none !important;
         }
 
         .top-bar .logo-center img:hover {
@@ -392,7 +393,8 @@
                 0 0 30px rgba(0, 85, 164, 0.08),
                 0 0 60px rgba(0, 85, 164, 0.04);
             transform: scale(1.02);
-            background: transparent;
+            background: transparent !important;
+            border: none !important;
         }
 
         .top-bar .contact-right {
@@ -411,15 +413,17 @@
             transition: all 0.3s ease;
             font-weight: 300;
             letter-spacing: 0.5px;
-            padding: 4px 8px;
-            border-radius: 8px;
+            padding: 4px 6px;
+            border-radius: 4px;
             display: inline-block;
-            background: transparent;
+            background: transparent !important;
+            border: none !important;
         }
 
         .top-bar .contact-right a:hover {
             color: #0055A4;
-            background: transparent;
+            background: transparent !important;
+            border: none !important;
             box-shadow: 
                 0 0 20px rgba(0, 85, 164, 0.12),
                 0 0 40px rgba(0, 85, 164, 0.06);
@@ -830,7 +834,7 @@
         }
 
         /* ================================================================
-           ФУТЕР (без копирайта) - БЕЗ ИЗМЕНЕНИЙ
+           ФУТЕР — БЕЗ ИЗМЕНЕНИЙ, КАК БЫЛО ИСХОДНО
            ================================================================ */
         .footer {
             text-align: center;
@@ -1262,7 +1266,7 @@
         </div>
     </div>
 
-    <!-- ФУТЕР (без копирайта) - ОСТАВЛЕН БЕЗ ИЗМЕНЕНИЙ -->
+    <!-- ФУТЕР — ВОЗВРАЩЕН В ИСХОДНОЕ СОСТОЯНИЕ -->
     <div class="footer">
         <div class="contacts">
             <a href="tel:+73433282772">+7 (343) 328-27-72</a>
