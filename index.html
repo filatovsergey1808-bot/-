@@ -424,7 +424,7 @@
         }
 
         /* ================================================================
-           КАРТОЧКА — НОВАЯ СТРУКТУРА
+           КАРТОЧКА — 2 КОЛОНКИ
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -500,7 +500,6 @@
             position: relative;
         }
 
-        /* ЛЕВАЯ КОЛОНКА: название + цена */
         .card .info .left-col {
             grid-column: 1 / 2;
             grid-row: 1 / 2;
@@ -513,7 +512,6 @@
             padding: 4px 4px 0 4px;
         }
 
-        /* Название — по верху */
         .card .info .name {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
@@ -530,7 +528,6 @@
             flex-shrink: 0;
         }
 
-        /* Цена — под названием */
         .card .info .price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
@@ -546,7 +543,6 @@
             flex-shrink: 0;
         }
 
-        /* ПРАВАЯ КОЛОНКА: описание */
         .card .info .description {
             grid-column: 2 / 3;
             grid-row: 1 / 2;
@@ -1194,7 +1190,7 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER
+        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНОЕ ПЕРЕЛИСТЫВАНИЕ
         // ================================================================
         let swiper = null;
 
@@ -1228,7 +1224,7 @@
 
             swiper = new Swiper('.mySwiper', {
                 loop: true,
-                speed: 1600,
+                speed: 1000, // ← Плавное перелистывание (1000ms = 1 секунда)
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
@@ -1248,7 +1244,7 @@
                 },
                 
                 autoplay: {
-                    delay: 4000,
+                    delay: 7000, // ← Увеличенное время удержания слайда (7 секунд)
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                     waitForTransition: true,
@@ -1260,12 +1256,15 @@
                     onlyInViewport: true,
                 },
                 
-                touchRatio: 1,
+                touchRatio: 0.8, // ← Более плавное перетаскивание
                 touchAngle: 45,
                 resistance: true,
                 resistanceRatio: 0.85,
                 loopAdditionalSlides: 1,
                 autoHeight: false,
+                
+                // Настройка easing для плавности как у книги
+                easing: 'ease-in-out',
                 
                 on: {
                     autoplayStop: function() {
