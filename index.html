@@ -424,7 +424,7 @@
         }
 
         /* ================================================================
-           КАРТОЧКА — 4 ЧЕТВЕРТИ (ЭЛЕГАНТНЫЙ ТОНКИЙ ШРИФТ)
+           КАРТОЧКА — 4 ЧЕТВЕРТИ
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -487,7 +487,7 @@
         }
 
         /* ================================================================
-           ИНФОРМАЦИОННАЯ ОБЛАСТЬ — 4 ЧЕТВЕРТИ (ЭЛЕГАНТНЫЙ ШРИФТ)
+           ИНФОРМАЦИОННАЯ ОБЛАСТЬ — 4 ЧЕТВЕРТИ
            ================================================================ */
         .card .info {
             padding: 14px 18px 16px;
@@ -500,14 +500,14 @@
             position: relative;
         }
 
-        /* 1-я четверть: Название — тонкий, элегантный, с автосжатием */
+        /* 1-я четверть: Название — в одну строку, без переноса */
         .card .info .name {
             grid-column: 1 / 2;
             grid-row: 1 / 2;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
-            font-size: clamp(36px, 5vw, 58px);
-            letter-spacing: 4px;
+            font-size: clamp(28px, 4vw, 48px);
+            letter-spacing: 3px;
             color: #000000;
             text-transform: uppercase;
             line-height: 1;
@@ -518,20 +518,18 @@
             width: 100%;
             height: 100%;
             padding: 0 4px;
-            /* Сжатие текста, если он не помещается */
+            white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            word-break: break-word;
-            hyphens: auto;
         }
 
-        /* 2-я и 3-я четверти: Описание — тонкий, по ширине */
+        /* 2-я и 3-я четверти: Описание — по ширине */
         .card .info .description {
             grid-column: 2 / 3;
             grid-row: 1 / 3;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 200;
-            font-size: clamp(17px, 1.8vw, 22px);
+            font-size: clamp(16px, 1.6vw, 20px);
             color: #4A4A5A;
             line-height: 1.4;
             letter-spacing: 0.3px;
@@ -547,14 +545,14 @@
             overflow: hidden;
         }
 
-        /* 4-я четверть: Цена — тонкий, элегантный */
+        /* 4-я четверть: Цена — в одну строку */
         .card .info .price {
             grid-column: 1 / 2;
             grid-row: 2 / 3;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
             color: #000000;
-            font-size: clamp(30px, 4vw, 48px);
+            font-size: clamp(24px, 3.2vw, 40px);
             letter-spacing: 2px;
             display: flex;
             align-items: center;
@@ -563,8 +561,8 @@
             width: 100%;
             height: 100%;
             padding: 0 4px;
-            overflow: hidden;
             white-space: nowrap;
+            overflow: hidden;
             text-overflow: ellipsis;
         }
 
@@ -901,17 +899,17 @@
             }
 
             .card .info .name {
-                font-size: clamp(28px, 5vw, 40px);
-                letter-spacing: 3px;
+                font-size: clamp(22px, 4vw, 34px);
+                letter-spacing: 2px;
             }
 
             .card .info .price {
-                font-size: clamp(24px, 4vw, 34px);
+                font-size: clamp(18px, 3vw, 28px);
                 letter-spacing: 1.5px;
             }
 
             .card .info .description {
-                font-size: clamp(15px, 2vw, 18px);
+                font-size: clamp(14px, 1.6vw, 17px);
             }
 
             .geo-shape:nth-child(1),
@@ -967,17 +965,17 @@
             }
 
             .card .info .name {
-                font-size: clamp(18px, 5.5vw, 26px);
-                letter-spacing: 1.5px;
-            }
-
-            .card .info .price {
                 font-size: clamp(16px, 4.5vw, 22px);
                 letter-spacing: 1px;
             }
 
+            .card .info .price {
+                font-size: clamp(14px, 3.5vw, 18px);
+                letter-spacing: 1px;
+            }
+
             .card .info .description {
-                font-size: clamp(12px, 3vw, 14px);
+                font-size: clamp(11px, 2.5vw, 13px);
                 padding-left: 2px;
                 padding-top: 1px;
             }
