@@ -373,18 +373,14 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — БЕСКОНЕЧНАЯ ПЛАВНАЯ, УВЕЛИЧЕННЫЕ СЛАЙДЫ
+           КАРУСЕЛЬ — БОЛЬШИЕ КВАДРАТНЫЕ СЛАЙДЫ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: 16px;
+            border-radius: 20px;
             padding: 20px 0;
-            /* ================================================================
-               ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
-               min-height — минимальная высота контейнера карусели
-               ================================================================ */
-            min-height: 560px;
+            min-height: 580px;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -403,15 +399,11 @@
             justify-content: center;
             align-items: center;
             padding: 0 40px;
-            /* ================================================================
-               ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
-               min-height — минимальная высота каждого слайда
-               ================================================================ */
-            min-height: 520px;
+            min-height: 540px;
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ, УВЕЛИЧЕННАЯ
+           КАРТОЧКА — КВАДРАТНАЯ, С ЗАКРУГЛЕННЫМИ УГЛАМИ
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -419,7 +411,7 @@
             aspect-ratio: 1 / 1;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
-            border-radius: 16px;
+            border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.5s ease;
@@ -431,11 +423,7 @@
             transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
-            /* ================================================================
-               ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
-               max-height — максимальная высота карточки
-               ================================================================ */
-            max-height: 520px;
+            max-height: 540px;
         }
 
         .card.active {
@@ -791,17 +779,19 @@
             }
 
             .carousel-wrapper {
-                min-height: 420px;
+                min-height: 440px;
                 padding: 10px 0;
+                border-radius: 16px;
             }
 
             .carousel-slide {
                 padding: 0 20px;
-                min-height: 400px;
+                min-height: 420px;
             }
 
             .card {
-                max-height: 400px;
+                max-height: 420px;
+                border-radius: 18px;
             }
 
             .card .image {
@@ -866,16 +856,18 @@
             }
 
             .carousel-wrapper {
-                min-height: 320px;
+                min-height: 340px;
+                border-radius: 12px;
             }
 
             .carousel-slide {
                 padding: 0 10px;
-                min-height: 300px;
+                min-height: 320px;
             }
 
             .card {
-                max-height: 300px;
+                max-height: 320px;
+                border-radius: 14px;
             }
 
             .card .image {
@@ -1100,28 +1092,26 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ "МИГАНИЯ"
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let track, slides, totalSlides;
+        let cloneTransitionTimeout = null;
 
         // Создаём массив слайдов с клонами для бесконечной прокрутки
         function createInfiniteSlides() {
             const slidesArray = [];
             
-            // Добавляем реальные слайды
             categories.forEach((cat, i) => {
                 slidesArray.push({ id: cat.id, name: cat.name, image: cat.image, price: cat.price, isClone: false, realIndex: i });
             });
             
-            // Создаём клоны для бесконечной прокрутки
             const cloneFirst = { ...slidesArray[0], isClone: true, realIndex: 0 };
             const cloneLast = { ...slidesArray[slidesArray.length - 1], isClone: true, realIndex: slidesArray.length - 1 };
             
-            // Добавляем клоны: первый и последний
             return [cloneLast, ...slidesArray, cloneFirst];
         }
 
@@ -1129,14 +1119,11 @@
             track = document.getElementById('carouselTrack');
             const dotsContainer = document.getElementById('dotsContainer');
 
-            // Очищаем трек
             track.innerHTML = '';
 
-            // Создаём бесконечный массив слайдов
             const infiniteSlides = createInfiniteSlides();
             totalSlides = infiniteSlides.length;
 
-            // Создаём слайды в треке
             infiniteSlides.forEach((slideData, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
@@ -1162,29 +1149,23 @@
 
             slides = track.querySelectorAll('.carousel-slide');
 
-            // Начальная позиция: первый реальный слайд (индекс 1, так как первым идёт клон последнего)
             currentIndex = 1;
             updateCarousel(true);
 
-            // Создаём точки
             dotsContainer.innerHTML = '';
             for (let i = 0; i < categories.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(i + 1); // +1 из-за клона в начале
+                dot.onclick = () => goToSlide(i + 1);
                 dotsContainer.appendChild(dot);
             }
 
             startAutoPlay();
         }
 
-        // Сохраняем ссылку на таймаут для очистки
-        let cloneTransitionTimeout = null;
-
         function updateCarousel(instant = false) {
             if (!track) return;
 
-            // Очищаем предыдущий таймаут, если он был
             if (cloneTransitionTimeout) {
                 clearTimeout(cloneTransitionTimeout);
                 cloneTransitionTimeout = null;
@@ -1199,7 +1180,6 @@
             const offset = -currentIndex * 100;
             track.style.transform = `translateX(${offset}%)`;
 
-            // Обновляем активные карточки
             slides.forEach((slide, idx) => {
                 const cards = slide.querySelectorAll('.card');
                 const isActive = idx === currentIndex;
@@ -1209,9 +1189,7 @@
                 });
             });
 
-            // Обновляем точки
             const dots = document.querySelectorAll('.carousel-dot');
-            // Определяем реальный индекс для точек
             let realIndex = currentIndex - 1;
             if (realIndex < 0) realIndex = categories.length - 1;
             if (realIndex >= categories.length) realIndex = 0;
@@ -1220,7 +1198,6 @@
                 dot.classList.toggle('active', idx === realIndex);
             });
 
-            // Принудительный reflow для instant перехода
             if (instant) {
                 track.offsetHeight;
                 track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
@@ -1230,20 +1207,13 @@
         function goToSlide(index, instant = false) {
             if (isTransitioning) return;
             
-            // Ограничиваем индекс
             if (index < 0) index = 0;
             if (index >= totalSlides) index = totalSlides - 1;
             
-            // Если мы пытаемся перейти на клон (индекс 0 или totalSlides-1),
-            // мы должны сначала перейти на соответствующий реальный слайд
-            // но с сохранением плавности
             if (index === 0) {
-                // Переход на первый клон — мы должны плавно перейти на последний реальный
-                // Но делаем это через обычный переход, а затем мгновенно переставляем
                 currentIndex = index;
                 updateCarousel(false);
                 
-                // После завершения анимации переходим на последний реальный
                 isTransitioning = true;
                 cloneTransitionTimeout = setTimeout(() => {
                     currentIndex = totalSlides - 2;
@@ -1256,7 +1226,6 @@
             }
             
             if (index === totalSlides - 1) {
-                // Переход на последний клон — плавно переходим на первый реальный
                 currentIndex = index;
                 updateCarousel(false);
                 
@@ -1271,7 +1240,6 @@
                 return;
             }
             
-            // Обычный переход
             currentIndex = index;
             updateCarousel(instant);
             
