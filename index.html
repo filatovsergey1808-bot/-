@@ -7,7 +7,14 @@
     <meta name="description" content="Премиальная террасная доска из натурального дерева и ДПК. PRINCIP FLOOR — качество, проверенное временем.">
     <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
     
+    <!-- Подключаем Swiper.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <style>
+        /* ================================================================
+           ОСНОВНОЙ ФОН
+           ================================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -24,6 +31,7 @@
             overflow-x: hidden;
         }
 
+        /* Геометрический фон */
         body::before {
             content: '';
             position: fixed;
@@ -199,6 +207,9 @@
         .geo-shape:nth-child(4) { animation-name: shapeFloat2; }
         .geo-shape:nth-child(5) { animation-name: shapeFloat3; }
 
+        /* ================================================================
+           ОСНОВНОЙ КОНТЕНТ
+           ================================================================ */
         #app {
             position: relative;
             z-index: 1;
@@ -206,6 +217,9 @@
             margin: 0 auto;
         }
 
+        /* ================================================================
+           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты
+           ================================================================ */
         .top-bar {
             display: flex;
             align-items: center;
@@ -293,6 +307,9 @@
             color: #003D7A;
         }
 
+        /* ================================================================
+           ШАПКА
+           ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
@@ -360,45 +377,48 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — НОВЫЙ ПОДХОД БЕЗ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ КЛОНАМИ
+           КАРУСЕЛЬ — SWIPER.JS
            ================================================================ */
         .carousel-wrapper {
             position: relative;
-            overflow: hidden;
             border-radius: 20px;
-            padding: 0;
+            overflow: hidden;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             width: 100%;
-            height: 0;
             padding-bottom: 100%;
+            position: relative;
         }
 
-        .carousel-track {
+        .swiper {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            display: flex;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            align-items: center;
-            will-change: transform;
             width: 100%;
             height: 100%;
         }
 
-        .carousel-slide {
-            flex: 0 0 100%;
+        .swiper-wrapper {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        .swiper-slide {
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 0 16px;
-            width: 100%;
             height: 100%;
+            width: 100%;
         }
 
+        /* ================================================================
+           КАРТОЧКА — КВАДРАТНАЯ
+           ================================================================ */
         .card {
             flex: 0 0 100%;
             max-width: 100%;
@@ -413,13 +433,13 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 20px rgba(0, 85, 164, 0.06);
-            opacity: 0.2;
+            opacity: 0.3;
             transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
         }
 
-        .card.active {
+        .swiper-slide-active .card {
             opacity: 1;
             transform: scale(1);
             filter: blur(0px);
@@ -429,7 +449,7 @@
             z-index: 3;
         }
 
-        .card.active:hover {
+        .swiper-slide-active .card:hover {
             transform: scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
@@ -484,7 +504,11 @@
             letter-spacing: 0.5px;
         }
 
-        .carousel-btn {
+        /* ================================================================
+           КНОПКИ НАВИГАЦИИ SWIPER
+           ================================================================ */
+        .swiper-button-prev,
+        .swiper-button-next {
             position: absolute;
             top: 0;
             bottom: 0;
@@ -503,9 +527,24 @@
             -webkit-backdrop-filter: blur(2px);
             border-radius: 0;
             width: 80px;
+            height: 100%;
+            margin: 0;
         }
 
-        .carousel-btn:hover {
+        .swiper-button-prev {
+            left: 0;
+            justify-content: flex-start;
+            padding-left: 8px;
+        }
+
+        .swiper-button-next {
+            right: 0;
+            justify-content: flex-end;
+            padding-right: 8px;
+        }
+
+        .swiper-button-prev:hover,
+        .swiper-button-next:hover {
             opacity: 0.6;
             color: #0055A4;
             background: rgba(0, 85, 164, 0.04);
@@ -513,23 +552,26 @@
             -webkit-backdrop-filter: blur(8px);
         }
 
-        .carousel-btn:active {
+        .swiper-button-prev:active,
+        .swiper-button-next:active {
             transform: scale(0.95);
         }
 
-        .carousel-btn.prev {
-            left: 0;
-            justify-content: flex-start;
-            padding-left: 8px;
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            font-size: 24px;
+            font-weight: 300;
         }
 
-        .carousel-btn.next {
-            right: 0;
-            justify-content: flex-end;
-            padding-right: 8px;
+        /* Скрываем стандартные стрелки Swiper */
+        .swiper-button-prev::after,
+        .swiper-button-next::after {
+            display: none;
         }
 
-        .carousel-btn svg {
+        /* Свои стрелки */
+        .swiper-button-prev svg,
+        .swiper-button-next svg {
             width: 36px;
             height: 36px;
             fill: currentColor;
@@ -537,18 +579,24 @@
             flex-shrink: 0;
         }
 
-        .carousel-btn:hover svg {
+        .swiper-button-prev:hover svg,
+        .swiper-button-next:hover svg {
             transform: scale(1.15);
         }
 
-        .carousel-dots {
+        /* ================================================================
+           ТОЧКИ SWIPER
+           ================================================================ */
+        .swiper-pagination {
+            position: relative;
+            bottom: auto;
+            padding: 16px 0 8px 0;
             display: flex;
             justify-content: center;
             gap: 10px;
-            padding: 16px 0 8px 0;
         }
 
-        .carousel-dot {
+        .swiper-pagination-bullet {
             width: 10px;
             height: 10px;
             border-radius: 50%;
@@ -556,20 +604,25 @@
             background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
             transition: all 0.3s ease;
+            opacity: 1;
+            margin: 0 !important;
         }
 
-        .carousel-dot.active {
+        .swiper-pagination-bullet-active {
             background: #0055A4;
             border-color: #0055A4;
             transform: scale(1.2);
             box-shadow: 0 0 20px rgba(0, 85, 164, 0.15);
         }
 
-        .carousel-dot:hover {
+        .swiper-pagination-bullet:hover {
             border-color: #0055A4;
             transform: scale(1.1);
         }
 
+        /* ================================================================
+           ФУТЕР (без копирайта)
+           ================================================================ */
         .footer {
             text-align: center;
             padding: 16px 14px 8px 14px;
@@ -593,6 +646,9 @@
             color: #003D7A;
         }
 
+        /* ================================================================
+           МОДАЛЬНОЕ ОКНО
+           ================================================================ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -722,40 +778,138 @@
             transform: translateY(-2px);
         }
 
+        /* ================================================================
+           АДАПТИВНОСТЬ
+           ================================================================ */
         @media (max-width: 768px) {
-            body { padding: 12px; }
-            .top-bar { flex-direction: column; padding: 4px 0 12px 0; gap: 10px; }
-            .top-bar .social-left { flex: none; justify-content: center; width: 100%; }
-            .top-bar .logo-center img { width: 180px; }
-            .top-bar .contact-right { flex: none; text-align: center; font-size: 13px; width: 100%; }
-            .header { padding: 24px 20px 20px 20px; margin-bottom: 20px; }
-            .header h1 { font-size: 32px; letter-spacing: 4px; }
-            .header .subtitle { font-size: 14px; }
-            .carousel-slide { padding: 0 12px; }
-            .carousel-btn { width: 50px; }
-            .carousel-btn svg { width: 28px; height: 28px; }
-            .geo-shape:nth-child(1), .geo-shape:nth-child(2), .geo-shape:nth-child(5) { display: none; }
+            body {
+                padding: 12px;
+            }
+
+            .top-bar {
+                flex-direction: column;
+                padding: 4px 0 12px 0;
+                gap: 10px;
+            }
+
+            .top-bar .social-left {
+                flex: none;
+                justify-content: center;
+                width: 100%;
+            }
+
+            .top-bar .logo-center img {
+                width: 180px;
+            }
+
+            .top-bar .contact-right {
+                flex: none;
+                text-align: center;
+                font-size: 13px;
+                width: 100%;
+            }
+
+            .header {
+                padding: 24px 20px 20px 20px;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                font-size: 32px;
+                letter-spacing: 4px;
+            }
+
+            .header .subtitle {
+                font-size: 14px;
+            }
+
+            .swiper-slide {
+                padding: 0 12px;
+            }
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 50px;
+            }
+
+            .swiper-button-prev svg,
+            .swiper-button-next svg {
+                width: 28px;
+                height: 28px;
+            }
+
+            .geo-shape:nth-child(1),
+            .geo-shape:nth-child(2),
+            .geo-shape:nth-child(5) {
+                display: none;
+            }
         }
 
         @media (max-width: 480px) {
-            .top-bar .logo-center img { width: 150px; }
-            .top-bar .social-left .social-icon { width: 34px; height: 34px; }
-            .top-bar .social-left .social-icon svg { width: 17px; height: 17px; }
-            .header h1 { font-size: 24px; letter-spacing: 2px; }
-            .header .subtitle { font-size: 12px; }
-            .carousel-slide { padding: 0 8px; }
-            .card { border-radius: 14px; }
-            .card .image { height: 65%; }
-            .card .image-placeholder { height: 65%; }
-            .card .info { padding: 8px 10px 10px; }
-            .carousel-btn { width: 40px; }
-            .carousel-btn svg { width: 20px; height: 20px; }
-            .geo-shape:nth-child(3), .geo-shape:nth-child(4) { display: none; }
+            .top-bar .logo-center img {
+                width: 150px;
+            }
+
+            .top-bar .social-left .social-icon {
+                width: 34px;
+                height: 34px;
+            }
+
+            .top-bar .social-left .social-icon svg {
+                width: 17px;
+                height: 17px;
+            }
+
+            .header h1 {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .header .subtitle {
+                font-size: 12px;
+            }
+
+            .swiper-slide {
+                padding: 0 8px;
+            }
+
+            .card {
+                border-radius: 14px;
+            }
+
+            .card .image {
+                height: 65%;
+            }
+
+            .card .image-placeholder {
+                height: 65%;
+            }
+
+            .card .info {
+                padding: 8px 10px 10px;
+            }
+
+            .swiper-button-prev,
+            .swiper-button-next {
+                width: 40px;
+            }
+
+            .swiper-button-prev svg,
+            .swiper-button-next svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            .geo-shape:nth-child(3),
+            .geo-shape:nth-child(4) {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ГЕОМЕТРИЧЕСКИЙ ФОН -->
     <div class="geo-shapes">
         <div class="geo-shape"></div>
         <div class="geo-shape"></div>
@@ -765,6 +919,7 @@
     </div>
 
     <div id="app">
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <div class="top-bar">
             <div class="social-left">
                 <a href="mailto:sl@principfloor.ru" class="social-icon" title="Email">
@@ -791,35 +946,32 @@
             </div>
         </div>
 
+        <!-- ШАПКА -->
         <div class="header">
             <h1>Террасная доска</h1>
             <div class="subtitle">Премиальные материалы для вашей террасы</div>
         </div>
 
-        <div class="carousel-wrapper" id="carouselWrapper">
-            <div class="carousel-track" id="carouselTrack">
-            </div>
-            <button class="carousel-btn prev" id="prevBtn">
-                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-            </button>
-            <button class="carousel-btn next" id="nextBtn">
-                <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
-            </button>
-        </div>
-
-        <div class="carousel-dots" id="dotsContainer"></div>
-
-        <div class="footer">
-            <div class="contacts">
-                <a href="tel:+73433282772">+7 (343) 328-27-72</a>
-                &nbsp;·&nbsp;
-                <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
-                &nbsp;·&nbsp;
-                <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
+        <!-- КАРУСЕЛЬ SWIPER -->
+        <div class="carousel-wrapper">
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="swiperWrapper">
+                    <!-- Слайды будут добавлены через JavaScript -->
+                </div>
+                <!-- Кнопки навигации -->
+                <div class="swiper-button-prev" id="swiperPrev">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </div>
+                <div class="swiper-button-next" id="swiperNext">
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+                </div>
+                <!-- Точки -->
+                <div class="swiper-pagination" id="swiperPagination"></div>
             </div>
         </div>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -843,6 +995,17 @@
                 <p id="modalSpecs"></p>
             </div>
             <button class="btn-close-modal" id="modalCloseBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- ФУТЕР (без копирайта) -->
+    <div class="footer">
+        <div class="contacts">
+            <a href="tel:+73433282772">+7 (343) 328-27-72</a>
+            &nbsp;·&nbsp;
+            <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
+            &nbsp;·&nbsp;
+            <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
         </div>
     </div>
 
@@ -931,222 +1094,86 @@
         };
 
         // ================================================================
-        // НОВАЯ КАРУСЕЛЬ — БЕЗ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ КЛОНАМИ
+        // ИНИЦИАЛИЗАЦИЯ SWIPER
         // ================================================================
-        let currentIndex = 0;
-        let autoPlayTimer = null;
-        const AUTO_PLAY_INTERVAL = 4000;
-        let isTransitioning = false;
-        let track, slides, totalSlides;
-        let isFirstLoad = true;
+        let swiper = null;
 
-        function createInfiniteSlides() {
-            const slidesArray = [];
+        function initSwiper() {
+            const wrapper = document.getElementById('swiperWrapper');
             
-            categories.forEach((cat, i) => {
-                slidesArray.push({ id: cat.id, name: cat.name, image: cat.image, price: cat.price, isClone: false, realIndex: i });
-            });
+            // Очищаем wrapper
+            wrapper.innerHTML = '';
             
-            const cloneFirst = { ...slidesArray[0], isClone: true, realIndex: 0 };
-            const cloneLast = { ...slidesArray[slidesArray.length - 1], isClone: true, realIndex: slidesArray.length - 1 };
-            
-            return [cloneLast, ...slidesArray, cloneFirst];
-        }
-
-        function initCarousel() {
-            track = document.getElementById('carouselTrack');
-            const dotsContainer = document.getElementById('dotsContainer');
-
-            track.innerHTML = '';
-
-            const infiniteSlides = createInfiniteSlides();
-            totalSlides = infiniteSlides.length;
-
-            infiniteSlides.forEach((slideData, index) => {
+            // Добавляем слайды
+            categories.forEach((cat) => {
                 const slide = document.createElement('div');
-                slide.className = 'carousel-slide';
-                slide.dataset.index = index;
-                slide.dataset.realIndex = slideData.realIndex;
-                slide.dataset.isClone = slideData.isClone ? 'true' : 'false';
-
+                slide.className = 'swiper-slide';
+                
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <img class="image" src="${slideData.image}" alt="${slideData.name}" loading="lazy" 
+                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder" style="display:none;">📦</div>
                     <div class="info">
-                        <div class="name">${slideData.name}</div>
-                        <div class="price">${slideData.price}</div>
+                        <div class="name">${cat.name}</div>
+                        <div class="price">${cat.price}</div>
                     </div>
                 `;
-                card.onclick = () => openModal(slideData.id);
+                card.onclick = () => openModal(cat.id);
                 slide.appendChild(card);
-                track.appendChild(slide);
+                wrapper.appendChild(slide);
             });
 
-            slides = track.querySelectorAll('.carousel-slide');
-
-            currentIndex = 1;
-            updateCarousel(true);
-
-            dotsContainer.innerHTML = '';
-            for (let i = 0; i < categories.length; i++) {
-                const dot = document.createElement('div');
-                dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(i + 1);
-                dotsContainer.appendChild(dot);
-            }
-
-            isFirstLoad = false;
-            startAutoPlay();
-        }
-
-        function updateCarousel(instant = false) {
-            if (!track) return;
-
-            if (instant) {
-                track.style.transition = 'none';
-            } else {
-                track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-
-            const offset = -currentIndex * 100;
-            track.style.transform = `translateX(${offset}%)`;
-
-            slides.forEach((slide, idx) => {
-                const cards = slide.querySelectorAll('.card');
-                const isActive = idx === currentIndex;
-
-                cards.forEach(card => {
-                    card.classList.toggle('active', isActive);
-                });
+            // Инициализируем Swiper
+            swiper = new Swiper('.mySwiper', {
+                loop: true, // Бесконечная прокрутка
+                speed: 600, // Скорость анимации
+                slidesPerView: 1,
+                spaceBetween: 0,
+                centeredSlides: true,
+                effect: 'slide',
+                
+                // Навигация
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                
+                // Точки
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    bulletClass: 'swiper-pagination-bullet',
+                    bulletActiveClass: 'swiper-pagination-bullet-active',
+                },
+                
+                // Автопрокрутка
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: true,
+                },
+                
+                // Отключение стандартных клавиш
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true,
+                },
+                
+                // Отключение эффекта при касании
+                touchRatio: 1,
+                touchAngle: 45,
             });
 
-            const dots = document.querySelectorAll('.carousel-dot');
-            let realIndex = currentIndex - 1;
-            if (realIndex < 0) realIndex = categories.length - 1;
-            if (realIndex >= categories.length) realIndex = 0;
-            
-            dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === realIndex);
+            // Обработка кликов на кнопки
+            document.querySelector('.swiper-button-prev').addEventListener('click', () => {
+                swiper.slidePrev();
             });
-
-            if (instant) {
-                track.offsetHeight;
-                track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-            }
-        }
-
-        function goToSlide(index, instant = false) {
-            if (isTransitioning) return;
             
-            if (index < 0) index = 0;
-            if (index >= totalSlides) index = totalSlides - 1;
-            
-            currentIndex = index;
-            updateCarousel(instant);
-            
-            // --- НОВЫЙ ПОДХОД: НЕ ПЕРЕКЛЮЧАЕМСЯ МЕЖДУ КЛОНАМИ ---
-            // Вместо того чтобы переключаться между клонами,
-            // мы просто позволяем карусели двигаться дальше,
-            // используя бесконечный цикл с добавлением слайдов
-            
-            if (currentIndex === 0) {
-                // Дошли до первого клона — переключаем на последний реальный
-                isTransitioning = true;
-                setTimeout(() => {
-                    currentIndex = totalSlides - 2;
-                    track.style.transition = 'none';
-                    const offset = -currentIndex * 100;
-                    track.style.transform = `translateX(${offset}%)`;
-                    track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                    
-                    slides.forEach((slide, idx) => {
-                        const cards = slide.querySelectorAll('.card');
-                        const isActive = idx === currentIndex;
-                        cards.forEach(card => {
-                            card.classList.toggle('active', isActive);
-                        });
-                    });
-                    const dots = document.querySelectorAll('.carousel-dot');
-                    let realIndex = currentIndex - 1;
-                    if (realIndex < 0) realIndex = categories.length - 1;
-                    if (realIndex >= categories.length) realIndex = 0;
-                    dots.forEach((dot, idx) => {
-                        dot.classList.toggle('active', idx === realIndex);
-                    });
-                    isTransitioning = false;
-                }, 600);
-            } else if (currentIndex === totalSlides - 1) {
-                // Дошли до последнего клона — переключаем на первый реальный
-                isTransitioning = true;
-                setTimeout(() => {
-                    currentIndex = 1;
-                    track.style.transition = 'none';
-                    const offset = -currentIndex * 100;
-                    track.style.transform = `translateX(${offset}%)`;
-                    track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-                    
-                    slides.forEach((slide, idx) => {
-                        const cards = slide.querySelectorAll('.card');
-                        const isActive = idx === currentIndex;
-                        cards.forEach(card => {
-                            card.classList.toggle('active', isActive);
-                        });
-                    });
-                    const dots = document.querySelectorAll('.carousel-dot');
-                    let realIndex = currentIndex - 1;
-                    if (realIndex < 0) realIndex = categories.length - 1;
-                    if (realIndex >= categories.length) realIndex = 0;
-                    dots.forEach((dot, idx) => {
-                        dot.classList.toggle('active', idx === realIndex);
-                    });
-                    isTransitioning = false;
-                }, 600);
-            } else {
-                if (!instant) {
-                    isTransitioning = true;
-                    setTimeout(() => {
-                        isTransitioning = false;
-                    }, 600);
-                } else {
-                    isTransitioning = false;
-                }
-            }
-
-            resetAutoPlay();
-        }
-
-        function nextSlide() {
-            if (isTransitioning) return;
-            goToSlide(currentIndex + 1);
-        }
-
-        function prevSlide() {
-            if (isTransitioning) return;
-            goToSlide(currentIndex - 1);
-        }
-
-        function startAutoPlay() {
-            stopAutoPlay();
-            autoPlayTimer = setInterval(() => {
-                nextSlide();
-            }, AUTO_PLAY_INTERVAL);
-        }
-
-        function stopAutoPlay() {
-            if (autoPlayTimer) {
-                clearInterval(autoPlayTimer);
-                autoPlayTimer = null;
-            }
-        }
-
-        function resetAutoPlay() {
-            stopAutoPlay();
-            startAutoPlay();
+            document.querySelector('.swiper-button-next').addEventListener('click', () => {
+                swiper.slideNext();
+            });
         }
 
         // ================================================================
@@ -1167,37 +1194,28 @@
 
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
-            stopAutoPlay();
+            
+            // Останавливаем автопрокрутку
+            if (swiper) {
+                swiper.autoplay.stop();
+            }
         }
 
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
-            startAutoPlay();
+            
+            // Запускаем автопрокрутку
+            if (swiper) {
+                swiper.autoplay.start();
+            }
         }
 
         // ================================================================
         // ЗАПУСК
         // ================================================================
         document.addEventListener('DOMContentLoaded', () => {
-            initCarousel();
-
-            const wrapper = document.getElementById('carouselWrapper');
-
-            document.getElementById('prevBtn').onclick = (e) => {
-                e.stopPropagation();
-                prevSlide();
-            };
-
-            document.getElementById('nextBtn').onclick = (e) => {
-                e.stopPropagation();
-                nextSlide();
-            };
-
-            wrapper.addEventListener('mouseenter', stopAutoPlay);
-            wrapper.addEventListener('mouseleave', startAutoPlay);
-            wrapper.addEventListener('touchstart', stopAutoPlay);
-            wrapper.addEventListener('touchend', startAutoPlay);
+            initSwiper();
 
             document.getElementById('modalClose').onclick = closeModal;
             document.getElementById('modalCloseBtn').onclick = closeModal;
@@ -1207,8 +1225,6 @@
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeModal();
-                if (e.key === 'ArrowLeft') prevSlide();
-                if (e.key === 'ArrowRight') nextSlide();
             });
         });
     </script>
