@@ -377,15 +377,15 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — SWIPER.JS (ПЛАВНАЯ)
+           КАРУСЕЛЬ — SWIPER.JS (ПЛАВНАЯ, БЕЗ ОБРЕЗАНИЯ)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             border-radius: 20px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: visible; /* ← Чтобы карточки не обрезались при увеличении */
+            background: transparent; /* ← Прозрачный фон */
+            backdrop-filter: none;
+            border: none;
             width: 100%;
             padding-bottom: 100%;
             position: relative;
@@ -399,6 +399,7 @@
             bottom: 0;
             width: 100%;
             height: 100%;
+            overflow: visible; /* ← Чтобы карточки не обрезались */
         }
 
         .swiper-wrapper {
@@ -414,6 +415,7 @@
             padding: 0 16px;
             height: 100%;
             width: 100%;
+            overflow: visible; /* ← Чтобы карточки не обрезались */
         }
 
         /* ================================================================
@@ -437,6 +439,8 @@
             transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
+            /* ← Добавляем отступы, чтобы при увеличении не обрезалось */
+            margin: 4px;
         }
 
         .swiper-slide-active .card {
@@ -450,7 +454,7 @@
         }
 
         .swiper-slide-active .card:hover {
-            transform: scale(1.02);
+            transform: scale(1.04); /* ← Увеличение при наведении */
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
@@ -1086,7 +1090,7 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНАЯ
+        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНАЯ, С ПЕРЕЗАПУСКОМ
         // ================================================================
         let swiper = null;
 
@@ -1117,10 +1121,10 @@
                 wrapper.appendChild(slide);
             });
 
-            // Инициализируем Swiper с плавными настройками
+            // Инициализируем Swiper
             swiper = new Swiper('.mySwiper', {
                 loop: true,
-                speed: 800, // Увеличил скорость анимации с 600 до 800ms для плавности
+                speed: 1600, // Увеличил до 1600ms — в 2 раза плавнее
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
@@ -1141,9 +1145,10 @@
                 
                 autoplay: {
                     delay: 4000,
-                    disableOnInteraction: true,
+                    disableOnInteraction: false, // ← НЕ отключать автопрокрутку при взаимодействии
                     pauseOnMouseEnter: true,
-                    waitForTransition: true, // Ждём завершения анимации
+                    waitForTransition: true,
+                    stopOnLastSlide: false,
                 },
                 
                 keyboard: {
@@ -1153,16 +1158,22 @@
                 
                 touchRatio: 1,
                 touchAngle: 45,
-                
-                // Плавность при перетаскивании
                 resistance: true,
                 resistanceRatio: 0.85,
-                
-                // Настройки для бесконечного цикла
                 loopAdditionalSlides: 1,
-                
-                // Отключаем автоматическую паузу
                 autoHeight: false,
+                
+                // При потере фокуса — продолжать автопрокрутку
+                on: {
+                    autoplayStop: function() {
+                        // Если автопрокрутка остановлена, запускаем её снова
+                        setTimeout(() => {
+                            if (swiper && !swiper.destroyed) {
+                                swiper.autoplay.start();
+                            }
+                        }, 100);
+                    }
+                }
             });
 
             // Обработка кликов на кнопки
@@ -1194,7 +1205,7 @@
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            if (swiper) {
+            if (swiper && !swiper.destroyed) {
                 swiper.autoplay.stop();
             }
         }
@@ -1203,7 +1214,7 @@
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
             
-            if (swiper) {
+            if (swiper && !swiper.destroyed) {
                 swiper.autoplay.start();
             }
         }
