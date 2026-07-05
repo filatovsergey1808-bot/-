@@ -502,12 +502,12 @@
         }
 
         /* ================================================================
-           КНОПКИ НАВИГАЦИИ
+           КНОПКИ НАВИГАЦИИ — УВЕЛИЧЕННАЯ ОБЛАСТЬ
            ================================================================ */
         .carousel-btn {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+            top: 0;
+            bottom: 0;
             z-index: 10;
             background: transparent;
             border: none;
@@ -517,10 +517,13 @@
             justify-content: center;
             color: rgba(0, 85, 164, 0.1);
             transition: all 0.3s ease;
-            padding: 20px 8px;
+            padding: 0;
             opacity: 0.2;
             backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
             border-radius: 0;
+            /* УВЕЛИЧЕННАЯ ОБЛАСТЬ: ширина в 2 раза больше */
+            width: 80px;
         }
 
         .carousel-btn:hover {
@@ -528,18 +531,23 @@
             color: #0055A4;
             background: rgba(0, 85, 164, 0.04);
             backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .carousel-btn:active {
-            transform: translateY(-50%) scale(0.95);
+            transform: scale(0.95);
         }
 
         .carousel-btn.prev {
-            left: 4px;
+            left: 0;
+            justify-content: flex-start;
+            padding-left: 8px;
         }
 
         .carousel-btn.next {
-            right: 4px;
+            right: 0;
+            justify-content: flex-end;
+            padding-right: 8px;
         }
 
         .carousel-btn svg {
@@ -547,6 +555,7 @@
             height: 36px;
             fill: currentColor;
             transition: transform 0.3s ease;
+            flex-shrink: 0;
         }
 
         .carousel-btn:hover svg {
@@ -792,9 +801,9 @@
                 padding: 0 12px;
             }
 
+            /* Уменьшаем кнопки на планшетах */
             .carousel-btn {
-                padding: 15px 6px;
-                opacity: 0.15;
+                width: 50px;
             }
 
             .carousel-btn svg {
@@ -853,8 +862,9 @@
                 padding: 8px 10px 10px;
             }
 
+            /* Уменьшаем кнопки на телефонах */
             .carousel-btn {
-                padding: 10px 4px;
+                width: 40px;
             }
 
             .carousel-btn svg {
