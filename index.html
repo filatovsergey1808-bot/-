@@ -486,7 +486,7 @@
         }
         
         /* ================================================================
-           КАРУСЕЛЬ — ФИКСИРОВАННАЯ
+           КАРУСЕЛЬ — ПО ОДНОМУ СЛАЙДУ, ЦЕНТРИРОВАННАЯ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -511,7 +511,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0 60px;
+            padding: 0 40px;
             min-height: 400px;
             position: relative;
         }
@@ -534,8 +534,8 @@
             display: flex;
             flex-direction: column;
             box-shadow: 0 4px 20px rgba(0, 85, 164, 0.06);
-            opacity: 0.3;
-            transform: scale(0.9);
+            opacity: 0.2;
+            transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
             margin: 0;
@@ -1142,7 +1142,7 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ИСПРАВЛЕННАЯ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ИСПРАВЛЕННАЯ ФИНАЛЬНАЯ
         // ================================================================
         
         let currentRealIndex = 0;
@@ -1150,10 +1150,13 @@
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let totalRealSlides = 0;
-        let slideWidth = 100;
+        let slideWidth = 100; // 100%
+        let track = null;
+        let slides = [];
+        let totalSlides = 0;
         
         function renderCarousel() {
-            const track = document.getElementById('carouselTrack');
+            track = document.getElementById('carouselTrack');
             const dotsContainer = document.getElementById('dotsContainer');
             
             const totalItems = categories.length;
@@ -1193,9 +1196,11 @@
             track.appendChild(firstClone);
             track.insertBefore(lastClone, track.children[0]);
             
+            slides = track.querySelectorAll('.carousel-slide');
+            totalSlides = slides.length;
+            
             // Устанавливаем начальную позицию на первом реальном слайде
             currentRealIndex = 0;
-            const totalSlides = track.children.length;
             const offset = -(currentRealIndex + 1) * slideWidth;
             track.style.transform = `translateX(${offset}%)`;
             
@@ -1213,8 +1218,6 @@
         }
         
         function updateCarousel() {
-            const track = document.getElementById('carouselTrack');
-            const slides = track.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             
             // Позиция: реальный индекс + 1 (из-за клона в начале)
@@ -1227,7 +1230,7 @@
                 // Индекс слайда в реальных данных (без учёта клонов)
                 let realIndex = slideIndex - 1;
                 if (slideIndex === 0) realIndex = totalRealSlides - 1;
-                if (slideIndex === slides.length - 1) realIndex = 0;
+                if (slideIndex === totalSlides - 1) realIndex = 0;
                 
                 const isActive = realIndex === currentRealIndex;
                 
@@ -1252,9 +1255,6 @@
             
             currentRealIndex = index;
             
-            const track = document.getElementById('carouselTrack');
-            const slides = track.querySelectorAll('.carousel-slide');
-            
             if (instant) {
                 track.style.transition = 'none';
                 updateCarousel();
@@ -1265,7 +1265,6 @@
             }
             
             // Проверяем, не дошли ли до клонов
-            const totalSlides = slides.length;
             const offset = -(currentRealIndex + 1) * slideWidth;
             
             // Если мы на первом клоне (индекс 0)
