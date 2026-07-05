@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ
+           КАРУСЕЛЬ С БЕСКОНЕЧНОЙ ПРОКРУТКОЙ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -572,24 +572,16 @@
         }
 
         /* ================================================================
-           ФУТЕР
+           ФУТЕР (без копирайта)
            ================================================================ */
         .footer {
             text-align: center;
-            padding: 24px 14px 12px 14px;
+            padding: 16px 14px 8px 14px;
             border-top: 1px solid rgba(0, 85, 164, 0.04);
             margin-top: 8px;
         }
 
-        .footer p {
-            color: #4A4A5A;
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-        }
-
         .footer .contacts {
-            margin-top: 6px;
             font-size: 13px;
             color: #8A8A9A;
         }
@@ -903,7 +895,7 @@
     </div>
 
     <div id="app">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ: логотип и контакты -->
+        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <div class="top-bar">
             <div class="social-left">
                 <a href="mailto:sl@principfloor.ru" class="social-icon" title="Email">
@@ -952,9 +944,8 @@
         <!-- ТОЧКИ -->
         <div class="carousel-dots" id="dotsContainer"></div>
 
-        <!-- ФУТЕР -->
+        <!-- ФУТЕР (без копирайта) -->
         <div class="footer">
-            <p>© 2026 PRINCIP FLOOR. Все права защищены.</p>
             <div class="contacts">
                 <a href="tel:+73433282772">+7 (343) 328-27-72</a>
                 &nbsp;·&nbsp;
@@ -1077,7 +1068,7 @@
         };
 
         // ================================================================
-        // КАРУСЕЛЬ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ
         // ================================================================
         let currentIndex = 0;
         let realIndex = 0;
@@ -1163,11 +1154,10 @@
                 if (idx === currentIndex) {
                     isActive = true;
                 }
-                // Для клонов: если мы на первом клоне (индекс 0), то активен последний реальный
+                // Для клонов
                 if (idx === 0 && currentIndex === totalSlides - 1) {
                     isActive = true;
                 }
-                // Если мы на последнем клоне (индекс totalSlides-1), то активен первый реальный
                 if (idx === totalSlides - 1 && currentIndex === 0) {
                     isActive = true;
                 }
@@ -1223,7 +1213,6 @@
                     setTimeout(() => { isTransitioning = false; }, 50);
                 }, 650);
             } else {
-                // Обычный переход
                 setTimeout(() => {
                     isTransitioning = false;
                 }, 650);
