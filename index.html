@@ -222,7 +222,58 @@
         }
 
         /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты (АЛЬТЕРНАТИВНОЕ РЕШЕНИЕ)
+           ПУЛЬСИРУЮЩАЯ АНИМАЦИЯ ДЛЯ КНОПОК МЕССЕНДЖЕРОВ
+           ================================================================ */
+        .social-icon {
+            position: relative;
+        }
+
+        /* Пульсирующее кольцо для иконок соцсетей */
+        .social-icon::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            background: transparent;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            border: 2px solid rgba(0, 85, 164, 0.3);
+        }
+
+        .social-icon:hover::after {
+            opacity: 1;
+            animation: pulseGlow 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+                border-color: rgba(0, 85, 164, 0.3);
+            }
+            50% {
+                transform: scale(1.3);
+                opacity: 0;
+                border-color: rgba(0, 85, 164, 0.6);
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+                border-color: rgba(0, 85, 164, 0.3);
+            }
+        }
+
+        /* Специально для кнопки MAX (скругленная) */
+        .social-icon.max-btn::after {
+            border-radius: 20px;
+        }
+
+        /* ================================================================
+           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты
            ================================================================ */
         .top-bar {
             display: flex;
@@ -258,6 +309,14 @@
             font-size: 14px;
         }
 
+        .top-bar .social-left .social-icon:hover {
+            background: #1A1A2E;
+            color: #ffffff;
+            border-color: #1A1A2E;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
+        }
+
         .top-bar .social-left .social-icon svg {
             width: 20px;
             height: 20px;
@@ -269,6 +328,7 @@
             fill: #ffffff;
         }
 
+        /* Специальный стиль для кнопки MAX */
         .top-bar .social-left .social-icon.max-btn {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 400;
@@ -285,26 +345,12 @@
             width: 220px;
             height: auto;
             filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
-            transition: all 0.4s ease;
+            transition: filter 0.3s ease;
             cursor: pointer;
-            /* Убираем все возможные фоны */
-            background: none !important;
-            background-color: transparent !important;
-            border: none !important;
-            outline: none !important;
-            padding: 0 !important;
-            margin: 0 !important;
-            box-shadow: none !important;
         }
 
         .top-bar .logo-center img:hover {
             filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
-            /* Только свечение, без фона */
-            box-shadow: 0 0 30px rgba(0, 85, 164, 0.08), 0 0 60px rgba(0, 85, 164, 0.04) !important;
-            transform: scale(1.02);
-            background: none !important;
-            background-color: transparent !important;
-            border: none !important;
         }
 
         .top-bar .contact-right {
@@ -320,32 +366,17 @@
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             color: #1A1A2E;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             font-weight: 300;
             letter-spacing: 0.5px;
-            display: inline-block;
-            /* Убираем все возможные фоны */
-            background: none !important;
-            background-color: transparent !important;
-            border: none !important;
-            outline: none !important;
-            padding: 4px 6px !important;
-            margin: 0 !important;
-            box-shadow: none !important;
         }
 
         .top-bar .contact-right a:hover {
-            color: #0055A4;
-            /* Только свечение, без фона */
-            box-shadow: 0 0 20px rgba(0, 85, 164, 0.12), 0 0 40px rgba(0, 85, 164, 0.06) !important;
-            transform: scale(1.02);
-            background: none !important;
-            background-color: transparent !important;
-            border: none !important;
+            color: #000000;
         }
 
         /* ================================================================
-           ШАПКА
+           ШАПКА — Playfair Display для заголовка
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
@@ -357,8 +388,6 @@
             border: 1px solid rgba(0, 85, 164, 0.2);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s ease;
-            cursor: default;
         }
 
         .header::before {
@@ -417,15 +446,6 @@
             letter-spacing: 2px;
         }
 
-        .header:hover {
-            box-shadow: 
-                0 0 30px rgba(0, 85, 164, 0.08),
-                0 0 60px rgba(0, 85, 164, 0.05),
-                inset 0 0 30px rgba(0, 85, 164, 0.03);
-            border-color: rgba(0, 85, 164, 0.25) !important;
-            transform: translateY(-2px);
-        }
-
         /* ================================================================
            КАРУСЕЛЬ — SWIPER.JS
            ================================================================ */
@@ -469,7 +489,7 @@
         }
 
         /* ================================================================
-           КАРТОЧКА
+           КАРТОЧКА — Playfair Display для названия
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -480,7 +500,7 @@
             border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: all 0.5s ease;
             border: 1.5px solid transparent;
             display: flex;
             flex-direction: column;
@@ -505,43 +525,9 @@
 
         .swiper-slide-active .card:hover {
             transform: scale(1.04);
-            box-shadow: 
-                0 16px 60px rgba(0, 85, 164, 0.15),
-                0 0 40px rgba(0, 85, 164, 0.08);
-            border-color: rgba(0, 85, 164, 0.4) !important;
+            box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
+            border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
-        }
-
-        .swiper-slide-active .card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 26px;
-            background: transparent;
-            opacity: 0;
-            transition: all 0.5s ease;
-            pointer-events: none;
-            border: 2px solid rgba(0, 85, 164, 0.2);
-        }
-
-        .swiper-slide-active .card:hover::before {
-            opacity: 1;
-            animation: cardGlow 1.5s ease-in-out infinite;
-        }
-
-        @keyframes cardGlow {
-            0% {
-                box-shadow: 0 0 20px rgba(0, 85, 164, 0.1), 0 0 40px rgba(0, 85, 164, 0.05);
-            }
-            50% {
-                box-shadow: 0 0 40px rgba(0, 85, 164, 0.2), 0 0 80px rgba(0, 85, 164, 0.1);
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(0, 85, 164, 0.1), 0 0 40px rgba(0, 85, 164, 0.05);
-            }
         }
 
         .card .image {
@@ -565,6 +551,9 @@
             flex-shrink: 0;
         }
 
+        /* ================================================================
+           ИНФОРМАЦИОННАЯ ОБЛАСТЬ — 2 КОЛОНКИ
+           ================================================================ */
         .card .info {
             padding: 14px 18px 16px;
             flex: 1;
@@ -656,7 +645,7 @@
             align-items: center;
             justify-content: center;
             color: rgba(0, 85, 164, 0.1);
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             padding: 0;
             opacity: 0.2;
             backdrop-filter: blur(2px);
@@ -681,14 +670,11 @@
 
         .swiper-button-prev:hover,
         .swiper-button-next:hover {
-            opacity: 0.8;
+            opacity: 0.6;
             color: #0055A4;
-            background: rgba(0, 85, 164, 0.06);
+            background: rgba(0, 85, 164, 0.04);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
-            box-shadow: 
-                0 0 30px rgba(0, 85, 164, 0.05),
-                inset 0 0 30px rgba(0, 85, 164, 0.02);
         }
 
         .swiper-button-prev:active,
@@ -734,7 +720,7 @@
             border: 1.5px solid rgba(0, 85, 164, 0.15);
             background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             opacity: 1;
             margin: 0 !important;
         }
@@ -743,31 +729,27 @@
             background: #0055A4;
             border-color: #0055A4;
             transform: scale(1.2);
-            box-shadow: 0 0 20px rgba(0, 85, 164, 0.2);
+            box-shadow: 0 0 20px rgba(0, 85, 164, 0.15);
         }
 
         .swiper-pagination-bullet:hover {
             border-color: #0055A4;
-            transform: scale(1.2);
-            box-shadow: 0 0 20px rgba(0, 85, 164, 0.1);
+            transform: scale(1.1);
         }
 
         /* ================================================================
-           ФУТЕР — ЯРКИЙ И ВИДИМЫЙ (АЛЬТЕРНАТИВНОЕ РЕШЕНИЕ)
+           ФУТЕР (без копирайта)
            ================================================================ */
         .footer {
             text-align: center;
-            padding: 20px 14px 12px 14px;
-            border-top: 1px solid rgba(0, 85, 164, 0.1);
-            margin-top: 12px;
-            background: transparent;
+            padding: 16px 14px 8px 14px;
+            border-top: 1px solid rgba(0, 85, 164, 0.04);
+            margin-top: 8px;
         }
 
         .footer .contacts {
-            font-size: 14px;
-            color: #4A4A5A;
-            font-weight: 400;
-            letter-spacing: 0.5px;
+            font-size: 13px;
+            color: #8A8A9A;
         }
 
         .footer .contacts a {
@@ -775,28 +757,15 @@
             color: #1A1A2E;
             text-decoration: none;
             transition: color 0.3s ease;
-            font-weight: 400;
-            padding: 4px 6px;
-            display: inline-block;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
+            font-weight: 300;
         }
 
         .footer .contacts a:hover {
-            color: #0055A4;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-        }
-
-        .footer .contacts .sep {
-            color: #8A8A9A;
-            padding: 0 4px;
+            color: #000000;
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО
+           МОДАЛЬНОЕ ОКНО — Playfair Display для заголовка
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -829,13 +798,6 @@
             max-height: 90vh;
             overflow-y: auto;
             border-top: 4px solid #0055A4;
-            transition: all 0.3s ease;
-        }
-
-        .modal:hover {
-            box-shadow: 
-                0 30px 100px rgba(0, 85, 164, 0.2),
-                0 0 60px rgba(0, 85, 164, 0.05);
         }
 
         @keyframes modalFadeIn {
@@ -856,16 +818,12 @@
             font-size: 24px;
             color: #8A8A9A;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: color 0.3s ease;
             padding: 0 4px;
-            border-radius: 8px;
         }
 
         .modal .modal-close:hover {
             color: #1A1A2E;
-            box-shadow: 0 0 20px rgba(0, 85, 164, 0.08);
-            background: rgba(0, 85, 164, 0.04);
-            transform: scale(1.1);
         }
 
         .modal h2 {
@@ -934,20 +892,14 @@
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 85, 164, 0.2);
         }
 
         .modal .btn-close-modal:hover {
             background: #003D7A;
-            box-shadow: 
-                0 8px 30px rgba(0, 85, 164, 0.3),
-                0 0 40px rgba(0, 85, 164, 0.1);
+            box-shadow: 0 8px 30px rgba(0, 85, 164, 0.3);
             transform: translateY(-2px);
-        }
-
-        .modal .btn-close-modal:active {
-            transform: scale(0.98);
         }
 
         /* ================================================================
@@ -1029,10 +981,6 @@
             .geo-shape:nth-child(5) {
                 display: none;
             }
-
-            .footer .contacts {
-                font-size: 13px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -1112,10 +1060,6 @@
             .geo-shape:nth-child(4) {
                 display: none;
             }
-
-            .footer .contacts {
-                font-size: 12px;
-            }
         }
     </style>
 </head>
@@ -1143,7 +1087,7 @@
                 <a href="https://wa.me/73433282772" target="_blank" class="social-icon" title="WhatsApp">
                     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                 </a>
-                <!-- Кнопка MAX -->
+                <!-- Кнопка MAX вместо планеты -->
                 <a href="#" class="social-icon max-btn" title="Макс">MAX</a>
             </div>
             <div class="logo-center">
@@ -1209,13 +1153,13 @@
         </div>
     </div>
 
-    <!-- ФУТЕР — ЯРКИЙ И ВИДИМЫЙ -->
+    <!-- ФУТЕР (без копирайта) -->
     <div class="footer">
         <div class="contacts">
             <a href="tel:+73433282772">+7 (343) 328-27-72</a>
-            <span class="sep">·</span>
+            &nbsp;·&nbsp;
             <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a>
-            <span class="sep">·</span>
+            &nbsp;·&nbsp;
             <a href="https://principfloor.ru" target="_blank">principfloor.ru</a>
         </div>
     </div>
@@ -1311,7 +1255,7 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER
+        // ИНИЦИАЛИЗАЦИЯ SWIPER — МАКСИМАЛЬНО ПЛАВНОЕ ПЕРЕЛИСТЫВАНИЕ
         // ================================================================
         let swiper = null;
 
