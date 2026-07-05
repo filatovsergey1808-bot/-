@@ -222,7 +222,7 @@
         }
 
         /* ================================================================
-           СИНЯЯ ПОДСВЕТКА (ДОБАВЛЕНО)
+           СИНЯЯ ПОДСВЕТКА (ОБНОВЛЕНО - БЕЗ ФОНА)
            ================================================================ */
         .glow-blue {
             transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
@@ -232,15 +232,75 @@
         .glow-blue:hover {
             box-shadow: 
                 0 0 20px rgba(0, 85, 164, 0.15),
-                0 0 40px rgba(0, 85, 164, 0.08),
-                inset 0 0 20px rgba(0, 85, 164, 0.04);
+                0 0 40px rgba(0, 85, 164, 0.08);
             border-color: rgba(0, 85, 164, 0.4) !important;
+        }
+
+        /* Специальные стили для логотипа - только свечение, без фона */
+        .logo-center img.glow-blue {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border-radius: 12px;
+            padding: 4px;
+            background: transparent !important;
+        }
+
+        .logo-center img.glow-blue:hover {
+            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
+            box-shadow: 
+                0 0 30px rgba(0, 85, 164, 0.08),
+                0 0 60px rgba(0, 85, 164, 0.04);
+            transform: scale(1.02);
+            background: transparent !important;
+        }
+
+        /* Специальные стили для номера телефона - только свечение, без фона */
+        .contact-right a.glow-blue {
+            transition: all 0.3s ease;
+            padding: 4px 8px;
+            border-radius: 8px;
+            display: inline-block;
+            background: transparent !important;
+        }
+
+        .contact-right a.glow-blue:hover {
+            box-shadow: 
+                0 0 20px rgba(0, 85, 164, 0.12),
+                0 0 40px rgba(0, 85, 164, 0.06);
+            transform: scale(1.02);
+            background: transparent !important;
+        }
+
+        /* Специальные стили для ссылок в футере - только свечение, без фона */
+        .footer .contacts a.glow-blue {
+            transition: all 0.3s ease;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            background: transparent !important;
+        }
+
+        .footer .contacts a.glow-blue:hover {
+            box-shadow: 
+                0 0 20px rgba(0, 85, 164, 0.08),
+                0 0 40px rgba(0, 85, 164, 0.04);
+            transform: translateY(-1px);
+            background: transparent !important;
         }
 
         /* Анимация пульсации для иконок соцсетей */
         .social-icon.glow-blue {
             position: relative;
             overflow: visible;
+            background: rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .social-icon.glow-blue:hover {
+            background: #1A1A2E;
+            color: #ffffff;
+            border-color: #1A1A2E;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
         }
 
         .social-icon.glow-blue::after {
@@ -293,6 +353,7 @@
         /* Специальная подсветка для шапки */
         .header.glow-blue {
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         .header.glow-blue:hover {
@@ -302,22 +363,7 @@
                 inset 0 0 30px rgba(0, 85, 164, 0.03);
             border-color: rgba(0, 85, 164, 0.25) !important;
             transform: translateY(-2px);
-        }
-
-        /* Подсветка для номера телефона */
-        .contact-right a.glow-blue {
-            transition: all 0.3s ease;
-            padding: 4px 12px;
-            border-radius: 8px;
-            display: inline-block;
-        }
-
-        .contact-right a.glow-blue:hover {
-            box-shadow: 
-                0 0 20px rgba(0, 85, 164, 0.12),
-                0 0 40px rgba(0, 85, 164, 0.06);
-            background: rgba(0, 85, 164, 0.04);
-            transform: scale(1.02);
+            background: rgba(255, 255, 255, 0.92);
         }
 
         /* ================================================================
@@ -357,14 +403,6 @@
             font-size: 14px;
         }
 
-        .top-bar .social-left .social-icon:hover {
-            background: #1A1A2E;
-            color: #ffffff;
-            border-color: #1A1A2E;
-            transform: translateY(-3px);
-            box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
-        }
-
         .top-bar .social-left .social-icon svg {
             width: 20px;
             height: 20px;
@@ -396,6 +434,7 @@
             cursor: pointer;
             border-radius: 12px;
             padding: 4px;
+            background: transparent;
         }
 
         .top-bar .logo-center img:hover {
@@ -404,7 +443,7 @@
                 0 0 30px rgba(0, 85, 164, 0.08),
                 0 0 60px rgba(0, 85, 164, 0.04);
             transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.3);
+            background: transparent;
         }
 
         .top-bar .contact-right {
@@ -426,10 +465,12 @@
             padding: 4px 8px;
             border-radius: 8px;
             display: inline-block;
+            background: transparent;
         }
 
         .top-bar .contact-right a:hover {
             color: #0055A4;
+            background: transparent;
         }
 
         /* ================================================================
@@ -859,15 +900,12 @@
             padding: 2px 8px;
             border-radius: 6px;
             display: inline-block;
+            background: transparent;
         }
 
         .footer .contacts a:hover {
             color: #0055A4;
-            box-shadow: 
-                0 0 20px rgba(0, 85, 164, 0.08),
-                0 0 40px rgba(0, 85, 164, 0.04);
-            background: rgba(0, 85, 164, 0.04);
-            transform: translateY(-1px);
+            background: transparent;
         }
 
         /* ================================================================
@@ -1217,6 +1255,7 @@
                 <img 
                     src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
                     alt="PRINCIP FLOOR"
+                    class="glow-blue"
                     onclick="window.open('https://principfloor.ru/', '_blank')">
             </div>
             <div class="contact-right">
