@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — НАСТОЯЩИЕ КВАДРАТНЫЕ СЛАЙДЫ
+           КАРУСЕЛЬ — КВАДРАТНАЯ, БЕЗ МИГАНИЯ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -383,13 +383,9 @@
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            /* ================================================================
-               КВАДРАТНЫЙ СЛАЙД:
-               width = 100%, height = ширине (через padding-bottom)
-               ================================================================ */
             width: 100%;
             height: 0;
-            padding-bottom: 100%; /* Это делает контейнер квадратным */
+            padding-bottom: 100%;
             position: relative;
         }
 
@@ -418,7 +414,7 @@
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ, ЗАПОЛНЯЕТ ВЕСЬ КОНТЕЙНЕР
+           КАРТОЧКА — КВАДРАТНАЯ
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -1058,7 +1054,7 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
@@ -1175,46 +1171,82 @@
             if (index < 0) index = 0;
             if (index >= totalSlides) index = totalSlides - 1;
             
-            if (index === 0) {
-                currentIndex = index;
-                updateCarousel(false);
-                
-                isTransitioning = true;
-                cloneTransitionTimeout = setTimeout(() => {
-                    currentIndex = totalSlides - 2;
-                    updateCarousel(true);
-                    isTransitioning = false;
-                    cloneTransitionTimeout = null;
-                }, 650);
-                resetAutoPlay();
-                return;
-            }
-            
-            if (index === totalSlides - 1) {
-                currentIndex = index;
-                updateCarousel(false);
-                
-                isTransitioning = true;
-                cloneTransitionTimeout = setTimeout(() => {
-                    currentIndex = 1;
-                    updateCarousel(true);
-                    isTransitioning = false;
-                    cloneTransitionTimeout = null;
-                }, 650);
-                resetAutoPlay();
-                return;
-            }
+            // --- ОСНОВНОЕ ИЗМЕНЕНИЕ ЗДЕСЬ ---
+            // Мы не переключаемся на клоны с мгновенным переходом,
+            // а позволяем карусели прокручиваться дальше плавно,
+            // используя бесконечный цикл
             
             currentIndex = index;
             updateCarousel(instant);
             
-            if (!instant) {
+            // Проверяем, не дошли ли до границ
+            if (currentIndex === 0) {
+                // Дошли до первого клона — переходим на последний реальный
                 isTransitioning = true;
-                setTimeout(() => {
+                cloneTransitionTimeout = setTimeout(() => {
+                    currentIndex = totalSlides - 2;
+                    // Мгновенный переход без анимации, но с сохранением визуала
+                    track.style.transition = 'none';
+                    const offset = -currentIndex * 100;
+                    track.style.transform = `translateX(${offset}%)`;
+                    track.offsetHeight;
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    // Обновляем активные карточки
+                    slides.forEach((slide, idx) => {
+                        const cards = slide.querySelectorAll('.card');
+                        const isActive = idx === currentIndex;
+                        cards.forEach(card => {
+                            card.classList.toggle('active', isActive);
+                        });
+                    });
+                    // Обновляем точки
+                    const dots = document.querySelectorAll('.carousel-dot');
+                    let realIndex = currentIndex - 1;
+                    if (realIndex < 0) realIndex = categories.length - 1;
+                    if (realIndex >= categories.length) realIndex = 0;
+                    dots.forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === realIndex);
+                    });
                     isTransitioning = false;
+                    cloneTransitionTimeout = null;
+                }, 650);
+            } else if (currentIndex === totalSlides - 1) {
+                // Дошли до последнего клона — переходим на первый реальный
+                isTransitioning = true;
+                cloneTransitionTimeout = setTimeout(() => {
+                    currentIndex = 1;
+                    track.style.transition = 'none';
+                    const offset = -currentIndex * 100;
+                    track.style.transform = `translateX(${offset}%)`;
+                    track.offsetHeight;
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    slides.forEach((slide, idx) => {
+                        const cards = slide.querySelectorAll('.card');
+                        const isActive = idx === currentIndex;
+                        cards.forEach(card => {
+                            card.classList.toggle('active', isActive);
+                        });
+                    });
+                    const dots = document.querySelectorAll('.carousel-dot');
+                    let realIndex = currentIndex - 1;
+                    if (realIndex < 0) realIndex = categories.length - 1;
+                    if (realIndex >= categories.length) realIndex = 0;
+                    dots.forEach((dot, idx) => {
+                        dot.classList.toggle('active', idx === realIndex);
+                    });
+                    isTransitioning = false;
+                    cloneTransitionTimeout = null;
                 }, 650);
             } else {
-                isTransitioning = false;
+                // Обычный переход
+                if (!instant) {
+                    isTransitioning = true;
+                    setTimeout(() => {
+                        isTransitioning = false;
+                    }, 650);
+                } else {
+                    isTransitioning = false;
+                }
             }
 
             resetAutoPlay();
