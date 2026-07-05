@@ -369,7 +369,7 @@
         .header .subtitle {
             position: relative;
             z-index: 1;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 200;
             color: #4A4A5A;
             margin-top: 6px;
@@ -377,13 +377,13 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — SWIPER.JS (ПЛАВНАЯ, БЕЗ ОБРЕЗАНИЯ)
+           КАРУСЕЛЬ — SWIPER.JS
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             border-radius: 20px;
-            overflow: visible; /* ← Чтобы карточки не обрезались при увеличении */
-            background: transparent; /* ← Прозрачный фон */
+            overflow: visible;
+            background: transparent;
             backdrop-filter: none;
             border: none;
             width: 100%;
@@ -399,7 +399,7 @@
             bottom: 0;
             width: 100%;
             height: 100%;
-            overflow: visible; /* ← Чтобы карточки не обрезались */
+            overflow: visible;
         }
 
         .swiper-wrapper {
@@ -415,11 +415,11 @@
             padding: 0 16px;
             height: 100%;
             width: 100%;
-            overflow: visible; /* ← Чтобы карточки не обрезались */
+            overflow: visible;
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ
+           КАРТОЧКА — НОВЫЙ ДИЗАЙН
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -439,8 +439,8 @@
             transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
-            /* ← Добавляем отступы, чтобы при увеличении не обрезалось */
             margin: 4px;
+            position: relative;
         }
 
         .swiper-slide-active .card {
@@ -454,7 +454,7 @@
         }
 
         .swiper-slide-active .card:hover {
-            transform: scale(1.04); /* ← Увеличение при наведении */
+            transform: scale(1.04);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
@@ -481,31 +481,62 @@
             flex-shrink: 0;
         }
 
+        /* ================================================================
+           НОВОЕ ОФОРМЛЕНИЕ КАРТОЧКИ:
+           Название слева сверху, описание справа, цена под названием
+           ================================================================ */
         .card .info {
-            padding: 14px 16px 16px;
-            text-align: center;
+            padding: 14px 18px 16px;
+            text-align: left;
             flex: 1;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             height: 30%;
+            position: relative;
+        }
+
+        .card .info-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .card .info-left {
+            flex: 1;
+            min-width: 0;
         }
 
         .card .name {
             font-weight: 300;
-            font-size: clamp(16px, 2.2vw, 26px);
+            font-size: clamp(18px, 2.5vw, 28px);
             letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
             line-height: 1.2;
+            margin-bottom: 4px;
         }
 
         .card .price {
             color: #0055A4;
-            font-size: clamp(14px, 1.8vw, 22px);
+            font-size: clamp(16px, 2vw, 22px);
             font-weight: 400;
-            margin-top: 4px;
             letter-spacing: 0.5px;
+        }
+
+        .card .info-right {
+            flex: 0 0 auto;
+            max-width: 55%;
+            text-align: right;
+        }
+
+        .card .description {
+            font-size: clamp(13px, 1.2vw, 16px);
+            font-weight: 300;
+            color: #4A4A5A;
+            line-height: 1.5;
+            letter-spacing: 0.3px;
         }
 
         /* ================================================================
@@ -816,7 +847,7 @@
             }
 
             .header .subtitle {
-                font-size: 14px;
+                font-size: 16px;
             }
 
             .swiper-slide {
@@ -832,6 +863,18 @@
             .swiper-button-next svg {
                 width: 28px;
                 height: 28px;
+            }
+
+            .card .name {
+                font-size: clamp(16px, 3vw, 22px);
+            }
+
+            .card .price {
+                font-size: clamp(14px, 2.5vw, 18px);
+            }
+
+            .card .description {
+                font-size: clamp(11px, 1.5vw, 14px);
             }
 
             .geo-shape:nth-child(1),
@@ -862,7 +905,7 @@
             }
 
             .header .subtitle {
-                font-size: 12px;
+                font-size: 14px;
             }
 
             .swiper-slide {
@@ -882,7 +925,24 @@
             }
 
             .card .info {
-                padding: 8px 10px 10px;
+                padding: 10px 12px 12px;
+            }
+
+            .card .name {
+                font-size: clamp(14px, 3.5vw, 18px);
+                letter-spacing: 1px;
+            }
+
+            .card .price {
+                font-size: clamp(13px, 3vw, 16px);
+            }
+
+            .card .description {
+                font-size: clamp(10px, 2vw, 12px);
+            }
+
+            .card .info-right {
+                max-width: 50%;
             }
 
             .swiper-button-prev,
@@ -945,7 +1005,7 @@
         <!-- ШАПКА -->
         <div class="header">
             <h1>Террасная доска</h1>
-            <div class="subtitle">Премиальные материалы для вашей террасы</div>
+            <div class="subtitle">Премиальные материалы под ваши задачи</div>
         </div>
 
         <!-- КАРУСЕЛЬ SWIPER -->
@@ -1007,42 +1067,48 @@
 
     <script>
         // ================================================================
-        // ДАННЫЕ
+        // ДАННЫЕ С ОПИСАНИЯМИ
         // ================================================================
         const categories = [{
             id: 'larch',
             name: 'Лиственница',
             image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
-            price: 'от 4 500 ₽/м²'
+            price: 'от 4 500 ₽/м²',
+            description: 'Морозостойкая, влагостойкая, доступная цена'
         }, {
             id: 'ash',
             name: 'Ясень',
             image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
-            price: 'от 5 900 ₽/м²'
+            price: 'от 5 900 ₽/м²',
+            description: 'Термообработанный, устойчивый к влаге'
         }, {
             id: 'kumaru',
             name: 'Кумару',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            price: 'от 8 500 ₽/м²'
+            price: 'от 8 500 ₽/м²',
+            description: 'Экзотическая порода, высокая плотность'
         }, {
             id: 'ipe',
             name: 'Ипе',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-            price: 'от 12 000 ₽/м²'
+            price: 'от 12 000 ₽/м²',
+            description: 'Максимальная твёрдость, долговечность до 50 лет'
         }, {
             id: 'decking',
             name: 'ДПК',
             image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
-            price: 'от 3 500 ₽/м²'
+            price: 'от 3 500 ₽/м²',
+            description: 'Композитный материал, не требует ухода'
         }, {
             id: 'montazh',
             name: 'Монтаж',
             image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
-            price: 'от 2 000 ₽/м²'
+            price: 'от 2 000 ₽/м²',
+            description: 'Профессиональный монтаж, гарантия качества'
         }];
 
         // ================================================================
-        // ДЕТАЛЬНЫЕ ДАННЫЕ
+        // ДЕТАЛЬНЫЕ ДАННЫЕ ДЛЯ МОДАЛЬНОГО ОКНА
         // ================================================================
         const details = {
             'larch': {
@@ -1090,17 +1156,15 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНАЯ, С ПЕРЕЗАПУСКОМ
+        // ИНИЦИАЛИЗАЦИЯ SWIPER
         // ================================================================
         let swiper = null;
 
         function initSwiper() {
             const wrapper = document.getElementById('swiperWrapper');
             
-            // Очищаем wrapper
             wrapper.innerHTML = '';
             
-            // Добавляем слайды
             categories.forEach((cat) => {
                 const slide = document.createElement('div');
                 slide.className = 'swiper-slide';
@@ -1112,8 +1176,15 @@
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder" style="display:none;">📦</div>
                     <div class="info">
-                        <div class="name">${cat.name}</div>
-                        <div class="price">${cat.price}</div>
+                        <div class="info-top">
+                            <div class="info-left">
+                                <div class="name">${cat.name}</div>
+                                <div class="price">${cat.price}</div>
+                            </div>
+                            <div class="info-right">
+                                <div class="description">${cat.description}</div>
+                            </div>
+                        </div>
                     </div>
                 `;
                 card.onclick = () => openModal(cat.id);
@@ -1121,10 +1192,9 @@
                 wrapper.appendChild(slide);
             });
 
-            // Инициализируем Swiper
             swiper = new Swiper('.mySwiper', {
                 loop: true,
-                speed: 1600, // Увеличил до 1600ms — в 2 раза плавнее
+                speed: 1600,
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
@@ -1145,7 +1215,7 @@
                 
                 autoplay: {
                     delay: 4000,
-                    disableOnInteraction: false, // ← НЕ отключать автопрокрутку при взаимодействии
+                    disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                     waitForTransition: true,
                     stopOnLastSlide: false,
@@ -1163,10 +1233,8 @@
                 loopAdditionalSlides: 1,
                 autoHeight: false,
                 
-                // При потере фокуса — продолжать автопрокрутку
                 on: {
                     autoplayStop: function() {
-                        // Если автопрокрутка остановлена, запускаем её снова
                         setTimeout(() => {
                             if (swiper && !swiper.destroyed) {
                                 swiper.autoplay.start();
@@ -1176,7 +1244,6 @@
                 }
             });
 
-            // Обработка кликов на кнопки
             document.querySelector('.swiper-button-prev').addEventListener('click', () => {
                 swiper.slidePrev();
             });
