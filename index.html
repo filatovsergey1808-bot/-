@@ -8,464 +8,43 @@
     <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
     
     <style>
-        /* ================================================================
-           CSS ПЕРЕМЕННЫЕ
-           ================================================================ */
-        :root {
-            --color-primary: #0055A4;
-            --color-primary-dark: #003D7A;
-            --color-primary-light: #E8F0F8;
-            --color-primary-soft: rgba(0, 85, 164, 0.15);
-            --color-white: #FFFFFF;
-            --color-light-bg: #F0F3F8;
-            --color-text-primary: #000000;
-            --color-text-secondary: #4A4A5A;
-            --color-text-light: #8A8A9A;
-            --color-border: #E5E8EC;
-            --shadow-card: 0 4px 16px rgba(0, 85, 164, 0.08);
-            --shadow-card-hover: 0 12px 40px rgba(0, 85, 164, 0.12);
-            --radius-card: 16px;
-            --transition: 0.3s ease;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* ================================================================
-           ОСНОВНОЙ ФОН
-           ================================================================ */
         body {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
-            background: var(--color-light-bg);
-            color: var(--color-text-primary);
+            background: #F0F3F8;
+            color: #1A1A2E;
             padding: 20px;
             position: relative;
             overflow-x: hidden;
         }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-            background: 
-                radial-gradient(ellipse at 20% 50%, rgba(0, 85, 164, 0.05) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 30%, rgba(0, 85, 164, 0.04) 0%, transparent 50%),
-                radial-gradient(ellipse at 50% 80%, rgba(0, 85, 165, 0.03) 0%, transparent 50%),
-                linear-gradient(180deg, #F8F9FC 0%, #E8ECF4 100%);
-            pointer-events: none;
-        }
-        
-        body::after {
-            content: '';
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            z-index: 0;
-            pointer-events: none;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent 0px,
-                    transparent 60px,
-                    rgba(0, 85, 164, 0.04) 60px,
-                    rgba(0, 85, 164, 0.07) 61px,
-                    rgba(0, 85, 164, 0.04) 62px,
-                    transparent 63px,
-                    transparent 120px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    transparent 0px,
-                    transparent 200px,
-                    rgba(0, 85, 164, 0.025) 200px,
-                    rgba(0, 85, 164, 0.06) 202px,
-                    rgba(0, 85, 164, 0.025) 204px,
-                    transparent 206px,
-                    transparent 400px
-                ),
-                repeating-linear-gradient(
-                    30deg,
-                    transparent 0px,
-                    transparent 140px,
-                    rgba(0, 85, 164, 0.02) 140px,
-                    rgba(0, 85, 164, 0.05) 141px,
-                    rgba(0, 85, 164, 0.02) 142px,
-                    transparent 143px,
-                    transparent 280px
-                ),
-                repeating-linear-gradient(
-                    -30deg,
-                    transparent 0px,
-                    transparent 90px,
-                    rgba(0, 85, 164, 0.03) 90px,
-                    rgba(0, 85, 164, 0.08) 92px,
-                    rgba(0, 85, 164, 0.03) 94px,
-                    transparent 96px,
-                    transparent 180px
-                ),
-                repeating-linear-gradient(
-                    15deg,
-                    transparent 0px,
-                    transparent 160px,
-                    rgba(0, 85, 164, 0.015) 160px,
-                    rgba(0, 85, 164, 0.04) 162px,
-                    rgba(0, 85, 164, 0.015) 164px,
-                    transparent 166px,
-                    transparent 320px
-                ),
-                repeating-linear-gradient(
-                    -15deg,
-                    transparent 0px,
-                    transparent 240px,
-                    rgba(0, 85, 164, 0.01) 240px,
-                    rgba(0, 85, 164, 0.035) 243px,
-                    rgba(0, 85, 164, 0.01) 246px,
-                    transparent 249px,
-                    transparent 480px
-                ),
-                repeating-linear-gradient(
-                    50deg,
-                    transparent 0px,
-                    transparent 350px,
-                    rgba(0, 85, 164, 0.01) 350px,
-                    rgba(0, 85, 164, 0.03) 354px,
-                    rgba(0, 85, 164, 0.01) 358px,
-                    transparent 362px,
-                    transparent 700px
-                ),
-                repeating-linear-gradient(
-                    -50deg,
-                    transparent 0px,
-                    transparent 40px,
-                    rgba(0, 85, 164, 0.02) 40px,
-                    rgba(0, 85, 164, 0.05) 41px,
-                    rgba(0, 85, 164, 0.02) 42px,
-                    transparent 43px,
-                    transparent 80px
-                );
-            transform: rotate(0deg) scale(1.1);
-            animation: gridFloat 25s ease-in-out infinite alternate;
-        }
-        
-        @keyframes gridFloat {
-            0% { transform: rotate(0deg) scale(1.05) translate(0, 0); }
-            20% { transform: rotate(0.5deg) scale(1.08) translate(1%, -1%); }
-            40% { transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%); }
-            60% { transform: rotate(0.8deg) scale(1.1) translate(1%, 1%); }
-            80% { transform: rotate(-0.5deg) scale(1.06) translate(-1%, -1%); }
-            100% { transform: rotate(0.3deg) scale(1.12) translate(0, 0); }
-        }
-        
-        .geometry-overlay {
-            position: fixed;
-            top: -50%;
-            left: -50%;
-            right: -50%;
-            bottom: -50%;
-            z-index: 0;
-            pointer-events: none;
-            background: 
-                repeating-linear-gradient(
-                    35deg,
-                    transparent 0px,
-                    transparent 180px,
-                    rgba(255, 255, 255, 0.04) 180px,
-                    rgba(255, 255, 255, 0.01) 181px,
-                    transparent 182px,
-                    transparent 360px
-                ),
-                repeating-linear-gradient(
-                    -35deg,
-                    transparent 0px,
-                    transparent 220px,
-                    rgba(255, 255, 255, 0.03) 220px,
-                    rgba(255, 255, 255, 0.01) 221px,
-                    transparent 222px,
-                    transparent 440px
-                ),
-                radial-gradient(circle at 30% 40%, rgba(255,255,255,0.02) 0%, transparent 50%),
-                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.015) 0%, transparent 40%);
-            transform: rotate(0deg) scale(1.1);
-            animation: gridFloat 20s ease-in-out infinite alternate-reverse;
-        }
-        
-        .geo-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-        
-        .geo-shape {
-            position: absolute;
-            border: 1px solid rgba(0, 85, 164, 0.04);
-            border-radius: 2px;
-            animation: shapeFloat 18s ease-in-out infinite alternate;
-        }
-        
-        .geo-shape:nth-child(1) {
-            width: 400px;
-            height: 200px;
-            top: -50px;
-            right: -100px;
-            transform: rotate(25deg);
-            background: linear-gradient(135deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
-            animation-duration: 22s;
-        }
-        
-        .geo-shape:nth-child(2) {
-            width: 150px;
-            height: 300px;
-            bottom: 50px;
-            left: -60px;
-            transform: rotate(-15deg);
-            background: linear-gradient(225deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
-            animation-duration: 26s;
-            animation-delay: -6s;
-        }
-        
-        .geo-shape:nth-child(3) {
-            width: 100px;
-            height: 100px;
-            top: 35%;
-            left: 55%;
-            transform: rotate(45deg);
-            background: linear-gradient(45deg, rgba(0, 85, 164, 0.02), rgba(0, 85, 164, 0.06));
-            animation-duration: 30s;
-            animation-delay: -12s;
-        }
-        
-        .geo-shape:nth-child(4) {
-            width: 250px;
-            height: 150px;
-            top: 15%;
-            left: 15%;
-            transform: rotate(60deg);
-            background: linear-gradient(135deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
-            animation-duration: 24s;
-            animation-delay: -4s;
-        }
-        
-        .geo-shape:nth-child(5) {
-            width: 180px;
-            height: 180px;
-            bottom: -30px;
-            right: 25%;
-            transform: rotate(-30deg);
-            background: linear-gradient(225deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
-            animation-duration: 28s;
-            animation-delay: -9s;
-        }
-        
-        @keyframes shapeFloat {
-            0% { transform: rotate(25deg) translate(0, 0) scale(1); opacity: 0.4; }
-            33% { transform: rotate(35deg) translate(12px, -18px) scale(1.06); opacity: 0.9; }
-            66% { transform: rotate(15deg) translate(-12px, 12px) scale(0.94); opacity: 0.5; }
-            100% { transform: rotate(30deg) translate(6px, -6px) scale(1.03); opacity: 0.7; }
-        }
-        
-        @keyframes shapeFloat2 {
-            0% { transform: rotate(-15deg) translate(0, 0) scale(1); opacity: 0.3; }
-            50% { transform: rotate(-25deg) translate(-18px, 12px) scale(1.08); opacity: 0.8; }
-            100% { transform: rotate(-5deg) translate(12px, -12px) scale(0.94); opacity: 0.5; }
-        }
-        
-        @keyframes shapeFloat3 {
-            0% { transform: rotate(45deg) translate(0, 0) scale(1); opacity: 0.3; }
-            100% { transform: rotate(55deg) translate(10px, -15px) scale(1.1); opacity: 0.8; }
-        }
-        
-        .geo-shape:nth-child(2) { animation-name: shapeFloat2; }
-        .geo-shape:nth-child(3) { animation-name: shapeFloat3; }
-        .geo-shape:nth-child(4) { animation-name: shapeFloat2; }
-        .geo-shape:nth-child(5) { animation-name: shapeFloat3; }
-        
-        /* ================================================================
-           ОСНОВНОЙ КОНТЕНТ
-           ================================================================ */
+
         #app {
-            position: relative;
-            z-index: 1;
             max-width: 1000px;
             margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
-        
-        /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ
-           ================================================================ */
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 8px 0 16px 0;
-            gap: 20px;
-        }
-        
-        .top-bar .social-left {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            justify-content: flex-start;
-        }
-        
-        .top-bar .social-left .social-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: rgba(0, 85, 164, 0.06);
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: all var(--transition);
-            border: 1px solid rgba(0, 85, 164, 0.06);
-            padding: 0;
-        }
-        
-        .top-bar .social-left .social-icon:hover {
-            background: var(--color-primary);
-            color: #ffffff;
-            border-color: var(--color-primary);
-            transform: translateY(-3px);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.2);
-        }
-        
-        .top-bar .social-left .social-icon:active {
-            transform: scale(0.92);
-        }
-        
-        .top-bar .social-left .social-icon svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-            display: block;
-        }
-        
-        .top-bar .social-left .social-icon:hover svg {
-            fill: #ffffff;
-        }
-        
-        .top-bar .logo-center {
-            flex: 0 0 auto;
-        }
-        
-        .top-bar .logo-center img {
-            display: block;
-            width: 220px;
-            height: auto;
-            filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
-            transition: filter var(--transition);
-            cursor: pointer;
-        }
-        
-        .top-bar .logo-center img:hover {
-            filter: drop-shadow(0 4px 24px rgba(0, 85, 164, 0.16));
-        }
-        
-        .top-bar .contact-right {
-            flex: 1;
-            text-align: right;
-            font-size: 14px;
-            color: var(--color-text-secondary);
-            font-weight: 300;
-            letter-spacing: 0.3px;
-        }
-        
-        .top-bar .contact-right a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: color var(--transition);
-            font-weight: 400;
-        }
-        
-        .top-bar .contact-right a:hover {
-            color: var(--color-primary-dark);
-        }
-        
+
         /* ================================================================
            ШАПКА
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
             padding: 32px 32px 28px 32px;
             margin-bottom: 28px;
-            box-shadow: 0 8px 40px rgba(0, 85, 164, 0.06);
-            border: 1px solid rgba(0, 85, 164, 0.2);
-            position: relative;
-            overflow: hidden;
             text-align: center;
+            border: 1px solid rgba(0, 85, 164, 0.2);
         }
-        
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-            pointer-events: none;
-            background: 
-                repeating-linear-gradient(
-                    15deg,
-                    transparent 0px,
-                    transparent 80px,
-                    rgba(0, 85, 164, 0.03) 80px,
-                    rgba(0, 85, 164, 0.06) 81px,
-                    rgba(0, 85, 164, 0.03) 82px,
-                    transparent 83px,
-                    transparent 160px
-                ),
-                repeating-linear-gradient(
-                    -25deg,
-                    transparent 0px,
-                    transparent 120px,
-                    rgba(0, 85, 164, 0.02) 120px,
-                    rgba(0, 85, 164, 0.05) 122px,
-                    rgba(0, 85, 164, 0.02) 124px,
-                    transparent 126px,
-                    transparent 240px
-                ),
-                repeating-linear-gradient(
-                    5deg,
-                    transparent 0px,
-                    transparent 200px,
-                    rgba(0, 85, 164, 0.015) 200px,
-                    rgba(0, 85, 164, 0.04) 203px,
-                    rgba(0, 85, 164, 0.015) 206px,
-                    transparent 209px,
-                    transparent 400px
-                ),
-                repeating-linear-gradient(
-                    -40deg,
-                    transparent 0px,
-                    transparent 160px,
-                    rgba(0, 85, 164, 0.01) 160px,
-                    rgba(0, 85, 164, 0.035) 163px,
-                    rgba(0, 85, 164, 0.01) 166px,
-                    transparent 169px,
-                    transparent 320px
-                );
-            opacity: 0.5;
-        }
-        
+
         .header h1 {
-            position: relative;
-            z-index: 1;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 48px;
             font-weight: 200;
             letter-spacing: 6px;
@@ -473,39 +52,36 @@
             text-transform: uppercase;
             line-height: 1.05;
         }
-        
+
         .header .subtitle {
-            position: relative;
-            z-index: 1;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 16px;
             font-weight: 200;
-            color: var(--color-text-secondary);
+            color: #4A4A5A;
             margin-top: 6px;
             letter-spacing: 2px;
         }
-        
+
         /* ================================================================
-           КАРУСЕЛЬ — ПО ОДНОМУ СЛАЙДУ, ЦЕНТРИРОВАННАЯ
+           КАРУСЕЛЬ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
-            border-radius: var(--radius-card);
+            border-radius: 16px;
             padding: 20px 0;
             min-height: 440px;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
         }
-        
+
         .carousel-track {
             display: flex;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             align-items: center;
             will-change: transform;
         }
-        
+
         .carousel-slide {
             flex: 0 0 100%;
             display: flex;
@@ -513,9 +89,8 @@
             align-items: center;
             padding: 0 40px;
             min-height: 400px;
-            position: relative;
         }
-        
+
         /* ================================================================
            КАРТОЧКА
            ================================================================ */
@@ -524,8 +99,7 @@
             max-width: 100%;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: var(--radius-card);
+            border-radius: 16px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.5s ease;
@@ -538,9 +112,8 @@
             transform: scale(0.85);
             filter: blur(4px);
             pointer-events: none;
-            margin: 0;
         }
-        
+
         .card.active {
             opacity: 1;
             transform: scale(1);
@@ -550,18 +123,14 @@
             box-shadow: 0 12px 50px rgba(0, 85, 164, 0.12);
             z-index: 3;
         }
-        
+
         .card.active:hover {
             transform: scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
         }
-        
-        .card:active {
-            transform: scale(0.97);
-        }
-        
+
         .card .image {
             width: 100%;
             height: 260px;
@@ -569,7 +138,7 @@
             display: block;
             background: #E8ECF0;
         }
-        
+
         .card .image-placeholder {
             width: 100%;
             height: 260px;
@@ -580,7 +149,7 @@
             background: #E8ECF0;
             color: #B0B8C0;
         }
-        
+
         .card .info {
             padding: 22px 20px 24px;
             text-align: center;
@@ -589,9 +158,8 @@
             flex-direction: column;
             justify-content: center;
         }
-        
+
         .card .name {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 300;
             font-size: 24px;
             letter-spacing: 2px;
@@ -599,15 +167,15 @@
             text-transform: uppercase;
             line-height: 1.2;
         }
-        
+
         .card .price {
-            color: var(--color-primary);
+            color: #0055A4;
             font-size: 22px;
             font-weight: 400;
             margin-top: 4px;
             letter-spacing: 0.5px;
         }
-        
+
         /* ================================================================
            КНОПКИ НАВИГАЦИИ
            ================================================================ */
@@ -623,47 +191,45 @@
             align-items: center;
             justify-content: center;
             color: rgba(0, 85, 164, 0.1);
-            transition: all var(--transition);
+            transition: all 0.3s ease;
             padding: 30px 8px;
             opacity: 0.2;
             backdrop-filter: blur(2px);
-            -webkit-backdrop-filter: blur(2px);
             border-radius: 0;
         }
-        
+
         .carousel-btn:hover {
             opacity: 0.6;
-            color: var(--color-primary);
+            color: #0055A4;
             background: rgba(0, 85, 164, 0.04);
             backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
         }
-        
+
         .carousel-btn:active {
             transform: translateY(-50%) scale(0.95);
         }
-        
+
         .carousel-btn.prev {
             left: 4px;
         }
-        
+
         .carousel-btn.next {
             right: 4px;
         }
-        
+
         .carousel-btn svg {
             width: 36px;
             height: 36px;
             fill: currentColor;
-            transition: transform var(--transition);
+            transition: transform 0.3s ease;
         }
-        
+
         .carousel-btn:hover svg {
             transform: scale(1.15);
         }
-        
+
         /* ================================================================
-           ИНДИКАТОРЫ
+           ТОЧКИ
            ================================================================ */
         .carousel-dots {
             display: flex;
@@ -671,7 +237,7 @@
             gap: 10px;
             padding: 16px 0 8px 0;
         }
-        
+
         .carousel-dot {
             width: 10px;
             height: 10px;
@@ -679,33 +245,30 @@
             border: 1.5px solid rgba(0, 85, 164, 0.15);
             background: rgba(255, 255, 255, 0.4);
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.3s ease;
         }
-        
+
         .carousel-dot.active {
-            background: var(--color-primary);
-            border-color: var(--color-primary);
+            background: #0055A4;
+            border-color: #0055A4;
             transform: scale(1.2);
             box-shadow: 0 0 20px rgba(0, 85, 164, 0.15);
         }
-        
+
         .carousel-dot:hover {
-            border-color: var(--color-primary);
+            border-color: #0055A4;
             transform: scale(1.1);
         }
-        
+
         /* ================================================================
            ФУТЕР
            ================================================================ */
         .footer {
-            grid-column: 1 / -1;
+            text-align: center;
             padding: 12px 14px 4px 14px;
             margin-top: 8px;
         }
-        
-        /* ================================================================
-           МОДАЛЬНОЕ ОКНО
-           ================================================================ */
+
         .modal-overlay {
             display: none;
             position: fixed;
@@ -715,21 +278,19 @@
             bottom: 0;
             background: rgba(0, 85, 164, 0.12);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
-        
+
         .modal-overlay.active {
             display: flex;
         }
-        
+
         .modal {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
             border-radius: 16px;
             max-width: 520px;
             width: 100%;
@@ -738,31 +299,36 @@
             animation: modalFadeIn 0.4s ease;
             max-height: 90vh;
             overflow-y: auto;
-            border-top: 4px solid var(--color-primary);
+            border-top: 4px solid #0055A4;
         }
-        
+
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
         }
-        
+
         .modal .modal-close {
             float: right;
             background: none;
             border: none;
             font-size: 24px;
-            color: var(--color-text-light);
+            color: #8A8A9A;
             cursor: pointer;
-            transition: color var(--transition);
+            transition: color 0.3s ease;
             padding: 0 4px;
         }
-        
+
         .modal .modal-close:hover {
-            color: var(--color-text-primary);
+            color: #1A1A2E;
         }
-        
+
         .modal h2 {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 22px;
             font-weight: 200;
             letter-spacing: 2px;
@@ -771,234 +337,168 @@
             margin-top: 4px;
             margin-bottom: 6px;
         }
-        
+
         .modal .modal-price {
             font-size: 20px;
-            color: var(--color-primary);
+            color: #0055A4;
             font-weight: 400;
             margin-bottom: 12px;
         }
-        
+
         .modal .modal-desc {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
-            color: var(--color-text-secondary);
+            color: #4A4A5A;
             font-weight: 300;
             line-height: 1.7;
             margin-bottom: 16px;
         }
-        
+
         .modal .modal-section {
             padding: 12px 0;
             border-top: 1px solid rgba(0, 85, 164, 0.04);
         }
-        
+
         .modal .modal-section h4 {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 12px;
             letter-spacing: 1px;
-            color: var(--color-text-light);
+            color: #8A8A9A;
             text-transform: uppercase;
             margin-bottom: 4px;
             font-weight: 400;
         }
-        
+
         .modal .modal-section p {
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
-            color: var(--color-text-secondary);
+            color: #4A4A5A;
             font-weight: 300;
             line-height: 1.6;
             white-space: pre-line;
         }
-        
+
         .modal .btn-close-modal {
             width: 100%;
             padding: 14px;
             margin-top: 16px;
-            background: var(--color-primary);
-            color: var(--color-white);
+            background: #0055A4;
+            color: #FFFFFF;
             border: none;
             border-radius: 12px;
-            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: 15px;
             font-weight: 300;
             letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: all var(--transition);
+            transition: all 0.3s ease;
             box-shadow: 0 4px 20px rgba(0, 85, 164, 0.2);
         }
-        
+
         .modal .btn-close-modal:hover {
-            background: var(--color-primary-dark);
+            background: #003D7A;
             box-shadow: 0 8px 30px rgba(0, 85, 164, 0.3);
             transform: translateY(-2px);
         }
-        
-        /* ================================================================
-           АДАПТИВНОСТЬ
-           ================================================================ */
+
         @media (max-width: 768px) {
-            body { padding: 12px; }
-            
-            .top-bar {
-                flex-direction: column;
-                padding: 4px 0 12px 0;
-                gap: 10px;
+            body {
+                padding: 12px;
             }
-            
-            .top-bar .social-left {
-                flex: none;
-                justify-content: center;
-                width: 100%;
+
+            .header h1 {
+                font-size: 32px;
+                letter-spacing: 4px;
             }
-            
-            .top-bar .logo-center img {
-                width: 180px;
+
+            .header .subtitle {
+                font-size: 14px;
             }
-            
-            .top-bar .contact-right {
-                flex: none;
-                text-align: center;
-                font-size: 13px;
-                width: 100%;
-            }
-            
-            .header {
-                padding: 24px 20px 20px 20px;
-                margin-bottom: 20px;
-                border-radius: 12px;
-                border-width: 1px;
-            }
-            
-            .header h1 { font-size: 32px; letter-spacing: 4px; }
-            .header .subtitle { font-size: 14px; }
-            
+
             .carousel-wrapper {
                 min-height: 320px;
                 padding: 10px 0;
             }
-            
+
             .carousel-slide {
-                min-height: 300px;
                 padding: 0 20px;
+                min-height: 300px;
             }
-            
+
             .card {
                 min-height: 280px;
-                transform: scale(0.85);
             }
-            
-            .card.active {
-                transform: scale(1);
+
+            .card .image {
+                height: 180px;
             }
-            
-            .card .image { height: 180px; }
-            .card .name { font-size: 20px; }
-            .card .price { font-size: 18px; }
-            .card .info { padding: 16px 14px 18px; }
-            
+
+            .card .name {
+                font-size: 20px;
+            }
+
+            .card .price {
+                font-size: 18px;
+            }
+
             .carousel-btn {
                 padding: 20px 6px;
                 opacity: 0.15;
             }
-            
+
             .carousel-btn svg {
                 width: 28px;
                 height: 28px;
             }
-            
-            .geo-shape:nth-child(1),
-            .geo-shape:nth-child(2),
-            .geo-shape:nth-child(5) { display: none; }
         }
-        
+
         @media (max-width: 480px) {
-            .top-bar .logo-center img { width: 150px; }
-            .top-bar .social-left { gap: 10px; }
-            .top-bar .social-left .social-icon { width: 34px; height: 34px; }
-            .top-bar .social-left .social-icon svg { width: 17px; height: 17px; }
-            .top-bar .contact-right { font-size: 11px; }
-            
-            .header h1 { font-size: 24px; letter-spacing: 2px; }
-            .header .subtitle { font-size: 12px; }
-            .header { padding: 18px 14px 16px; border-radius: 10px; }
-            
-            .carousel-wrapper { min-height: 260px; }
-            .carousel-slide { min-height: 240px; padding: 0 10px; }
-            
+            .header h1 {
+                font-size: 24px;
+                letter-spacing: 2px;
+            }
+
+            .header .subtitle {
+                font-size: 12px;
+            }
+
+            .carousel-wrapper {
+                min-height: 260px;
+            }
+
+            .carousel-slide {
+                padding: 0 10px;
+                min-height: 240px;
+            }
+
             .card {
                 min-height: 220px;
-                transform: scale(0.8);
             }
-            
-            .card.active {
-                transform: scale(1);
+
+            .card .image {
+                height: 140px;
             }
-            
-            .card .image { height: 140px; }
-            .card .name { font-size: 16px; letter-spacing: 1px; }
-            .card .price { font-size: 15px; }
-            .card .info { padding: 12px 10px 14px; }
-            
-            .carousel-btn { padding: 12px 4px; }
-            .carousel-btn svg { width: 20px; height: 20px; }
-            
-            .geo-shape:nth-child(3),
-            .geo-shape:nth-child(4) { display: none; }
-            
-            .modal { padding: 20px 16px; border-radius: 12px; }
+
+            .card .name {
+                font-size: 16px;
+                letter-spacing: 1px;
+            }
+
+            .card .price {
+                font-size: 15px;
+            }
+
+            .carousel-btn {
+                padding: 12px 4px;
+            }
+
+            .carousel-btn svg {
+                width: 20px;
+                height: 20px;
+            }
         }
-        
-        .modal::-webkit-scrollbar { width: 4px; }
-        .modal::-webkit-scrollbar-track { background: var(--color-light-bg); border-radius: 8px; }
-        .modal::-webkit-scrollbar-thumb { background: var(--color-primary); border-radius: 8px; }
     </style>
 </head>
 <body>
 
-    <!-- СВЕТОВОЙ СЛОЙ -->
-    <div class="geometry-overlay"></div>
-    
-    <!-- ПАРЯЩИЕ ГЕОМЕТРИЧЕСКИЕ ФИГУРЫ -->
-    <div class="geo-shapes">
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-        <div class="geo-shape"></div>
-    </div>
-
-    <!-- ОСНОВНОЙ КОНТЕНТ -->
     <div id="app">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
-        <div class="top-bar">
-            <div class="social-left">
-                <a href="mailto:sl@principfloor.ru" class="social-icon" title="Email">
-                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                </a>
-                <a href="https://t.me/principfloor" target="_blank" class="social-icon" title="Telegram">
-                    <svg viewBox="0 0 24 24"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z"/></svg>
-                </a>
-                <a href="https://wa.me/73433282772" target="_blank" class="social-icon" title="WhatsApp">
-                    <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                </a>
-                <a href="#" class="social-icon" title="Макс">
-                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                </a>
-            </div>
-            <div class="logo-center">
-                <img 
-                    src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png?v=1601247390" 
-                    alt="PRINCIP FLOOR"
-                    onclick="window.open('https://principfloor.ru/', '_blank')">
-            </div>
-            <div class="contact-right">
-                <a href="tel:+73433282772">+7 (343) 328-27-72</a>
-            </div>
-        </div>
-
         <!-- ШАПКА -->
         <div class="header">
             <h1>Террасная доска</h1>
@@ -1007,16 +507,17 @@
 
         <!-- КАРУСЕЛЬ -->
         <div class="carousel-wrapper" id="carouselWrapper">
-            <div class="carousel-track" id="carouselTrack"></div>
-            
-            <button class="carousel-btn prev" id="prevBtn" aria-label="Предыдущий">
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Слайды будут добавлены через JavaScript -->
+            </div>
+            <button class="carousel-btn prev" id="prevBtn">
                 <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
             </button>
-            <button class="carousel-btn next" id="nextBtn" aria-label="Следующий">
+            <button class="carousel-btn next" id="nextBtn">
                 <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
             </button>
         </div>
-        
+
         <!-- ТОЧКИ -->
         <div class="carousel-dots" id="dotsContainer"></div>
     </div>
@@ -1052,50 +553,41 @@
         // ================================================================
         // ДАННЫЕ
         // ================================================================
-        
-        const categories = [
-            {
-                id: 'larch',
-                name: 'Лиственница',
-                image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
-                price: 'от 4 500 ₽/м²'
-            },
-            {
-                id: 'ash',
-                name: 'Ясень',
-                image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
-                price: 'от 5 900 ₽/м²'
-            },
-            {
-                id: 'kumaru',
-                name: 'Кумару',
-                image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-                price: 'от 8 500 ₽/м²'
-            },
-            {
-                id: 'ipe',
-                name: 'Ипе',
-                image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
-                price: 'от 12 000 ₽/м²'
-            },
-            {
-                id: 'decking',
-                name: 'ДПК',
-                image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
-                price: 'от 3 500 ₽/м²'
-            },
-            {
-                id: 'montazh',
-                name: 'Монтаж',
-                image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
-                price: 'от 2 000 ₽/м²'
-            }
-        ];
+        const categories = [{
+            id: 'larch',
+            name: 'Лиственница',
+            image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
+            price: 'от 4 500 ₽/м²'
+        }, {
+            id: 'ash',
+            name: 'Ясень',
+            image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
+            price: 'от 5 900 ₽/м²'
+        }, {
+            id: 'kumaru',
+            name: 'Кумару',
+            image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
+            price: 'от 8 500 ₽/м²'
+        }, {
+            id: 'ipe',
+            name: 'Ипе',
+            image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
+            price: 'от 12 000 ₽/м²'
+        }, {
+            id: 'decking',
+            name: 'ДПК',
+            image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
+            price: 'от 3 500 ₽/м²'
+        }, {
+            id: 'montazh',
+            name: 'Монтаж',
+            image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
+            price: 'от 2 000 ₽/м²'
+        }];
 
         // ================================================================
         // ДЕТАЛЬНЫЕ ДАННЫЕ
         // ================================================================
-        
         const details = {
             'larch': {
                 desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
@@ -1142,38 +634,31 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ИСПРАВЛЕННАЯ ФИНАЛЬНАЯ
+        // КАРУСЕЛЬ
         // ================================================================
-        
-        let currentRealIndex = 0;
+        let currentIndex = 0;
+        let realIndex = 0;
+        let totalSlides = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
-        let totalRealSlides = 0;
-        let slideWidth = 100; // 100%
-        let track = null;
-        let slides = [];
-        let totalSlides = 0;
-        
-        function renderCarousel() {
+        let track, slides;
+
+        function initCarousel() {
             track = document.getElementById('carouselTrack');
             const dotsContainer = document.getElementById('dotsContainer');
-            
-            const totalItems = categories.length;
-            totalRealSlides = totalItems;
-            
+
+            // Очищаем трек
             track.innerHTML = '';
-            
+
             // Создаём реальные слайды
-            for (let i = 0; i < totalItems; i++) {
-                const cat = categories[i];
+            categories.forEach((cat, i) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
                 slide.dataset.index = i;
-                
+
                 const card = document.createElement('div');
                 card.className = 'card';
-                card.dataset.index = i;
                 card.innerHTML = `
                     <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
@@ -1186,169 +671,154 @@
                 card.onclick = () => openModal(cat.id);
                 slide.appendChild(card);
                 track.appendChild(slide);
-            }
-            
-            // Создаём клоны для бесконечной прокрутки
+            });
+
+            // Клонируем первый и последний слайд для бесконечной прокрутки
             const firstClone = track.children[0].cloneNode(true);
             const lastClone = track.children[track.children.length - 1].cloneNode(true);
-            
-            // Добавляем клоны
             track.appendChild(firstClone);
             track.insertBefore(lastClone, track.children[0]);
-            
+
             slides = track.querySelectorAll('.carousel-slide');
             totalSlides = slides.length;
-            
-            // Устанавливаем начальную позицию на первом реальном слайде
-            currentRealIndex = 0;
-            const offset = -(currentRealIndex + 1) * slideWidth;
-            track.style.transform = `translateX(${offset}%)`;
-            
-            // Обновляем dots
+
+            // Начальная позиция: первый реальный слайд
+            realIndex = 0;
+            currentIndex = realIndex + 1;
+            updateCarousel(true);
+
+            // Создаём точки
             dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalRealSlides; i++) {
+            for (let i = 0; i < categories.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.onclick = () => goToSlide(i);
                 dotsContainer.appendChild(dot);
             }
-            
-            updateCarousel();
+
             startAutoPlay();
         }
-        
-        function updateCarousel() {
-            const dots = document.querySelectorAll('.carousel-dot');
-            
-            // Позиция: реальный индекс + 1 (из-за клона в начале)
-            const offset = -(currentRealIndex + 1) * slideWidth;
-            track.style.transform = `translateX(${offset}%)`;
-            
-            // Обновляем активные карточки
-            slides.forEach((slide, slideIndex) => {
-                const cards = slide.querySelectorAll('.card');
-                // Индекс слайда в реальных данных (без учёта клонов)
-                let realIndex = slideIndex - 1;
-                if (slideIndex === 0) realIndex = totalRealSlides - 1;
-                if (slideIndex === totalSlides - 1) realIndex = 0;
-                
-                const isActive = realIndex === currentRealIndex;
-                
-                cards.forEach((card) => {
-                    card.classList.remove('active');
-                    if (isActive) {
-                        card.classList.add('active');
-                    }
-                });
-            });
-            
-            // Обновляем точки
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentRealIndex);
-            });
-        }
-        
-        function goToSlide(index, instant = false) {
-            if (isTransitioning) return;
-            if (index < 0) index = totalRealSlides - 1;
-            if (index >= totalRealSlides) index = 0;
-            
-            currentRealIndex = index;
-            
+
+        function updateCarousel(instant = false) {
+            if (!track) return;
+
             if (instant) {
                 track.style.transition = 'none';
-                updateCarousel();
+            } else {
+                track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            }
+
+            const offset = -currentIndex * 100;
+            track.style.transform = `translateX(${offset}%)`;
+
+            // Обновляем активные карточки
+            slides.forEach((slide, idx) => {
+                const cards = slide.querySelectorAll('.card');
+                let isActive = false;
+                if (idx === currentIndex) {
+                    isActive = true;
+                }
+                // Для клонов: если мы на первом клоне (индекс 0), то активен последний реальный
+                if (idx === 0 && currentIndex === totalSlides - 1) {
+                    isActive = true;
+                }
+                // Если мы на последнем клоне (индекс totalSlides-1), то активен первый реальный
+                if (idx === totalSlides - 1 && currentIndex === 0) {
+                    isActive = true;
+                }
+
+                cards.forEach(card => {
+                    card.classList.toggle('active', isActive);
+                });
+            });
+
+            // Обновляем точки
+            const dots = document.querySelectorAll('.carousel-dot');
+            let dotIndex = realIndex;
+            if (dotIndex < 0) dotIndex = categories.length - 1;
+            if (dotIndex >= categories.length) dotIndex = 0;
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === dotIndex);
+            });
+
+            // Принудительный reflow для instant перехода
+            if (instant) {
                 track.offsetHeight;
                 track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            } else {
-                updateCarousel();
             }
-            
-            // Проверяем, не дошли ли до клонов
-            const offset = -(currentRealIndex + 1) * slideWidth;
-            
-            // Если мы на первом клоне (индекс 0)
-            if (offset === 0) {
+        }
+
+        function goToSlide(index, instant = false) {
+            if (isTransitioning) return;
+            if (index < 0) index = categories.length - 1;
+            if (index >= categories.length) index = 0;
+
+            realIndex = index;
+            currentIndex = realIndex + 1;
+
+            updateCarousel(instant);
+
+            // Проверяем клоны
+            if (currentIndex === 0) {
+                // Дошли до первого клона → переходим на последний реальный
                 isTransitioning = true;
                 setTimeout(() => {
-                    currentRealIndex = totalRealSlides - 1;
-                    const newOffset = -(currentRealIndex + 1) * slideWidth;
-                    track.style.transition = 'none';
-                    track.style.transform = `translateX(${newOffset}%)`;
-                    track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    updateCarousel();
-                    setTimeout(() => {
-                        isTransitioning = false;
-                    }, 50);
+                    realIndex = categories.length - 1;
+                    currentIndex = realIndex + 1;
+                    updateCarousel(true);
+                    setTimeout(() => { isTransitioning = false; }, 50);
                 }, 650);
-            }
-            // Если мы на последнем клоне
-            else if (offset === -(totalSlides - 1) * slideWidth) {
+            } else if (currentIndex === totalSlides - 1) {
+                // Дошли до последнего клона → переходим на первый реальный
                 isTransitioning = true;
                 setTimeout(() => {
-                    currentRealIndex = 0;
-                    const newOffset = -(currentRealIndex + 1) * slideWidth;
-                    track.style.transition = 'none';
-                    track.style.transform = `translateX(${newOffset}%)`;
-                    track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    updateCarousel();
-                    setTimeout(() => {
-                        isTransitioning = false;
-                    }, 50);
+                    realIndex = 0;
+                    currentIndex = realIndex + 1;
+                    updateCarousel(true);
+                    setTimeout(() => { isTransitioning = false; }, 50);
                 }, 650);
             }
-            
+
             resetAutoPlay();
         }
-        
+
         function nextSlide() {
             if (isTransitioning) return;
-            goToSlide(currentRealIndex + 1);
+            goToSlide(realIndex + 1);
         }
-        
+
         function prevSlide() {
             if (isTransitioning) return;
-            goToSlide(currentRealIndex - 1);
+            goToSlide(realIndex - 1);
         }
-        
+
         function startAutoPlay() {
             stopAutoPlay();
             autoPlayTimer = setInterval(() => {
                 nextSlide();
             }, AUTO_PLAY_INTERVAL);
         }
-        
+
         function stopAutoPlay() {
             if (autoPlayTimer) {
                 clearInterval(autoPlayTimer);
                 autoPlayTimer = null;
             }
         }
-        
+
         function resetAutoPlay() {
             stopAutoPlay();
-            startAutoPlay();
-        }
-        
-        function pauseAutoPlay() {
-            stopAutoPlay();
-        }
-        
-        function resumeAutoPlay() {
             startAutoPlay();
         }
 
         // ================================================================
         // МОДАЛЬНОЕ ОКНО
         // ================================================================
-        
         function openModal(id) {
             const data = categories.find(c => c.id === id);
             const detail = details[id];
             if (!data || !detail) return;
-            
+
             document.getElementById('modalName').textContent = data.name;
             document.getElementById('modalPrice').textContent = data.price;
             document.getElementById('modalDesc').textContent = detail.desc;
@@ -1356,46 +826,47 @@
             document.getElementById('modalCons').textContent = detail.cons;
             document.getElementById('modalCare').textContent = detail.care;
             document.getElementById('modalSpecs').textContent = detail.specs;
-            
+
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
-            pauseAutoPlay();
+            stopAutoPlay();
         }
-        
+
         function closeModal() {
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
-            resumeAutoPlay();
+            startAutoPlay();
         }
-        
+
         // ================================================================
         // ЗАПУСК
         // ================================================================
-        
         document.addEventListener('DOMContentLoaded', () => {
-            renderCarousel();
-            
+            initCarousel();
+
             const wrapper = document.getElementById('carouselWrapper');
-            
+
             document.getElementById('prevBtn').onclick = (e) => {
                 e.stopPropagation();
                 prevSlide();
             };
+
             document.getElementById('nextBtn').onclick = (e) => {
                 e.stopPropagation();
                 nextSlide();
             };
-            
-            wrapper.addEventListener('mouseenter', pauseAutoPlay);
-            wrapper.addEventListener('mouseleave', resumeAutoPlay);
-            wrapper.addEventListener('touchstart', pauseAutoPlay);
-            wrapper.addEventListener('touchend', resumeAutoPlay);
-            
+
+            wrapper.addEventListener('mouseenter', stopAutoPlay);
+            wrapper.addEventListener('mouseleave', startAutoPlay);
+            wrapper.addEventListener('touchstart', stopAutoPlay);
+            wrapper.addEventListener('touchend', startAutoPlay);
+
             document.getElementById('modalClose').onclick = closeModal;
             document.getElementById('modalCloseBtn').onclick = closeModal;
             document.getElementById('modalOverlay').onclick = (e) => {
                 if (e.target === e.currentTarget) closeModal();
             };
+
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeModal();
                 if (e.key === 'ArrowLeft') prevSlide();
