@@ -1190,7 +1190,7 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНОЕ ПЕРЕЛИСТЫВАНИЕ
+        // ИНИЦИАЛИЗАЦИЯ SWIPER — МАКСИМАЛЬНО ПЛАВНОЕ ПЕРЕЛИСТЫВАНИЕ
         // ================================================================
         let swiper = null;
 
@@ -1224,7 +1224,7 @@
 
             swiper = new Swiper('.mySwiper', {
                 loop: true,
-                speed: 1000, // ← Плавное перелистывание (1000ms = 1 секунда)
+                speed: 1400, // ← Очень медленное перелистывание (1.4 секунды)
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
@@ -1244,7 +1244,7 @@
                 },
                 
                 autoplay: {
-                    delay: 7000, // ← Увеличенное время удержания слайда (7 секунд)
+                    delay: 10000, // ← Очень долгое удержание (10 секунд)
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                     waitForTransition: true,
@@ -1256,15 +1256,15 @@
                     onlyInViewport: true,
                 },
                 
-                touchRatio: 0.8, // ← Более плавное перетаскивание
+                touchRatio: 0.6, // ← Максимально плавное перетаскивание
                 touchAngle: 45,
                 resistance: true,
                 resistanceRatio: 0.85,
                 loopAdditionalSlides: 1,
                 autoHeight: false,
                 
-                // Настройка easing для плавности как у книги
-                easing: 'ease-in-out',
+                // Плавное замедление как у книги
+                easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
                 
                 on: {
                     autoplayStop: function() {
