@@ -486,97 +486,72 @@
         }
         
         /* ================================================================
-           КРУПНАЯ КАРУСЕЛЬ — одна карточка, соседние видны частично
+           КАРУСЕЛЬ С ЦЕНТРИРОВАНИЕМ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
             border-radius: var(--radius-card);
-            padding: 12px 0;
-            min-height: 480px;
+            padding: 20px 0;
+            min-height: 460px;
         }
         
         .carousel-track {
             display: flex;
-            transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            gap: 0;
+            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             align-items: center;
+            padding: 0 10%;
         }
         
         .carousel-slide {
             flex: 0 0 100%;
             display: flex;
             justify-content: center;
-            gap: 0;
-            min-height: 450px;
-            padding: 0 10%;
-            position: relative;
+            align-items: center;
+            gap: 20px;
+            padding: 0 20px;
+            min-height: 420px;
         }
         
         /* ================================================================
-           КАРТОЧКА — одна видимая, остальные на заднем плане
+           КАРТОЧКА — с центрированием
            ================================================================ */
         .card {
-            flex: 0 0 60%;
-            max-width: 60%;
+            flex: 0 0 55%;
+            max-width: 55%;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-radius: var(--radius-card);
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.5s ease, box-shadow 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+            transition: all 0.5s ease;
             border: 1.5px solid transparent;
-            position: relative;
-            min-height: 420px;
+            min-height: 400px;
             display: flex;
             flex-direction: column;
-            margin: 0 auto;
-            box-shadow: 0 8px 40px rgba(0, 85, 164, 0.08);
+            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.06);
+            opacity: 0.5;
+            transform: scale(0.85);
+            filter: blur(2px);
+            pointer-events: none;
         }
         
-        /* Центральная (активная) карточка */
         .card.active {
+            opacity: 1;
             transform: scale(1);
+            filter: blur(0px);
+            pointer-events: all;
             border-color: rgba(0, 85, 164, 0.15);
             box-shadow: 0 12px 50px rgba(0, 85, 164, 0.12);
             z-index: 3;
-            opacity: 1;
-            filter: blur(0px);
         }
         
-        /* Карточки слева и справа (на заднем плане) */
-        .card.preview {
-            transform: scale(0.85);
-            opacity: 0.3;
-            filter: blur(3px);
-            pointer-events: none;
-            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.04);
-            border-color: transparent;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%) scale(0.85);
-            cursor: default;
-        }
-        
-        .card.preview-left {
-            left: -30%;
-            opacity: 0.25;
-            filter: blur(4px);
-        }
-        
-        .card.preview-right {
-            right: -30%;
-            opacity: 0.25;
-            filter: blur(4px);
-        }
-        
-        .card:hover {
+        .card.active:hover {
             transform: scale(1.02);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
-            z-index: 4;
         }
         
         .card:active {
@@ -585,7 +560,7 @@
         
         .card .image {
             width: 100%;
-            height: 280px;
+            height: 260px;
             object-fit: cover;
             display: block;
             background: #E8ECF0;
@@ -593,7 +568,7 @@
         
         .card .image-placeholder {
             width: 100%;
-            height: 280px;
+            height: 260px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -603,7 +578,7 @@
         }
         
         .card .info {
-            padding: 22px 20px 24px;
+            padding: 20px 18px 22px;
             text-align: center;
             flex: 1;
             display: flex;
@@ -614,7 +589,7 @@
         .card .name {
             font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 300;
-            font-size: 24px;
+            font-size: 22px;
             letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
@@ -623,14 +598,14 @@
         
         .card .price {
             color: var(--color-primary);
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 400;
             margin-top: 4px;
             letter-spacing: 0.5px;
         }
         
         /* ================================================================
-           КНОПКИ НАВИГАЦИИ — еле заметные, на всю высоту
+           КНОПКИ НАВИГАЦИИ
            ================================================================ */
         .carousel-btn {
             position: absolute;
@@ -644,9 +619,8 @@
             align-items: center;
             justify-content: center;
             color: rgba(0, 85, 164, 0.1);
-            font-size: 28px;
             transition: all var(--transition);
-            padding: 20px 12px;
+            padding: 30px 10px;
             opacity: 0.2;
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
@@ -666,16 +640,16 @@
         }
         
         .carousel-btn.prev {
-            left: 4px;
+            left: 0;
         }
         
         .carousel-btn.next {
-            right: 4px;
+            right: 0;
         }
         
         .carousel-btn svg {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             fill: currentColor;
             transition: transform var(--transition);
         }
@@ -685,7 +659,7 @@
         }
         
         /* ================================================================
-           ИНДИКАТОРЫ (точки)
+           ИНДИКАТОРЫ
            ================================================================ */
         .carousel-dots {
             display: flex;
@@ -898,43 +872,44 @@
             .header .subtitle { font-size: 14px; }
             
             .carousel-wrapper {
-                min-height: 360px;
-                padding: 8px 0;
+                min-height: 340px;
+                padding: 10px 0;
             }
             
             .carousel-slide {
+                min-height: 320px;
+                padding: 0 10px;
+                gap: 10px;
+            }
+            
+            .carousel-track {
                 padding: 0 5%;
-                min-height: 340px;
             }
             
             .card {
-                flex: 0 0 80%;
-                max-width: 80%;
-                min-height: 320px;
+                flex: 0 0 70%;
+                max-width: 70%;
+                min-height: 300px;
+                transform: scale(0.8);
             }
             
-            .card .image { height: 200px; }
+            .card.active {
+                transform: scale(1);
+            }
+            
+            .card .image { height: 180px; }
             .card .name { font-size: 18px; }
             .card .price { font-size: 17px; }
             .card .info { padding: 16px 14px 18px; }
             
-            .card.preview {
-                transform: scale(0.8);
-                opacity: 0.2;
-                filter: blur(5px);
-            }
-            
-            .card.preview-left { left: -40%; }
-            .card.preview-right { right: -40%; }
-            
             .carousel-btn {
-                padding: 12px 8px;
+                padding: 20px 6px;
                 opacity: 0.15;
             }
             
             .carousel-btn svg {
-                width: 24px;
-                height: 24px;
+                width: 28px;
+                height: 28px;
             }
             
             .geo-shape:nth-child(1),
@@ -953,31 +928,28 @@
             .header .subtitle { font-size: 12px; }
             .header { padding: 18px 14px 16px; border-radius: 10px; }
             
-            .carousel-wrapper { min-height: 280px; }
-            .carousel-slide { min-height: 260px; padding: 0 2%; }
+            .carousel-wrapper { min-height: 260px; }
+            .carousel-slide { min-height: 240px; padding: 0 5px; gap: 6px; }
+            .carousel-track { padding: 0 2%; }
             
             .card {
-                flex: 0 0 90%;
-                max-width: 90%;
-                min-height: 240px;
+                flex: 0 0 80%;
+                max-width: 80%;
+                min-height: 220px;
+                transform: scale(0.75);
             }
             
-            .card .image { height: 150px; }
+            .card.active {
+                transform: scale(1);
+            }
+            
+            .card .image { height: 140px; }
             .card .name { font-size: 15px; letter-spacing: 1px; }
             .card .price { font-size: 14px; }
             .card .info { padding: 12px 10px 14px; }
             
-            .card.preview {
-                transform: scale(0.7);
-                opacity: 0.15;
-                filter: blur(6px);
-            }
-            
-            .card.preview-left { left: -50%; }
-            .card.preview-right { right: -50%; }
-            
-            .carousel-btn { padding: 8px 4px; }
-            .carousel-btn svg { width: 18px; height: 18px; }
+            .carousel-btn { padding: 12px 4px; }
+            .carousel-btn svg { width: 20px; height: 20px; }
             
             .geo-shape:nth-child(3),
             .geo-shape:nth-child(4) { display: none; }
@@ -1039,11 +1011,10 @@
             <div class="subtitle">Премиальные материалы для вашей террасы</div>
         </div>
 
-        <!-- КРУПНАЯ КАРУСЕЛЬ -->
+        <!-- КАРУСЕЛЬ -->
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack"></div>
             
-            <!-- Кнопки навигации по бокам -->
             <button class="carousel-btn prev" id="prevBtn" aria-label="Предыдущий">
                 <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
             </button>
@@ -1128,7 +1099,7 @@
         ];
 
         // ================================================================
-        // ДЕТАЛЬНЫЕ ДАННЫЕ ДЛЯ МОДАЛЬНОГО ОКНА
+        // ДЕТАЛЬНЫЕ ДАННЫЕ
         // ================================================================
         
         const details = {
@@ -1147,28 +1118,28 @@
                 specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая'
             },
             'kumaru': {
-                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению. Идеальна для террас в сложных климатических условиях.',
+                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению.',
                 pros: '✅ Экзотический вид\n✅ Высокая плотность\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
                 cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
                 specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая'
             },
             'ipe': {
-                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми. Идеальна для террас, причалов и зон с интенсивной нагрузкой.',
+                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми.',
                 pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
                 cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
                 specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
             },
             'decking': {
-                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт и не выцветает.',
+                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт.',
                 pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
                 cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
                 specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК\n💧 Водостойкость: Высокая'
             },
             'montazh': {
-                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества на все виды работ.',
+                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества.',
                 pros: '✅ Опытные мастера\n✅ Гарантия на работы\n✅ Используем качественный крепёж\n✅ Соблюдаем технологию',
                 cons: '❌ Требует предварительного заказа\n❌ Зависит от погодных условий',
                 care: '🔧 Используем нержавеющий крепёж\n📏 Соблюдаем зазоры (5-8 мм)\n🌬️ Обеспечиваем вентиляцию\n🛡️ Обработка защитными составами',
@@ -1198,6 +1169,7 @@
             for (let s = 0; s < totalSlides; s++) {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
+                slide.dataset.index = s;
                 
                 const startIdx = s * itemsPerSlide;
                 const endIdx = Math.min(startIdx + itemsPerSlide, totalItems);
@@ -1241,34 +1213,20 @@
             const slides = track.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             
-            // Перемещаем трек
             track.style.transform = `translateX(-${currentSlide * 100}%)`;
             
-            // Обновляем состояние карточек в каждом слайде
             slides.forEach((slide, slideIndex) => {
                 const cards = slide.querySelectorAll('.card');
                 const isActive = slideIndex === currentSlide;
                 
-                cards.forEach((card, cardIndex) => {
-                    // Убираем все классы
-                    card.classList.remove('active', 'preview', 'preview-left', 'preview-right');
-                    
+                cards.forEach((card) => {
+                    card.classList.remove('active');
                     if (isActive) {
-                        // В активном слайде все карточки активны
                         card.classList.add('active');
-                    } else {
-                        // В неактивных слайдах — карточки на заднем плане
-                        card.classList.add('preview');
-                        if (slideIndex < currentSlide) {
-                            card.classList.add('preview-left');
-                        } else {
-                            card.classList.add('preview-right');
-                        }
                     }
                 });
             });
             
-            // Обновляем точки
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === currentSlide);
             });
@@ -1377,6 +1335,15 @@
                 if (e.key === 'Escape') closeModal();
                 if (e.key === 'ArrowLeft') prevSlide();
                 if (e.key === 'ArrowRight') nextSlide();
+            });
+            
+            // Пересчёт при изменении размера окна
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    updateCarousel();
+                }, 200);
             });
         });
     </script>
