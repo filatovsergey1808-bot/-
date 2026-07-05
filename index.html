@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL)
+           КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL FIXED)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -522,7 +522,6 @@
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
             border-radius: 0;
-            /* УВЕЛИЧЕННАЯ ОБЛАСТЬ: ширина в 2 раза больше */
             width: 80px;
         }
 
@@ -801,7 +800,6 @@
                 padding: 0 12px;
             }
 
-            /* Уменьшаем кнопки на планшетах */
             .carousel-btn {
                 width: 50px;
             }
@@ -862,7 +860,6 @@
                 padding: 8px 10px 10px;
             }
 
-            /* Уменьшаем кнопки на телефонах */
             .carousel-btn {
                 width: 40px;
             }
@@ -1119,7 +1116,6 @@
 
             slides = track.querySelectorAll('.carousel-slide');
 
-            // Начинаем с первого реального слайда (индекс 1)
             currentIndex = 1;
             updateCarousel(true);
 
@@ -1183,16 +1179,13 @@
             if (currentIndex === 0) {
                 isTransitioning = true;
                 setTimeout(() => {
-                    // Плавно переключаемся на последний реальный слайд
                     currentIndex = totalSlides - 2;
-                    // Делаем мгновенный переход без анимации
                     track.style.transition = 'none';
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
                     track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
                     
-                    // Обновляем состояние
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
                         const isActive = idx === currentIndex;
@@ -1212,7 +1205,6 @@
             } else if (currentIndex === totalSlides - 1) {
                 isTransitioning = true;
                 setTimeout(() => {
-                    // Плавно переключаемся на первый реальный слайд
                     currentIndex = 1;
                     track.style.transition = 'none';
                     const offset = -currentIndex * 100;
