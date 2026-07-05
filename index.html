@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — КВАДРАТНАЯ, БЕЗ МИГАНИЯ (FIXED)
+           КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -1054,14 +1054,13 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL)
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ (ОКОНЧАТЕЛЬНОЕ РЕШЕНИЕ)
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let track, slides, totalSlides;
-        let cloneTransitionTimeout = null;
 
         function createInfiniteSlides() {
             const slidesArray = [];
@@ -1128,11 +1127,6 @@
         function updateCarousel(instant = false) {
             if (!track) return;
 
-            if (cloneTransitionTimeout) {
-                clearTimeout(cloneTransitionTimeout);
-                cloneTransitionTimeout = null;
-            }
-
             if (instant) {
                 track.style.transition = 'none';
             } else {
@@ -1175,17 +1169,20 @@
             currentIndex = index;
             updateCarousel(instant);
             
-            // Проверяем границы
+            // Проверяем границы для бесконечного цикла
             if (currentIndex === 0) {
                 isTransitioning = true;
-                cloneTransitionTimeout = setTimeout(() => {
+                setTimeout(() => {
+                    // Плавно переключаемся на последний реальный слайд
                     currentIndex = totalSlides - 2;
+                    // Делаем мгновенный переход без анимации
                     track.style.transition = 'none';
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
                     track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
                     
+                    // Обновляем состояние
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
                         const isActive = idx === currentIndex;
@@ -1201,11 +1198,11 @@
                         dot.classList.toggle('active', idx === realIndex);
                     });
                     isTransitioning = false;
-                    cloneTransitionTimeout = null;
                 }, 700);
             } else if (currentIndex === totalSlides - 1) {
                 isTransitioning = true;
-                cloneTransitionTimeout = setTimeout(() => {
+                setTimeout(() => {
+                    // Плавно переключаемся на первый реальный слайд
                     currentIndex = 1;
                     track.style.transition = 'none';
                     const offset = -currentIndex * 100;
@@ -1228,7 +1225,6 @@
                         dot.classList.toggle('active', idx === realIndex);
                     });
                     isTransitioning = false;
-                    cloneTransitionTimeout = null;
                 }, 700);
             } else {
                 if (!instant) {
