@@ -373,26 +373,32 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — КВАДРАТНЫЕ АДАПТИВНЫЕ СЛАЙДЫ
+           КАРУСЕЛЬ — НАСТОЯЩИЕ КВАДРАТНЫЕ СЛАЙДЫ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
             overflow: hidden;
             border-radius: 20px;
-            padding: 20px 0;
+            padding: 0;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
             /* ================================================================
-               РАЗМЕР СЛАЙДА (АДАПТИВНЫЙ КВАДРАТ):
-               Ширина = 100% от контейнера, высота = ширине
+               КВАДРАТНЫЙ СЛАЙД:
+               width = 100%, height = ширине (через padding-bottom)
                ================================================================ */
             width: 100%;
-            aspect-ratio: 1 / 1;
-            max-height: 600px;
+            height: 0;
+            padding-bottom: 100%; /* Это делает контейнер квадратным */
+            position: relative;
         }
 
         .carousel-track {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             display: flex;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             align-items: center;
@@ -406,13 +412,13 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0 20px;
+            padding: 0 16px;
             width: 100%;
             height: 100%;
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ, НА ВСЮ ВЫСОТУ
+           КАРТОЧКА — КВАДРАТНАЯ, ЗАПОЛНЯЕТ ВЕСЬ КОНТЕЙНЕР
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -473,7 +479,7 @@
         }
 
         .card .info {
-            padding: 16px 20px 18px;
+            padding: 14px 16px 16px;
             text-align: center;
             flex: 1;
             display: flex;
@@ -484,7 +490,7 @@
 
         .card .name {
             font-weight: 300;
-            font-size: clamp(18px, 2.5vw, 28px);
+            font-size: clamp(16px, 2.2vw, 26px);
             letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
@@ -493,7 +499,7 @@
 
         .card .price {
             color: #0055A4;
-            font-size: clamp(16px, 2vw, 22px);
+            font-size: clamp(14px, 1.8vw, 22px);
             font-weight: 400;
             margin-top: 4px;
             letter-spacing: 0.5px;
@@ -786,30 +792,8 @@
                 font-size: 14px;
             }
 
-            .carousel-wrapper {
-                border-radius: 16px;
-                padding: 10px 0;
-                max-height: 500px;
-            }
-
             .carousel-slide {
-                padding: 0 10px;
-            }
-
-            .card {
-                border-radius: 18px;
-            }
-
-            .card .image {
-                height: 65%;
-            }
-
-            .card .image-placeholder {
-                height: 65%;
-            }
-
-            .card .info {
-                padding: 12px 16px 14px;
+                padding: 0 12px;
             }
 
             .carousel-btn {
@@ -853,14 +837,8 @@
                 font-size: 12px;
             }
 
-            .carousel-wrapper {
-                border-radius: 12px;
-                padding: 8px 0;
-                max-height: 400px;
-            }
-
             .carousel-slide {
-                padding: 0 6px;
+                padding: 0 8px;
             }
 
             .card {
@@ -868,11 +846,11 @@
             }
 
             .card .image {
-                height: 60%;
+                height: 65%;
             }
 
             .card .image-placeholder {
-                height: 60%;
+                height: 65%;
             }
 
             .card .info {
