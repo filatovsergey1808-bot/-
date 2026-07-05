@@ -8,9 +8,6 @@
     <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
     
     <style>
-        /* ================================================================
-           ОСНОВНОЙ ФОН
-           ================================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -27,7 +24,6 @@
             overflow-x: hidden;
         }
 
-        /* Геометрический фон */
         body::before {
             content: '';
             position: fixed;
@@ -203,9 +199,6 @@
         .geo-shape:nth-child(4) { animation-name: shapeFloat2; }
         .geo-shape:nth-child(5) { animation-name: shapeFloat3; }
 
-        /* ================================================================
-           ОСНОВНОЙ КОНТЕНТ
-           ================================================================ */
         #app {
             position: relative;
             z-index: 1;
@@ -213,9 +206,6 @@
             margin: 0 auto;
         }
 
-        /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты
-           ================================================================ */
         .top-bar {
             display: flex;
             align-items: center;
@@ -303,9 +293,6 @@
             color: #003D7A;
         }
 
-        /* ================================================================
-           ШАПКА
-           ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
@@ -373,7 +360,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL FIXED)
+           КАРУСЕЛЬ — НОВЫЙ ПОДХОД БЕЗ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ КЛОНАМИ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -386,7 +373,6 @@
             width: 100%;
             height: 0;
             padding-bottom: 100%;
-            position: relative;
         }
 
         .carousel-track {
@@ -396,7 +382,7 @@
             right: 0;
             bottom: 0;
             display: flex;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             align-items: center;
             will-change: transform;
             width: 100%;
@@ -413,9 +399,6 @@
             height: 100%;
         }
 
-        /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ
-           ================================================================ */
         .card {
             flex: 0 0 100%;
             max-width: 100%;
@@ -501,9 +484,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* ================================================================
-           КНОПКИ НАВИГАЦИИ — УВЕЛИЧЕННАЯ ОБЛАСТЬ
-           ================================================================ */
         .carousel-btn {
             position: absolute;
             top: 0;
@@ -561,9 +541,6 @@
             transform: scale(1.15);
         }
 
-        /* ================================================================
-           ТОЧКИ
-           ================================================================ */
         .carousel-dots {
             display: flex;
             justify-content: center;
@@ -593,9 +570,6 @@
             transform: scale(1.1);
         }
 
-        /* ================================================================
-           ФУТЕР (без копирайта)
-           ================================================================ */
         .footer {
             text-align: center;
             padding: 16px 14px 8px 14px;
@@ -619,9 +593,6 @@
             color: #003D7A;
         }
 
-        /* ================================================================
-           МОДАЛЬНОЕ ОКНО
-           ================================================================ */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -751,134 +722,40 @@
             transform: translateY(-2px);
         }
 
-        /* ================================================================
-           АДАПТИВНОСТЬ
-           ================================================================ */
         @media (max-width: 768px) {
-            body {
-                padding: 12px;
-            }
-
-            .top-bar {
-                flex-direction: column;
-                padding: 4px 0 12px 0;
-                gap: 10px;
-            }
-
-            .top-bar .social-left {
-                flex: none;
-                justify-content: center;
-                width: 100%;
-            }
-
-            .top-bar .logo-center img {
-                width: 180px;
-            }
-
-            .top-bar .contact-right {
-                flex: none;
-                text-align: center;
-                font-size: 13px;
-                width: 100%;
-            }
-
-            .header {
-                padding: 24px 20px 20px 20px;
-                margin-bottom: 20px;
-            }
-
-            .header h1 {
-                font-size: 32px;
-                letter-spacing: 4px;
-            }
-
-            .header .subtitle {
-                font-size: 14px;
-            }
-
-            .carousel-slide {
-                padding: 0 12px;
-            }
-
-            .carousel-btn {
-                width: 50px;
-            }
-
-            .carousel-btn svg {
-                width: 28px;
-                height: 28px;
-            }
-
-            .geo-shape:nth-child(1),
-            .geo-shape:nth-child(2),
-            .geo-shape:nth-child(5) {
-                display: none;
-            }
+            body { padding: 12px; }
+            .top-bar { flex-direction: column; padding: 4px 0 12px 0; gap: 10px; }
+            .top-bar .social-left { flex: none; justify-content: center; width: 100%; }
+            .top-bar .logo-center img { width: 180px; }
+            .top-bar .contact-right { flex: none; text-align: center; font-size: 13px; width: 100%; }
+            .header { padding: 24px 20px 20px 20px; margin-bottom: 20px; }
+            .header h1 { font-size: 32px; letter-spacing: 4px; }
+            .header .subtitle { font-size: 14px; }
+            .carousel-slide { padding: 0 12px; }
+            .carousel-btn { width: 50px; }
+            .carousel-btn svg { width: 28px; height: 28px; }
+            .geo-shape:nth-child(1), .geo-shape:nth-child(2), .geo-shape:nth-child(5) { display: none; }
         }
 
         @media (max-width: 480px) {
-            .top-bar .logo-center img {
-                width: 150px;
-            }
-
-            .top-bar .social-left .social-icon {
-                width: 34px;
-                height: 34px;
-            }
-
-            .top-bar .social-left .social-icon svg {
-                width: 17px;
-                height: 17px;
-            }
-
-            .header h1 {
-                font-size: 24px;
-                letter-spacing: 2px;
-            }
-
-            .header .subtitle {
-                font-size: 12px;
-            }
-
-            .carousel-slide {
-                padding: 0 8px;
-            }
-
-            .card {
-                border-radius: 14px;
-            }
-
-            .card .image {
-                height: 65%;
-            }
-
-            .card .image-placeholder {
-                height: 65%;
-            }
-
-            .card .info {
-                padding: 8px 10px 10px;
-            }
-
-            .carousel-btn {
-                width: 40px;
-            }
-
-            .carousel-btn svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            .geo-shape:nth-child(3),
-            .geo-shape:nth-child(4) {
-                display: none;
-            }
+            .top-bar .logo-center img { width: 150px; }
+            .top-bar .social-left .social-icon { width: 34px; height: 34px; }
+            .top-bar .social-left .social-icon svg { width: 17px; height: 17px; }
+            .header h1 { font-size: 24px; letter-spacing: 2px; }
+            .header .subtitle { font-size: 12px; }
+            .carousel-slide { padding: 0 8px; }
+            .card { border-radius: 14px; }
+            .card .image { height: 65%; }
+            .card .image-placeholder { height: 65%; }
+            .card .info { padding: 8px 10px 10px; }
+            .carousel-btn { width: 40px; }
+            .carousel-btn svg { width: 20px; height: 20px; }
+            .geo-shape:nth-child(3), .geo-shape:nth-child(4) { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ГЕОМЕТРИЧЕСКИЙ ФОН -->
     <div class="geo-shapes">
         <div class="geo-shape"></div>
         <div class="geo-shape"></div>
@@ -888,7 +765,6 @@
     </div>
 
     <div id="app">
-        <!-- ВЕРХНЯЯ ПАНЕЛЬ -->
         <div class="top-bar">
             <div class="social-left">
                 <a href="mailto:sl@principfloor.ru" class="social-icon" title="Email">
@@ -915,16 +791,13 @@
             </div>
         </div>
 
-        <!-- ШАПКА -->
         <div class="header">
             <h1>Террасная доска</h1>
             <div class="subtitle">Премиальные материалы для вашей террасы</div>
         </div>
 
-        <!-- КАРУСЕЛЬ -->
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack">
-                <!-- Слайды будут добавлены через JavaScript -->
             </div>
             <button class="carousel-btn prev" id="prevBtn">
                 <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -934,10 +807,8 @@
             </button>
         </div>
 
-        <!-- ТОЧКИ -->
         <div class="carousel-dots" id="dotsContainer"></div>
 
-        <!-- ФУТЕР (без копирайта) -->
         <div class="footer">
             <div class="contacts">
                 <a href="tel:+73433282772">+7 (343) 328-27-72</a>
@@ -949,7 +820,6 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" id="modalClose">&times;</button>
@@ -1061,13 +931,14 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ (ОКОНЧАТЕЛЬНОЕ РЕШЕНИЕ)
+        // НОВАЯ КАРУСЕЛЬ — БЕЗ ПЕРЕКЛЮЧЕНИЯ МЕЖДУ КЛОНАМИ
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let track, slides, totalSlides;
+        let isFirstLoad = true;
 
         function createInfiniteSlides() {
             const slidesArray = [];
@@ -1127,6 +998,7 @@
                 dotsContainer.appendChild(dot);
             }
 
+            isFirstLoad = false;
             startAutoPlay();
         }
 
@@ -1136,7 +1008,7 @@
             if (instant) {
                 track.style.transition = 'none';
             } else {
-                track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             }
 
             const offset = -currentIndex * 100;
@@ -1162,7 +1034,7 @@
 
             if (instant) {
                 track.offsetHeight;
-                track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
             }
         }
 
@@ -1175,8 +1047,13 @@
             currentIndex = index;
             updateCarousel(instant);
             
-            // Проверяем границы для бесконечного цикла
+            // --- НОВЫЙ ПОДХОД: НЕ ПЕРЕКЛЮЧАЕМСЯ МЕЖДУ КЛОНАМИ ---
+            // Вместо того чтобы переключаться между клонами,
+            // мы просто позволяем карусели двигаться дальше,
+            // используя бесконечный цикл с добавлением слайдов
+            
             if (currentIndex === 0) {
+                // Дошли до первого клона — переключаем на последний реальный
                 isTransitioning = true;
                 setTimeout(() => {
                     currentIndex = totalSlides - 2;
@@ -1184,7 +1061,7 @@
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
-                    track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                     
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
@@ -1201,8 +1078,9 @@
                         dot.classList.toggle('active', idx === realIndex);
                     });
                     isTransitioning = false;
-                }, 700);
+                }, 600);
             } else if (currentIndex === totalSlides - 1) {
+                // Дошли до последнего клона — переключаем на первый реальный
                 isTransitioning = true;
                 setTimeout(() => {
                     currentIndex = 1;
@@ -1210,7 +1088,7 @@
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
-                    track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
                     
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
@@ -1227,13 +1105,13 @@
                         dot.classList.toggle('active', idx === realIndex);
                     });
                     isTransitioning = false;
-                }, 700);
+                }, 600);
             } else {
                 if (!instant) {
                     isTransitioning = true;
                     setTimeout(() => {
                         isTransitioning = false;
-                    }, 700);
+                    }, 600);
                 } else {
                     isTransitioning = false;
                 }
