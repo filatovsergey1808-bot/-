@@ -486,7 +486,7 @@
         }
         
         /* ================================================================
-           КАРУСЕЛЬ — НА ВСЮ ШИРИНУ
+           КАРУСЕЛЬ — ФИКСИРОВАННАЯ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -503,6 +503,7 @@
             display: flex;
             transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             align-items: center;
+            will-change: transform;
         }
         
         .carousel-slide {
@@ -516,7 +517,7 @@
         }
         
         /* ================================================================
-           КАРТОЧКА — НА ВСЮ ШИРИНУ СЛАЙДА
+           КАРТОЧКА
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -1141,14 +1142,15 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ИСПРАВЛЕННАЯ
         // ================================================================
         
-        let currentIndex = 0;
+        let currentRealIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let totalRealSlides = 0;
+        let slideWidth = 100;
         
         function renderCarousel() {
             const track = document.getElementById('carouselTrack');
@@ -1192,15 +1194,17 @@
             track.insertBefore(lastClone, track.children[0]);
             
             // Устанавливаем начальную позицию на первом реальном слайде
-            currentIndex = 1;
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            currentRealIndex = 0;
+            const totalSlides = track.children.length;
+            const offset = -(currentRealIndex + 1) * slideWidth;
+            track.style.transform = `translateX(${offset}%)`;
             
             // Обновляем dots
             dotsContainer.innerHTML = '';
             for (let i = 0; i < totalRealSlides; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(i + 1);
+                dot.onclick = () => goToSlide(i);
                 dotsContainer.appendChild(dot);
             }
             
@@ -1213,12 +1217,19 @@
             const slides = track.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             
-            track.style.transform = `translateX(-${currentIndex * 100}%)`;
+            // Позиция: реальный индекс + 1 (из-за клона в начале)
+            const offset = -(currentRealIndex + 1) * slideWidth;
+            track.style.transform = `translateX(${offset}%)`;
             
             // Обновляем активные карточки
             slides.forEach((slide, slideIndex) => {
                 const cards = slide.querySelectorAll('.card');
-                const isActive = slideIndex === currentIndex;
+                // Индекс слайда в реальных данных (без учёта клонов)
+                let realIndex = slideIndex - 1;
+                if (slideIndex === 0) realIndex = totalRealSlides - 1;
+                if (slideIndex === slides.length - 1) realIndex = 0;
+                
+                const isActive = realIndex === currentRealIndex;
                 
                 cards.forEach((card) => {
                     card.classList.remove('active');
@@ -1229,26 +1240,20 @@
             });
             
             // Обновляем точки
-            let realIndex = currentIndex - 1;
-            if (realIndex < 0) realIndex = totalRealSlides - 1;
-            if (realIndex >= totalRealSlides) realIndex = 0;
-            
             dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === realIndex);
+                dot.classList.toggle('active', index === currentRealIndex);
             });
         }
         
         function goToSlide(index, instant = false) {
             if (isTransitioning) return;
+            if (index < 0) index = totalRealSlides - 1;
+            if (index >= totalRealSlides) index = 0;
+            
+            currentRealIndex = index;
             
             const track = document.getElementById('carouselTrack');
             const slides = track.querySelectorAll('.carousel-slide');
-            const total = slides.length;
-            
-            if (index < 0) index = 0;
-            if (index >= total) index = total - 1;
-            
-            currentIndex = index;
             
             if (instant) {
                 track.style.transition = 'none';
@@ -1259,19 +1264,37 @@
                 updateCarousel();
             }
             
-            // Проверяем клоны
-            if (index === 0) {
+            // Проверяем, не дошли ли до клонов
+            const totalSlides = slides.length;
+            const offset = -(currentRealIndex + 1) * slideWidth;
+            
+            // Если мы на первом клоне (индекс 0)
+            if (offset === 0) {
                 isTransitioning = true;
                 setTimeout(() => {
-                    goToSlide(totalRealSlides, true);
+                    currentRealIndex = totalRealSlides - 1;
+                    const newOffset = -(currentRealIndex + 1) * slideWidth;
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(${newOffset}%)`;
+                    track.offsetHeight;
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    updateCarousel();
                     setTimeout(() => {
                         isTransitioning = false;
                     }, 50);
                 }, 650);
-            } else if (index === total - 1) {
+            }
+            // Если мы на последнем клоне
+            else if (offset === -(totalSlides - 1) * slideWidth) {
                 isTransitioning = true;
                 setTimeout(() => {
-                    goToSlide(1, true);
+                    currentRealIndex = 0;
+                    const newOffset = -(currentRealIndex + 1) * slideWidth;
+                    track.style.transition = 'none';
+                    track.style.transform = `translateX(${newOffset}%)`;
+                    track.offsetHeight;
+                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    updateCarousel();
                     setTimeout(() => {
                         isTransitioning = false;
                     }, 50);
@@ -1283,12 +1306,12 @@
         
         function nextSlide() {
             if (isTransitioning) return;
-            goToSlide(currentIndex + 1);
+            goToSlide(currentRealIndex + 1);
         }
         
         function prevSlide() {
             if (isTransitioning) return;
-            goToSlide(currentIndex - 1);
+            goToSlide(currentRealIndex - 1);
         }
         
         function startAutoPlay() {
