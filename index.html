@@ -1100,13 +1100,14 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ НАКЛАДЫВАНИЯ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ "МИГАНИЯ"
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let track, slides, totalSlides;
+        let transitionTimeout = null;
 
         // Создаём массив слайдов с клонами для бесконечной прокрутки
         function createInfiniteSlides() {
@@ -1181,6 +1182,12 @@
         function updateCarousel(instant = false) {
             if (!track) return;
 
+            // Очищаем предыдущий таймаут, если он был
+            if (transitionTimeout) {
+                clearTimeout(transitionTimeout);
+                transitionTimeout = null;
+            }
+
             if (instant) {
                 track.style.transition = 'none';
             } else {
@@ -1225,40 +1232,41 @@
             if (index < 0) index = 0;
             if (index >= totalSlides) index = totalSlides - 1;
             
-            // Запоминаем предыдущий индекс для проверки
-            const prevIndex = currentIndex;
             currentIndex = index;
             
+            // Обновляем карусель
             updateCarousel(instant);
 
             // Проверяем, не дошли ли до клонов для бесконечной прокрутки
             // Если мы на первом клоне (индекс 0) — переходим на последний реальный
             if (currentIndex === 0) {
                 isTransitioning = true;
-                setTimeout(() => {
+                // Используем таймаут, который будет выполнен после завершения анимации
+                transitionTimeout = setTimeout(() => {
                     currentIndex = totalSlides - 2; // последний реальный
                     updateCarousel(true);
-                    setTimeout(() => { isTransitioning = false; }, 50);
+                    isTransitioning = false;
+                    transitionTimeout = null;
                 }, 650);
             } 
             // Если мы на последнем клоне (индекс totalSlides-1) — переходим на первый реальный
             else if (currentIndex === totalSlides - 1) {
                 isTransitioning = true;
-                setTimeout(() => {
+                transitionTimeout = setTimeout(() => {
                     currentIndex = 1; // первый реальный
                     updateCarousel(true);
-                    setTimeout(() => { isTransitioning = false; }, 50);
+                    isTransitioning = false;
+                    transitionTimeout = null;
                 }, 650);
             } else {
-                // Если переход был обычным, снимаем блокировку
+                // Обычный переход
                 if (!instant) {
-                    setTimeout(() => {
+                    transitionTimeout = setTimeout(() => {
                         isTransitioning = false;
+                        transitionTimeout = null;
                     }, 650);
                 } else {
-                    setTimeout(() => {
-                        isTransitioning = false;
-                    }, 50);
+                    isTransitioning = false;
                 }
             }
 
