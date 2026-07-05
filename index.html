@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — БЕСКОНЕЧНАЯ ПЛАВНАЯ
+           КАРУСЕЛЬ — БЕСКОНЕЧНАЯ ПЛАВНАЯ, УВЕЛИЧЕННЫЕ СЛАЙДЫ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -384,7 +384,7 @@
                ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
                min-height — минимальная высота контейнера карусели
                ================================================================ */
-            min-height: 460px;
+            min-height: 560px;
             background: rgba(255, 255, 255, 0.03);
             backdrop-filter: blur(4px);
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -407,11 +407,11 @@
                ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
                min-height — минимальная высота каждого слайда
                ================================================================ */
-            min-height: 420px;
+            min-height: 520px;
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ
+           КАРТОЧКА — КВАДРАТНАЯ, УВЕЛИЧЕННАЯ
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -435,7 +435,7 @@
                ИЗМЕНИТЕ ЭТОТ РАЗМЕР: 
                max-height — максимальная высота карточки
                ================================================================ */
-            max-height: 420px;
+            max-height: 520px;
         }
 
         .card.active {
@@ -477,7 +477,7 @@
         }
 
         .card .info {
-            padding: 16px 20px 20px;
+            padding: 20px 24px 24px;
             text-align: center;
             flex: 1;
             display: flex;
@@ -488,7 +488,7 @@
 
         .card .name {
             font-weight: 300;
-            font-size: 22px;
+            font-size: 26px;
             letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
@@ -497,9 +497,9 @@
 
         .card .price {
             color: #0055A4;
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 400;
-            margin-top: 4px;
+            margin-top: 6px;
             letter-spacing: 0.5px;
         }
 
@@ -791,17 +791,17 @@
             }
 
             .carousel-wrapper {
-                min-height: 340px;
+                min-height: 420px;
                 padding: 10px 0;
             }
 
             .carousel-slide {
                 padding: 0 20px;
-                min-height: 320px;
+                min-height: 400px;
             }
 
             .card {
-                max-height: 320px;
+                max-height: 400px;
             }
 
             .card .image {
@@ -813,15 +813,15 @@
             }
 
             .card .name {
-                font-size: 18px;
+                font-size: 20px;
             }
 
             .card .price {
-                font-size: 16px;
+                font-size: 18px;
             }
 
             .card .info {
-                padding: 12px 16px 16px;
+                padding: 14px 16px 18px;
             }
 
             .carousel-btn {
@@ -866,16 +866,16 @@
             }
 
             .carousel-wrapper {
-                min-height: 280px;
+                min-height: 320px;
             }
 
             .carousel-slide {
                 padding: 0 10px;
-                min-height: 260px;
+                min-height: 300px;
             }
 
             .card {
-                max-height: 260px;
+                max-height: 300px;
             }
 
             .card .image {
@@ -887,16 +887,16 @@
             }
 
             .card .name {
-                font-size: 15px;
+                font-size: 16px;
                 letter-spacing: 1px;
             }
 
             .card .price {
-                font-size: 14px;
+                font-size: 15px;
             }
 
             .card .info {
-                padding: 8px 10px 12px;
+                padding: 10px 12px 14px;
             }
 
             .carousel-btn {
@@ -1107,7 +1107,6 @@
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
         let track, slides, totalSlides;
-        let transitionTimeout = null;
 
         // Создаём массив слайдов с клонами для бесконечной прокрутки
         function createInfiniteSlides() {
@@ -1179,13 +1178,16 @@
             startAutoPlay();
         }
 
+        // Сохраняем ссылку на таймаут для очистки
+        let cloneTransitionTimeout = null;
+
         function updateCarousel(instant = false) {
             if (!track) return;
 
             // Очищаем предыдущий таймаут, если он был
-            if (transitionTimeout) {
-                clearTimeout(transitionTimeout);
-                transitionTimeout = null;
+            if (cloneTransitionTimeout) {
+                clearTimeout(cloneTransitionTimeout);
+                cloneTransitionTimeout = null;
             }
 
             if (instant) {
@@ -1232,42 +1234,54 @@
             if (index < 0) index = 0;
             if (index >= totalSlides) index = totalSlides - 1;
             
-            currentIndex = index;
-            
-            // Обновляем карусель
-            updateCarousel(instant);
-
-            // Проверяем, не дошли ли до клонов для бесконечной прокрутки
-            // Если мы на первом клоне (индекс 0) — переходим на последний реальный
-            if (currentIndex === 0) {
+            // Если мы пытаемся перейти на клон (индекс 0 или totalSlides-1),
+            // мы должны сначала перейти на соответствующий реальный слайд
+            // но с сохранением плавности
+            if (index === 0) {
+                // Переход на первый клон — мы должны плавно перейти на последний реальный
+                // Но делаем это через обычный переход, а затем мгновенно переставляем
+                currentIndex = index;
+                updateCarousel(false);
+                
+                // После завершения анимации переходим на последний реальный
                 isTransitioning = true;
-                // Используем таймаут, который будет выполнен после завершения анимации
-                transitionTimeout = setTimeout(() => {
-                    currentIndex = totalSlides - 2; // последний реальный
+                cloneTransitionTimeout = setTimeout(() => {
+                    currentIndex = totalSlides - 2;
                     updateCarousel(true);
                     isTransitioning = false;
-                    transitionTimeout = null;
+                    cloneTransitionTimeout = null;
                 }, 650);
-            } 
-            // Если мы на последнем клоне (индекс totalSlides-1) — переходим на первый реальный
-            else if (currentIndex === totalSlides - 1) {
+                resetAutoPlay();
+                return;
+            }
+            
+            if (index === totalSlides - 1) {
+                // Переход на последний клон — плавно переходим на первый реальный
+                currentIndex = index;
+                updateCarousel(false);
+                
                 isTransitioning = true;
-                transitionTimeout = setTimeout(() => {
-                    currentIndex = 1; // первый реальный
+                cloneTransitionTimeout = setTimeout(() => {
+                    currentIndex = 1;
                     updateCarousel(true);
                     isTransitioning = false;
-                    transitionTimeout = null;
+                    cloneTransitionTimeout = null;
+                }, 650);
+                resetAutoPlay();
+                return;
+            }
+            
+            // Обычный переход
+            currentIndex = index;
+            updateCarousel(instant);
+            
+            if (!instant) {
+                isTransitioning = true;
+                setTimeout(() => {
+                    isTransitioning = false;
                 }, 650);
             } else {
-                // Обычный переход
-                if (!instant) {
-                    transitionTimeout = setTimeout(() => {
-                        isTransitioning = false;
-                        transitionTimeout = null;
-                    }, 650);
-                } else {
-                    isTransitioning = false;
-                }
+                isTransitioning = false;
             }
 
             resetAutoPlay();
@@ -1275,13 +1289,11 @@
 
         function nextSlide() {
             if (isTransitioning) return;
-            // Плавно переходим к следующему индексу
             goToSlide(currentIndex + 1);
         }
 
         function prevSlide() {
             if (isTransitioning) return;
-            // Плавно переходим к предыдущему индексу
             goToSlide(currentIndex - 1);
         }
 
