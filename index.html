@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ С БЕСКОНЕЧНОЙ ПРОКРУТКОЙ
+           КАРУСЕЛЬ — БЕСКОНЕЧНАЯ ПЛАВНАЯ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -1088,15 +1088,30 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ПЛАВНАЯ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — ПЛАВНАЯ БЕЗ РЫВКОВ
         // ================================================================
         let currentIndex = 0;
-        let realIndex = 0;
-        let totalSlides = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
-        let track, slides;
+        let track, slides, totalSlides;
+
+        // Создаём массив слайдов с клонами для бесконечной прокрутки
+        function createInfiniteSlides() {
+            const slidesArray = [];
+            
+            // Добавляем реальные слайды
+            categories.forEach((cat, i) => {
+                slidesArray.push({ id: cat.id, name: cat.name, image: cat.image, price: cat.price, isClone: false, realIndex: i });
+            });
+            
+            // Создаём клоны для бесконечной прокрутки
+            const cloneFirst = { ...slidesArray[0], isClone: true, realIndex: 0 };
+            const cloneLast = { ...slidesArray[slidesArray.length - 1], isClone: true, realIndex: slidesArray.length - 1 };
+            
+            // Добавляем клоны: первый и последний
+            return [cloneLast, ...slidesArray, cloneFirst];
+        }
 
         function initCarousel() {
             track = document.getElementById('carouselTrack');
@@ -1105,40 +1120,38 @@
             // Очищаем трек
             track.innerHTML = '';
 
-            // Создаём реальные слайды
-            categories.forEach((cat, i) => {
+            // Создаём бесконечный массив слайдов
+            const infiniteSlides = createInfiniteSlides();
+            totalSlides = infiniteSlides.length;
+
+            // Создаём слайды в треке
+            infiniteSlides.forEach((slideData, index) => {
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                slide.dataset.index = i;
+                slide.dataset.index = index;
+                slide.dataset.realIndex = slideData.realIndex;
+                slide.dataset.isClone = slideData.isClone ? 'true' : 'false';
 
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
-                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
+                    <img class="image" src="${slideData.image}" alt="${slideData.name}" loading="lazy" 
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <div class="image-placeholder" style="display:none;">📦</div>
                     <div class="info">
-                        <div class="name">${cat.name}</div>
-                        <div class="price">${cat.price}</div>
+                        <div class="name">${slideData.name}</div>
+                        <div class="price">${slideData.price}</div>
                     </div>
                 `;
-                card.onclick = () => openModal(cat.id);
+                card.onclick = () => openModal(slideData.id);
                 slide.appendChild(card);
                 track.appendChild(slide);
             });
 
-            // Клонируем первый и последний слайд для бесконечной прокрутки
-            const firstClone = track.children[0].cloneNode(true);
-            const lastClone = track.children[track.children.length - 1].cloneNode(true);
-            track.appendChild(firstClone);
-            track.insertBefore(lastClone, track.children[0]);
-
             slides = track.querySelectorAll('.carousel-slide');
-            totalSlides = slides.length;
 
-            // Начальная позиция: первый реальный слайд
-            realIndex = 0;
-            currentIndex = realIndex + 1;
+            // Начальная позиция: первый реальный слайд (индекс 1, так как первым идёт клон последнего)
+            currentIndex = 1;
             updateCarousel(true);
 
             // Создаём точки
@@ -1146,7 +1159,7 @@
             for (let i = 0; i < categories.length; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-                dot.onclick = () => goToSlide(i);
+                dot.onclick = () => goToSlide(i + 1); // +1 из-за клона в начале
                 dotsContainer.appendChild(dot);
             }
 
@@ -1168,19 +1181,7 @@
             // Обновляем активные карточки
             slides.forEach((slide, idx) => {
                 const cards = slide.querySelectorAll('.card');
-                let isActive = false;
-                
-                // Проверяем, является ли этот слайд активным
-                if (idx === currentIndex) {
-                    isActive = true;
-                }
-                // Для клонов
-                if (idx === 0 && currentIndex === totalSlides - 1) {
-                    isActive = true;
-                }
-                if (idx === totalSlides - 1 && currentIndex === 0) {
-                    isActive = true;
-                }
+                const isActive = idx === currentIndex;
 
                 cards.forEach(card => {
                     card.classList.toggle('active', isActive);
@@ -1189,11 +1190,13 @@
 
             // Обновляем точки
             const dots = document.querySelectorAll('.carousel-dot');
-            let dotIndex = realIndex;
-            if (dotIndex < 0) dotIndex = categories.length - 1;
-            if (dotIndex >= categories.length) dotIndex = 0;
+            // Определяем реальный индекс для точек
+            let realIndex = currentIndex - 1;
+            if (realIndex < 0) realIndex = categories.length - 1;
+            if (realIndex >= categories.length) realIndex = 0;
+            
             dots.forEach((dot, idx) => {
-                dot.classList.toggle('active', idx === dotIndex);
+                dot.classList.toggle('active', idx === realIndex);
             });
 
             // Принудительный reflow для instant перехода
@@ -1205,30 +1208,29 @@
 
         function goToSlide(index, instant = false) {
             if (isTransitioning) return;
-            if (index < 0) index = categories.length - 1;
-            if (index >= categories.length) index = 0;
-
-            realIndex = index;
-            currentIndex = realIndex + 1;
-
+            
+            // Ограничиваем индекс
+            if (index < 0) index = 0;
+            if (index >= totalSlides) index = totalSlides - 1;
+            
+            currentIndex = index;
             updateCarousel(instant);
 
-            // Проверяем клоны для бесконечной прокрутки — делаем это ПОСЛЕ анимации
+            // Проверяем, не дошли ли до клонов для бесконечной прокрутки
+            // Если мы на первом клоне (индекс 0) — переходим на последний реальный
             if (currentIndex === 0) {
-                // Дошли до первого клона → переходим на последний реальный
                 isTransitioning = true;
                 setTimeout(() => {
-                    realIndex = categories.length - 1;
-                    currentIndex = realIndex + 1;
+                    currentIndex = totalSlides - 2; // последний реальный
                     updateCarousel(true);
                     setTimeout(() => { isTransitioning = false; }, 50);
                 }, 650);
-            } else if (currentIndex === totalSlides - 1) {
-                // Дошли до последнего клона → переходим на первый реальный
+            } 
+            // Если мы на последнем клоне (индекс totalSlides-1) — переходим на первый реальный
+            else if (currentIndex === totalSlides - 1) {
                 isTransitioning = true;
                 setTimeout(() => {
-                    realIndex = 0;
-                    currentIndex = realIndex + 1;
+                    currentIndex = 1; // первый реальный
                     updateCarousel(true);
                     setTimeout(() => { isTransitioning = false; }, 50);
                 }, 650);
@@ -1243,12 +1245,14 @@
 
         function nextSlide() {
             if (isTransitioning) return;
-            goToSlide(realIndex + 1);
+            // Плавно переходим к следующему индексу
+            goToSlide(currentIndex + 1);
         }
 
         function prevSlide() {
             if (isTransitioning) return;
-            goToSlide(realIndex - 1);
+            // Плавно переходим к предыдущему индексу
+            goToSlide(currentIndex - 1);
         }
 
         function startAutoPlay() {
