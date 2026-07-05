@@ -377,7 +377,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — SWIPER.JS
+           КАРУСЕЛЬ — SWIPER.JS (ПЛАВНАЯ)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -559,17 +559,9 @@
 
         .swiper-button-prev::after,
         .swiper-button-next::after {
-            font-size: 24px;
-            font-weight: 300;
-        }
-
-        /* Скрываем стандартные стрелки Swiper */
-        .swiper-button-prev::after,
-        .swiper-button-next::after {
             display: none;
         }
 
-        /* Свои стрелки */
         .swiper-button-prev svg,
         .swiper-button-next svg {
             width: 36px;
@@ -1094,7 +1086,7 @@
         };
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER
+        // ИНИЦИАЛИЗАЦИЯ SWIPER — ПЛАВНАЯ
         // ================================================================
         let swiper = null;
 
@@ -1125,22 +1117,21 @@
                 wrapper.appendChild(slide);
             });
 
-            // Инициализируем Swiper
+            // Инициализируем Swiper с плавными настройками
             swiper = new Swiper('.mySwiper', {
-                loop: true, // Бесконечная прокрутка
-                speed: 600, // Скорость анимации
+                loop: true,
+                speed: 800, // Увеличил скорость анимации с 600 до 800ms для плавности
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
                 effect: 'slide',
+                watchSlidesProgress: true,
                 
-                // Навигация
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
                 },
                 
-                // Точки
                 pagination: {
                     el: '.swiper-pagination',
                     clickable: true,
@@ -1148,22 +1139,30 @@
                     bulletActiveClass: 'swiper-pagination-bullet-active',
                 },
                 
-                // Автопрокрутка
                 autoplay: {
                     delay: 4000,
                     disableOnInteraction: true,
                     pauseOnMouseEnter: true,
+                    waitForTransition: true, // Ждём завершения анимации
                 },
                 
-                // Отключение стандартных клавиш
                 keyboard: {
                     enabled: true,
                     onlyInViewport: true,
                 },
                 
-                // Отключение эффекта при касании
                 touchRatio: 1,
                 touchAngle: 45,
+                
+                // Плавность при перетаскивании
+                resistance: true,
+                resistanceRatio: 0.85,
+                
+                // Настройки для бесконечного цикла
+                loopAdditionalSlides: 1,
+                
+                // Отключаем автоматическую паузу
+                autoHeight: false,
             });
 
             // Обработка кликов на кнопки
@@ -1195,7 +1194,6 @@
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Останавливаем автопрокрутку
             if (swiper) {
                 swiper.autoplay.stop();
             }
@@ -1205,7 +1203,6 @@
             document.getElementById('modalOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
             
-            // Запускаем автопрокрутку
             if (swiper) {
                 swiper.autoplay.start();
             }
