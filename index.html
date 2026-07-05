@@ -373,7 +373,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — КВАДРАТНАЯ, БЕЗ МИГАНИЯ
+           КАРУСЕЛЬ — КВАДРАТНАЯ, БЕЗ МИГАНИЯ (FIXED)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -396,7 +396,7 @@
             right: 0;
             bottom: 0;
             display: flex;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             align-items: center;
             will-change: transform;
             width: 100%;
@@ -1054,7 +1054,7 @@
         };
 
         // ================================================================
-        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ
+        // БЕСКОНЕЧНАЯ КАРУСЕЛЬ — БЕЗ МИГАНИЯ (FINAL)
         // ================================================================
         let currentIndex = 0;
         let autoPlayTimer = null;
@@ -1110,6 +1110,7 @@
 
             slides = track.querySelectorAll('.carousel-slide');
 
+            // Начинаем с первого реального слайда (индекс 1)
             currentIndex = 1;
             updateCarousel(true);
 
@@ -1135,7 +1136,7 @@
             if (instant) {
                 track.style.transition = 'none';
             } else {
-                track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
             }
 
             const offset = -currentIndex * 100;
@@ -1161,7 +1162,7 @@
 
             if (instant) {
                 track.offsetHeight;
-                track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
             }
         }
 
@@ -1171,27 +1172,20 @@
             if (index < 0) index = 0;
             if (index >= totalSlides) index = totalSlides - 1;
             
-            // --- ОСНОВНОЕ ИЗМЕНЕНИЕ ЗДЕСЬ ---
-            // Мы не переключаемся на клоны с мгновенным переходом,
-            // а позволяем карусели прокручиваться дальше плавно,
-            // используя бесконечный цикл
-            
             currentIndex = index;
             updateCarousel(instant);
             
-            // Проверяем, не дошли ли до границ
+            // Проверяем границы
             if (currentIndex === 0) {
-                // Дошли до первого клона — переходим на последний реальный
                 isTransitioning = true;
                 cloneTransitionTimeout = setTimeout(() => {
                     currentIndex = totalSlides - 2;
-                    // Мгновенный переход без анимации, но с сохранением визуала
                     track.style.transition = 'none';
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-                    // Обновляем активные карточки
+                    track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                    
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
                         const isActive = idx === currentIndex;
@@ -1199,7 +1193,6 @@
                             card.classList.toggle('active', isActive);
                         });
                     });
-                    // Обновляем точки
                     const dots = document.querySelectorAll('.carousel-dot');
                     let realIndex = currentIndex - 1;
                     if (realIndex < 0) realIndex = categories.length - 1;
@@ -1209,9 +1202,8 @@
                     });
                     isTransitioning = false;
                     cloneTransitionTimeout = null;
-                }, 650);
+                }, 700);
             } else if (currentIndex === totalSlides - 1) {
-                // Дошли до последнего клона — переходим на первый реальный
                 isTransitioning = true;
                 cloneTransitionTimeout = setTimeout(() => {
                     currentIndex = 1;
@@ -1219,7 +1211,8 @@
                     const offset = -currentIndex * 100;
                     track.style.transform = `translateX(${offset}%)`;
                     track.offsetHeight;
-                    track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                    track.style.transition = 'transform 0.7s cubic-bezier(0.4, 0, 0.2, 1)';
+                    
                     slides.forEach((slide, idx) => {
                         const cards = slide.querySelectorAll('.card');
                         const isActive = idx === currentIndex;
@@ -1236,14 +1229,13 @@
                     });
                     isTransitioning = false;
                     cloneTransitionTimeout = null;
-                }, 650);
+                }, 700);
             } else {
-                // Обычный переход
                 if (!instant) {
                     isTransitioning = true;
                     setTimeout(() => {
                         isTransitioning = false;
-                    }, 650);
+                    }, 700);
                 } else {
                     isTransitioning = false;
                 }
