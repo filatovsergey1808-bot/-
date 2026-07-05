@@ -486,7 +486,7 @@
         }
         
         /* ================================================================
-           КАРУСЕЛЬ С БЕСКОНЕЧНОЙ ПРОКРУТКОЙ
+           КАРУСЕЛЬ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -1153,49 +1153,42 @@
         // БЕСКОНЕЧНАЯ КАРУСЕЛЬ
         // ================================================================
         
-        let currentSlide = 0;
-        let totalSlides = 0;
+        let currentIndex = 0;
         let autoPlayTimer = null;
         const AUTO_PLAY_INTERVAL = 4000;
         let isTransitioning = false;
+        let totalRealSlides = 0;
         
         function renderCarousel() {
             const track = document.getElementById('carouselTrack');
             const dotsContainer = document.getElementById('dotsContainer');
             
-            const itemsPerSlide = 1;
             const totalItems = categories.length;
-            totalSlides = Math.ceil(totalItems / itemsPerSlide);
+            totalRealSlides = totalItems;
             
             track.innerHTML = '';
             
-            // Создаём слайды
-            for (let s = 0; s < totalSlides; s++) {
+            // Создаём реальные слайды
+            for (let i = 0; i < totalItems; i++) {
+                const cat = categories[i];
                 const slide = document.createElement('div');
                 slide.className = 'carousel-slide';
-                slide.dataset.index = s;
+                slide.dataset.index = i;
                 
-                const startIdx = s * itemsPerSlide;
-                const endIdx = Math.min(startIdx + itemsPerSlide, totalItems);
-                
-                for (let i = startIdx; i < endIdx; i++) {
-                    const cat = categories[i];
-                    const card = document.createElement('div');
-                    card.className = 'card';
-                    card.dataset.index = i;
-                    card.innerHTML = `
-                        <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
-                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="image-placeholder" style="display:none;">📦</div>
-                        <div class="info">
-                            <div class="name">${cat.name}</div>
-                            <div class="price">${cat.price}</div>
-                        </div>
-                    `;
-                    card.onclick = () => openModal(cat.id);
-                    slide.appendChild(card);
-                }
-                
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.dataset.index = i;
+                card.innerHTML = `
+                    <img class="image" src="${cat.image}" alt="${cat.name}" loading="lazy" 
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="image-placeholder" style="display:none;">📦</div>
+                    <div class="info">
+                        <div class="name">${cat.name}</div>
+                        <div class="price">${cat.price}</div>
+                    </div>
+                `;
+                card.onclick = () => openModal(cat.id);
+                slide.appendChild(card);
                 track.appendChild(slide);
             }
             
@@ -1203,19 +1196,17 @@
             const firstClone = track.children[0].cloneNode(true);
             const lastClone = track.children[track.children.length - 1].cloneNode(true);
             
+            // Добавляем клоны
             track.appendChild(firstClone);
             track.insertBefore(lastClone, track.children[0]);
             
-            // Обновляем totalSlides с учётом клонов
-            const totalClones = track.children.length;
-            
             // Устанавливаем начальную позицию на первом реальном слайде
-            currentSlide = 1;
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            currentIndex = 1;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
             
             // Обновляем dots
             dotsContainer.innerHTML = '';
-            for (let i = 0; i < totalSlides; i++) {
+            for (let i = 0; i < totalRealSlides; i++) {
                 const dot = document.createElement('div');
                 dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
                 dot.onclick = () => goToSlide(i + 1);
@@ -1231,23 +1222,12 @@
             const slides = track.querySelectorAll('.carousel-slide');
             const dots = document.querySelectorAll('.carousel-dot');
             
-            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            track.style.transform = `translateX(-${currentIndex * 100}%)`;
             
+            // Обновляем активные карточки
             slides.forEach((slide, slideIndex) => {
                 const cards = slide.querySelectorAll('.card');
-                // Проверяем, является ли слайд клоном
-                const isClone = slideIndex === 0 || slideIndex === slides.length - 1;
-                // Определяем, активен ли слайд (для клонов используем соответствующие реальные индексы)
-                let isActive = false;
-                if (isClone) {
-                    if (slideIndex === 0) {
-                        isActive = currentSlide === slides.length - 2;
-                    } else if (slideIndex === slides.length - 1) {
-                        isActive = currentSlide === 1;
-                    }
-                } else {
-                    isActive = slideIndex === currentSlide;
-                }
+                const isActive = slideIndex === currentIndex;
                 
                 cards.forEach((card) => {
                     card.classList.remove('active');
@@ -1257,10 +1237,10 @@
                 });
             });
             
-            // Обновляем dots
-            let realIndex = currentSlide - 1;
-            if (realIndex < 0) realIndex = totalSlides - 1;
-            if (realIndex >= totalSlides) realIndex = 0;
+            // Обновляем точки
+            let realIndex = currentIndex - 1;
+            if (realIndex < 0) realIndex = totalRealSlides - 1;
+            if (realIndex >= totalRealSlides) realIndex = 0;
             
             dots.forEach((dot, index) => {
                 dot.classList.toggle('active', index === realIndex);
@@ -1277,12 +1257,13 @@
             if (index < 0) index = 0;
             if (index >= total) index = total - 1;
             
-            currentSlide = index;
+            currentIndex = index;
             
             if (instant) {
                 track.style.transition = 'none';
                 updateCarousel();
-                track.offsetHeight; // trigger reflow
+                // Принудительный reflow
+                track.offsetHeight;
                 track.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             } else {
                 updateCarousel();
@@ -1291,22 +1272,22 @@
             // Проверяем, не дошли ли до клонов
             if (index === 0) {
                 // Переход на последний реальный слайд
+                isTransitioning = true;
                 setTimeout(() => {
-                    isTransitioning = true;
-                    goToSlide(totalSlides, true);
+                    goToSlide(totalRealSlides, true);
                     setTimeout(() => {
                         isTransitioning = false;
                     }, 50);
-                }, 600);
+                }, 650);
             } else if (index === total - 1) {
                 // Переход на первый реальный слайд
+                isTransitioning = true;
                 setTimeout(() => {
-                    isTransitioning = true;
                     goToSlide(1, true);
                     setTimeout(() => {
                         isTransitioning = false;
                     }, 50);
-                }, 600);
+                }, 650);
             }
             
             resetAutoPlay();
@@ -1314,14 +1295,12 @@
         
         function nextSlide() {
             if (isTransitioning) return;
-            const track = document.getElementById('carouselTrack');
-            const slides = track.querySelectorAll('.carousel-slide');
-            goToSlide(currentSlide + 1);
+            goToSlide(currentIndex + 1);
         }
         
         function prevSlide() {
             if (isTransitioning) return;
-            goToSlide(currentSlide - 1);
+            goToSlide(currentIndex - 1);
         }
         
         function startAutoPlay() {
@@ -1397,16 +1376,22 @@
                 nextSlide();
             };
             
+            // Пауза при наведении
             wrapper.addEventListener('mouseenter', pauseAutoPlay);
             wrapper.addEventListener('mouseleave', resumeAutoPlay);
+            
+            // Для мобильных
             wrapper.addEventListener('touchstart', pauseAutoPlay);
             wrapper.addEventListener('touchend', resumeAutoPlay);
             
+            // Закрытие модального окна
             document.getElementById('modalClose').onclick = closeModal;
             document.getElementById('modalCloseBtn').onclick = closeModal;
             document.getElementById('modalOverlay').onclick = (e) => {
                 if (e.target === e.currentTarget) closeModal();
             };
+            
+            // Клавиатура
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeModal();
                 if (e.key === 'ArrowLeft') prevSlide();
