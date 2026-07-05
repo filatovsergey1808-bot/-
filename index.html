@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
-    <!-- Подключаем элегантный шрифт -->
+    <!-- Подключаем элегантные шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap" rel="stylesheet">
     
     <style>
@@ -311,7 +312,7 @@
         }
 
         /* ================================================================
-           ШАПКА
+           ШАПКА — Playfair Display для заголовка
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
@@ -361,10 +362,10 @@
         .header h1 {
             position: relative;
             z-index: 1;
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 48px;
-            font-weight: 100;
-            letter-spacing: 6px;
+            font-weight: 400;
+            letter-spacing: 4px;
             color: #000000;
             text-transform: uppercase;
             line-height: 1.05;
@@ -424,7 +425,7 @@
         }
 
         /* ================================================================
-           КАРТОЧКА — 2 КОЛОНКИ
+           КАРТОЧКА — Playfair Display для названия
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -512,11 +513,12 @@
             padding: 4px 4px 0 4px;
         }
 
+        /* Название — Playfair Display */
         .card .info .name {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-weight: 100;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-weight: 400;
             font-size: clamp(28px, 4vw, 48px);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
             line-height: 1.1;
@@ -528,6 +530,7 @@
             flex-shrink: 0;
         }
 
+        /* Цена — Inter (тонкий) */
         .card .info .price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
@@ -543,6 +546,7 @@
             flex-shrink: 0;
         }
 
+        /* Описание — Inter */
         .card .info .description {
             grid-column: 2 / 3;
             grid-row: 1 / 2;
@@ -699,7 +703,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО
+           МОДАЛЬНОЕ ОКНО — Playfair Display для заголовка
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -761,9 +765,9 @@
         }
 
         .modal h2 {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: 22px;
-            font-weight: 100;
+            font-weight: 400;
             letter-spacing: 2px;
             color: #000000;
             text-transform: uppercase;
@@ -874,7 +878,7 @@
 
             .header h1 {
                 font-size: 32px;
-                letter-spacing: 4px;
+                letter-spacing: 3px;
             }
 
             .header .subtitle {
@@ -898,7 +902,7 @@
 
             .card .info .name {
                 font-size: clamp(22px, 4vw, 34px);
-                letter-spacing: 2px;
+                letter-spacing: 1.5px;
             }
 
             .card .info .price {
@@ -1224,7 +1228,7 @@
 
             swiper = new Swiper('.mySwiper', {
                 loop: true,
-                speed: 1800, // ← Очень медленное перелистывание (1.8 секунды)
+                speed: 1800, // ← Ваши настройки
                 slidesPerView: 1,
                 spaceBetween: 0,
                 centeredSlides: true,
@@ -1244,7 +1248,7 @@
                 },
                 
                 autoplay: {
-                    delay: 10000, // ← Очень долгое удержание (10 секунд)
+                    delay: 10000,
                     disableOnInteraction: false,
                     pauseOnMouseEnter: true,
                     waitForTransition: true,
@@ -1256,14 +1260,13 @@
                     onlyInViewport: true,
                 },
                 
-                touchRatio: 0.4, // ← Максимально плавное перетаскивание
+                touchRatio: 0.4, // ← Ваши настройки
                 touchAngle: 45,
                 resistance: true,
                 resistanceRatio: 0.85,
                 loopAdditionalSlides: 1,
                 autoHeight: false,
                 
-                // Плавное замедление как у книги
                 easing: 'cubic-bezier(0.25, 0.1, 0.25, 1)',
                 
                 on: {
