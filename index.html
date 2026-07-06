@@ -744,7 +744,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — НОВЫЙ ДИЗАЙН
+           МОДАЛЬНОЕ ОКНО — ОБНОВЛЕННЫЙ ДИЗАЙН
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -784,8 +784,12 @@
             animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             max-height: 92vh;
             overflow-y: auto;
-            border-top: 4px solid #0055A4;
             position: relative;
+        }
+
+        /* Убираем синюю полосу сверху */
+        .modal {
+            border-top: none;
         }
 
         /* Стилизация скролла */
@@ -849,9 +853,9 @@
         /* Заголовок модального окна */
         .modal .modal-header {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: flex-start;
-            margin-bottom: clamp(12px, 1.8vh, 20px);
+            margin-bottom: clamp(8px, 1.2vh, 16px);
             padding-right: clamp(36px, 4vw, 52px);
         }
 
@@ -867,12 +871,11 @@
 
         .modal .modal-header .modal-price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(18px, 2.5vh, 28px);
-            color: #0055A4;
-            font-weight: 300;
+            font-size: clamp(16px, 2vh, 24px);
+            color: #1A1A2E;
+            font-weight: 100;
             letter-spacing: 1px;
-            white-space: nowrap;
-            margin-top: 4px;
+            margin-top: 2px;
         }
 
         /* Описание */
@@ -1091,15 +1094,6 @@
 
             .modal .modal-actions {
                 grid-template-columns: 1fr;
-            }
-
-            .modal .modal-header {
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .modal .modal-header .modal-price {
-                margin-top: 0;
             }
         }
 
