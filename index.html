@@ -17,43 +17,25 @@
     
     <style>
         /* ================================================================
-           ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ И СБРОС
+           ОСНОВНОЙ ФОН
            ================================================================ */
-        :root {
-            --max-width: 1400px;
-            --padding-base: clamp(12px, 2vw, 40px);
-            --card-max-width: 800px;
-            --card-min-width: 280px;
-        }
-
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            width: 100%;
-            overflow-x: hidden;
-        }
-
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
-            height: 100vh;
             background: #F0F3F8;
             color: #1A1A2E;
-            padding: var(--padding-base);
+            padding: 20px;
             position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow-x: hidden;
         }
 
-        /* ================================================================
-           ГЕОМЕТРИЧЕСКИЙ ФОН
-           ================================================================ */
+        /* Геометрический фон */
         body::before {
             content: '';
             position: fixed;
@@ -99,6 +81,26 @@
                     rgba(0, 85, 164, 0.025) 204px,
                     transparent 206px,
                     transparent 400px
+                ),
+                repeating-linear-gradient(
+                    30deg,
+                    transparent 0px,
+                    transparent 140px,
+                    rgba(0, 85, 164, 0.02) 140px,
+                    rgba(0, 85, 164, 0.05) 141px,
+                    rgba(0, 85, 164, 0.02) 142px,
+                    transparent 143px,
+                    transparent 280px
+                ),
+                repeating-linear-gradient(
+                    -30deg,
+                    transparent 0px,
+                    transparent 90px,
+                    rgba(0, 85, 164, 0.03) 90px,
+                    rgba(0, 85, 164, 0.08) 92px,
+                    rgba(0, 85, 164, 0.03) 94px,
+                    transparent 96px,
+                    transparent 180px
                 );
             transform: rotate(0deg) scale(1.1);
             animation: gridFloat 25s ease-in-out infinite alternate;
@@ -107,8 +109,11 @@
 
         @keyframes gridFloat {
             0% { transform: rotate(0deg) scale(1.05) translate(0, 0); }
-            50% { transform: rotate(0.5deg) scale(1.08) translate(1%, -1%); }
-            100% { transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%); }
+            20% { transform: rotate(0.5deg) scale(1.08) translate(1%, -1%); }
+            40% { transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%); }
+            60% { transform: rotate(0.8deg) scale(1.1) translate(1%, 1%); }
+            80% { transform: rotate(-0.5deg) scale(1.06) translate(-1%, -1%); }
+            100% { transform: rotate(0.3deg) scale(1.12) translate(0, 0); }
         }
 
         .geo-shapes {
@@ -130,20 +135,20 @@
         }
 
         .geo-shape:nth-child(1) {
-            width: 30vw;
-            height: 20vh;
-            top: -10vh;
-            right: -5vw;
+            width: 400px;
+            height: 200px;
+            top: -50px;
+            right: -100px;
             transform: rotate(25deg);
             background: linear-gradient(135deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
             animation-duration: 22s;
         }
 
         .geo-shape:nth-child(2) {
-            width: 15vw;
-            height: 30vh;
-            bottom: 5vh;
-            left: -5vw;
+            width: 150px;
+            height: 300px;
+            bottom: 50px;
+            left: -60px;
             transform: rotate(-15deg);
             background: linear-gradient(225deg, rgba(0, 85, 164, 0.01), rgba(0, 85, 164, 0.04));
             animation-duration: 26s;
@@ -151,8 +156,8 @@
         }
 
         .geo-shape:nth-child(3) {
-            width: 8vw;
-            height: 8vw;
+            width: 100px;
+            height: 100px;
             top: 35%;
             left: 55%;
             transform: rotate(45deg);
@@ -162,8 +167,8 @@
         }
 
         .geo-shape:nth-child(4) {
-            width: 20vw;
-            height: 15vh;
+            width: 250px;
+            height: 150px;
             top: 15%;
             left: 15%;
             transform: rotate(60deg);
@@ -173,9 +178,9 @@
         }
 
         .geo-shape:nth-child(5) {
-            width: 15vw;
-            height: 15vw;
-            bottom: -5vh;
+            width: 180px;
+            height: 180px;
+            bottom: -30px;
             right: 25%;
             transform: rotate(-30deg);
             background: linear-gradient(225deg, rgba(0, 85, 164, 0.015), rgba(0, 85, 164, 0.05));
@@ -185,9 +190,20 @@
 
         @keyframes shapeFloat {
             0% { transform: rotate(25deg) translate(0, 0) scale(1); opacity: 0.4; }
-            33% { transform: rotate(35deg) translate(1vw, -2vh) scale(1.06); opacity: 0.9; }
-            66% { transform: rotate(15deg) translate(-1vw, 1vh) scale(0.94); opacity: 0.5; }
-            100% { transform: rotate(30deg) translate(0.5vw, -0.5vh) scale(1.03); opacity: 0.7; }
+            33% { transform: rotate(35deg) translate(12px, -18px) scale(1.06); opacity: 0.9; }
+            66% { transform: rotate(15deg) translate(-12px, 12px) scale(0.94); opacity: 0.5; }
+            100% { transform: rotate(30deg) translate(6px, -6px) scale(1.03); opacity: 0.7; }
+        }
+
+        @keyframes shapeFloat2 {
+            0% { transform: rotate(-15deg) translate(0, 0) scale(1); opacity: 0.3; }
+            50% { transform: rotate(-25deg) translate(-18px, 12px) scale(1.08); opacity: 0.8; }
+            100% { transform: rotate(-5deg) translate(12px, -12px) scale(0.94); opacity: 0.5; }
+        }
+
+        @keyframes shapeFloat3 {
+            0% { transform: rotate(45deg) translate(0, 0) scale(1); opacity: 0.3; }
+            100% { transform: rotate(55deg) translate(10px, -15px) scale(1.1); opacity: 0.8; }
         }
 
         .geo-shape:nth-child(2) { animation-name: shapeFloat2; }
@@ -195,33 +211,14 @@
         .geo-shape:nth-child(4) { animation-name: shapeFloat2; }
         .geo-shape:nth-child(5) { animation-name: shapeFloat3; }
 
-        @keyframes shapeFloat2 {
-            0% { transform: rotate(-15deg) translate(0, 0) scale(1); opacity: 0.3; }
-            50% { transform: rotate(-25deg) translate(-2vw, 1vh) scale(1.08); opacity: 0.8; }
-            100% { transform: rotate(-5deg) translate(1vw, -1vh) scale(0.94); opacity: 0.5; }
-        }
-
-        @keyframes shapeFloat3 {
-            0% { transform: rotate(45deg) translate(0, 0) scale(1); opacity: 0.3; }
-            100% { transform: rotate(55deg) translate(1vw, -1.5vh) scale(1.1); opacity: 0.8; }
-        }
-
         /* ================================================================
-           ОСНОВНОЙ КОНТЕЙНЕР
+           ОСНОВНОЙ КОНТЕНТ
            ================================================================ */
         #app {
             position: relative;
             z-index: 1;
-            width: 100%;
-            max-width: var(--max-width);
-            height: 100%;
-            max-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            gap: clamp(6px, 1vh, 20px);
-            padding: 0;
+            max-width: 1000px;
             margin: 0 auto;
-            overflow: hidden;
         }
 
         /* ================================================================
@@ -229,7 +226,6 @@
            ================================================================ */
         .social-icon {
             position: relative;
-            flex-shrink: 0;
         }
 
         .social-icon::after {
@@ -263,23 +259,21 @@
         }
 
         /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — ФИКСИРОВАННАЯ ВЫСОТА
+           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты
            ================================================================ */
         .top-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: clamp(4px, 0.5vh, 10px) 0;
-            gap: clamp(8px, 1.2vw, 24px);
-            flex-shrink: 0;
-            min-height: clamp(44px, 6vh, 70px);
+            padding: 8px 0 16px 0;
+            gap: 20px;
         }
 
         .top-bar .social-left {
             flex: 1;
             display: flex;
             align-items: center;
-            gap: clamp(6px, 0.8vw, 16px);
+            gap: 12px;
             justify-content: flex-start;
         }
 
@@ -287,8 +281,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: clamp(28px, 3.2vh, 44px);
-            height: clamp(28px, 3.2vh, 44px);
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             background: rgba(0, 0, 0, 0.04);
             color: #1A1A2E;
@@ -298,7 +292,7 @@
             padding: 0;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 400;
-            font-size: clamp(10px, 1.1vh, 15px);
+            font-size: 14px;
             cursor: pointer;
         }
 
@@ -306,13 +300,13 @@
             background: #1A1A2E;
             color: #ffffff;
             border-color: #1A1A2E;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: 0 4px 16px rgba(26, 26, 46, 0.2);
         }
 
         .top-bar .social-left .social-icon svg {
-            width: clamp(14px, 1.6vh, 22px);
-            height: clamp(14px, 1.6vh, 22px);
+            width: 20px;
+            height: 20px;
             fill: currentColor;
             display: block;
         }
@@ -322,14 +316,14 @@
         }
 
         .top-bar .social-left .social-icon.max-btn {
-            font-size: clamp(10px, 1.1vh, 15px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 13px;
             letter-spacing: 1px;
         }
 
         .top-bar .logo-center {
             flex: 0 0 auto;
-            display: flex;
-            align-items: center;
         }
 
         .top-bar .logo-center a {
@@ -340,12 +334,10 @@
 
         .top-bar .logo-center img {
             display: block;
-            width: clamp(100px, 15vw, 240px);
+            width: 220px;
             height: auto;
-            max-height: clamp(30px, 4vh, 70px);
             filter: drop-shadow(0 2px 12px rgba(0, 85, 164, 0.08));
             transition: filter 0.3s ease;
-            object-fit: contain;
         }
 
         .top-bar .logo-center img:hover {
@@ -355,7 +347,7 @@
         .top-bar .contact-right {
             flex: 1;
             text-align: right;
-            font-size: clamp(11px, 1.2vh, 17px);
+            font-size: 14px;
             color: #4A4A5A;
             font-weight: 300;
             letter-spacing: 0.3px;
@@ -369,7 +361,6 @@
             font-weight: 300;
             letter-spacing: 0.5px;
             cursor: pointer;
-            font-size: inherit;
         }
 
         .top-bar .contact-right a:hover {
@@ -377,22 +368,18 @@
         }
 
         /* ================================================================
-           ШАПКА — ФИКСИРОВАННАЯ ВЫСОТА
+           ШАПКА — Playfair Display для заголовка
            ================================================================ */
         .header {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(20px);
-            border-radius: clamp(10px, 1.2vh, 20px);
-            padding: clamp(6px, 1vh, 18px) clamp(12px, 1.5vw, 30px);
+            border-radius: 16px;
+            padding: 32px 32px 28px 32px;
+            margin-bottom: 28px;
             text-align: center;
             border: 1px solid rgba(0, 85, 164, 0.2);
             position: relative;
             overflow: hidden;
-            flex-shrink: 0;
-            min-height: clamp(50px, 7vh, 100px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
         }
 
         .header::before {
@@ -432,9 +419,9 @@
             position: relative;
             z-index: 1;
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(16px, 3vh, 44px);
+            font-size: 48px;
             font-weight: 400;
-            letter-spacing: clamp(1.5px, 0.3vw, 5px);
+            letter-spacing: 4px;
             color: #1A1A2E;
             text-transform: uppercase;
             line-height: 1.05;
@@ -444,42 +431,37 @@
             position: relative;
             z-index: 1;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(10px, 1.2vh, 17px);
+            font-size: 18px;
             font-weight: 200;
             color: #4A4A5A;
-            margin-top: clamp(1px, 0.2vh, 4px);
-            letter-spacing: clamp(0.5px, 0.15vw, 2px);
+            margin-top: 6px;
+            letter-spacing: 2px;
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — ЗАНИМАЕТ ОСТАВШЕЕСЯ МЕСТО, НЕ ПЕРЕКРЫВАЕТ
+           КАРУСЕЛЬ — SWIPER.JS (СТАНДАРТНАЯ, НЕ РАСТЯНУТАЯ)
            ================================================================ */
         .carousel-wrapper {
             position: relative;
-            flex: 1;
-            min-height: 0;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            border-radius: 20px;
             overflow: visible;
-        }
-
-        /* Контейнер для квадратной карусели */
-        .carousel-container {
-            position: relative;
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
             width: 100%;
-            max-width: var(--card-max-width);
-            aspect-ratio: 1 / 1;
-            margin: 0 auto;
-            max-height: 100%;
+            padding-bottom: 100%;
+            position: relative;
         }
 
         .swiper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             width: 100%;
             height: 100%;
             overflow: visible;
-            border-radius: clamp(12px, 1.5vh, 28px);
         }
 
         .swiper-wrapper {
@@ -492,14 +474,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 0 clamp(6px, 0.8vw, 16px);
+            padding: 0 16px;
             height: 100%;
             width: 100%;
             overflow: visible;
         }
 
         /* ================================================================
-           КАРТОЧКА — КВАДРАТНАЯ
+           КАРТОЧКА — Playfair Display для названия
            ================================================================ */
         .card {
             flex: 0 0 100%;
@@ -507,7 +489,7 @@
             height: 100%;
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(10px);
-            border-radius: clamp(14px, 1.8vh, 28px);
+            border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.5s ease;
@@ -534,7 +516,7 @@
         }
 
         .swiper-slide-active .card:hover {
-            transform: scale(1.02);
+            transform: scale(1.04);
             box-shadow: 0 16px 60px rgba(0, 85, 164, 0.15);
             border-color: rgba(0, 85, 164, 0.25);
             background: rgba(255, 255, 255, 0.98);
@@ -555,7 +537,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(30px, 5vh, 70px);
+            font-size: 60px;
             background: #E8ECF0;
             color: #B0B8C0;
             flex-shrink: 0;
@@ -565,15 +547,14 @@
            ИНФОРМАЦИОННАЯ ОБЛАСТЬ — 2 КОЛОНКИ
            ================================================================ */
         .card .info {
-            padding: clamp(6px, 0.8vh, 16px) clamp(10px, 1.2vw, 20px);
+            padding: 14px 18px 16px;
             flex: 1;
             display: grid;
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr;
             height: 30%;
-            gap: clamp(2px, 0.3vh, 6px) clamp(6px, 0.8vw, 16px);
+            gap: 4px 12px;
             position: relative;
-            min-height: 0;
         }
 
         .card .info .left-col {
@@ -581,19 +562,18 @@
             grid-row: 1 / 2;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             width: 100%;
             height: 100%;
-            padding: 0;
-            overflow: hidden;
+            padding: 4px 4px 0 4px;
         }
 
         .card .info .name {
             font-family: 'Playfair Display', 'Times New Roman', serif;
             font-weight: 400;
-            font-size: clamp(14px, 2.8vh, 40px);
-            letter-spacing: clamp(1px, 0.15vw, 3px);
+            font-size: clamp(28px, 4vw, 48px);
+            letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
             line-height: 1.1;
@@ -609,14 +589,14 @@
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 100;
             color: #1A1A2E;
-            font-size: clamp(11px, 1.5vh, 24px);
-            letter-spacing: clamp(0.5px, 0.1vw, 2px);
+            font-size: clamp(20px, 2.6vw, 32px);
+            letter-spacing: 2px;
             text-align: center;
             width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            margin-top: clamp(0px, 0.2vh, 3px);
+            margin-top: 2px;
             flex-shrink: 0;
         }
 
@@ -625,16 +605,16 @@
             grid-row: 1 / 2;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-weight: 200;
-            font-size: clamp(9px, 1vh, 16px);
+            font-size: clamp(16px, 1.6vw, 20px);
             color: #4A4A5A;
-            line-height: 1.3;
-            letter-spacing: 0.2px;
+            line-height: 1.4;
+            letter-spacing: 0.3px;
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
             text-align: justify;
-            padding-left: clamp(2px, 0.2vw, 6px);
-            padding-top: clamp(1px, 0.1vh, 3px);
+            padding-left: 4px;
+            padding-top: 2px;
             width: 100%;
             height: 100%;
             text-justify: inter-word;
@@ -642,7 +622,7 @@
         }
 
         /* ================================================================
-           КНОПКИ НАВИГАЦИИ SWIPER — АДАПТИВНЫЕ
+           КНОПКИ НАВИГАЦИИ SWIPER
            ================================================================ */
         .swiper-button-prev,
         .swiper-button-next {
@@ -663,7 +643,7 @@
             backdrop-filter: blur(2px);
             -webkit-backdrop-filter: blur(2px);
             border-radius: 0;
-            width: clamp(30px, 4vw, 70px);
+            width: 80px;
             height: 100%;
             margin: 0;
         }
@@ -671,13 +651,13 @@
         .swiper-button-prev {
             left: 0;
             justify-content: flex-start;
-            padding-left: clamp(3px, 0.4vw, 10px);
+            padding-left: 8px;
         }
 
         .swiper-button-next {
             right: 0;
             justify-content: flex-end;
-            padding-right: clamp(3px, 0.4vw, 10px);
+            padding-right: 8px;
         }
 
         .swiper-button-prev:hover,
@@ -701,8 +681,8 @@
 
         .swiper-button-prev svg,
         .swiper-button-next svg {
-            width: clamp(16px, 2vw, 34px);
-            height: clamp(16px, 2vw, 34px);
+            width: 36px;
+            height: 36px;
             fill: currentColor;
             transition: transform 0.3s ease;
             flex-shrink: 0;
@@ -719,16 +699,15 @@
         .swiper-pagination {
             position: relative;
             bottom: auto;
-            padding: clamp(6px, 0.8vh, 16px) 0 clamp(3px, 0.4vh, 8px) 0;
+            padding: 16px 0 8px 0;
             display: flex;
             justify-content: center;
-            gap: clamp(5px, 0.6vw, 12px);
-            flex-shrink: 0;
+            gap: 10px;
         }
 
         .swiper-pagination-bullet {
-            width: clamp(6px, 0.6vw, 12px);
-            height: clamp(6px, 0.6vw, 12px);
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             border: 1.5px solid rgba(0, 85, 164, 0.15);
             background: rgba(255, 255, 255, 0.4);
@@ -751,7 +730,14 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО
+           ФУТЕР (без копирайта)
+           ================================================================ */
+        .footer {
+            display: none;
+        }
+
+        /* ================================================================
+           МОДАЛЬНОЕ ОКНО — Playfair Display для заголовка
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -765,7 +751,7 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: clamp(16px, 2vh, 40px);
+            padding: 20px;
         }
 
         .modal-overlay.active {
@@ -775,10 +761,10 @@
         .modal {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
-            border-radius: clamp(12px, 1.5vh, 24px);
-            max-width: clamp(320px, 45vw, 560px);
+            border-radius: 16px;
+            max-width: 520px;
             width: 100%;
-            padding: clamp(16px, 2.5vh, 36px) clamp(14px, 1.8vw, 32px);
+            padding: 32px 28px 28px;
             box-shadow: 0 20px 80px rgba(0, 85, 164, 0.15);
             animation: modalFadeIn 0.4s ease;
             max-height: 90vh;
@@ -795,7 +781,7 @@
             float: right;
             background: none;
             border: none;
-            font-size: clamp(18px, 2.2vh, 26px);
+            font-size: 24px;
             color: #8A8A9A;
             cursor: pointer;
             transition: color 0.3s ease;
@@ -808,7 +794,7 @@
 
         .modal h2 {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(16px, 2.2vh, 26px);
+            font-size: 22px;
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
@@ -819,39 +805,39 @@
 
         .modal .modal-price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.8vh, 22px);
+            font-size: 20px;
             color: #1A1A2E;
             font-weight: 100;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .modal .modal-desc {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(12px, 1.3vh, 16px);
+            font-size: 15px;
             color: #4A4A5A;
             font-weight: 200;
             line-height: 1.7;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
 
         .modal .modal-section {
-            padding: clamp(6px, 0.8vh, 14px) 0;
+            padding: 12px 0;
             border-top: 1px solid rgba(0, 85, 164, 0.04);
         }
 
         .modal .modal-section h4 {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(10px, 1.1vh, 13px);
+            font-size: 12px;
             letter-spacing: 1px;
             color: #8A8A9A;
             text-transform: uppercase;
-            margin-bottom: 3px;
+            margin-bottom: 4px;
             font-weight: 300;
         }
 
         .modal .modal-section p {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(12px, 1.2vh, 15px);
+            font-size: 15px;
             color: #4A4A5A;
             font-weight: 200;
             line-height: 1.6;
@@ -860,14 +846,14 @@
 
         .modal .btn-close-modal {
             width: 100%;
-            padding: clamp(10px, 1.2vh, 16px);
-            margin-top: 14px;
+            padding: 14px;
+            margin-top: 16px;
             background: #0055A4;
             color: #FFFFFF;
             border: none;
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(12px, 1.2vh, 16px);
+            font-size: 15px;
             font-weight: 300;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -885,268 +871,181 @@
         /* ================================================================
            АДАПТИВНОСТЬ
            ================================================================ */
-
-        /* Мобильные устройства */
         @media (max-width: 768px) {
             body {
-                padding: clamp(6px, 1.2vw, 14px);
-            }
-
-            #app {
-                gap: clamp(4px, 0.8vh, 12px);
+                padding: 12px;
             }
 
             .top-bar {
-                flex-wrap: wrap;
-                gap: clamp(4px, 0.6vw, 10px);
-                min-height: clamp(38px, 5vh, 55px);
+                flex-direction: column;
+                padding: 4px 0 12px 0;
+                gap: 10px;
             }
 
             .top-bar .social-left {
                 flex: none;
                 justify-content: center;
                 width: 100%;
-                order: 2;
-                gap: clamp(4px, 0.6vw, 10px);
             }
 
-            .top-bar .logo-center {
-                order: 1;
-                flex: 1;
-                display: flex;
-                justify-content: center;
+            .top-bar .logo-center img {
+                width: 180px;
             }
 
             .top-bar .contact-right {
-                order: 3;
                 flex: none;
                 text-align: center;
+                font-size: 13px;
                 width: 100%;
-                font-size: clamp(10px, 1.1vh, 14px);
-            }
-
-            .top-bar .logo-center img {
-                width: clamp(90px, 25vw, 150px);
-                max-height: clamp(25px, 3.5vh, 45px);
             }
 
             .header {
-                min-height: clamp(40px, 6vh, 70px);
-                padding: clamp(4px, 0.6vh, 12px) clamp(10px, 1.2vw, 20px);
+                padding: 24px 20px 20px 20px;
+                margin-bottom: 20px;
             }
 
             .header h1 {
-                font-size: clamp(14px, 2.5vh, 28px);
+                font-size: 32px;
+                letter-spacing: 3px;
             }
 
             .header .subtitle {
-                font-size: clamp(9px, 1vh, 14px);
+                font-size: 16px;
             }
 
-            .carousel-container {
-                max-width: 100%;
-                max-height: 65vh;
+            .swiper-slide {
+                padding: 0 12px;
             }
 
             .swiper-button-prev,
             .swiper-button-next {
-                width: clamp(24px, 4vw, 44px);
+                width: 50px;
             }
 
             .swiper-button-prev svg,
             .swiper-button-next svg {
-                width: clamp(14px, 2vw, 24px);
-                height: clamp(14px, 2vw, 24px);
+                width: 28px;
+                height: 28px;
             }
 
             .card .info .name {
-                font-size: clamp(12px, 2.2vh, 22px);
+                font-size: clamp(22px, 4vw, 34px);
+                letter-spacing: 1.5px;
             }
 
             .card .info .price {
-                font-size: clamp(10px, 1.4vh, 16px);
+                font-size: clamp(16px, 2.5vw, 24px);
+                letter-spacing: 1.5px;
             }
 
             .card .info .description {
-                font-size: clamp(8px, 0.9vh, 13px);
+                font-size: clamp(14px, 1.6vw, 17px);
+            }
+
+            .geo-shape:nth-child(1),
+            .geo-shape:nth-child(2),
+            .geo-shape:nth-child(5) {
+                display: none;
             }
         }
 
-        /* Маленькие телефоны */
         @media (max-width: 480px) {
-            body {
-                padding: clamp(4px, 0.8vw, 10px);
-            }
-
-            #app {
-                gap: clamp(3px, 0.5vh, 8px);
+            .top-bar .logo-center img {
+                width: 150px;
             }
 
             .top-bar .social-left .social-icon {
-                width: clamp(24px, 3.5vh, 32px);
-                height: clamp(24px, 3.5vh, 32px);
+                width: 34px;
+                height: 34px;
             }
 
             .top-bar .social-left .social-icon svg {
-                width: clamp(12px, 1.8vh, 16px);
-                height: clamp(12px, 1.8vh, 16px);
-            }
-
-            .top-bar .logo-center img {
-                width: clamp(70px, 20vw, 110px);
-                max-height: clamp(20px, 3vh, 35px);
-            }
-
-            .header {
-                min-height: clamp(32px, 5vh, 50px);
-                padding: clamp(3px, 0.4vh, 8px) clamp(8px, 1vw, 14px);
-                border-radius: clamp(8px, 1vh, 14px);
+                width: 17px;
+                height: 17px;
             }
 
             .header h1 {
-                font-size: clamp(12px, 2.2vh, 20px);
-                letter-spacing: 1px;
+                font-size: 24px;
+                letter-spacing: 2px;
             }
 
             .header .subtitle {
-                font-size: clamp(8px, 0.8vh, 12px);
+                font-size: 14px;
+            }
+
+            .swiper-slide {
+                padding: 0 8px;
+            }
+
+            .card {
+                border-radius: 14px;
+            }
+
+            .card .image {
+                height: 65%;
+            }
+
+            .card .image-placeholder {
+                height: 65%;
+            }
+
+            .card .info {
+                padding: 10px 12px 12px;
+                gap: 2px 8px;
+            }
+
+            .card .info .name {
+                font-size: clamp(16px, 4.5vw, 22px);
+                letter-spacing: 1px;
+            }
+
+            .card .info .price {
+                font-size: clamp(13px, 3vw, 17px);
+                letter-spacing: 1px;
                 margin-top: 1px;
             }
 
-            .carousel-container {
-                max-height: 55vh;
+            .card .info .description {
+                font-size: clamp(11px, 2.5vw, 13px);
+                padding-left: 2px;
+                padding-top: 1px;
             }
 
             .swiper-button-prev,
             .swiper-button-next {
-                width: clamp(20px, 3.5vw, 36px);
+                width: 40px;
             }
 
             .swiper-button-prev svg,
             .swiper-button-next svg {
-                width: clamp(12px, 1.8vw, 20px);
-                height: clamp(12px, 1.8vw, 20px);
-            }
-
-            .card .info .name {
-                font-size: clamp(10px, 1.8vh, 16px);
-                letter-spacing: 0.5px;
-            }
-
-            .card .info .price {
-                font-size: clamp(8px, 1.2vh, 13px);
-            }
-
-            .card .info .description {
-                font-size: clamp(7px, 0.8vh, 11px);
-                line-height: 1.2;
-            }
-
-            .card .info {
-                padding: clamp(4px, 0.5vh, 10px) clamp(6px, 0.8vw, 12px);
-                gap: 1px clamp(3px, 0.4vw, 6px);
-            }
-
-            .swiper-pagination-bullet {
-                width: clamp(5px, 0.6vw, 8px);
-                height: clamp(5px, 0.6vw, 8px);
-            }
-
-            .swiper-pagination {
-                padding: clamp(4px, 0.5vh, 10px) 0 clamp(2px, 0.3vh, 6px) 0;
-                gap: clamp(4px, 0.5vw, 8px);
+                width: 20px;
+                height: 20px;
             }
 
             .geo-shape:nth-child(3),
             .geo-shape:nth-child(4) {
                 display: none;
             }
-
-            .modal {
-                padding: clamp(14px, 1.8vh, 20px) clamp(10px, 1.2vw, 16px);
-            }
         }
 
-        /* Очень маленькие телефоны */
-        @media (max-width: 360px) {
-            .top-bar .social-left .social-icon {
-                width: 20px;
-                height: 20px;
-            }
-
-            .top-bar .social-left .social-icon svg {
-                width: 10px;
-                height: 10px;
-            }
-
-            .top-bar .social-left {
-                gap: 3px;
-            }
-
-            .top-bar .logo-center img {
-                width: 60px;
-                max-height: 18px;
-            }
-
-            .header h1 {
-                font-size: 10px;
-            }
-
-            .header .subtitle {
-                font-size: 7px;
-            }
-
-            .carousel-container {
-                max-height: 45vh;
-            }
-
-            .card .info .name {
-                font-size: 8px;
-            }
-
-            .card .info .price {
-                font-size: 7px;
-            }
-
-            .card .info .description {
-                font-size: 6px;
-            }
-        }
-
-        /* Большие экраны */
+        /* ================================================================
+           АДАПТАЦИЯ ДЛЯ БОЛЬШИХ ЭКРАНОВ
+           ================================================================ */
         @media (min-width: 1400px) {
-            .carousel-container {
-                max-width: 800px;
-            }
-
             .header h1 {
-                font-size: clamp(32px, 4.5vh, 56px);
+                font-size: 56px;
             }
 
             .card .info .name {
-                font-size: clamp(24px, 3.5vh, 48px);
+                font-size: 52px;
             }
 
             .card .info .price {
-                font-size: clamp(18px, 2.2vh, 32px);
+                font-size: 36px;
             }
 
             .card .info .description {
-                font-size: clamp(14px, 1.6vh, 22px);
-            }
-        }
-
-        @media (min-width: 1920px) {
-            .carousel-container {
-                max-width: 900px;
-            }
-
-            .header h1 {
-                font-size: clamp(40px, 5vh, 72px);
-            }
-
-            .card .info .name {
-                font-size: clamp(32px, 4vh, 56px);
+                font-size: 22px;
             }
         }
     </style>
@@ -1195,21 +1094,21 @@
             <div class="subtitle">Премиальные материалы под ваши задачи</div>
         </div>
 
-        <!-- КВАДРАТНАЯ КАРУСЕЛЬ -->
+        <!-- КАРУСЕЛЬ SWIPER -->
         <div class="carousel-wrapper">
-            <div class="carousel-container">
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper" id="swiperWrapper">
-                        <!-- Слайды будут добавлены через JavaScript -->
-                    </div>
-                    <div class="swiper-button-prev" id="swiperPrev">
-                        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-                    </div>
-                    <div class="swiper-button-next" id="swiperNext">
-                        <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
-                    </div>
-                    <div class="swiper-pagination" id="swiperPagination"></div>
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper" id="swiperWrapper">
+                    <!-- Слайды будут добавлены через JavaScript -->
                 </div>
+                <!-- Кнопки навигации -->
+                <div class="swiper-button-prev" id="swiperPrev">
+                    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+                </div>
+                <div class="swiper-button-next" id="swiperNext">
+                    <svg viewBox="0 0 24 24"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg>
+                </div>
+                <!-- Точки -->
+                <div class="swiper-pagination" id="swiperPagination"></div>
             </div>
         </div>
     </div>
@@ -1241,6 +1140,17 @@
         </div>
     </div>
 
+    <!-- ФУТЕР — УБРАН -->
+    <!-- <div class="footer"> -->
+        <!-- <div class="contacts"> -->
+            <!-- <a href="tel:+73433282772">+7 (343) 328-27-72</a> -->
+            <!-- &nbsp;·&nbsp; -->
+            <!-- <a href="mailto:sl@principfloor.ru">sl@principfloor.ru</a> -->
+            <!-- &nbsp;·&nbsp; -->
+            <!-- <a href="https://principfloor.ru" target="_blank">principfloor.ru</a> -->
+        <!-- </div> -->
+    <!-- </div> -->
+
     <script>
         // ================================================================
         // ДАННЫЕ С ПОДРОБНЫМИ ОПИСАНИЯМИ
@@ -1250,37 +1160,37 @@
             name: 'Лиственница',
             image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
             price: 'от 4 500 ₽/м²',
-            description: 'Морозостойкая сибирская лиственница. Влагостойкая, прочная, экологичная.'
+            description: 'Морозостойкая сибирская лиственница. Влагостойкая, прочная, экологичная. Идеальный выбор для террас в регионах с суровым климатом. С годами становится только прочнее и приобретает благородный оттенок.'
         }, {
             id: 'ash',
             name: 'Ясень',
             image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
             price: 'от 5 900 ₽/м²',
-            description: 'Термообработанный ясень — натуральная древесина, прошедшая специальную обработку.'
+            description: 'Термообработанный ясень — натуральная древесина, прошедшая специальную обработку. Устойчив к влаге и перепадам температур. Сохраняет тёплый цвет и естественную текстуру дерева.'
         }, {
             id: 'kumaru',
             name: 'Кумару',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 8 500 ₽/м²',
-            description: 'Экзотическая порода из Южной Америки. Высокая плотность и твёрдость.'
+            description: 'Экзотическая порода из Южной Америки. Отличается высокой плотностью и твёрдостью. Устойчива к гниению, не боится насекомых и грибка. Премиальный выбор для самых требовательных проектов.'
         }, {
             id: 'ipe',
             name: 'Ипе',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 12 000 ₽/м²',
-            description: 'Бразильский орех — одна из самых твёрдых пород в мире. Срок службы до 50 лет.'
+            description: 'Бразильский орех — одна из самых твёрдых пород в мире. Максимальная устойчивость к гниению и механическим повреждениям. Срок службы до 50 лет. Идеально для террас с высокой нагрузкой.'
         }, {
             id: 'decking',
             name: 'ДПК',
             image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
             price: 'от 3 500 ₽/м²',
-            description: 'Древесно-полимерный композит — современное решение. Не требует покраски.'
+            description: 'Древесно-полимерный композит — современное решение для террас. Не требует покраски и пропитки. Устойчив к влаге, не гниёт и не выцветает. Противоскользящая поверхность для безопасности.'
         }, {
             id: 'montazh',
             name: 'Монтаж',
             image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
             price: 'от 2 000 ₽/м²',
-            description: 'Профессиональный монтаж террасной доски любого типа. Гарантия на все виды работ.'
+            description: 'Профессиональный монтаж террасной доски любого типа. Работаем с деревом и ДПК. Используем качественные крепёжные системы. Гарантия на все виды работ. Соблюдаем технологию укладки.'
         }];
 
         // ================================================================
@@ -1288,42 +1198,42 @@
         // ================================================================
         const details = {
             'larch': {
-                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина.',
+                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
                 pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
                 cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
                 specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая'
             },
             'ash': {
-                desc: 'Термообработанный ясень — натуральная древесина, прошедшая термическую обработку.',
+                desc: 'Термообработанный ясень — натуральная древесина, прошедшая термическую обработку. Становится более устойчивой к влаге и перепадам температур.',
                 pros: '✅ Натуральный вид дерева\n✅ Устойчивость к влаге\n✅ Тёплый цвет\n✅ Экологичный материал',
                 cons: '❌ Дороже обычной древесины\n❌ Требует ухода\n❌ Может выцветать на солнце',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
                 specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая'
             },
             'kumaru': {
-                desc: 'Кумару — экзотическая порода из Южной Америки. Высокая плотность и твёрдость.',
+                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению.',
                 pros: '✅ Экзотический вид\n✅ Высокая плотность\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
                 cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
                 specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая'
             },
             'ipe': {
-                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород.',
+                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми.',
                 pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
                 cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
                 specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
             },
             'decking': {
-                desc: 'Декинг из ДПК сочетает эстетику дерева и практичность пластика.',
+                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт.',
                 pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
                 cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
                 care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
                 specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК\n💧 Водостойкость: Высокая'
             },
             'montazh': {
-                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК.',
+                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества.',
                 pros: '✅ Опытные мастера\n✅ Гарантия на работы\n✅ Используем качественный крепёж\n✅ Соблюдаем технологию',
                 cons: '❌ Требует предварительного заказа\n❌ Зависит от погодных условий',
                 care: '🔧 Используем нержавеющий крепёж\n📏 Соблюдаем зазоры (5-8 мм)\n🌬️ Обеспечиваем вентиляцию\n🛡️ Обработка защитными составами',
