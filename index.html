@@ -994,7 +994,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР (ОТДЕЛЬНОЕ)
+           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР
            ================================================================ */
         .modal-calc-overlay {
             display: none;
@@ -1030,7 +1030,7 @@
             max-height: 92vh;
             overflow-y: auto;
             position: relative;
-            border-top: 4px solid #0055A4;
+            border-top: none;
         }
 
         .modal-calc::-webkit-scrollbar {
@@ -1085,7 +1085,7 @@
             letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
-            margin-bottom: clamp(6px, 0.8vh, 12px);
+            margin-bottom: clamp(4px, 0.5vh, 8px);
         }
 
         .modal-calc .calc-subtitle {
@@ -1697,12 +1697,12 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР (ОТДЕЛЬНОЕ) -->
+    <!-- МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР -->
     <div class="modal-calc-overlay" id="modalCalcOverlay">
         <div class="modal-calc">
             <button class="modal-close" id="modalCalcClose">✕</button>
             
-            <div class="calc-title">🧮 Калькулятор</div>
+            <div class="calc-title">Калькулятор</div>
             <div class="calc-subtitle">Предварительный расчёт стоимости террасной доски</div>
             
             <div class="calc-material" id="calcMaterial">
@@ -1867,6 +1867,12 @@
         }];
 
         // ================================================================
+        // ТОКЕН И ID ДЛЯ TELEGRAM БОТА
+        // ================================================================
+        const BOT_TOKEN = 'YOUR_BOT_TOKEN'; // Замените на ваш токен
+        const CHAT_ID = 'YOUR_CHAT_ID'; // Замените на ваш CHAT_ID
+
+        // ================================================================
         // ИНИЦИАЛИЗАЦИЯ SWIPER
         // ================================================================
         let swiper = null;
@@ -1994,6 +2000,35 @@
         }
 
         // ================================================================
+        // ОТПРАВКА В TELEGRAM
+        // ================================================================
+        function sendToTelegram(name, phone, messenger, material, area, total) {
+            const message = 
+                `📋 *НОВЫЙ ЗАПРОС НА РАСЧЁТ*\n\n` +
+                `👤 *Имя:* ${name}\n` +
+                `📞 *Телефон:* ${phone}\n` +
+                `💬 *Мессенджер:* ${messenger}\n` +
+                `📦 *Материал:* ${material}\n` +
+                `📐 *Чистая площадь:* ${area} м²\n` +
+                `💰 *С учётом подрезки (10%):* ${Math.ceil(area * 1.1)} м²\n` +
+                `💵 *Примерная стоимость:* ${total}`;
+            
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            
+            return fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: message,
+                    parse_mode: 'Markdown'
+                })
+            });
+        }
+
+        // ================================================================
         // МОДАЛЬНОЕ ОКНО — ОСНОВНОЕ
         // ================================================================
         function openModal(id) {
@@ -2116,7 +2151,7 @@
             // Кнопка "Купить"
             document.getElementById('btnBuy').addEventListener('click', () => {
                 const name = document.getElementById('modalName').textContent;
-                alert(`✅ Заявка на покупку "${name}" отправлена!\nСкоро с вами свяжется менеджер.`);
+                alert(`Заявка на покупку "${name}" отправлена!\nСкоро с вами свяжется менеджер.`);
                 closeModal();
             });
             
@@ -2144,34 +2179,55 @@
             document.getElementById('calcSend').addEventListener('click', () => {
                 const areaInput = document.getElementById('calcArea');
                 const area = parseFloat(areaInput.value);
-                const name = document.getElementById('calcMaterialName').textContent;
+                const material = document.getElementById('calcMaterialName').textContent;
                 const total = document.getElementById('calcTotal').textContent;
                 const withTrim = document.getElementById('calcWithTrim').textContent;
                 
                 if (!area || area <= 0) {
-                    alert('⚠️ Пожалуйста, введите площадь террасы в м²');
+                    alert('Пожалуйста, введите площадь террасы в м²');
                     areaInput.focus();
                     return;
                 }
                 
                 // Запрашиваем контакты
-                const phone = prompt('📞 Оставьте ваш номер телефона для связи:', '+7');
-                const nameContact = prompt('👤 Ваше имя:');
-                
-                if (phone && nameContact) {
-                    alert(
-                        `✅ Спасибо, ${nameContact}!\n\n` +
-                        `📊 Предварительный расчёт для "${name}":\n` +
-                        `📐 Чистая площадь: ${area} м²\n` +
-                        `📦 С учётом подрезки (10%): ${withTrim}\n` +
-                        `💰 Примерная стоимость: ${total}\n\n` +
-                        `🔄 Мы уточним сроки поставки и сообщим их Вам!\n` +
-                        `📞 Свяжемся с вами по номеру: ${phone}`
-                    );
-                    closeCalcModal();
-                } else {
-                    alert('❌ Для расчёта необходимо указать контактные данные.');
+                const nameContact = prompt('Ваше имя:');
+                if (!nameContact) {
+                    alert('Для расчёта необходимо указать имя.');
+                    return;
                 }
+                
+                const phone = prompt('Ваш номер телефона для связи:');
+                if (!phone) {
+                    alert('Для расчёта необходимо указать номер телефона.');
+                    return;
+                }
+                
+                // Выбор мессенджера
+                const messengerChoice = confirm('Выберите способ связи:\n\n• Нажмите "ОК" — Telegram\n• Нажмите "Отмена" — WhatsApp\n\nИли позвоните по номеру +7 (343) 328-27-72');
+                const messenger = messengerChoice ? 'Telegram' : 'WhatsApp';
+                
+                // Показываем сообщение о отправке
+                alert(`Спасибо, ${nameContact}!\n\nВаш расчёт отправлен менеджеру.\nМы свяжемся с вами в ${messenger} или по телефону.\n\nСпасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`);
+                
+                // Отправляем в Telegram
+                sendToTelegram(
+                    nameContact,
+                    phone,
+                    messenger,
+                    material,
+                    area,
+                    total
+                ).then(response => {
+                    if (response.ok) {
+                        console.log('Сообщение отправлено в Telegram');
+                    } else {
+                        console.error('Ошибка отправки в Telegram');
+                    }
+                }).catch(error => {
+                    console.error('Ошибка:', error);
+                });
+                
+                closeCalcModal();
             });
         });
     </script>
