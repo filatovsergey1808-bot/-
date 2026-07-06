@@ -1273,6 +1273,227 @@
         }
 
         /* ================================================================
+           МОДАЛЬНОЕ ОКНО — ПОКУПКА
+           ================================================================ */
+        .modal-buy-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 85, 164, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(16px, 3vh, 40px);
+            animation: overlayFade 0.3s ease;
+        }
+
+        .modal-buy-overlay.active {
+            display: flex;
+        }
+
+        .modal-buy {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: clamp(16px, 2.5vh, 28px);
+            max-width: clamp(340px, 45vw, 560px);
+            width: 100%;
+            padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
+            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
+            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-height: 92vh;
+            overflow-y: auto;
+            position: relative;
+            border-top: none;
+        }
+
+        .modal-buy::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal-buy::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 4px;
+        }
+
+        .modal-buy::-webkit-scrollbar-thumb {
+            background: rgba(0, 85, 164, 0.3);
+            border-radius: 4px;
+        }
+
+        .modal-buy::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 85, 164, 0.5);
+        }
+
+        .modal-buy .modal-close {
+            position: absolute;
+            top: clamp(12px, 1.5vh, 20px);
+            right: clamp(12px, 1.5vw, 20px);
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 50%;
+            width: clamp(36px, 4vh, 44px);
+            height: clamp(36px, 4vh, 44px);
+            font-size: clamp(18px, 2.2vh, 24px);
+            color: #4A4A5A;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-buy .modal-close:hover {
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+            transform: rotate(90deg);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
+        }
+
+        .modal-buy .buy-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: clamp(22px, 3.2vh, 34px);
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #1A1A2E;
+            text-transform: uppercase;
+            margin-bottom: clamp(4px, 0.5vh, 8px);
+        }
+
+        .modal-buy .buy-subtitle {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.5vh, 18px);
+            color: #4A4A5A;
+            font-weight: 300;
+            margin-bottom: clamp(20px, 2.5vh, 32px);
+            letter-spacing: 0.3px;
+        }
+
+        .modal-buy .buy-material {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #8A8A9A;
+            font-weight: 300;
+            margin-bottom: clamp(16px, 2vh, 24px);
+            padding: clamp(10px, 1vh, 16px);
+            background: rgba(0, 85, 164, 0.04);
+            border-radius: clamp(8px, 0.8vh, 12px);
+            border: 1px solid rgba(0, 85, 164, 0.06);
+        }
+
+        .modal-buy .buy-material strong {
+            color: #1A1A2E;
+            font-weight: 500;
+        }
+
+        .modal-buy .buy-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.2vw, 16px);
+            margin-bottom: clamp(12px, 1.2vh, 18px);
+        }
+
+        .modal-buy .buy-row label {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.4vh, 17px);
+            color: #1A1A2E;
+            font-weight: 400;
+            min-width: clamp(100px, 9vw, 140px);
+        }
+
+        .modal-buy .buy-row input {
+            flex: 1;
+            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: clamp(8px, 0.8vh, 10px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(16px, 1.6vh, 20px);
+            color: #1A1A2E;
+            background: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .modal-buy .buy-row input:focus {
+            outline: none;
+            border-color: #0055A4;
+            box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+        }
+
+        .modal-buy .buy-row input::placeholder {
+            color: #B0B8C0;
+        }
+
+        .modal-buy .buy-row .buy-unit {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.4vh, 17px);
+            color: #8A8A9A;
+            font-weight: 300;
+            white-space: nowrap;
+        }
+
+        .modal-buy .buy-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(10px, 1.2vw, 16px);
+            margin-top: clamp(4px, 0.5vh, 8px);
+        }
+
+        .modal-buy .buy-actions .btn {
+            padding: clamp(14px, 1.6vh, 20px);
+            border: none;
+            border-radius: clamp(10px, 1vh, 14px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.5vh, 18px);
+            font-weight: 400;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .modal-buy .buy-actions .btn-primary {
+            background: #0055A4;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.25);
+        }
+
+        .modal-buy .buy-actions .btn-primary:hover {
+            background: #003D7A;
+            box-shadow: 0 8px 30px rgba(0, 85, 164, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .modal-buy .buy-actions .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .modal-buy .buy-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #1A1A2E;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .modal-buy .buy-actions .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .modal-buy .buy-actions .btn-secondary:active {
+            transform: scale(0.98);
+        }
+
+        /* ================================================================
            МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
            ================================================================ */
         .modal-messenger-overlay {
@@ -1566,6 +1787,18 @@
                 align-items: flex-start;
             }
 
+            .modal-buy .buy-row {
+                flex-wrap: wrap;
+            }
+
+            .modal-buy .buy-row label {
+                min-width: 100%;
+            }
+
+            .modal-buy .buy-actions {
+                grid-template-columns: 1fr;
+            }
+
             .modal-messenger .messenger-buttons {
                 grid-template-columns: 1fr 1fr;
             }
@@ -1681,6 +1914,12 @@
             }
 
             .modal-calc {
+                padding: 22px 16px 24px;
+                max-width: 98%;
+                border-radius: 14px;
+            }
+
+            .modal-buy {
                 padding: 22px 16px 24px;
                 max-width: 98%;
                 border-radius: 14px;
@@ -1926,6 +2165,33 @@
             <div class="calc-actions">
                 <button class="btn btn-primary" id="calcSend">Отправить расчёт</button>
                 <button class="btn btn-secondary" id="calcClear">Очистить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО — ПОКУПКА -->
+    <div class="modal-buy-overlay" id="modalBuyOverlay">
+        <div class="modal-buy">
+            <button class="modal-close" id="modalBuyClose">✕</button>
+            
+            <div class="buy-title">Оформление заказа</div>
+            <div class="buy-subtitle">Заполните данные для покупки террасной доски</div>
+            
+            <div class="buy-material" id="buyMaterial">
+                <strong>Материал:</strong> <span id="buyMaterialName">Лиственница</span>
+                &nbsp;·&nbsp;
+                <span id="buyMaterialPrice">4 500 ₽/м²</span>
+            </div>
+            
+            <div class="buy-row">
+                <label for="buyQuantity">Количество:</label>
+                <input type="number" id="buyQuantity" placeholder="Введите количество м²" step="0.1" min="0">
+                <span class="buy-unit">м²</span>
+            </div>
+            
+            <div class="buy-actions">
+                <button class="btn btn-primary" id="buySend">Отправить заявку</button>
+                <button class="btn btn-secondary" id="buyClear">Очистить</button>
             </div>
         </div>
     </div>
@@ -2222,16 +2488,29 @@
         // ================================================================
         // ОТПРАВКА В TELEGRAM
         // ================================================================
-        function sendToTelegram(name, phone, messenger, material, area, total, withTrim) {
-            const message = 
-                `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
-                `👤 Имя: ${name}\n` +
-                `📞 Телефон: ${phone}\n` +
-                `💬 Мессенджер: ${messenger}\n` +
-                `📦 Материал: ${material}\n` +
-                `📐 Чистая площадь: ${area} м²\n` +
-                `💰 С учётом подрезки (10%): ${withTrim}\n` +
-                `💵 Примерная стоимость: ${total}`;
+        function sendToTelegram(name, phone, messenger, material, quantity, type) {
+            let message = '';
+            
+            if (type === 'buy') {
+                message = 
+                    `📋 НОВАЯ ЗАЯВКА НА ПОКУПКУ\n\n` +
+                    `👤 Имя: ${name}\n` +
+                    `📞 Телефон: ${phone}\n` +
+                    `💬 Мессенджер: ${messenger}\n` +
+                    `📦 Материал: ${material}\n` +
+                    `📐 Количество: ${quantity} м²\n` +
+                    `💰 Стоимость: уточняется менеджером`;
+            } else {
+                message = 
+                    `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
+                    `👤 Имя: ${name}\n` +
+                    `📞 Телефон: ${phone}\n` +
+                    `💬 Мессенджер: ${messenger}\n` +
+                    `📦 Материал: ${material}\n` +
+                    `📐 Чистая площадь: ${currentArea} м²\n` +
+                    `💰 С учётом подрезки (10%): ${currentWithTrim}\n` +
+                    `💵 Примерная стоимость: ${currentTotal}`;
+            }
             
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             
@@ -2255,7 +2534,7 @@
             const data = categories.find(c => c.id === id);
             if (!data) return;
 
-            // Сохраняем данные для калькулятора
+            // Сохраняем данные для калькулятора и покупки
             currentPriceValue = data.priceValue;
             currentName = data.name;
             currentPrice = data.price;
@@ -2346,11 +2625,41 @@
         }
 
         // ================================================================
+        // МОДАЛЬНОЕ ОКНО — ПОКУПКА
+        // ================================================================
+        let buyData = {};
+
+        function openBuyModal() {
+            // Передаём данные в форму покупки
+            document.getElementById('buyMaterialName').textContent = currentName;
+            document.getElementById('buyMaterialPrice').textContent = currentPrice;
+            
+            // Сбрасываем поля
+            document.getElementById('buyQuantity').value = '';
+            
+            document.getElementById('modalBuyOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Фокусируемся на поле ввода
+            setTimeout(() => {
+                document.getElementById('buyQuantity').focus();
+            }, 300);
+        }
+
+        function closeBuyModal() {
+            document.getElementById('modalBuyOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ================================================================
         // МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
         // ================================================================
         let messengerData = {};
+        let messengerType = '';
 
-        function openMessengerModal() {
+        function openMessengerModal(data, type) {
+            messengerData = data;
+            messengerType = type;
             document.getElementById('modalMessengerOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2378,6 +2687,12 @@
                 if (e.target === e.currentTarget) closeCalcModal();
             };
 
+            // Закрытие покупки
+            document.getElementById('modalBuyClose').onclick = closeBuyModal;
+            document.getElementById('modalBuyOverlay').onclick = (e) => {
+                if (e.target === e.currentTarget) closeBuyModal();
+            };
+
             // Закрытие модального окна выбора мессенджера
             document.getElementById('modalMessengerClose').onclick = closeMessengerModal;
             document.getElementById('modalMessengerOverlay').onclick = (e) => {
@@ -2389,15 +2704,17 @@
                 if (e.key === 'Escape') {
                     closeModal();
                     closeCalcModal();
+                    closeBuyModal();
                     closeMessengerModal();
                 }
             });
             
-            // Кнопка "Купить"
+            // Кнопка "Купить" — открывает форму покупки
             document.getElementById('btnBuy').addEventListener('click', () => {
-                const name = document.getElementById('modalName').textContent;
-                alert(`Заявка на покупку "${name}" отправлена!\nСкоро с вами свяжется менеджер.`);
                 closeModal();
+                setTimeout(() => {
+                    openBuyModal();
+                }, 400);
             });
             
             // Кнопка "Рассчитать" — открывает калькулятор
@@ -2407,6 +2724,10 @@
                     openCalcModal();
                 }, 400);
             });
+            
+            // ================================================================
+            // КАЛЬКУЛЯТОР
+            // ================================================================
             
             // Событие изменения в поле ввода площади
             document.getElementById('calcArea').addEventListener('input', updateCalculator);
@@ -2438,19 +2759,57 @@
                 updateCalculator();
                 
                 // Сохраняем данные для отправки
-                messengerData = {
+                const data = {
+                    material: document.getElementById('calcMaterialName').textContent,
                     area: currentArea,
-                    total: currentTotal,
                     withTrim: currentWithTrim,
-                    material: document.getElementById('calcMaterialName').textContent
+                    total: currentTotal
                 };
                 
                 // Открываем окно выбора мессенджера
                 closeCalcModal();
                 setTimeout(() => {
-                    openMessengerModal();
+                    openMessengerModal(data, 'calc');
                 }, 400);
             });
+            
+            // ================================================================
+            // ПОКУПКА
+            // ================================================================
+            
+            // Кнопка "Очистить"
+            document.getElementById('buyClear').addEventListener('click', () => {
+                document.getElementById('buyQuantity').value = '';
+                document.getElementById('buyQuantity').focus();
+            });
+            
+            // Кнопка "Отправить заявку" — открывает выбор мессенджера
+            document.getElementById('buySend').addEventListener('click', () => {
+                const quantityInput = document.getElementById('buyQuantity');
+                const quantity = parseFloat(quantityInput.value);
+                
+                if (!quantity || quantity <= 0) {
+                    alert('Пожалуйста, введите количество материала в м²');
+                    quantityInput.focus();
+                    return;
+                }
+                
+                // Сохраняем данные для отправки
+                const data = {
+                    material: document.getElementById('buyMaterialName').textContent,
+                    quantity: quantity
+                };
+                
+                // Открываем окно выбора мессенджера
+                closeBuyModal();
+                setTimeout(() => {
+                    openMessengerModal(data, 'buy');
+                }, 400);
+            });
+            
+            // ================================================================
+            // ВЫБОР МЕССЕНДЖЕРА
+            // ================================================================
             
             // Обработчики кнопок выбора мессенджера
             document.querySelectorAll('.btn-messenger').forEach(btn => {
@@ -2460,37 +2819,56 @@
                     // Запрашиваем контакты
                     const nameContact = prompt('Ваше имя:');
                     if (!nameContact) {
-                        alert('Для расчёта необходимо указать имя.');
+                        alert('Для отправки необходимо указать имя.');
                         return;
                     }
                     
                     const phone = prompt('Ваш номер телефона для связи:');
                     if (!phone) {
-                        alert('Для расчёта необходимо указать номер телефона.');
+                        alert('Для отправки необходимо указать номер телефона.');
                         return;
                     }
                     
-                    // Показываем сообщение о отправке
-                    alert(`Спасибо, ${nameContact}!\n\nВаш расчёт отправлен менеджеру.\nМы свяжемся с вами в ${messenger}.\n\nСпасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`);
+                    // Формируем сообщение в зависимости от типа
+                    let successMessage = '';
+                    if (messengerType === 'buy') {
+                        successMessage = 
+                            `Спасибо, ${nameContact}!\n\n` +
+                            `Ваша заявка на покупку отправлена менеджеру.\n` +
+                            `Мы свяжемся с вами в ${messenger} для подтверждения заказа.\n\n` +
+                            `Спасибо, что выбрали PRINCIP FLOOR!`;
+                    } else {
+                        successMessage = 
+                            `Спасибо, ${nameContact}!\n\n` +
+                            `Ваш расчёт отправлен менеджеру.\n` +
+                            `Мы свяжемся с вами в ${messenger}.\n\n` +
+                            `Спасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`;
+                    }
+                    
+                    alert(successMessage);
                     
                     // Отправляем в Telegram
-                    sendToTelegram(
-                        nameContact,
-                        phone,
-                        messenger,
-                        messengerData.material,
-                        messengerData.area,
-                        messengerData.total,
-                        messengerData.withTrim
-                    ).then(response => {
-                        if (response.ok) {
-                            console.log('Сообщение отправлено в Telegram');
-                        } else {
-                            console.error('Ошибка отправки в Telegram');
-                        }
-                    }).catch(error => {
-                        console.error('Ошибка:', error);
-                    });
+                    let quantity = '';
+                    if (messengerType === 'buy') {
+                        quantity = messengerData.quantity + ' м²';
+                        sendToTelegram(
+                            nameContact,
+                            phone,
+                            messenger,
+                            messengerData.material,
+                            quantity,
+                            'buy'
+                        );
+                    } else {
+                        sendToTelegram(
+                            nameContact,
+                            phone,
+                            messenger,
+                            messengerData.material,
+                            messengerData.area + ' м² (с подрезкой: ' + messengerData.withTrim + ')',
+                            'calc'
+                        );
+                    }
                     
                     closeMessengerModal();
                 });
