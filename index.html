@@ -13,7 +13,7 @@
     
     <!-- Подключаем элегантные шрифты -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* ================================================================
@@ -567,7 +567,7 @@
             grid-row: 1 / 2;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start; /* Выравнивание по верхнему краю */
+            justify-content: flex-start;
             align-items: center;
             width: 100%;
             height: 100%;
@@ -589,7 +589,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             flex-shrink: 0;
-            margin-top: 0; /* Убираем лишние отступы */
+            margin-top: 0;
         }
 
         .card .info .price {
@@ -744,7 +744,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО
+           МОДАЛЬНОЕ ОКНО — НОВЫЙ ДИЗАЙН
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -753,126 +753,247 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 85, 164, 0.12);
-            backdrop-filter: blur(12px);
+            background: rgba(0, 85, 164, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: clamp(16px, 3vh, 40px);
+            animation: overlayFade 0.3s ease;
         }
 
         .modal-overlay.active {
             display: flex;
         }
 
+        @keyframes overlayFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .modal {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.97);
             backdrop-filter: blur(20px);
-            border-radius: 16px;
-            max-width: clamp(340px, 45vw, 560px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: clamp(16px, 2.5vh, 28px);
+            max-width: clamp(340px, 50vw, 620px);
             width: 100%;
-            padding: clamp(20px, 3vh, 36px) clamp(16px, 2vw, 32px);
-            box-shadow: 0 20px 80px rgba(0, 85, 164, 0.15);
-            animation: modalFadeIn 0.4s ease;
-            max-height: 90vh;
+            padding: clamp(24px, 4vh, 44px) clamp(20px, 3vw, 40px);
+            box-shadow: 0 30px 120px rgba(0, 85, 164, 0.2);
+            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            max-height: 92vh;
             overflow-y: auto;
             border-top: 4px solid #0055A4;
+            position: relative;
         }
 
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: translateY(30px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        /* Стилизация скролла */
+        .modal::-webkit-scrollbar {
+            width: 4px;
         }
 
+        .modal::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 4px;
+        }
+
+        .modal::-webkit-scrollbar-thumb {
+            background: rgba(0, 85, 164, 0.3);
+            border-radius: 4px;
+        }
+
+        .modal::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 85, 164, 0.5);
+        }
+
+        @keyframes modalSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.96);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Кнопка закрытия */
         .modal .modal-close {
-            float: right;
-            background: none;
-            border: none;
-            font-size: clamp(20px, 2.5vh, 28px);
-            color: #8A8A9A;
+            position: absolute;
+            top: clamp(12px, 1.5vh, 20px);
+            right: clamp(12px, 1.5vw, 20px);
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 50%;
+            width: clamp(36px, 4vh, 44px);
+            height: clamp(36px, 4vh, 44px);
+            font-size: clamp(18px, 2.2vh, 24px);
+            color: #4A4A5A;
             cursor: pointer;
-            transition: color 0.3s ease;
-            padding: 0 4px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
         }
 
         .modal .modal-close:hover {
-            color: #1A1A2E;
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+            transform: rotate(90deg);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
-        .modal h2 {
+        /* Заголовок модального окна */
+        .modal .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: clamp(12px, 1.8vh, 20px);
+            padding-right: clamp(36px, 4vw, 52px);
+        }
+
+        .modal .modal-header h2 {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(18px, 2.5vh, 26px);
+            font-size: clamp(22px, 3.5vh, 36px);
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
-            margin-top: 4px;
-            margin-bottom: 6px;
+            line-height: 1.1;
         }
 
-        .modal .modal-price {
+        .modal .modal-header .modal-price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 2vh, 22px);
-            color: #1A1A2E;
-            font-weight: 100;
-            margin-bottom: 12px;
+            font-size: clamp(18px, 2.5vh, 28px);
+            color: #0055A4;
+            font-weight: 300;
+            letter-spacing: 1px;
+            white-space: nowrap;
+            margin-top: 4px;
         }
 
+        /* Описание */
         .modal .modal-desc {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.5vh, 17px);
+            font-size: clamp(14px, 1.6vh, 18px);
             color: #4A4A5A;
-            font-weight: 200;
-            line-height: 1.7;
-            margin-bottom: 16px;
-        }
-
-        .modal .modal-section {
-            padding: clamp(8px, 1vh, 14px) 0;
-            border-top: 1px solid rgba(0, 85, 164, 0.04);
-        }
-
-        .modal .modal-section h4 {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(11px, 1.2vh, 14px);
-            letter-spacing: 1px;
-            color: #8A8A9A;
-            text-transform: uppercase;
-            margin-bottom: 4px;
             font-weight: 300;
+            line-height: 1.7;
+            margin-bottom: clamp(16px, 2vh, 24px);
+            padding-bottom: clamp(12px, 1.5vh, 20px);
+            border-bottom: 1px solid rgba(0, 85, 164, 0.06);
         }
 
-        .modal .modal-section p {
+        /* Характеристики — сетка */
+        .modal .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(6px, 0.8vh, 12px) clamp(12px, 1.5vw, 24px);
+            margin-bottom: clamp(16px, 2vh, 24px);
+        }
+
+        .modal .spec-item {
+            display: flex;
+            flex-direction: column;
+            padding: clamp(6px, 0.6vh, 10px) 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .modal .spec-item .spec-label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.4vh, 16px);
-            color: #4A4A5A;
-            font-weight: 200;
-            line-height: 1.6;
-            white-space: pre-line;
+            font-size: clamp(10px, 1vh, 13px);
+            color: #8A8A9A;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
         }
 
-        .modal .btn-close-modal {
-            width: 100%;
-            padding: clamp(12px, 1.5vh, 16px);
-            margin-top: 16px;
-            background: #0055A4;
-            color: #FFFFFF;
+        .modal .spec-item .spec-value {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.4vh, 17px);
+            color: #1A1A2E;
+            font-weight: 400;
+            letter-spacing: 0.3px;
+        }
+
+        /* Блок с дополнительной информацией */
+        .modal .modal-extra {
+            background: rgba(0, 85, 164, 0.03);
+            border-radius: clamp(10px, 1vh, 14px);
+            padding: clamp(12px, 1.2vh, 18px) clamp(14px, 1.5vw, 22px);
+            margin-bottom: clamp(16px, 2vh, 24px);
+            border: 1px solid rgba(0, 85, 164, 0.06);
+        }
+
+        .modal .modal-extra p {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #4A4A5A;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .modal .modal-extra strong {
+            color: #1A1A2E;
+            font-weight: 400;
+        }
+
+        /* Кнопки действий */
+        .modal .modal-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(10px, 1.2vw, 16px);
+            margin-top: clamp(4px, 0.5vh, 8px);
+        }
+
+        .modal .modal-actions .btn {
+            padding: clamp(12px, 1.5vh, 18px);
             border: none;
             border-radius: clamp(10px, 1vh, 14px);
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.4vh, 16px);
-            font-weight: 300;
-            letter-spacing: 2px;
+            font-size: clamp(13px, 1.4vh, 17px);
+            font-weight: 400;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.2);
+            text-align: center;
         }
 
-        .modal .btn-close-modal:hover {
+        .modal .modal-actions .btn-primary {
+            background: #0055A4;
+            color: #ffffff;
+            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.25);
+        }
+
+        .modal .modal-actions .btn-primary:hover {
             background: #003D7A;
-            box-shadow: 0 8px 30px rgba(0, 85, 164, 0.3);
+            box-shadow: 0 8px 30px rgba(0, 85, 164, 0.35);
             transform: translateY(-2px);
+        }
+
+        .modal .modal-actions .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        .modal .modal-actions .btn-secondary {
+            background: rgba(0, 0, 0, 0.04);
+            color: #1A1A2E;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .modal .modal-actions .btn-secondary:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .modal .modal-actions .btn-secondary:active {
+            transform: scale(0.98);
         }
 
         /* ================================================================
@@ -960,6 +1081,25 @@
             .geo-shape:nth-child(2),
             .geo-shape:nth-child(5) {
                 display: none;
+            }
+
+            /* Модальное окно на мобильных */
+            .modal .specs-grid {
+                grid-template-columns: 1fr;
+                gap: 4px;
+            }
+
+            .modal .modal-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .modal .modal-header {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .modal .modal-header .modal-price {
+                margin-top: 0;
             }
         }
 
@@ -1067,8 +1207,9 @@
             }
 
             .modal {
-                padding: 18px 14px 18px;
-                max-width: 95%;
+                padding: 18px 14px 20px;
+                max-width: 98%;
+                border-radius: 14px;
             }
         }
 
@@ -1233,27 +1374,32 @@
     <!-- МОДАЛЬНОЕ ОКНО -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
-            <button class="modal-close" id="modalClose">&times;</button>
-            <h2 id="modalName"></h2>
-            <div class="modal-price" id="modalPrice"></div>
-            <div class="modal-desc" id="modalDesc"></div>
-            <div class="modal-section">
-                <h4>➕ Плюсы</h4>
-                <p id="modalPros"></p>
+            <button class="modal-close" id="modalClose">✕</button>
+            
+            <div class="modal-header">
+                <h2 id="modalName">Лиственница</h2>
+                <div class="modal-price" id="modalPrice">от 4 500 ₽/м²</div>
             </div>
-            <div class="modal-section">
-                <h4>➖ Минусы</h4>
-                <p id="modalCons"></p>
+            
+            <div class="modal-desc" id="modalDesc">
+                Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом.
             </div>
-            <div class="modal-section">
-                <h4>🧹 Уход</h4>
-                <p id="modalCare"></p>
+            
+            <!-- Сетка характеристик -->
+            <div class="specs-grid" id="specsGrid">
+                <!-- Заполняется через JavaScript -->
             </div>
-            <div class="modal-section">
-                <h4>📋 Характеристики</h4>
-                <p id="modalSpecs"></p>
+            
+            <!-- Дополнительная информация -->
+            <div class="modal-extra" id="modalExtra">
+                <p><strong>Рекомендация:</strong> Для продления срока службы рекомендуется обрабатывать маслом раз в 1-2 года. Идеально для открытых террас, беседок и причалов.</p>
             </div>
-            <button class="btn-close-modal" id="modalCloseBtn">Закрыть</button>
+            
+            <!-- Кнопки действий -->
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="btnBuy">Купить</button>
+                <button class="btn btn-secondary" id="btnCalc">Рассчитать</button>
+            </div>
         </div>
     </div>
 
@@ -1266,86 +1412,116 @@
             name: 'Лиственница',
             image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
             price: 'от 4 500 ₽/м²',
-            description: 'Морозостойкая сибирская лиственница. Влагостойкая, прочная, экологичная. Идеальный выбор для террас в регионах с суровым климатом. С годами становится только прочнее и приобретает благородный оттенок.'
+            description: 'Морозостойкая сибирская лиственница. Влагостойкая, прочная, экологичная. Идеальный выбор для террас в регионах с суровым климатом. С годами становится только прочнее и приобретает благородный оттенок.',
+            specs: {
+                length: '4000 мм',
+                width: '140 мм',
+                height: '28 мм',
+                wearClass: 'Класс 3 (высокая износостойкость)',
+                waterproof: 'Высокая (природная смолистость)',
+                mountType: 'Скрытый крепёж / Открытый монтаж',
+                country: 'Россия (Сибирь)',
+                chamfer: 'Скруглённая фаска (2 мм)',
+                density: '650-700 кг/м³',
+                warranty: 'Гарантия 10 лет'
+            },
+            extra: 'Рекомендуется ежегодная обработка маслом для сохранения цвета и защиты от влаги. Отлично подходит для северных регионов.'
         }, {
             id: 'ash',
             name: 'Ясень',
             image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
             price: 'от 5 900 ₽/м²',
-            description: 'Термообработанный ясень — натуральная древесина, прошедшая специальную обработку. Устойчив к влаге и перепадам температур. Сохраняет тёплый цвет и естественную текстуру дерева.'
+            description: 'Термообработанный ясень — натуральная древесина, прошедшая специальную обработку. Устойчив к влаге и перепадам температур. Сохраняет тёплый цвет и естественную текстуру дерева.',
+            specs: {
+                length: '3000 мм',
+                width: '145 мм',
+                height: '28 мм',
+                wearClass: 'Класс 3 (высокая износостойкость)',
+                waterproof: 'Высокая (термообработка)',
+                mountType: 'Скрытый крепёж',
+                country: 'Европа / Россия',
+                chamfer: 'Прямоугольная фаска (1.5 мм)',
+                density: '680-730 кг/м³',
+                warranty: 'Гарантия 12 лет'
+            },
+            extra: 'Термообработка придаёт древесине стабильность и защиту от влаги. Рекомендуется для террас с интенсивной нагрузкой.'
         }, {
             id: 'kumaru',
             name: 'Кумару',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 8 500 ₽/м²',
-            description: 'Экзотическая порода из Южной Америки. Отличается высокой плотностью и твёрдостью. Устойчива к гниению, не боится насекомых и грибка. Премиальный выбор для самых требовательных проектов.'
+            description: 'Экзотическая порода из Южной Америки. Отличается высокой плотностью и твёрдостью. Устойчива к гниению, не боится насекомых и грибка. Премиальный выбор для самых требовательных проектов.',
+            specs: {
+                length: '3000 мм',
+                width: '140 мм',
+                height: '25 мм',
+                wearClass: 'Класс 4 (максимальная износостойкость)',
+                waterproof: 'Максимальная (естественная)',
+                mountType: 'Скрытый крепёж / Шурупы',
+                country: 'Южная Америка (Бразилия)',
+                chamfer: 'Скруглённая фаска (3 мм)',
+                density: '900-1000 кг/м³',
+                warranty: 'Гарантия 15 лет'
+            },
+            extra: 'Одна из самых твёрдых пород в мире. Идеальна для террас с высокой проходимостью и коммерческих объектов. Требует сверления отверстий под крепёж.'
         }, {
             id: 'ipe',
             name: 'Ипе',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 12 000 ₽/м²',
-            description: 'Бразильский орех — одна из самых твёрдых пород в мире. Максимальная устойчивость к гниению и механическим повреждениям. Срок службы до 50 лет. Идеально для террас с высокой нагрузкой.'
+            description: 'Бразильский орех — одна из самых твёрдых пород в мире. Максимальная устойчивость к гниению и механическим повреждениям. Срок службы до 50 лет. Идеально для террас с высокой нагрузкой.',
+            specs: {
+                length: '3000 мм',
+                width: '145 мм',
+                height: '25 мм',
+                wearClass: 'Класс 4 (максимальная износостойкость)',
+                waterproof: 'Максимальная (естественная)',
+                mountType: 'Скрытый крепёж / Шурупы',
+                country: 'Южная Америка (Бразилия)',
+                chamfer: 'Прямоугольная фаска (2 мм)',
+                density: '1050-1100 кг/м³',
+                warranty: 'Гарантия 20 лет'
+            },
+            extra: 'Премиальная порода с потрясающей прочностью и долговечностью. Не требует обработки. Идеальна для бассейнов, причалов и террас с высокой нагрузкой.'
         }, {
             id: 'decking',
             name: 'ДПК',
             image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
             price: 'от 3 500 ₽/м²',
-            description: 'Древесно-полимерный композит — современное решение для террас. Не требует покраски и пропитки. Устойчив к влаге, не гниёт и не выцветает. Противоскользящая поверхность для безопасности.'
+            description: 'Древесно-полимерный композит — современное решение для террас. Не требует покраски и пропитки. Устойчив к влаге, не гниёт и не выцветает. Противоскользящая поверхность для безопасности.',
+            specs: {
+                length: '3000 мм',
+                width: '150 мм',
+                height: '25 мм',
+                wearClass: 'Класс 3 (высокая износостойкость)',
+                waterproof: 'Максимальная (не впитывает влагу)',
+                mountType: 'Скрытый крепёж / Клипсы',
+                country: 'Россия / Китай',
+                chamfer: 'Скруглённая фаска (2 мм)',
+                density: '1200-1400 кг/м³',
+                warranty: 'Гарантия 15 лет'
+            },
+            extra: 'Идеальное решение для тех, кто ценит практичность и не хочет тратить время на уход. Доступен в различных цветах и текстурах. Противоскользящая поверхность.'
         }, {
             id: 'montazh',
             name: 'Монтаж',
             image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
             price: 'от 2 000 ₽/м²',
-            description: 'Профессиональный монтаж террасной доски любого типа. Работаем с деревом и ДПК. Используем качественные крепёжные системы. Гарантия на все виды работ. Соблюдаем технологию укладки.'
+            description: 'Профессиональный монтаж террасной доски любого типа. Работаем с деревом и ДПК. Используем качественные крепёжные системы. Гарантия на все виды работ. Соблюдаем технологию укладки.',
+            specs: {
+                length: '—',
+                width: '—',
+                height: '—',
+                wearClass: '—',
+                waterproof: '—',
+                mountType: 'Профессиональный монтаж',
+                country: 'Россия',
+                chamfer: '—',
+                density: '—',
+                warranty: 'Гарантия на работы 2 года'
+            },
+            extra: 'Работаем с любыми типами террасной доски: лиственница, ясень, экзотические породы, ДПК. Используем только качественные крепёжные материалы. Соблюдаем все технологические зазоры и правила монтажа.'
         }];
-
-        // ================================================================
-        // ДЕТАЛЬНЫЕ ДАННЫЕ ДЛЯ МОДАЛЬНОГО ОКНА
-        // ================================================================
-        const details = {
-            'larch': {
-                desc: 'Сибирская лиственница — морозостойкая и влагостойкая древесина. Идеально подходит для террас в регионах с холодным климатом. Со временем становится только прочнее.',
-                pros: '✅ Морозостойкость\n✅ Влагостойкость\n✅ Доступная цена\n✅ Экологичный материал',
-                cons: '❌ Требует ухода (масло/лак)\n❌ Может трескаться\n❌ Со временем темнеет',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в год',
-                specs: '⏳ Срок службы: 20-30 лет\n📊 Класс: Хвойная древесина\n💧 Водостойкость: Высокая'
-            },
-            'ash': {
-                desc: 'Термообработанный ясень — натуральная древесина, прошедшая термическую обработку. Становится более устойчивой к влаге и перепадам температур.',
-                pros: '✅ Натуральный вид дерева\n✅ Устойчивость к влаге\n✅ Тёплый цвет\n✅ Экологичный материал',
-                cons: '❌ Дороже обычной древесины\n❌ Требует ухода\n❌ Может выцветать на солнце',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
-                specs: '⏳ Срок службы: 20-25 лет\n📊 Класс: Термодревесина\n💧 Водостойкость: Высокая'
-            },
-            'kumaru': {
-                desc: 'Кумару — экзотическая порода из Южной Америки. Отличается высокой плотностью, твёрдостью и устойчивостью к гниению.',
-                pros: '✅ Экзотический вид\n✅ Высокая плотность\n✅ Устойчивость к гниению\n✅ Не боится насекомых',
-                cons: '❌ Высокая цена\n❌ Тяжёлый материал\n❌ Требует специального крепежа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2 года',
-                specs: '⏳ Срок службы: 30-40 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Высокая'
-            },
-            'ipe': {
-                desc: 'Ипе (бразильский орех) — одна из самых твёрдых и долговечных экзотических пород. Почти не гниёт и не поражается насекомыми.',
-                pros: '✅ Максимальная твёрдость\n✅ Устойчивость к гниению\n✅ Долговечность (до 50 лет)\n✅ Не боится насекомых',
-                cons: '❌ Очень высокая цена\n❌ Требует специального крепежа\n❌ Тяжёлый материал',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🛡️ Масляная пропитка раз в 2-3 года',
-                specs: '⏳ Срок службы: 40-50 лет\n📊 Класс: Экзотическая древесина\n💧 Водостойкость: Максимальная'
-            },
-            'decking': {
-                desc: 'Декинг из ДПК (древесно-полимерного композита) сочетает эстетику дерева и практичность пластика. Не требует ухода, не гниёт.',
-                pros: '✅ Устойчивость к влаге\n✅ Не требует покраски\n✅ Противоскользящая поверхность\n✅ Долговечность (25-30 лет)',
-                cons: '❌ Высокая цена\n❌ Может нагреваться на солнце\n❌ Требует правильного монтажа',
-                care: '🧹 Регулярно подметать\n💧 Мыть водой из шланга\n🧽 Для пятен — мягкие моющие средства',
-                specs: '⏳ Срок службы: 25-30 лет\n📊 Класс: ДПК\n💧 Водостойкость: Высокая'
-            },
-            'montazh': {
-                desc: 'Профессиональный монтаж террасной доски. Работаем с деревом и ДПК. Гарантия качества.',
-                pros: '✅ Опытные мастера\n✅ Гарантия на работы\n✅ Используем качественный крепёж\n✅ Соблюдаем технологию',
-                cons: '❌ Требует предварительного заказа\n❌ Зависит от погодных условий',
-                care: '🔧 Используем нержавеющий крепёж\n📏 Соблюдаем зазоры (5-8 мм)\n🌬️ Обеспечиваем вентиляцию\n🛡️ Обработка защитными составами',
-                specs: '⏳ Срок службы: от 15 лет\n📊 Рекомендации: Уклон 1-2%\n💧 Защита от влаги'
-            }
-        };
 
         // ================================================================
         // ИНИЦИАЛИЗАЦИЯ SWIPER
@@ -1448,16 +1624,44 @@
         // ================================================================
         function openModal(id) {
             const data = categories.find(c => c.id === id);
-            const detail = details[id];
-            if (!data || !detail) return;
+            if (!data) return;
 
+            // Заполняем заголовок и цену
             document.getElementById('modalName').textContent = data.name;
             document.getElementById('modalPrice').textContent = data.price;
-            document.getElementById('modalDesc').textContent = detail.desc;
-            document.getElementById('modalPros').textContent = detail.pros;
-            document.getElementById('modalCons').textContent = detail.cons;
-            document.getElementById('modalCare').textContent = detail.care;
-            document.getElementById('modalSpecs').textContent = detail.specs;
+            document.getElementById('modalDesc').textContent = data.description;
+            
+            // Заполняем характеристики
+            const specsGrid = document.getElementById('specsGrid');
+            specsGrid.innerHTML = '';
+            
+            const specItems = [
+                { label: 'Длина', value: data.specs.length },
+                { label: 'Ширина', value: data.specs.width },
+                { label: 'Высота', value: data.specs.height },
+                { label: 'Класс износостойкости', value: data.specs.wearClass },
+                { label: 'Водостойкость', value: data.specs.waterproof },
+                { label: 'Тип монтажа', value: data.specs.mountType },
+                { label: 'Страна производства', value: data.specs.country },
+                { label: 'Фаска', value: data.specs.chamfer },
+                { label: 'Плотность', value: data.specs.density },
+                { label: 'Гарантия', value: data.specs.warranty }
+            ];
+            
+            specItems.forEach(item => {
+                if (item.value && item.value !== '—') {
+                    const div = document.createElement('div');
+                    div.className = 'spec-item';
+                    div.innerHTML = `
+                        <span class="spec-label">${item.label}</span>
+                        <span class="spec-value">${item.value}</span>
+                    `;
+                    specsGrid.appendChild(div);
+                }
+            });
+            
+            // Заполняем дополнительную информацию
+            document.getElementById('modalExtra').innerHTML = `<p><strong>Рекомендация:</strong> ${data.extra}</p>`;
 
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1483,13 +1687,26 @@
             initSwiper();
 
             document.getElementById('modalClose').onclick = closeModal;
-            document.getElementById('modalCloseBtn').onclick = closeModal;
             document.getElementById('modalOverlay').onclick = (e) => {
                 if (e.target === e.currentTarget) closeModal();
             };
 
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') closeModal();
+            });
+            
+            // Обработчики для кнопок в модальном окне
+            document.getElementById('btnBuy').addEventListener('click', () => {
+                const name = document.getElementById('modalName').textContent;
+                alert(`✅ Заявка на покупку "${name}" отправлена!\nСкоро с вами свяжется менеджер.`);
+                closeModal();
+            });
+            
+            document.getElementById('btnCalc').addEventListener('click', () => {
+                const name = document.getElementById('modalName').textContent;
+                alert(`📐 Открывается калькулятор для "${name}"\nВведите площадь террасы для расчёта.`);
+                // Здесь можно открыть отдельное окно с калькулятором
+                closeModal();
             });
         });
     </script>
