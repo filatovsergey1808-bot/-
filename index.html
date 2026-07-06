@@ -1273,6 +1273,182 @@
         }
 
         /* ================================================================
+           МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
+           ================================================================ */
+        .modal-messenger-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 85, 164, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(16px, 3vh, 40px);
+            animation: overlayFade 0.3s ease;
+        }
+
+        .modal-messenger-overlay.active {
+            display: flex;
+        }
+
+        .modal-messenger {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: clamp(16px, 2.5vh, 28px);
+            max-width: clamp(340px, 45vw, 500px);
+            width: 100%;
+            padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
+            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
+            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            border-top: none;
+        }
+
+        .modal-messenger .modal-close {
+            position: absolute;
+            top: clamp(12px, 1.5vh, 20px);
+            right: clamp(12px, 1.5vw, 20px);
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 50%;
+            width: clamp(36px, 4vh, 44px);
+            height: clamp(36px, 4vh, 44px);
+            font-size: clamp(18px, 2.2vh, 24px);
+            color: #4A4A5A;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-messenger .modal-close:hover {
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+            transform: rotate(90deg);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
+        }
+
+        .modal-messenger .messenger-title {
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            font-size: clamp(20px, 3vh, 30px);
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: #1A1A2E;
+            text-transform: uppercase;
+            margin-bottom: clamp(6px, 0.8vh, 12px);
+            text-align: center;
+        }
+
+        .modal-messenger .messenger-subtitle {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.5vh, 18px);
+            color: #4A4A5A;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: clamp(24px, 3vh, 36px);
+            letter-spacing: 0.3px;
+        }
+
+        .modal-messenger .messenger-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(10px, 1.2vw, 16px);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger {
+            padding: clamp(14px, 1.6vh, 20px);
+            border: none;
+            border-radius: clamp(10px, 1vh, 14px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.5vh, 18px);
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.04);
+            color: #1A1A2E;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger:hover {
+            background: rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger:active {
+            transform: scale(0.98);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.telegram {
+            background: #0088cc;
+            color: #ffffff;
+            border-color: #0088cc;
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.telegram:hover {
+            background: #006699;
+            border-color: #006699;
+            box-shadow: 0 4px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.whatsapp {
+            background: #25D366;
+            color: #ffffff;
+            border-color: #25D366;
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.whatsapp:hover {
+            background: #1DA851;
+            border-color: #1DA851;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.max {
+            background: #1A1A2E;
+            color: #ffffff;
+            border-color: #1A1A2E;
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.max:hover {
+            background: #2A2A4E;
+            border-color: #2A2A4E;
+            box-shadow: 0 4px 20px rgba(26, 26, 46, 0.3);
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.call {
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+        }
+
+        .modal-messenger .messenger-buttons .btn-messenger.call:hover {
+            background: #003D7A;
+            border-color: #003D7A;
+            box-shadow: 0 4px 20px rgba(0, 85, 164, 0.3);
+        }
+
+        .modal-messenger .messenger-note {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(12px, 1.2vh, 15px);
+            color: #8A8A9A;
+            font-weight: 300;
+            text-align: center;
+            margin-top: clamp(16px, 2vh, 24px);
+            line-height: 1.5;
+        }
+
+        /* ================================================================
            АДАПТИВНОСТЬ
            ================================================================ */
         @media (max-width: 768px) {
@@ -1389,6 +1565,10 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+
+            .modal-messenger .messenger-buttons {
+                grid-template-columns: 1fr 1fr;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1504,6 +1684,16 @@
                 padding: 22px 16px 24px;
                 max-width: 98%;
                 border-radius: 14px;
+            }
+
+            .modal-messenger {
+                padding: 22px 16px 24px;
+                max-width: 98%;
+                border-radius: 14px;
+            }
+
+            .modal-messenger .messenger-buttons {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1740,6 +1930,25 @@
         </div>
     </div>
 
+    <!-- МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА -->
+    <div class="modal-messenger-overlay" id="modalMessengerOverlay">
+        <div class="modal-messenger">
+            <button class="modal-close" id="modalMessengerClose">✕</button>
+            
+            <div class="messenger-title">Выберите способ связи</div>
+            <div class="messenger-subtitle">В каком мессенджере вам будет удобно получить ответ?</div>
+            
+            <div class="messenger-buttons">
+                <button class="btn-messenger telegram" data-messenger="Telegram">Telegram</button>
+                <button class="btn-messenger whatsapp" data-messenger="WhatsApp">WhatsApp</button>
+                <button class="btn-messenger max" data-messenger="MAX">MAX</button>
+                <button class="btn-messenger call" data-messenger="Позвонить">Позвонить</button>
+            </div>
+            
+            <div class="messenger-note">Мы свяжемся с вами в выбранном мессенджере или по телефону</div>
+        </div>
+    </div>
+
     <script>
         // ================================================================
         // ДАННЫЕ С ПОДРОБНЫМИ ОПИСАНИЯМИ
@@ -1873,13 +2082,19 @@
         const CHAT_ID = 'YOUR_CHAT_ID'; // Замените на ваш CHAT_ID
 
         // ================================================================
-        // ИНИЦИАЛИЗАЦИЯ SWIPER
+        // ПЕРЕМЕННЫЕ ДЛЯ ДАННЫХ
         // ================================================================
         let swiper = null;
         let currentPriceValue = 0;
         let currentName = '';
         let currentPrice = '';
+        let currentArea = 0;
+        let currentTotal = '';
+        let currentWithTrim = '';
 
+        // ================================================================
+        // ИНИЦИАЛИЗАЦИЯ SWIPER
+        // ================================================================
         function initSwiper() {
             const wrapper = document.getElementById('swiperWrapper');
             
@@ -1993,25 +2208,30 @@
             // Рассчитываем стоимость
             const total = roundedArea * currentPriceValue;
             
+            // Сохраняем для отправки
+            currentArea = area;
+            currentTotal = total.toLocaleString('ru-RU') + ' ₽';
+            currentWithTrim = roundedArea + ' м²';
+            
             // Обновляем отображение
-            document.getElementById('calcWithTrim').textContent = `${roundedArea} м²`;
-            document.getElementById('calcTotal').textContent = `${total.toLocaleString('ru-RU')} ₽`;
+            document.getElementById('calcWithTrim').textContent = currentWithTrim;
+            document.getElementById('calcTotal').textContent = currentTotal;
             document.getElementById('calcPricePerM2').textContent = `${currentPriceValue.toLocaleString('ru-RU')} ₽`;
         }
 
         // ================================================================
         // ОТПРАВКА В TELEGRAM
         // ================================================================
-        function sendToTelegram(name, phone, messenger, material, area, total) {
+        function sendToTelegram(name, phone, messenger, material, area, total, withTrim) {
             const message = 
-                `📋 *НОВЫЙ ЗАПРОС НА РАСЧЁТ*\n\n` +
-                `👤 *Имя:* ${name}\n` +
-                `📞 *Телефон:* ${phone}\n` +
-                `💬 *Мессенджер:* ${messenger}\n` +
-                `📦 *Материал:* ${material}\n` +
-                `📐 *Чистая площадь:* ${area} м²\n` +
-                `💰 *С учётом подрезки (10%):* ${Math.ceil(area * 1.1)} м²\n` +
-                `💵 *Примерная стоимость:* ${total}`;
+                `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
+                `👤 Имя: ${name}\n` +
+                `📞 Телефон: ${phone}\n` +
+                `💬 Мессенджер: ${messenger}\n` +
+                `📦 Материал: ${material}\n` +
+                `📐 Чистая площадь: ${area} м²\n` +
+                `💰 С учётом подрезки (10%): ${withTrim}\n` +
+                `💵 Примерная стоимость: ${total}`;
             
             const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
             
@@ -2107,6 +2327,9 @@
             document.getElementById('calcArea').value = '';
             document.getElementById('calcWithTrim').textContent = '0 м²';
             document.getElementById('calcTotal').textContent = '0 ₽';
+            currentArea = 0;
+            currentTotal = '';
+            currentWithTrim = '';
             
             document.getElementById('modalCalcOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2119,6 +2342,21 @@
 
         function closeCalcModal() {
             document.getElementById('modalCalcOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ================================================================
+        // МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
+        // ================================================================
+        let messengerData = {};
+
+        function openMessengerModal() {
+            document.getElementById('modalMessengerOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMessengerModal() {
+            document.getElementById('modalMessengerOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -2140,11 +2378,18 @@
                 if (e.target === e.currentTarget) closeCalcModal();
             };
 
+            // Закрытие модального окна выбора мессенджера
+            document.getElementById('modalMessengerClose').onclick = closeMessengerModal;
+            document.getElementById('modalMessengerOverlay').onclick = (e) => {
+                if (e.target === e.currentTarget) closeMessengerModal();
+            };
+
             // Клавиша Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeModal();
                     closeCalcModal();
+                    closeMessengerModal();
                 }
             });
             
@@ -2173,15 +2418,15 @@
                 document.getElementById('calcWithTrim').textContent = '0 м²';
                 document.getElementById('calcTotal').textContent = '0 ₽';
                 document.getElementById('calcArea').focus();
+                currentArea = 0;
+                currentTotal = '';
+                currentWithTrim = '';
             });
             
-            // Кнопка "Отправить расчёт"
+            // Кнопка "Отправить расчёт" — открывает выбор мессенджера
             document.getElementById('calcSend').addEventListener('click', () => {
                 const areaInput = document.getElementById('calcArea');
                 const area = parseFloat(areaInput.value);
-                const material = document.getElementById('calcMaterialName').textContent;
-                const total = document.getElementById('calcTotal').textContent;
-                const withTrim = document.getElementById('calcWithTrim').textContent;
                 
                 if (!area || area <= 0) {
                     alert('Пожалуйста, введите площадь террасы в м²');
@@ -2189,45 +2434,66 @@
                     return;
                 }
                 
-                // Запрашиваем контакты
-                const nameContact = prompt('Ваше имя:');
-                if (!nameContact) {
-                    alert('Для расчёта необходимо указать имя.');
-                    return;
-                }
+                // Обновляем данные
+                updateCalculator();
                 
-                const phone = prompt('Ваш номер телефона для связи:');
-                if (!phone) {
-                    alert('Для расчёта необходимо указать номер телефона.');
-                    return;
-                }
+                // Сохраняем данные для отправки
+                messengerData = {
+                    area: currentArea,
+                    total: currentTotal,
+                    withTrim: currentWithTrim,
+                    material: document.getElementById('calcMaterialName').textContent
+                };
                 
-                // Выбор мессенджера
-                const messengerChoice = confirm('Выберите способ связи:\n\n• Нажмите "ОК" — Telegram\n• Нажмите "Отмена" — WhatsApp\n\nИли позвоните по номеру +7 (343) 328-27-72');
-                const messenger = messengerChoice ? 'Telegram' : 'WhatsApp';
-                
-                // Показываем сообщение о отправке
-                alert(`Спасибо, ${nameContact}!\n\nВаш расчёт отправлен менеджеру.\nМы свяжемся с вами в ${messenger} или по телефону.\n\nСпасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`);
-                
-                // Отправляем в Telegram
-                sendToTelegram(
-                    nameContact,
-                    phone,
-                    messenger,
-                    material,
-                    area,
-                    total
-                ).then(response => {
-                    if (response.ok) {
-                        console.log('Сообщение отправлено в Telegram');
-                    } else {
-                        console.error('Ошибка отправки в Telegram');
-                    }
-                }).catch(error => {
-                    console.error('Ошибка:', error);
-                });
-                
+                // Открываем окно выбора мессенджера
                 closeCalcModal();
+                setTimeout(() => {
+                    openMessengerModal();
+                }, 400);
+            });
+            
+            // Обработчики кнопок выбора мессенджера
+            document.querySelectorAll('.btn-messenger').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const messenger = this.dataset.messenger;
+                    
+                    // Запрашиваем контакты
+                    const nameContact = prompt('Ваше имя:');
+                    if (!nameContact) {
+                        alert('Для расчёта необходимо указать имя.');
+                        return;
+                    }
+                    
+                    const phone = prompt('Ваш номер телефона для связи:');
+                    if (!phone) {
+                        alert('Для расчёта необходимо указать номер телефона.');
+                        return;
+                    }
+                    
+                    // Показываем сообщение о отправке
+                    alert(`Спасибо, ${nameContact}!\n\nВаш расчёт отправлен менеджеру.\nМы свяжемся с вами в ${messenger}.\n\nСпасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`);
+                    
+                    // Отправляем в Telegram
+                    sendToTelegram(
+                        nameContact,
+                        phone,
+                        messenger,
+                        messengerData.material,
+                        messengerData.area,
+                        messengerData.total,
+                        messengerData.withTrim
+                    ).then(response => {
+                        if (response.ok) {
+                            console.log('Сообщение отправлено в Telegram');
+                        } else {
+                            console.error('Ошибка отправки в Telegram');
+                        }
+                    }).catch(error => {
+                        console.error('Ошибка:', error);
+                    });
+                    
+                    closeMessengerModal();
+                });
             });
         });
     </script>
