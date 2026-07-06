@@ -321,7 +321,6 @@
 
         .top-bar .social-left .social-icon.max-btn {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-weight: 400;
             font-size: clamp(11px, 1.2vh, 15px);
             letter-spacing: 1px;
         }
@@ -744,7 +743,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — ОБНОВЛЕННЫЙ ДИЗАЙН
+           МОДАЛЬНОЕ ОКНО — С КАЛЬКУЛЯТОРОМ
            ================================================================ */
         .modal-overlay {
             display: none;
@@ -785,14 +784,9 @@
             max-height: 92vh;
             overflow-y: auto;
             position: relative;
-        }
-
-        /* Убираем синюю полосу сверху */
-        .modal {
             border-top: none;
         }
 
-        /* Стилизация скролла */
         .modal::-webkit-scrollbar {
             width: 4px;
         }
@@ -945,7 +939,108 @@
             font-weight: 400;
         }
 
-        /* Кнопки действий */
+        /* ================================================================
+           КАЛЬКУЛЯТОР
+           ================================================================ */
+        .modal .calculator {
+            background: rgba(0, 85, 164, 0.03);
+            border-radius: clamp(10px, 1vh, 14px);
+            padding: clamp(14px, 1.5vh, 22px) clamp(14px, 1.5vw, 22px);
+            margin-bottom: clamp(16px, 2vh, 24px);
+            border: 1px solid rgba(0, 85, 164, 0.08);
+        }
+
+        .modal .calculator .calc-title {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.5vh, 18px);
+            font-weight: 400;
+            color: #1A1A2E;
+            margin-bottom: clamp(10px, 1vh, 16px);
+            letter-spacing: 0.5px;
+        }
+
+        .modal .calculator .calc-row {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 1.2vw, 16px);
+            margin-bottom: clamp(8px, 0.8vh, 12px);
+        }
+
+        .modal .calculator .calc-row label {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #4A4A5A;
+            font-weight: 300;
+            min-width: clamp(80px, 8vw, 120px);
+        }
+
+        .modal .calculator .calc-row input {
+            flex: 1;
+            padding: clamp(8px, 0.8vh, 12px) clamp(10px, 1vw, 14px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: clamp(8px, 0.8vh, 10px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.4vh, 17px);
+            color: #1A1A2E;
+            background: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease;
+            width: 100%;
+            min-width: 0;
+        }
+
+        .modal .calculator .calc-row input:focus {
+            outline: none;
+            border-color: #0055A4;
+            box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+        }
+
+        .modal .calculator .calc-row input::placeholder {
+            color: #B0B8C0;
+        }
+
+        .modal .calculator .calc-row .calc-unit {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #8A8A9A;
+            font-weight: 300;
+            white-space: nowrap;
+        }
+
+        .modal .calculator .calc-result {
+            margin-top: clamp(10px, 1vh, 16px);
+            padding-top: clamp(10px, 1vh, 16px);
+            border-top: 1px solid rgba(0, 85, 164, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .modal .calculator .calc-result .result-label {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #4A4A5A;
+            font-weight: 300;
+        }
+
+        .modal .calculator .calc-result .result-value {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(18px, 2.2vh, 28px);
+            font-weight: 500;
+            color: #0055A4;
+            letter-spacing: 0.5px;
+        }
+
+        .modal .calculator .calc-result .result-value .result-sub {
+            font-size: clamp(12px, 1.2vh, 16px);
+            font-weight: 300;
+            color: #8A8A9A;
+        }
+
+        /* ================================================================
+           КНОПКИ ДЕЙСТВИЙ
+           ================================================================ */
         .modal .modal-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1086,7 +1181,6 @@
                 display: none;
             }
 
-            /* Модальное окно на мобильных */
             .modal .specs-grid {
                 grid-template-columns: 1fr;
                 gap: 4px;
@@ -1094,6 +1188,19 @@
 
             .modal .modal-actions {
                 grid-template-columns: 1fr;
+            }
+
+            .modal .calculator .calc-row {
+                flex-wrap: wrap;
+            }
+
+            .modal .calculator .calc-row label {
+                min-width: 100%;
+            }
+
+            .modal .calculator .calc-result {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
 
@@ -1365,7 +1472,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО -->
+    <!-- МОДАЛЬНОЕ ОКНО С КАЛЬКУЛЯТОРОМ -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <button class="modal-close" id="modalClose">✕</button>
@@ -1382,6 +1489,27 @@
             <!-- Сетка характеристик -->
             <div class="specs-grid" id="specsGrid">
                 <!-- Заполняется через JavaScript -->
+            </div>
+            
+            <!-- КАЛЬКУЛЯТОР -->
+            <div class="calculator" id="calculator">
+                <div class="calc-title">🧮 Предварительный расчёт стоимости</div>
+                
+                <div class="calc-row">
+                    <label for="calcArea">Чистая площадь:</label>
+                    <input type="number" id="calcArea" placeholder="Введите площадь в м²" step="0.1" min="0">
+                    <span class="calc-unit">м²</span>
+                </div>
+                
+                <div class="calc-row" style="margin-bottom: 0;">
+                    <label style="color: #8A8A9A; font-size: clamp(12px, 1.1vh, 14px);">+ 10% на подрезку:</label>
+                    <span style="font-family: 'Inter', sans-serif; font-size: clamp(14px, 1.4vh, 17px); color: #4A4A5A;" id="calcWithTrim">0 м²</span>
+                </div>
+                
+                <div class="calc-result">
+                    <span class="result-label">Примерная стоимость:</span>
+                    <span class="result-value" id="calcTotal">0 ₽</span>
+                </div>
             </div>
             
             <!-- Дополнительная информация -->
@@ -1406,6 +1534,7 @@
             name: 'Лиственница',
             image: 'https://i.pinimg.com/736x/f4/85/f1/f485f13473e78c8fe19022f9c529d084.jpg',
             price: 'от 4 500 ₽/м²',
+            priceValue: 4500,
             description: 'Морозостойкая сибирская лиственница. Влагостойкая, прочная, экологичная. Идеальный выбор для террас в регионах с суровым климатом. С годами становится только прочнее и приобретает благородный оттенок.',
             specs: {
                 length: '4000 мм',
@@ -1425,6 +1554,7 @@
             name: 'Ясень',
             image: 'https://i.pinimg.com/736x/fb/7c/eb/fb7ceb406f68979c665a5f324a68e57b.jpg',
             price: 'от 5 900 ₽/м²',
+            priceValue: 5900,
             description: 'Термообработанный ясень — натуральная древесина, прошедшая специальную обработку. Устойчив к влаге и перепадам температур. Сохраняет тёплый цвет и естественную текстуру дерева.',
             specs: {
                 length: '3000 мм',
@@ -1444,6 +1574,7 @@
             name: 'Кумару',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 8 500 ₽/м²',
+            priceValue: 8500,
             description: 'Экзотическая порода из Южной Америки. Отличается высокой плотностью и твёрдостью. Устойчива к гниению, не боится насекомых и грибка. Премиальный выбор для самых требовательных проектов.',
             specs: {
                 length: '3000 мм',
@@ -1463,6 +1594,7 @@
             name: 'Ипе',
             image: 'https://i.pinimg.com/736x/37/ea/40/37ea400092963c619c00589fbc7cd146.jpg',
             price: 'от 12 000 ₽/м²',
+            priceValue: 12000,
             description: 'Бразильский орех — одна из самых твёрдых пород в мире. Максимальная устойчивость к гниению и механическим повреждениям. Срок службы до 50 лет. Идеально для террас с высокой нагрузкой.',
             specs: {
                 length: '3000 мм',
@@ -1482,6 +1614,7 @@
             name: 'ДПК',
             image: 'https://i.pinimg.com/1200x/91/f6/a4/91f6a467c6f8ba04366db84b50ab542d.jpg',
             price: 'от 3 500 ₽/м²',
+            priceValue: 3500,
             description: 'Древесно-полимерный композит — современное решение для террас. Не требует покраски и пропитки. Устойчив к влаге, не гниёт и не выцветает. Противоскользящая поверхность для безопасности.',
             specs: {
                 length: '3000 мм',
@@ -1501,6 +1634,7 @@
             name: 'Монтаж',
             image: 'https://i.pinimg.com/736x/3a/ff/75/3aff750d269c307cf95f01c21aedb07a.jpg',
             price: 'от 2 000 ₽/м²',
+            priceValue: 2000,
             description: 'Профессиональный монтаж террасной доски любого типа. Работаем с деревом и ДПК. Используем качественные крепёжные системы. Гарантия на все виды работ. Соблюдаем технологию укладки.',
             specs: {
                 length: '—',
@@ -1521,6 +1655,8 @@
         // ИНИЦИАЛИЗАЦИЯ SWIPER
         // ================================================================
         let swiper = null;
+        let currentPriceValue = 0;
+        let currentName = '';
 
         function initSwiper() {
             const wrapper = document.getElementById('swiperWrapper');
@@ -1614,11 +1750,42 @@
         }
 
         // ================================================================
+        // ФУНКЦИЯ КАЛЬКУЛЯТОРА
+        // ================================================================
+        function updateCalculator() {
+            const areaInput = document.getElementById('calcArea');
+            const area = parseFloat(areaInput.value);
+            
+            if (!area || area <= 0) {
+                document.getElementById('calcWithTrim').textContent = '0 м²';
+                document.getElementById('calcTotal').textContent = '0 ₽';
+                return;
+            }
+            
+            // Добавляем 10% на подрезку
+            const withTrim = area * 1.1;
+            
+            // Округляем в большую сторону (убираем десятые)
+            const roundedArea = Math.ceil(withTrim);
+            
+            // Рассчитываем стоимость
+            const total = roundedArea * currentPriceValue;
+            
+            // Обновляем отображение
+            document.getElementById('calcWithTrim').textContent = `${roundedArea} м²`;
+            document.getElementById('calcTotal').textContent = `${total.toLocaleString('ru-RU')} ₽`;
+        }
+
+        // ================================================================
         // МОДАЛЬНОЕ ОКНО
         // ================================================================
         function openModal(id) {
             const data = categories.find(c => c.id === id);
             if (!data) return;
+
+            // Сохраняем цену и название для калькулятора
+            currentPriceValue = data.priceValue;
+            currentName = data.name;
 
             // Заполняем заголовок и цену
             document.getElementById('modalName').textContent = data.name;
@@ -1656,6 +1823,11 @@
             
             // Заполняем дополнительную информацию
             document.getElementById('modalExtra').innerHTML = `<p><strong>Рекомендация:</strong> ${data.extra}</p>`;
+            
+            // Сбрасываем калькулятор
+            document.getElementById('calcArea').value = '';
+            document.getElementById('calcWithTrim').textContent = '0 м²';
+            document.getElementById('calcTotal').textContent = '0 ₽';
 
             document.getElementById('modalOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1689,19 +1861,51 @@
                 if (e.key === 'Escape') closeModal();
             });
             
-            // Обработчики для кнопок в модальном окне
+            // Обработчик для кнопки "Купить"
             document.getElementById('btnBuy').addEventListener('click', () => {
                 const name = document.getElementById('modalName').textContent;
                 alert(`✅ Заявка на покупку "${name}" отправлена!\nСкоро с вами свяжется менеджер.`);
                 closeModal();
             });
             
+            // Обработчик для кнопки "Рассчитать"
             document.getElementById('btnCalc').addEventListener('click', () => {
+                const areaInput = document.getElementById('calcArea');
+                const area = parseFloat(areaInput.value);
                 const name = document.getElementById('modalName').textContent;
-                alert(`📐 Открывается калькулятор для "${name}"\nВведите площадь террасы для расчёта.`);
-                // Здесь можно открыть отдельное окно с калькулятором
-                closeModal();
+                
+                if (!area || area <= 0) {
+                    alert('⚠️ Пожалуйста, введите площадь террасы в м²');
+                    areaInput.focus();
+                    return;
+                }
+                
+                // Получаем результат из калькулятора
+                const total = document.getElementById('calcTotal').textContent;
+                
+                // Запрашиваем контакты
+                const phone = prompt('📞 Оставьте ваш номер телефона для связи:', '+7');
+                const nameContact = prompt('👤 Ваше имя:');
+                
+                if (phone && nameContact) {
+                    alert(
+                        `✅ Спасибо, ${nameContact}!\n\n` +
+                        `📊 Предварительный расчёт для "${name}":\n` +
+                        `📐 Чистая площадь: ${area} м²\n` +
+                        `📦 С учётом подрезки (10%): ${document.getElementById('calcWithTrim').textContent}\n` +
+                        `💰 Примерная стоимость: ${total}\n\n` +
+                        `🔄 Мы уточним сроки поставки и сообщим их Вам!\n` +
+                        `📞 Свяжемся с вами по номеру: ${phone}`
+                    );
+                    closeModal();
+                } else {
+                    alert('❌ Для расчёта необходимо указать контактные данные.');
+                }
             });
+            
+            // Событие изменения в поле ввода площади
+            document.getElementById('calcArea').addEventListener('input', updateCalculator);
+            document.getElementById('calcArea').addEventListener('change', updateCalculator);
         });
     </script>
 </body>
