@@ -38,7 +38,7 @@
             justify-content: center;
         }
 
-        /* Геометрический фон (сокращен для экономии места) */
+        /* Геометрический фон */
         body::before {
             content: '';
             position: fixed;
@@ -962,7 +962,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР
+           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР (С ФОРМОЙ)
            ================================================================ */
         .modal-calc-overlay {
             display: none;
@@ -1188,10 +1188,53 @@
             letter-spacing: 0.5px;
         }
 
+        /* ФОРМА В КАЛЬКУЛЯТОРЕ */
+        .modal-calc .calc-form {
+            margin-top: clamp(16px, 1.8vh, 24px);
+            padding-top: clamp(16px, 1.8vh, 24px);
+            border-top: 1px solid rgba(0, 85, 164, 0.06);
+        }
+
+        .modal-calc .calc-field {
+            margin-bottom: clamp(12px, 1.2vh, 18px);
+        }
+
+        .modal-calc .calc-field label {
+            display: block;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #1A1A2E;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .modal-calc .calc-field input {
+            width: 100%;
+            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: clamp(8px, 0.8vh, 10px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.4vh, 17px);
+            color: #1A1A2E;
+            background: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .modal-calc .calc-field input:focus {
+            border-color: #0055A4;
+            box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+        }
+
+        .modal-calc .calc-field input::placeholder {
+            color: #B0B8C0;
+        }
+
         .modal-calc .calc-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: clamp(10px, 1.2vw, 16px);
+            margin-top: clamp(8px, 0.8vh, 14px);
         }
 
         .modal-calc .calc-actions .btn {
@@ -1241,7 +1284,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (С ФОРМОЙ)
+           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ
            ================================================================ */
         .modal-consult-overlay {
             display: none;
@@ -2184,14 +2227,27 @@
                 <span class="total-value" id="calcTotal">0 ₽</span>
             </div>
             
+            <!-- ФОРМА В КАЛЬКУЛЯТОРЕ -->
+            <div class="calc-form">
+                <div class="calc-field">
+                    <label for="calcName">Ваше имя</label>
+                    <input type="text" id="calcName" placeholder="Введите ваше имя">
+                </div>
+                
+                <div class="calc-field">
+                    <label for="calcPhone">Номер телефона</label>
+                    <input type="tel" id="calcPhone" placeholder="+7 (___) ___-__-__">
+                </div>
+            </div>
+            
             <div class="calc-actions">
-                <button class="btn btn-primary" id="calcSend">Отправить расчёт</button>
+                <button class="btn btn-primary" id="calcSend">Проконсультироваться</button>
                 <button class="btn btn-secondary" id="calcClear">Очистить</button>
             </div>
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (С ФОРМОЙ) -->
+    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ -->
     <div class="modal-consult-overlay" id="modalConsultOverlay">
         <div class="modal-consult">
             <button class="modal-close" id="modalConsultClose">✕</button>
@@ -2394,6 +2450,8 @@
         let currentWithTrim = '';
         let consultName = '';
         let consultPhone = '';
+        let calcName = '';
+        let calcPhone = '';
         let messengerType = '';
 
         // ================================================================
@@ -2629,6 +2687,8 @@
             document.getElementById('calcArea').value = '';
             document.getElementById('calcWithTrim').textContent = '0 м²';
             document.getElementById('calcTotal').textContent = '0 ₽';
+            document.getElementById('calcName').value = '';
+            document.getElementById('calcPhone').value = '';
             currentArea = 0;
             currentTotal = '';
             currentWithTrim = '';
@@ -2767,6 +2827,8 @@
                 document.getElementById('calcArea').value = '';
                 document.getElementById('calcWithTrim').textContent = '0 м²';
                 document.getElementById('calcTotal').textContent = '0 ₽';
+                document.getElementById('calcName').value = '';
+                document.getElementById('calcPhone').value = '';
                 document.getElementById('calcArea').focus();
                 currentArea = 0;
                 currentTotal = '';
@@ -2783,7 +2845,26 @@
                     return;
                 }
                 
+                const name = document.getElementById('calcName').value.trim();
+                const phone = document.getElementById('calcPhone').value.trim();
+                
+                if (!name) {
+                    alert('Пожалуйста, введите ваше имя');
+                    document.getElementById('calcName').focus();
+                    return;
+                }
+                
+                if (!phone) {
+                    alert('Пожалуйста, введите номер телефона');
+                    document.getElementById('calcPhone').focus();
+                    return;
+                }
+                
+                calcName = name;
+                calcPhone = phone;
+                
                 updateCalculator();
+                
                 closeCalcModal();
                 setTimeout(() => {
                     openMessengerModal('calc');
@@ -2844,18 +2925,8 @@
                             'Спасибо, что выбрали нас!<br>' +
                             'Мы свяжемся с Вами в ближайшее время!';
                     } else {
-                        // Для расчёта запрашиваем имя и телефон через модальное окно
-                        // Так как у нас нет отдельной формы для расчёта, используем prompt
-                        name = prompt('Ваше имя:');
-                        if (!name) {
-                            alert('Для отправки необходимо указать имя.');
-                            return;
-                        }
-                        phone = prompt('Ваш номер телефона для связи:');
-                        if (!phone) {
-                            alert('Для отправки необходимо указать номер телефона.');
-                            return;
-                        }
+                        name = calcName;
+                        phone = calcPhone;
                         successMessage = 
                             `Спасибо, ${name}!<br><br>` +
                             `Ваш расчёт отправлен менеджеру.<br>` +
@@ -2869,7 +2940,6 @@
                         openSuccessModal(successMessage);
                     }, 300);
                     
-                    // Отправляем в Telegram
                     if (messengerType === 'consult') {
                         sendToTelegram(name, phone, messenger, 'consult');
                     } else {
