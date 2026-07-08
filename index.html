@@ -1273,9 +1273,9 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — ПОКУПКА
+           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (бывшая ПОКУПКА)
            ================================================================ */
-        .modal-buy-overlay {
+        .modal-consult-overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -1292,11 +1292,11 @@
             animation: overlayFade 0.3s ease;
         }
 
-        .modal-buy-overlay.active {
+        .modal-consult-overlay.active {
             display: flex;
         }
 
-        .modal-buy {
+        .modal-consult {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
@@ -1312,25 +1312,25 @@
             border-top: none;
         }
 
-        .modal-buy::-webkit-scrollbar {
+        .modal-consult::-webkit-scrollbar {
             width: 4px;
         }
 
-        .modal-buy::-webkit-scrollbar-track {
+        .modal-consult::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.02);
             border-radius: 4px;
         }
 
-        .modal-buy::-webkit-scrollbar-thumb {
+        .modal-consult::-webkit-scrollbar-thumb {
             background: rgba(0, 85, 164, 0.3);
             border-radius: 4px;
         }
 
-        .modal-buy::-webkit-scrollbar-thumb:hover {
+        .modal-consult::-webkit-scrollbar-thumb:hover {
             background: rgba(0, 85, 164, 0.5);
         }
 
-        .modal-buy .modal-close {
+        .modal-consult .modal-close {
             position: absolute;
             top: clamp(12px, 1.5vh, 20px);
             right: clamp(12px, 1.5vw, 20px);
@@ -1349,7 +1349,7 @@
             line-height: 1;
         }
 
-        .modal-buy .modal-close:hover {
+        .modal-consult .modal-close:hover {
             background: #0055A4;
             color: #ffffff;
             border-color: #0055A4;
@@ -1357,7 +1357,7 @@
             box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
-        .modal-buy .buy-title {
+        .modal-consult .consult-title {
             font-family: 'Playfair Display', 'Times New Roman', serif;
             font-size: clamp(22px, 3.2vh, 34px);
             font-weight: 400;
@@ -1367,7 +1367,7 @@
             margin-bottom: clamp(4px, 0.5vh, 8px);
         }
 
-        .modal-buy .buy-subtitle {
+        .modal-consult .consult-subtitle {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: clamp(14px, 1.5vh, 18px);
             color: #4A4A5A;
@@ -1376,7 +1376,7 @@
             letter-spacing: 0.3px;
         }
 
-        .modal-buy .buy-material {
+        .modal-consult .consult-material {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: clamp(13px, 1.3vh, 16px);
             color: #8A8A9A;
@@ -1388,19 +1388,19 @@
             border: 1px solid rgba(0, 85, 164, 0.06);
         }
 
-        .modal-buy .buy-material strong {
+        .modal-consult .consult-material strong {
             color: #1A1A2E;
             font-weight: 500;
         }
 
-        .modal-buy .buy-row {
+        .modal-consult .consult-row {
             display: flex;
             align-items: center;
             gap: clamp(10px, 1.2vw, 16px);
             margin-bottom: clamp(12px, 1.2vh, 18px);
         }
 
-        .modal-buy .buy-row label {
+        .modal-consult .consult-row label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: clamp(14px, 1.4vh, 17px);
             color: #1A1A2E;
@@ -1408,7 +1408,7 @@
             min-width: clamp(100px, 9vw, 140px);
         }
 
-        .modal-buy .buy-row input {
+        .modal-consult .consult-row input {
             flex: 1;
             padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
             border: 1px solid rgba(0, 0, 0, 0.08);
@@ -1422,17 +1422,17 @@
             min-width: 0;
         }
 
-        .modal-buy .buy-row input:focus {
+        .modal-consult .consult-row input:focus {
             outline: none;
             border-color: #0055A4;
             box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
         }
 
-        .modal-buy .buy-row input::placeholder {
+        .modal-consult .consult-row input::placeholder {
             color: #B0B8C0;
         }
 
-        .modal-buy .buy-row .buy-unit {
+        .modal-consult .consult-row .consult-unit {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: clamp(14px, 1.4vh, 17px);
             color: #8A8A9A;
@@ -1440,14 +1440,14 @@
             white-space: nowrap;
         }
 
-        .modal-buy .buy-actions {
+        .modal-consult .consult-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: clamp(10px, 1.2vw, 16px);
             margin-top: clamp(4px, 0.5vh, 8px);
         }
 
-        .modal-buy .buy-actions .btn {
+        .modal-consult .consult-actions .btn {
             padding: clamp(14px, 1.6vh, 20px);
             border: none;
             border-radius: clamp(10px, 1vh, 14px);
@@ -1461,35 +1461,35 @@
             text-align: center;
         }
 
-        .modal-buy .buy-actions .btn-primary {
+        .modal-consult .consult-actions .btn-primary {
             background: #0055A4;
             color: #ffffff;
             box-shadow: 0 4px 20px rgba(0, 85, 164, 0.25);
         }
 
-        .modal-buy .buy-actions .btn-primary:hover {
+        .modal-consult .consult-actions .btn-primary:hover {
             background: #003D7A;
             box-shadow: 0 8px 30px rgba(0, 85, 164, 0.35);
             transform: translateY(-2px);
         }
 
-        .modal-buy .buy-actions .btn-primary:active {
+        .modal-consult .consult-actions .btn-primary:active {
             transform: scale(0.98);
         }
 
-        .modal-buy .buy-actions .btn-secondary {
+        .modal-consult .consult-actions .btn-secondary {
             background: rgba(0, 0, 0, 0.04);
             color: #1A1A2E;
             border: 1px solid rgba(0, 0, 0, 0.08);
         }
 
-        .modal-buy .buy-actions .btn-secondary:hover {
+        .modal-consult .consult-actions .btn-secondary:hover {
             background: rgba(0, 0, 0, 0.08);
             transform: translateY(-2px);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
         }
 
-        .modal-buy .buy-actions .btn-secondary:active {
+        .modal-consult .consult-actions .btn-secondary:active {
             transform: scale(0.98);
         }
 
@@ -1787,15 +1787,15 @@
                 align-items: flex-start;
             }
 
-            .modal-buy .buy-row {
+            .modal-consult .consult-row {
                 flex-wrap: wrap;
             }
 
-            .modal-buy .buy-row label {
+            .modal-consult .consult-row label {
                 min-width: 100%;
             }
 
-            .modal-buy .buy-actions {
+            .modal-consult .consult-actions {
                 grid-template-columns: 1fr;
             }
 
@@ -1919,7 +1919,7 @@
                 border-radius: 14px;
             }
 
-            .modal-buy {
+            .modal-consult {
                 padding: 22px 16px 24px;
                 max-width: 98%;
                 border-radius: 14px;
@@ -2120,7 +2120,7 @@
             
             <!-- Кнопки действий -->
             <div class="modal-actions">
-                <button class="btn btn-primary" id="btnBuy">Купить</button>
+                <button class="btn btn-primary" id="btnConsult">Консультация</button>
                 <button class="btn btn-secondary" id="btnCalc">Рассчитать</button>
             </div>
         </div>
@@ -2169,29 +2169,29 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО — ПОКУПКА -->
-    <div class="modal-buy-overlay" id="modalBuyOverlay">
-        <div class="modal-buy">
-            <button class="modal-close" id="modalBuyClose">✕</button>
+    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ -->
+    <div class="modal-consult-overlay" id="modalConsultOverlay">
+        <div class="modal-consult">
+            <button class="modal-close" id="modalConsultClose">✕</button>
             
-            <div class="buy-title">Оформление заказа</div>
-            <div class="buy-subtitle">Заполните данные для покупки террасной доски</div>
+            <div class="consult-title">Запрос консультации</div>
+            <div class="consult-subtitle">Заполните данные для получения консультации</div>
             
-            <div class="buy-material" id="buyMaterial">
-                <strong>Материал:</strong> <span id="buyMaterialName">Лиственница</span>
+            <div class="consult-material" id="consultMaterial">
+                <strong>Материал:</strong> <span id="consultMaterialName">Лиственница</span>
                 &nbsp;·&nbsp;
-                <span id="buyMaterialPrice">4 500 ₽/м²</span>
+                <span id="consultMaterialPrice">4 500 ₽/м²</span>
             </div>
             
-            <div class="buy-row">
-                <label for="buyQuantity">Количество:</label>
-                <input type="number" id="buyQuantity" placeholder="Введите количество м²" step="0.1" min="0">
-                <span class="buy-unit">м²</span>
+            <div class="consult-row">
+                <label for="consultQuantity">Количество:</label>
+                <input type="number" id="consultQuantity" placeholder="Введите количество м²" step="0.1" min="0">
+                <span class="consult-unit">м²</span>
             </div>
             
-            <div class="buy-actions">
-                <button class="btn btn-primary" id="buySend">Отправить заявку</button>
-                <button class="btn btn-secondary" id="buyClear">Очистить</button>
+            <div class="consult-actions">
+                <button class="btn btn-primary" id="consultSend">Отправить запрос</button>
+                <button class="btn btn-secondary" id="consultClear">Очистить</button>
             </div>
         </div>
     </div>
@@ -2229,7 +2229,7 @@
             specs: {
                 length: '4000 мм',
                 width: '140 мм',
-                height: '28 мм',
+                thickness: '28 мм',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Высокая (природная смолистость)',
                 mountType: 'Скрытый крепёж / Открытый монтаж',
@@ -2249,7 +2249,7 @@
             specs: {
                 length: '3000 мм',
                 width: '145 мм',
-                height: '28 мм',
+                thickness: '28 мм',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Высокая (термообработка)',
                 mountType: 'Скрытый крепёж',
@@ -2269,7 +2269,7 @@
             specs: {
                 length: '3000 мм',
                 width: '140 мм',
-                height: '25 мм',
+                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: 'Класс 4 (максимальная износостойкость)',
                 waterproof: 'Максимальная (естественная)',
                 mountType: 'Скрытый крепёж / Шурупы',
@@ -2289,7 +2289,7 @@
             specs: {
                 length: '3000 мм',
                 width: '145 мм',
-                height: '25 мм',
+                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: 'Класс 4 (максимальная износостойкость)',
                 waterproof: 'Максимальная (естественная)',
                 mountType: 'Скрытый крепёж / Шурупы',
@@ -2309,7 +2309,7 @@
             specs: {
                 length: '3000 мм',
                 width: '150 мм',
-                height: '25 мм',
+                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Максимальная (не впитывает влагу)',
                 mountType: 'Скрытый крепёж / Клипсы',
@@ -2329,7 +2329,7 @@
             specs: {
                 length: '—',
                 width: '—',
-                height: '—',
+                thickness: '—',  // ← ИЗМЕНЕНО С height НА thickness
                 wearClass: '—',
                 waterproof: '—',
                 mountType: 'Профессиональный монтаж',
@@ -2491,9 +2491,9 @@
         function sendToTelegram(name, phone, messenger, material, quantity, type) {
             let message = '';
             
-            if (type === 'buy') {
+            if (type === 'consult') {
                 message = 
-                    `📋 НОВАЯ ЗАЯВКА НА ПОКУПКУ\n\n` +
+                    `📋 НОВЫЙ ЗАПРОС НА КОНСУЛЬТАЦИЮ\n\n` +
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
                     `💬 Мессенджер: ${messenger}\n` +
@@ -2534,7 +2534,7 @@
             const data = categories.find(c => c.id === id);
             if (!data) return;
 
-            // Сохраняем данные для калькулятора и покупки
+            // Сохраняем данные для калькулятора и консультации
             currentPriceValue = data.priceValue;
             currentName = data.name;
             currentPrice = data.price;
@@ -2551,7 +2551,7 @@
             const specItems = [
                 { label: 'Длина', value: data.specs.length },
                 { label: 'Ширина', value: data.specs.width },
-                { label: 'Высота', value: data.specs.height },
+                { label: 'Толщина', value: data.specs.thickness },  // ← ИЗМЕНЕНО С "Высота" НА "Толщина"
                 { label: 'Класс износостойкости', value: data.specs.wearClass },
                 { label: 'Водостойкость', value: data.specs.waterproof },
                 { label: 'Тип монтажа', value: data.specs.mountType },
@@ -2625,29 +2625,29 @@
         }
 
         // ================================================================
-        // МОДАЛЬНОЕ ОКНО — ПОКУПКА
+        // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ
         // ================================================================
-        let buyData = {};
+        let consultData = {};
 
-        function openBuyModal() {
-            // Передаём данные в форму покупки
-            document.getElementById('buyMaterialName').textContent = currentName;
-            document.getElementById('buyMaterialPrice').textContent = currentPrice;
+        function openConsultModal() {
+            // Передаём данные в форму консультации
+            document.getElementById('consultMaterialName').textContent = currentName;
+            document.getElementById('consultMaterialPrice').textContent = currentPrice;
             
             // Сбрасываем поля
-            document.getElementById('buyQuantity').value = '';
+            document.getElementById('consultQuantity').value = '';
             
-            document.getElementById('modalBuyOverlay').classList.add('active');
+            document.getElementById('modalConsultOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
             // Фокусируемся на поле ввода
             setTimeout(() => {
-                document.getElementById('buyQuantity').focus();
+                document.getElementById('consultQuantity').focus();
             }, 300);
         }
 
-        function closeBuyModal() {
-            document.getElementById('modalBuyOverlay').classList.remove('active');
+        function closeConsultModal() {
+            document.getElementById('modalConsultOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -2687,10 +2687,10 @@
                 if (e.target === e.currentTarget) closeCalcModal();
             };
 
-            // Закрытие покупки
-            document.getElementById('modalBuyClose').onclick = closeBuyModal;
-            document.getElementById('modalBuyOverlay').onclick = (e) => {
-                if (e.target === e.currentTarget) closeBuyModal();
+            // Закрытие консультации
+            document.getElementById('modalConsultClose').onclick = closeConsultModal;
+            document.getElementById('modalConsultOverlay').onclick = (e) => {
+                if (e.target === e.currentTarget) closeConsultModal();
             };
 
             // Закрытие модального окна выбора мессенджера
@@ -2704,16 +2704,16 @@
                 if (e.key === 'Escape') {
                     closeModal();
                     closeCalcModal();
-                    closeBuyModal();
+                    closeConsultModal();
                     closeMessengerModal();
                 }
             });
             
-            // Кнопка "Купить" — открывает форму покупки
-            document.getElementById('btnBuy').addEventListener('click', () => {
+            // Кнопка "Консультация" — открывает форму консультации
+            document.getElementById('btnConsult').addEventListener('click', () => {
                 closeModal();
                 setTimeout(() => {
-                    openBuyModal();
+                    openConsultModal();
                 }, 400);
             });
             
@@ -2774,18 +2774,18 @@
             });
             
             // ================================================================
-            // ПОКУПКА
+            // КОНСУЛЬТАЦИЯ
             // ================================================================
             
             // Кнопка "Очистить"
-            document.getElementById('buyClear').addEventListener('click', () => {
-                document.getElementById('buyQuantity').value = '';
-                document.getElementById('buyQuantity').focus();
+            document.getElementById('consultClear').addEventListener('click', () => {
+                document.getElementById('consultQuantity').value = '';
+                document.getElementById('consultQuantity').focus();
             });
             
-            // Кнопка "Отправить заявку" — открывает выбор мессенджера
-            document.getElementById('buySend').addEventListener('click', () => {
-                const quantityInput = document.getElementById('buyQuantity');
+            // Кнопка "Отправить запрос" — открывает выбор мессенджера
+            document.getElementById('consultSend').addEventListener('click', () => {
+                const quantityInput = document.getElementById('consultQuantity');
                 const quantity = parseFloat(quantityInput.value);
                 
                 if (!quantity || quantity <= 0) {
@@ -2796,14 +2796,14 @@
                 
                 // Сохраняем данные для отправки
                 const data = {
-                    material: document.getElementById('buyMaterialName').textContent,
+                    material: document.getElementById('consultMaterialName').textContent,
                     quantity: quantity
                 };
                 
                 // Открываем окно выбора мессенджера
-                closeBuyModal();
+                closeConsultModal();
                 setTimeout(() => {
-                    openMessengerModal(data, 'buy');
+                    openMessengerModal(data, 'consult');
                 }, 400);
             });
             
@@ -2831,11 +2831,11 @@
                     
                     // Формируем сообщение в зависимости от типа
                     let successMessage = '';
-                    if (messengerType === 'buy') {
+                    if (messengerType === 'consult') {
                         successMessage = 
                             `Спасибо, ${nameContact}!\n\n` +
-                            `Ваша заявка на покупку отправлена менеджеру.\n` +
-                            `Мы свяжемся с вами в ${messenger} для подтверждения заказа.\n\n` +
+                            `Ваш запрос на консультацию отправлен менеджеру.\n` +
+                            `Мы свяжемся с вами в ${messenger} для консультации.\n\n` +
                             `Спасибо, что выбрали PRINCIP FLOOR!`;
                     } else {
                         successMessage = 
@@ -2849,7 +2849,7 @@
                     
                     // Отправляем в Telegram
                     let quantity = '';
-                    if (messengerType === 'buy') {
+                    if (messengerType === 'consult') {
                         quantity = messengerData.quantity + ' м²';
                         sendToTelegram(
                             nameContact,
@@ -2857,7 +2857,7 @@
                             messenger,
                             messengerData.material,
                             quantity,
-                            'buy'
+                            'consult'
                         );
                     } else {
                         sendToTelegram(
