@@ -1273,7 +1273,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (бывшая ПОКУПКА)
+           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ)
            ================================================================ */
         .modal-consult-overlay {
             display: none;
@@ -1393,51 +1393,9 @@
             font-weight: 500;
         }
 
+        /* Убираем поле для количества */
         .modal-consult .consult-row {
-            display: flex;
-            align-items: center;
-            gap: clamp(10px, 1.2vw, 16px);
-            margin-bottom: clamp(12px, 1.2vh, 18px);
-        }
-
-        .modal-consult .consult-row label {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
-            color: #1A1A2E;
-            font-weight: 400;
-            min-width: clamp(100px, 9vw, 140px);
-        }
-
-        .modal-consult .consult-row input {
-            flex: 1;
-            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: clamp(8px, 0.8vh, 10px);
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 1.6vh, 20px);
-            color: #1A1A2E;
-            background: rgba(255, 255, 255, 0.8);
-            transition: border-color 0.3s ease;
-            width: 100%;
-            min-width: 0;
-        }
-
-        .modal-consult .consult-row input:focus {
-            outline: none;
-            border-color: #0055A4;
-            box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
-        }
-
-        .modal-consult .consult-row input::placeholder {
-            color: #B0B8C0;
-        }
-
-        .modal-consult .consult-row .consult-unit {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
-            color: #8A8A9A;
-            font-weight: 300;
-            white-space: nowrap;
+            display: none;
         }
 
         .modal-consult .consult-actions {
@@ -1785,14 +1743,6 @@
             .modal-calc .calc-total {
                 flex-direction: column;
                 align-items: flex-start;
-            }
-
-            .modal-consult .consult-row {
-                flex-wrap: wrap;
-            }
-
-            .modal-consult .consult-row label {
-                min-width: 100%;
             }
 
             .modal-consult .consult-actions {
@@ -2169,13 +2119,13 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ -->
+    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ) -->
     <div class="modal-consult-overlay" id="modalConsultOverlay">
         <div class="modal-consult">
             <button class="modal-close" id="modalConsultClose">✕</button>
             
             <div class="consult-title">Запрос консультации</div>
-            <div class="consult-subtitle">Заполните данные для получения консультации</div>
+            <div class="consult-subtitle">Оставьте свои контакты, и мы свяжемся с вами</div>
             
             <div class="consult-material" id="consultMaterial">
                 <strong>Материал:</strong> <span id="consultMaterialName">Лиственница</span>
@@ -2183,7 +2133,8 @@
                 <span id="consultMaterialPrice">4 500 ₽/м²</span>
             </div>
             
-            <div class="consult-row">
+            <!-- Поле количества скрыто -->
+            <div class="consult-row" style="display:none;">
                 <label for="consultQuantity">Количество:</label>
                 <input type="number" id="consultQuantity" placeholder="Введите количество м²" step="0.1" min="0">
                 <span class="consult-unit">м²</span>
@@ -2229,7 +2180,7 @@
             specs: {
                 length: '4000 мм',
                 width: '140 мм',
-                thickness: '28 мм',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '28 мм',
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Высокая (природная смолистость)',
                 mountType: 'Скрытый крепёж / Открытый монтаж',
@@ -2249,7 +2200,7 @@
             specs: {
                 length: '3000 мм',
                 width: '145 мм',
-                thickness: '28 мм',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '28 мм',
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Высокая (термообработка)',
                 mountType: 'Скрытый крепёж',
@@ -2269,7 +2220,7 @@
             specs: {
                 length: '3000 мм',
                 width: '140 мм',
-                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '25 мм',
                 wearClass: 'Класс 4 (максимальная износостойкость)',
                 waterproof: 'Максимальная (естественная)',
                 mountType: 'Скрытый крепёж / Шурупы',
@@ -2289,7 +2240,7 @@
             specs: {
                 length: '3000 мм',
                 width: '145 мм',
-                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '25 мм',
                 wearClass: 'Класс 4 (максимальная износостойкость)',
                 waterproof: 'Максимальная (естественная)',
                 mountType: 'Скрытый крепёж / Шурупы',
@@ -2309,7 +2260,7 @@
             specs: {
                 length: '3000 мм',
                 width: '150 мм',
-                thickness: '25 мм',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '25 мм',
                 wearClass: 'Класс 3 (высокая износостойкость)',
                 waterproof: 'Максимальная (не впитывает влагу)',
                 mountType: 'Скрытый крепёж / Клипсы',
@@ -2329,7 +2280,7 @@
             specs: {
                 length: '—',
                 width: '—',
-                thickness: '—',  // ← ИЗМЕНЕНО С height НА thickness
+                thickness: '—',
                 wearClass: '—',
                 waterproof: '—',
                 mountType: 'Профессиональный монтаж',
@@ -2488,7 +2439,7 @@
         // ================================================================
         // ОТПРАВКА В TELEGRAM
         // ================================================================
-        function sendToTelegram(name, phone, messenger, material, quantity, type) {
+        function sendToTelegram(name, phone, messenger, material, type) {
             let message = '';
             
             if (type === 'consult') {
@@ -2497,9 +2448,7 @@
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
                     `💬 Мессенджер: ${messenger}\n` +
-                    `📦 Материал: ${material}\n` +
-                    `📐 Количество: ${quantity} м²\n` +
-                    `💰 Стоимость: уточняется менеджером`;
+                    `📦 Материал: ${material}`;
             } else {
                 message = 
                     `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
@@ -2551,7 +2500,7 @@
             const specItems = [
                 { label: 'Длина', value: data.specs.length },
                 { label: 'Ширина', value: data.specs.width },
-                { label: 'Толщина', value: data.specs.thickness },  // ← ИЗМЕНЕНО С "Высота" НА "Толщина"
+                { label: 'Толщина', value: data.specs.thickness },
                 { label: 'Класс износостойкости', value: data.specs.wearClass },
                 { label: 'Водостойкость', value: data.specs.waterproof },
                 { label: 'Тип монтажа', value: data.specs.mountType },
@@ -2625,7 +2574,7 @@
         }
 
         // ================================================================
-        // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ
+        // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ)
         // ================================================================
         let consultData = {};
 
@@ -2634,16 +2583,8 @@
             document.getElementById('consultMaterialName').textContent = currentName;
             document.getElementById('consultMaterialPrice').textContent = currentPrice;
             
-            // Сбрасываем поля
-            document.getElementById('consultQuantity').value = '';
-            
             document.getElementById('modalConsultOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
-            
-            // Фокусируемся на поле ввода
-            setTimeout(() => {
-                document.getElementById('consultQuantity').focus();
-            }, 300);
         }
 
         function closeConsultModal() {
@@ -2760,10 +2701,7 @@
                 
                 // Сохраняем данные для отправки
                 const data = {
-                    material: document.getElementById('calcMaterialName').textContent,
-                    area: currentArea,
-                    withTrim: currentWithTrim,
-                    total: currentTotal
+                    material: document.getElementById('calcMaterialName').textContent
                 };
                 
                 // Открываем окно выбора мессенджера
@@ -2777,27 +2715,11 @@
             // КОНСУЛЬТАЦИЯ
             // ================================================================
             
-            // Кнопка "Очистить"
-            document.getElementById('consultClear').addEventListener('click', () => {
-                document.getElementById('consultQuantity').value = '';
-                document.getElementById('consultQuantity').focus();
-            });
-            
             // Кнопка "Отправить запрос" — открывает выбор мессенджера
             document.getElementById('consultSend').addEventListener('click', () => {
-                const quantityInput = document.getElementById('consultQuantity');
-                const quantity = parseFloat(quantityInput.value);
-                
-                if (!quantity || quantity <= 0) {
-                    alert('Пожалуйста, введите количество материала в м²');
-                    quantityInput.focus();
-                    return;
-                }
-                
                 // Сохраняем данные для отправки
                 const data = {
-                    material: document.getElementById('consultMaterialName').textContent,
-                    quantity: quantity
+                    material: document.getElementById('consultMaterialName').textContent
                 };
                 
                 // Открываем окно выбора мессенджера
@@ -2805,6 +2727,11 @@
                 setTimeout(() => {
                     openMessengerModal(data, 'consult');
                 }, 400);
+            });
+            
+            // Кнопка "Очистить" — просто закрывает окно
+            document.getElementById('consultClear').addEventListener('click', () => {
+                closeConsultModal();
             });
             
             // ================================================================
@@ -2833,10 +2760,8 @@
                     let successMessage = '';
                     if (messengerType === 'consult') {
                         successMessage = 
-                            `Спасибо, ${nameContact}!\n\n` +
-                            `Ваш запрос на консультацию отправлен менеджеру.\n` +
-                            `Мы свяжемся с вами в ${messenger} для консультации.\n\n` +
-                            `Спасибо, что выбрали PRINCIP FLOOR!`;
+                            `Спасибо, что выбрали PRINCIP FLOOR!\n\n` +
+                            `Мы свяжемся с Вами в ближайшее время!`;
                     } else {
                         successMessage = 
                             `Спасибо, ${nameContact}!\n\n` +
@@ -2848,15 +2773,12 @@
                     alert(successMessage);
                     
                     // Отправляем в Telegram
-                    let quantity = '';
                     if (messengerType === 'consult') {
-                        quantity = messengerData.quantity + ' м²';
                         sendToTelegram(
                             nameContact,
                             phone,
                             messenger,
                             messengerData.material,
-                            quantity,
                             'consult'
                         );
                     } else {
@@ -2865,7 +2787,6 @@
                             phone,
                             messenger,
                             messengerData.material,
-                            messengerData.area + ' м² (с подрезкой: ' + messengerData.withTrim + ')',
                             'calc'
                         );
                     }
