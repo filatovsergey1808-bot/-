@@ -2916,23 +2916,19 @@
                     
                     let name = '';
                     let phone = '';
-                    let successMessage = '';
                     
                     if (messengerType === 'consult') {
                         name = consultName;
                         phone = consultPhone;
-                        successMessage = 
-                            'Спасибо, что выбрали нас!<br>' +
-                            'Мы свяжемся с Вами в ближайшее время!';
                     } else {
                         name = calcName;
                         phone = calcPhone;
-                        successMessage = 
-                            `Спасибо, ${name}!<br><br>` +
-                            `Ваш расчёт отправлен менеджеру.<br>` +
-                            `Мы свяжемся с вами в ${messenger}.<br><br>` +
-                            `Спасибо, что воспользовались предварительным расчётом!<br>Мы уточним сроки поставки и сообщим их Вам!`;
                     }
+                    
+                    // Единое короткое сообщение для всех случаев
+                    const successMessage = 
+                        'Спасибо, что выбрали нас!<br>' +
+                        'Мы свяжемся с Вами в ближайшее время!';
                     
                     closeMessengerModal();
                     
