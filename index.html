@@ -2913,10 +2913,10 @@
             document.querySelectorAll('.btn-messenger').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const messenger = this.dataset.messenger;
-                    
+        
                     let name = '';
                     let phone = '';
-                    
+        
                     if (messengerType === 'consult') {
                         name = consultName;
                         phone = consultPhone;
@@ -2924,18 +2924,18 @@
                         name = calcName;
                         phone = calcPhone;
                     }
-                    
-                    // Единое короткое сообщение для всех случаев
+        
+        // Сообщение с именем
                     const successMessage = 
-                        'Спасибо, что выбрали нас!<br>' +
-                        'Мы свяжемся с Вами в ближайшее время!';
-                    
+                        `${name}, спасибо, что выбрали нас!<br>` +
+                        `Мы свяжемся с Вами в ближайшее время!`;
+        
                     closeMessengerModal();
-                    
+        
                     setTimeout(() => {
                         openSuccessModal(successMessage);
                     }, 300);
-                    
+        
                     if (messengerType === 'consult') {
                         sendToTelegram(name, phone, messenger, 'consult');
                     } else {
