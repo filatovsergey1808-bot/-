@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Террасная доска | PRINCIP FLOOR</title>
     <meta name="description" content="Премиальная террасная доска из натурального дерева и ДПК. PRINCIP FLOOR — качество, проверенное временем.">
     <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
@@ -27,12 +27,15 @@
 
         html, body {
             height: 100%;
+            width: 100%;
             overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             min-height: 100vh;
+            min-height: -webkit-fill-available;
             background: #F0F3F8;
             color: #1A1A2E;
             padding: clamp(10px, 2vw, 30px);
@@ -43,7 +46,9 @@
             justify-content: center;
         }
 
-        /* Геометрический фон */
+        /* ================================================================
+           ГЕОМЕТРИЧЕСКИЙ ФОН (сокращен для экономии места)
+           ================================================================ */
         body::before {
             content: '';
             position: fixed;
@@ -738,8 +743,9 @@
             z-index: 1000;
             justify-content: center;
             align-items: center;
-            padding: clamp(16px, 3vh, 40px);
+            padding: 20px;
             animation: overlayFade 0.3s ease;
+            overflow: hidden;
         }
 
         .modal-overlay.active,
@@ -764,13 +770,15 @@
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: clamp(16px, 2.5vh, 28px);
+            border-radius: 16px;
             box-shadow: 0 30px 120px rgba(0, 85, 164, 0.2);
             animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             position: relative;
             border-top: none;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            margin: auto;
+            width: 100%;
         }
 
         @keyframes modalSlideUp {
@@ -782,6 +790,43 @@
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
+        }
+
+        /* Кнопка закрытия для всех модальных окон */
+        .modal .modal-close,
+        .modal-calc .modal-close,
+        .modal-consult .modal-close,
+        .modal-messenger .modal-close,
+        .modal-success .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            color: #4A4A5A;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            z-index: 10;
+        }
+
+        .modal .modal-close:hover,
+        .modal-calc .modal-close:hover,
+        .modal-consult .modal-close:hover,
+        .modal-messenger .modal-close:hover,
+        .modal-success .modal-close:hover {
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+            transform: rotate(90deg);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
         /* Стилизация скролла для всех модальных окон */
@@ -819,43 +864,6 @@
             background: rgba(0, 85, 164, 0.5);
         }
 
-        /* Кнопка закрытия для всех модальных окон */
-        .modal .modal-close,
-        .modal-calc .modal-close,
-        .modal-consult .modal-close,
-        .modal-messenger .modal-close,
-        .modal-success .modal-close {
-            position: absolute;
-            top: clamp(12px, 1.5vh, 20px);
-            right: clamp(12px, 1.5vw, 20px);
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            width: clamp(36px, 4vh, 44px);
-            height: clamp(36px, 4vh, 44px);
-            font-size: clamp(18px, 2.2vh, 24px);
-            color: #4A4A5A;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-            z-index: 10;
-        }
-
-        .modal .modal-close:hover,
-        .modal-calc .modal-close:hover,
-        .modal-consult .modal-close:hover,
-        .modal-messenger .modal-close:hover,
-        .modal-success .modal-close:hover {
-            background: #0055A4;
-            color: #ffffff;
-            border-color: #0055A4;
-            transform: rotate(90deg);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
-        }
-
         /* ================================================================
            МОДАЛЬНОЕ ОКНО — ОСНОВНОЕ
            ================================================================ */
@@ -867,23 +875,22 @@
         }
 
         .modal {
-            max-width: clamp(340px, 50vw, 620px);
-            width: 100%;
-            padding: clamp(24px, 4vh, 44px) clamp(20px, 3vw, 40px);
-            max-height: 92vh;
+            max-width: 620px;
+            padding: 32px 28px 28px;
+            max-height: 90vh;
         }
 
         .modal .modal-header {
             display: flex;
             flex-direction: column;
             align-items: flex-start;
-            margin-bottom: clamp(8px, 1.2vh, 16px);
-            padding-right: clamp(36px, 4vw, 52px);
+            margin-bottom: 12px;
+            padding-right: 44px;
         }
 
         .modal .modal-header h2 {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(22px, 3.5vh, 36px);
+            font-size: 28px;
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
@@ -893,7 +900,7 @@
 
         .modal .modal-header .modal-price {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 2vh, 24px);
+            font-size: 20px;
             color: #1A1A2E;
             font-weight: 100;
             letter-spacing: 1px;
@@ -902,32 +909,32 @@
 
         .modal .modal-desc {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.6vh, 18px);
+            font-size: 16px;
             color: #4A4A5A;
             font-weight: 300;
             line-height: 1.7;
-            margin-bottom: clamp(16px, 2vh, 24px);
-            padding-bottom: clamp(12px, 1.5vh, 20px);
+            margin-bottom: 16px;
+            padding-bottom: 16px;
             border-bottom: 1px solid rgba(0, 85, 164, 0.06);
         }
 
         .modal .specs-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(6px, 0.8vh, 12px) clamp(12px, 1.5vw, 24px);
-            margin-bottom: clamp(16px, 2vh, 24px);
+            gap: 6px 16px;
+            margin-bottom: 16px;
         }
 
         .modal .spec-item {
             display: flex;
             flex-direction: column;
-            padding: clamp(6px, 0.6vh, 10px) 0;
+            padding: 6px 0;
             border-bottom: 1px solid rgba(0, 0, 0, 0.03);
         }
 
         .modal .spec-item .spec-label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(10px, 1vh, 13px);
+            font-size: 11px;
             color: #8A8A9A;
             font-weight: 400;
             letter-spacing: 0.5px;
@@ -937,7 +944,7 @@
 
         .modal .spec-item .spec-value {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.4vh, 17px);
+            font-size: 15px;
             color: #1A1A2E;
             font-weight: 400;
             letter-spacing: 0.3px;
@@ -945,15 +952,15 @@
 
         .modal .modal-extra {
             background: rgba(0, 85, 164, 0.03);
-            border-radius: clamp(10px, 1vh, 14px);
-            padding: clamp(12px, 1.2vh, 18px) clamp(14px, 1.5vw, 22px);
-            margin-bottom: clamp(16px, 2vh, 24px);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-bottom: 16px;
             border: 1px solid rgba(0, 85, 164, 0.06);
         }
 
         .modal .modal-extra p {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.3vh, 16px);
+            font-size: 14px;
             color: #4A4A5A;
             font-weight: 300;
             line-height: 1.6;
@@ -967,16 +974,16 @@
         .modal .modal-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(10px, 1.2vw, 16px);
-            margin-top: clamp(4px, 0.5vh, 8px);
+            gap: 12px;
+            margin-top: 4px;
         }
 
         .modal .modal-actions .btn {
-            padding: clamp(12px, 1.5vh, 18px);
+            padding: 14px;
             border: none;
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.4vh, 17px);
+            font-size: 15px;
             font-weight: 400;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -1028,40 +1035,39 @@
         }
 
         .modal-calc {
-            max-width: clamp(340px, 45vw, 560px);
-            width: 100%;
-            padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            max-height: 92vh;
+            max-width: 560px;
+            padding: 32px 28px 32px;
+            max-height: 90vh;
         }
 
         .modal-calc .calc-title {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(22px, 3.2vh, 34px);
+            font-size: 28px;
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
-            margin-bottom: clamp(4px, 0.5vh, 8px);
+            margin-bottom: 4px;
         }
 
         .modal-calc .calc-subtitle {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 16px;
             color: #4A4A5A;
             font-weight: 300;
-            margin-bottom: clamp(20px, 2.5vh, 32px);
+            margin-bottom: 24px;
             letter-spacing: 0.3px;
         }
 
         .modal-calc .calc-material {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.3vh, 16px);
+            font-size: 14px;
             color: #8A8A9A;
             font-weight: 300;
-            margin-bottom: clamp(16px, 2vh, 24px);
-            padding: clamp(10px, 1vh, 16px);
+            margin-bottom: 18px;
+            padding: 12px 16px;
             background: rgba(0, 85, 164, 0.04);
-            border-radius: clamp(8px, 0.8vh, 12px);
+            border-radius: 10px;
             border: 1px solid rgba(0, 85, 164, 0.06);
         }
 
@@ -1073,25 +1079,25 @@
         .modal-calc .calc-row {
             display: flex;
             align-items: center;
-            gap: clamp(10px, 1.2vw, 16px);
-            margin-bottom: clamp(12px, 1.2vh, 18px);
+            gap: 12px;
+            margin-bottom: 14px;
         }
 
         .modal-calc .calc-row label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
+            font-size: 15px;
             color: #1A1A2E;
             font-weight: 400;
-            min-width: clamp(100px, 9vw, 140px);
+            min-width: 120px;
         }
 
         .modal-calc .calc-row input {
             flex: 1;
-            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            padding: 12px 14px;
             border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: clamp(8px, 0.8vh, 10px);
+            border-radius: 10px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 1.6vh, 20px);
+            font-size: 17px;
             color: #1A1A2E;
             background: rgba(255, 255, 255, 0.8);
             transition: border-color 0.3s ease;
@@ -1111,7 +1117,7 @@
 
         .modal-calc .calc-row .calc-unit {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
+            font-size: 15px;
             color: #8A8A9A;
             font-weight: 300;
             white-space: nowrap;
@@ -1120,11 +1126,11 @@
         .modal-calc .calc-info {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(8px, 0.8vh, 14px);
-            margin: clamp(16px, 1.8vh, 24px) 0;
-            padding: clamp(14px, 1.5vh, 22px);
+            gap: 10px;
+            margin: 18px 0;
+            padding: 16px 20px;
             background: rgba(0, 85, 164, 0.03);
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             border: 1px solid rgba(0, 85, 164, 0.06);
         }
 
@@ -1135,7 +1141,7 @@
 
         .modal-calc .calc-info .info-item .info-label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(10px, 1vh, 13px);
+            font-size: 11px;
             color: #8A8A9A;
             font-weight: 300;
             text-transform: uppercase;
@@ -1144,7 +1150,7 @@
 
         .modal-calc .calc-info .info-item .info-value {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 1.8vh, 22px);
+            font-size: 18px;
             color: #1A1A2E;
             font-weight: 500;
             margin-top: 2px;
@@ -1154,23 +1160,23 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: clamp(14px, 1.5vh, 22px);
+            padding-top: 18px;
             border-top: 2px solid rgba(0, 85, 164, 0.08);
-            margin-bottom: clamp(20px, 2.5vh, 32px);
+            margin-bottom: 24px;
             flex-wrap: wrap;
             gap: 8px;
         }
 
         .modal-calc .calc-total .total-label {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 1.8vh, 22px);
+            font-size: 18px;
             color: #1A1A2E;
             font-weight: 400;
         }
 
         .modal-calc .calc-total .total-value {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(24px, 3vh, 38px);
+            font-size: 30px;
             font-weight: 600;
             color: #0055A4;
             letter-spacing: 0.5px;
@@ -1178,19 +1184,19 @@
 
         /* ФОРМА В КАЛЬКУЛЯТОРЕ */
         .modal-calc .calc-form {
-            margin-top: clamp(16px, 1.8vh, 24px);
-            padding-top: clamp(16px, 1.8vh, 24px);
+            margin-top: 18px;
+            padding-top: 18px;
             border-top: 1px solid rgba(0, 85, 164, 0.06);
         }
 
         .modal-calc .calc-field {
-            margin-bottom: clamp(12px, 1.2vh, 18px);
+            margin-bottom: 14px;
         }
 
         .modal-calc .calc-field label {
             display: block;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.3vh, 16px);
+            font-size: 14px;
             color: #1A1A2E;
             font-weight: 400;
             margin-bottom: 4px;
@@ -1198,11 +1204,11 @@
 
         .modal-calc .calc-field input {
             width: 100%;
-            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            padding: 12px 14px;
             border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: clamp(8px, 0.8vh, 10px);
+            border-radius: 10px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
+            font-size: 16px;
             color: #1A1A2E;
             background: rgba(255, 255, 255, 0.8);
             transition: border-color 0.3s ease;
@@ -1221,16 +1227,16 @@
         .modal-calc .calc-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(10px, 1.2vw, 16px);
-            margin-top: clamp(8px, 0.8vh, 14px);
+            gap: 12px;
+            margin-top: 10px;
         }
 
         .modal-calc .calc-actions .btn {
-            padding: clamp(14px, 1.6vh, 20px);
+            padding: 16px;
             border: none;
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 15px;
             font-weight: 400;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -1282,39 +1288,38 @@
         }
 
         .modal-consult {
-            max-width: clamp(340px, 45vw, 500px);
-            width: 100%;
-            padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            max-height: 92vh;
+            max-width: 500px;
+            padding: 32px 28px 32px;
+            max-height: 90vh;
         }
 
         .modal-consult .consult-title {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(22px, 3.2vh, 34px);
+            font-size: 28px;
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
-            margin-bottom: clamp(4px, 0.5vh, 8px);
+            margin-bottom: 4px;
         }
 
         .modal-consult .consult-subtitle {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 16px;
             color: #4A4A5A;
             font-weight: 300;
-            margin-bottom: clamp(20px, 2.5vh, 32px);
+            margin-bottom: 24px;
             letter-spacing: 0.3px;
         }
 
         .modal-consult .consult-field {
-            margin-bottom: clamp(12px, 1.2vh, 18px);
+            margin-bottom: 14px;
         }
 
         .modal-consult .consult-field label {
             display: block;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.3vh, 16px);
+            font-size: 14px;
             color: #1A1A2E;
             font-weight: 400;
             margin-bottom: 4px;
@@ -1322,11 +1327,11 @@
 
         .modal-consult .consult-field input {
             width: 100%;
-            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            padding: 12px 14px;
             border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: clamp(8px, 0.8vh, 10px);
+            border-radius: 10px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.4vh, 17px);
+            font-size: 16px;
             color: #1A1A2E;
             background: rgba(255, 255, 255, 0.8);
             transition: border-color 0.3s ease;
@@ -1345,16 +1350,16 @@
         .modal-consult .consult-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(10px, 1.2vw, 16px);
-            margin-top: clamp(8px, 0.8vh, 14px);
+            gap: 12px;
+            margin-top: 10px;
         }
 
         .modal-consult .consult-actions .btn {
-            padding: clamp(14px, 1.6vh, 20px);
+            padding: 16px;
             border: none;
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 15px;
             font-weight: 400;
             letter-spacing: 1.5px;
             text-transform: uppercase;
@@ -1406,44 +1411,43 @@
         }
 
         .modal-messenger {
-            max-width: clamp(340px, 45vw, 500px);
-            width: 100%;
-            padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
+            max-width: 500px;
+            padding: 32px 28px 32px;
         }
 
         .modal-messenger .messenger-title {
             font-family: 'Playfair Display', 'Times New Roman', serif;
-            font-size: clamp(20px, 3vh, 30px);
+            font-size: 24px;
             font-weight: 400;
             letter-spacing: 2px;
             color: #1A1A2E;
             text-transform: uppercase;
-            margin-bottom: clamp(6px, 0.8vh, 12px);
+            margin-bottom: 8px;
             text-align: center;
         }
 
         .modal-messenger .messenger-subtitle {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 16px;
             color: #4A4A5A;
             font-weight: 300;
             text-align: center;
-            margin-bottom: clamp(24px, 3vh, 36px);
+            margin-bottom: 28px;
             letter-spacing: 0.3px;
         }
 
         .modal-messenger .messenger-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: clamp(10px, 1.2vw, 16px);
+            gap: 12px;
         }
 
         .modal-messenger .messenger-buttons .btn-messenger {
-            padding: clamp(14px, 1.6vh, 20px);
+            padding: 16px;
             border: none;
-            border-radius: clamp(10px, 1vh, 14px);
+            border-radius: 12px;
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(14px, 1.5vh, 18px);
+            font-size: 16px;
             font-weight: 400;
             letter-spacing: 1px;
             cursor: pointer;
@@ -1514,11 +1518,11 @@
 
         .modal-messenger .messenger-note {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(12px, 1.2vh, 15px);
+            font-size: 13px;
             color: #8A8A9A;
             font-weight: 300;
             text-align: center;
-            margin-top: clamp(16px, 2vh, 24px);
+            margin-top: 20px;
             line-height: 1.5;
         }
 
@@ -1533,21 +1537,20 @@
         }
 
         .modal-success {
-            max-width: clamp(340px, 45vw, 480px);
-            width: 100%;
-            padding: clamp(32px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
+            max-width: 480px;
+            padding: 40px 32px 40px;
             text-align: center;
         }
 
         .modal-success .success-logo {
             max-width: 200px;
             height: auto;
-            margin-bottom: clamp(16px, 2vh, 24px);
+            margin-bottom: 20px;
         }
 
         .modal-success .success-message {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(16px, 1.8vh, 22px);
+            font-size: 18px;
             color: #1A1A2E;
             font-weight: 300;
             line-height: 1.6;
@@ -1559,7 +1562,7 @@
            ================================================================ */
         @media (max-width: 768px) {
             body {
-                padding: clamp(8px, 1.5vw, 16px);
+                padding: 12px;
             }
 
             .top-bar {
@@ -1589,10 +1592,11 @@
             .header {
                 padding: 20px 16px 16px 16px;
                 margin-bottom: 16px;
+                border-radius: 12px;
             }
 
             .header h1 {
-                font-size: 28px;
+                font-size: 26px;
                 letter-spacing: 2px;
             }
 
@@ -1642,6 +1646,28 @@
             }
 
             /* Модальные окна на мобильных */
+            .modal,
+            .modal-calc,
+            .modal-consult,
+            .modal-messenger,
+            .modal-success {
+                padding: 24px 20px 24px;
+                max-height: 85vh;
+                border-radius: 12px;
+            }
+
+            .modal .modal-header h2 {
+                font-size: 22px;
+            }
+
+            .modal .modal-header .modal-price {
+                font-size: 17px;
+            }
+
+            .modal .modal-desc {
+                font-size: 14px;
+            }
+
             .modal .specs-grid {
                 grid-template-columns: 1fr;
                 gap: 4px;
@@ -1651,40 +1677,109 @@
                 grid-template-columns: 1fr;
             }
 
-            .modal-calc .calc-info {
-                grid-template-columns: 1fr;
-                gap: 8px;
+            .modal-calc .calc-title {
+                font-size: 22px;
+            }
+
+            .modal-calc .calc-subtitle {
+                font-size: 14px;
+                margin-bottom: 18px;
             }
 
             .modal-calc .calc-row {
                 flex-wrap: wrap;
+                gap: 8px;
             }
 
             .modal-calc .calc-row label {
                 min-width: 100%;
+                font-size: 14px;
+            }
+
+            .modal-calc .calc-row input {
+                font-size: 16px;
+                padding: 10px 12px;
+            }
+
+            .modal-calc .calc-info {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                padding: 14px 16px;
+            }
+
+            .modal-calc .calc-info .info-item .info-value {
+                font-size: 16px;
+            }
+
+            .modal-calc .calc-total .total-label {
+                font-size: 16px;
+            }
+
+            .modal-calc .calc-total .total-value {
+                font-size: 24px;
             }
 
             .modal-calc .calc-actions {
                 grid-template-columns: 1fr;
             }
 
-            .modal-calc .calc-total {
-                flex-direction: column;
-                align-items: flex-start;
+            .modal-consult .consult-title {
+                font-size: 22px;
+            }
+
+            .modal-consult .consult-subtitle {
+                font-size: 14px;
+                margin-bottom: 18px;
             }
 
             .modal-consult .consult-actions {
                 grid-template-columns: 1fr;
             }
 
+            .modal-messenger .messenger-title {
+                font-size: 20px;
+            }
+
+            .modal-messenger .messenger-subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
             .modal-messenger .messenger-buttons {
                 grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .modal-messenger .messenger-buttons .btn-messenger {
+                padding: 14px;
+                font-size: 14px;
+            }
+
+            .modal-success .success-logo {
+                max-width: 150px;
+                margin-bottom: 16px;
+            }
+
+            .modal-success .success-message {
+                font-size: 16px;
+            }
+
+            .modal .modal-close,
+            .modal-calc .modal-close,
+            .modal-consult .modal-close,
+            .modal-messenger .modal-close,
+            .modal-success .modal-close {
+                width: 34px;
+                height: 34px;
+                font-size: 17px;
+                top: 12px;
+                right: 12px;
             }
         }
 
         @media (max-width: 480px) {
             body {
-                padding: 6px;
+                padding: 8px;
             }
 
             .top-bar .logo-center img {
@@ -1709,7 +1804,7 @@
             }
 
             .header h1 {
-                font-size: 20px;
+                font-size: 18px;
                 letter-spacing: 1.5px;
             }
 
@@ -1719,7 +1814,7 @@
             }
 
             .carousel-wrapper {
-                max-height: 55vh;
+                max-height: 50vh;
             }
 
             .swiper-slide {
@@ -1727,7 +1822,7 @@
             }
 
             .card {
-                border-radius: 12px;
+                border-radius: 10px;
             }
 
             .card .image {
@@ -1744,18 +1839,18 @@
             }
 
             .card .info .name {
-                font-size: clamp(13px, 2.2vh, 18px);
+                font-size: clamp(12px, 2.2vh, 16px);
                 letter-spacing: 0.5px;
             }
 
             .card .info .price {
-                font-size: clamp(10px, 1.5vh, 14px);
+                font-size: clamp(10px, 1.5vh, 13px);
                 letter-spacing: 0.5px;
                 margin-top: 1px;
             }
 
             .card .info .description {
-                font-size: clamp(8px, 1vh, 11px);
+                font-size: clamp(8px, 1vh, 10px);
                 padding-left: 2px;
                 padding-top: 1px;
             }
@@ -1795,51 +1890,14 @@
                 padding: 8px;
             }
 
-            .modal {
-                padding: 16px 12px 18px;
-                max-width: 100%;
-                border-radius: 12px;
-                max-height: 95vh;
-            }
-
-            .modal-calc {
-                padding: 18px 14px 20px;
-                max-width: 100%;
-                border-radius: 12px;
-                max-height: 95vh;
-            }
-
-            .modal-consult {
-                padding: 18px 14px 20px;
-                max-width: 100%;
-                border-radius: 12px;
-                max-height: 95vh;
-            }
-
-            .modal-messenger {
-                padding: 18px 14px 20px;
-                max-width: 100%;
-                border-radius: 12px;
-            }
-
+            .modal,
+            .modal-calc,
+            .modal-consult,
+            .modal-messenger,
             .modal-success {
-                padding: 20px 14px 24px;
-                max-width: 100%;
-                border-radius: 12px;
-            }
-
-            .modal-success .success-logo {
-                max-width: 120px;
-                margin-bottom: 12px;
-            }
-
-            .modal-success .success-message {
-                font-size: 15px;
-            }
-
-            .modal-messenger .messenger-buttons {
-                grid-template-columns: 1fr;
-                gap: 8px;
+                padding: 18px 14px 20px;
+                border-radius: 10px;
+                max-height: 92vh;
             }
 
             .modal .modal-header h2 {
@@ -1847,11 +1905,13 @@
             }
 
             .modal .modal-header .modal-price {
-                font-size: 14px;
+                font-size: 15px;
             }
 
             .modal .modal-desc {
                 font-size: 13px;
+                margin-bottom: 12px;
+                padding-bottom: 12px;
             }
 
             .modal .spec-item .spec-label {
@@ -1859,7 +1919,12 @@
             }
 
             .modal .spec-item .spec-value {
-                font-size: 12px;
+                font-size: 13px;
+            }
+
+            .modal .modal-extra {
+                padding: 10px 14px;
+                margin-bottom: 12px;
             }
 
             .modal .modal-extra p {
@@ -1867,7 +1932,7 @@
             }
 
             .modal .modal-actions .btn {
-                font-size: 12px;
+                font-size: 13px;
                 padding: 12px;
             }
 
@@ -1877,26 +1942,31 @@
 
             .modal-calc .calc-subtitle {
                 font-size: 13px;
-                margin-bottom: 16px;
+                margin-bottom: 14px;
             }
 
             .modal-calc .calc-material {
                 font-size: 12px;
                 padding: 8px 12px;
+                margin-bottom: 14px;
             }
 
             .modal-calc .calc-row label {
                 font-size: 13px;
-                min-width: 100%;
             }
 
             .modal-calc .calc-row input {
                 font-size: 15px;
-                padding: 8px 12px;
+                padding: 8px 10px;
             }
 
             .modal-calc .calc-row .calc-unit {
                 font-size: 13px;
+            }
+
+            .modal-calc .calc-info {
+                padding: 10px 12px;
+                margin: 12px 0;
             }
 
             .modal-calc .calc-info .info-item .info-label {
@@ -1915,13 +1985,18 @@
                 font-size: 20px;
             }
 
+            .modal-calc .calc-form {
+                margin-top: 14px;
+                padding-top: 14px;
+            }
+
             .modal-calc .calc-field label {
-                font-size: 12px;
+                font-size: 13px;
             }
 
             .modal-calc .calc-field input {
-                font-size: 14px;
-                padding: 8px 12px;
+                font-size: 15px;
+                padding: 8px 10px;
             }
 
             .modal-calc .calc-actions .btn {
@@ -1935,16 +2010,16 @@
 
             .modal-consult .consult-subtitle {
                 font-size: 13px;
-                margin-bottom: 16px;
+                margin-bottom: 14px;
             }
 
             .modal-consult .consult-field label {
-                font-size: 12px;
+                font-size: 13px;
             }
 
             .modal-consult .consult-field input {
-                font-size: 14px;
-                padding: 8px 12px;
+                font-size: 15px;
+                padding: 8px 10px;
             }
 
             .modal-consult .consult-actions .btn {
@@ -1961,6 +2036,11 @@
                 margin-bottom: 16px;
             }
 
+            .modal-messenger .messenger-buttons {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
             .modal-messenger .messenger-buttons .btn-messenger {
                 font-size: 13px;
                 padding: 12px;
@@ -1968,7 +2048,28 @@
 
             .modal-messenger .messenger-note {
                 font-size: 12px;
-                margin-top: 12px;
+                margin-top: 14px;
+            }
+
+            .modal-success .success-logo {
+                max-width: 120px;
+                margin-bottom: 12px;
+            }
+
+            .modal-success .success-message {
+                font-size: 15px;
+            }
+
+            .modal .modal-close,
+            .modal-calc .modal-close,
+            .modal-consult .modal-close,
+            .modal-messenger .modal-close,
+            .modal-success .modal-close {
+                width: 30px;
+                height: 30px;
+                font-size: 15px;
+                top: 10px;
+                right: 10px;
             }
         }
 
@@ -2001,19 +2102,43 @@
             }
 
             .carousel-wrapper {
-                max-height: 45vh;
+                max-height: 40vh;
             }
 
             .card .info .name {
-                font-size: 11px;
+                font-size: 10px;
             }
 
             .card .info .price {
-                font-size: 9px;
+                font-size: 8px;
             }
 
             .card .info .description {
                 font-size: 7px;
+            }
+
+            .modal,
+            .modal-calc,
+            .modal-consult,
+            .modal-messenger,
+            .modal-success {
+                padding: 14px 10px 16px;
+            }
+
+            .modal .modal-header h2 {
+                font-size: 16px;
+            }
+
+            .modal-calc .calc-title {
+                font-size: 16px;
+            }
+
+            .modal-consult .consult-title {
+                font-size: 16px;
+            }
+
+            .modal-messenger .messenger-title {
+                font-size: 16px;
             }
 
             .modal-success .success-logo {
