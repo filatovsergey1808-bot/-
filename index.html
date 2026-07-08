@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Террасная доска | PRINCIP FLOOR</title>
     <meta name="description" content="Премиальная террасная доска из натурального дерева и ДПК. PRINCIP FLOOR — качество, проверенное временем.">
     <meta name="keywords" content="террасная доска, декинг, ДПК, лиственница, PRINCIP FLOOR">
@@ -23,6 +23,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
         }
 
         body {
@@ -717,18 +722,19 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — ОСНОВНОЕ
+           МОДАЛЬНЫЕ ОКНА — ОБЩИЕ СТИЛИ
            ================================================================ */
-        .modal-overlay {
+        .modal-overlay,
+        .modal-calc-overlay,
+        .modal-consult-overlay,
+        .modal-messenger-overlay,
+        .modal-success-overlay {
             display: none;
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 85, 164, 0.15);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
             z-index: 1000;
             justify-content: center;
             align-items: center;
@@ -736,7 +742,11 @@
             animation: overlayFade 0.3s ease;
         }
 
-        .modal-overlay.active {
+        .modal-overlay.active,
+        .modal-calc-overlay.active,
+        .modal-consult-overlay.active,
+        .modal-messenger-overlay.active,
+        .modal-success-overlay.active {
             display: flex;
         }
 
@@ -745,38 +755,22 @@
             to { opacity: 1; }
         }
 
-        .modal {
-            background: rgba(255, 255, 255, 0.97);
+        /* Общие стили для всех модальных окон */
+        .modal,
+        .modal-calc,
+        .modal-consult,
+        .modal-messenger,
+        .modal-success {
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: clamp(16px, 2.5vh, 28px);
-            max-width: clamp(340px, 50vw, 620px);
-            width: 100%;
-            padding: clamp(24px, 4vh, 44px) clamp(20px, 3vw, 40px);
             box-shadow: 0 30px 120px rgba(0, 85, 164, 0.2);
             animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            max-height: 92vh;
-            overflow-y: auto;
             position: relative;
             border-top: none;
-        }
-
-        .modal::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .modal::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 4px;
-        }
-
-        .modal::-webkit-scrollbar-thumb {
-            background: rgba(0, 85, 164, 0.3);
-            border-radius: 4px;
-        }
-
-        .modal::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 85, 164, 0.5);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         @keyframes modalSlideUp {
@@ -790,7 +784,47 @@
             }
         }
 
-        .modal .modal-close {
+        /* Стилизация скролла для всех модальных окон */
+        .modal::-webkit-scrollbar,
+        .modal-calc::-webkit-scrollbar,
+        .modal-consult::-webkit-scrollbar,
+        .modal-messenger::-webkit-scrollbar,
+        .modal-success::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .modal::-webkit-scrollbar-track,
+        .modal-calc::-webkit-scrollbar-track,
+        .modal-consult::-webkit-scrollbar-track,
+        .modal-messenger::-webkit-scrollbar-track,
+        .modal-success::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 4px;
+        }
+
+        .modal::-webkit-scrollbar-thumb,
+        .modal-calc::-webkit-scrollbar-thumb,
+        .modal-consult::-webkit-scrollbar-thumb,
+        .modal-messenger::-webkit-scrollbar-thumb,
+        .modal-success::-webkit-scrollbar-thumb {
+            background: rgba(0, 85, 164, 0.3);
+            border-radius: 4px;
+        }
+
+        .modal::-webkit-scrollbar-thumb:hover,
+        .modal-calc::-webkit-scrollbar-thumb:hover,
+        .modal-consult::-webkit-scrollbar-thumb:hover,
+        .modal-messenger::-webkit-scrollbar-thumb:hover,
+        .modal-success::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 85, 164, 0.5);
+        }
+
+        /* Кнопка закрытия для всех модальных окон */
+        .modal .modal-close,
+        .modal-calc .modal-close,
+        .modal-consult .modal-close,
+        .modal-messenger .modal-close,
+        .modal-success .modal-close {
             position: absolute;
             top: clamp(12px, 1.5vh, 20px);
             right: clamp(12px, 1.5vw, 20px);
@@ -807,14 +841,36 @@
             align-items: center;
             justify-content: center;
             line-height: 1;
+            z-index: 10;
         }
 
-        .modal .modal-close:hover {
+        .modal .modal-close:hover,
+        .modal-calc .modal-close:hover,
+        .modal-consult .modal-close:hover,
+        .modal-messenger .modal-close:hover,
+        .modal-success .modal-close:hover {
             background: #0055A4;
             color: #ffffff;
             border-color: #0055A4;
             transform: rotate(90deg);
             box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
+        }
+
+        /* ================================================================
+           МОДАЛЬНОЕ ОКНО — ОСНОВНОЕ
+           ================================================================ */
+        .modal-overlay {
+            background: rgba(0, 85, 164, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            z-index: 1000;
+        }
+
+        .modal {
+            max-width: clamp(340px, 50vw, 620px);
+            width: 100%;
+            padding: clamp(24px, 4vh, 44px) clamp(20px, 3vw, 40px);
+            max-height: 92vh;
         }
 
         .modal .modal-header {
@@ -962,88 +1018,20 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР (С ФОРМОЙ)
+           МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР
            ================================================================ */
         .modal-calc-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             background: rgba(0, 85, 164, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: clamp(16px, 3vh, 40px);
-            animation: overlayFade 0.3s ease;
-        }
-
-        .modal-calc-overlay.active {
-            display: flex;
         }
 
         .modal-calc {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: clamp(16px, 2.5vh, 28px);
             max-width: clamp(340px, 45vw, 560px);
             width: 100%;
             padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
-            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             max-height: 92vh;
-            overflow-y: auto;
-            position: relative;
-            border-top: none;
-        }
-
-        .modal-calc::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .modal-calc::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 4px;
-        }
-
-        .modal-calc::-webkit-scrollbar-thumb {
-            background: rgba(0, 85, 164, 0.3);
-            border-radius: 4px;
-        }
-
-        .modal-calc::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 85, 164, 0.5);
-        }
-
-        .modal-calc .modal-close {
-            position: absolute;
-            top: clamp(12px, 1.5vh, 20px);
-            right: clamp(12px, 1.5vw, 20px);
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            width: clamp(36px, 4vh, 44px);
-            height: clamp(36px, 4vh, 44px);
-            font-size: clamp(18px, 2.2vh, 24px);
-            color: #4A4A5A;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .modal-calc .modal-close:hover {
-            background: #0055A4;
-            color: #ffffff;
-            border-color: #0055A4;
-            transform: rotate(90deg);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
         .modal-calc .calc-title {
@@ -1287,85 +1275,17 @@
            МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ
            ================================================================ */
         .modal-consult-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             background: rgba(0, 85, 164, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: clamp(16px, 3vh, 40px);
-            animation: overlayFade 0.3s ease;
-        }
-
-        .modal-consult-overlay.active {
-            display: flex;
         }
 
         .modal-consult {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: clamp(16px, 2.5vh, 28px);
             max-width: clamp(340px, 45vw, 500px);
             width: 100%;
             padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
-            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             max-height: 92vh;
-            overflow-y: auto;
-            position: relative;
-            border-top: none;
-        }
-
-        .modal-consult::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .modal-consult::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 4px;
-        }
-
-        .modal-consult::-webkit-scrollbar-thumb {
-            background: rgba(0, 85, 164, 0.3);
-            border-radius: 4px;
-        }
-
-        .modal-consult::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 85, 164, 0.5);
-        }
-
-        .modal-consult .modal-close {
-            position: absolute;
-            top: clamp(12px, 1.5vh, 20px);
-            right: clamp(12px, 1.5vw, 20px);
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            width: clamp(36px, 4vh, 44px);
-            height: clamp(36px, 4vh, 44px);
-            font-size: clamp(18px, 2.2vh, 24px);
-            color: #4A4A5A;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .modal-consult .modal-close:hover {
-            background: #0055A4;
-            color: #ffffff;
-            border-color: #0055A4;
-            transform: rotate(90deg);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
         .modal-consult .consult-title {
@@ -1479,65 +1399,16 @@
            МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
            ================================================================ */
         .modal-messenger-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             background: rgba(0, 85, 164, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 3000;
-            justify-content: center;
-            align-items: center;
-            padding: clamp(16px, 3vh, 40px);
-            animation: overlayFade 0.3s ease;
-        }
-
-        .modal-messenger-overlay.active {
-            display: flex;
         }
 
         .modal-messenger {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: clamp(16px, 2.5vh, 28px);
             max-width: clamp(340px, 45vw, 500px);
             width: 100%;
             padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
-            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            border-top: none;
-        }
-
-        .modal-messenger .modal-close {
-            position: absolute;
-            top: clamp(12px, 1.5vh, 20px);
-            right: clamp(12px, 1.5vw, 20px);
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            width: clamp(36px, 4vh, 44px);
-            height: clamp(36px, 4vh, 44px);
-            font-size: clamp(18px, 2.2vh, 24px);
-            color: #4A4A5A;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .modal-messenger .modal-close:hover {
-            background: #0055A4;
-            color: #ffffff;
-            border-color: #0055A4;
-            transform: rotate(90deg);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
         .modal-messenger .messenger-title {
@@ -1655,66 +1526,17 @@
            МОДАЛЬНОЕ ОКНО — УСПЕШНАЯ ОТПРАВКА
            ================================================================ */
         .modal-success-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
             background: rgba(0, 85, 164, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             z-index: 4000;
-            justify-content: center;
-            align-items: center;
-            padding: clamp(16px, 3vh, 40px);
-            animation: overlayFade 0.3s ease;
-        }
-
-        .modal-success-overlay.active {
-            display: flex;
         }
 
         .modal-success {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: clamp(16px, 2.5vh, 28px);
             max-width: clamp(340px, 45vw, 480px);
             width: 100%;
             padding: clamp(32px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
-            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
-            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            position: relative;
-            border-top: none;
             text-align: center;
-        }
-
-        .modal-success .modal-close {
-            position: absolute;
-            top: clamp(12px, 1.5vh, 20px);
-            right: clamp(12px, 1.5vw, 20px);
-            background: rgba(0, 0, 0, 0.04);
-            border: 1px solid rgba(0, 0, 0, 0.06);
-            border-radius: 50%;
-            width: clamp(36px, 4vh, 44px);
-            height: clamp(36px, 4vh, 44px);
-            font-size: clamp(18px, 2.2vh, 24px);
-            color: #4A4A5A;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            line-height: 1;
-        }
-
-        .modal-success .modal-close:hover {
-            background: #0055A4;
-            color: #ffffff;
-            border-color: #0055A4;
-            transform: rotate(90deg);
-            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
         .modal-success .success-logo {
@@ -1737,7 +1559,7 @@
            ================================================================ */
         @media (max-width: 768px) {
             body {
-                padding: 12px;
+                padding: clamp(8px, 1.5vw, 16px);
             }
 
             .top-bar {
@@ -1765,52 +1587,52 @@
             }
 
             .header {
-                padding: 24px 20px 20px 20px;
-                margin-bottom: 20px;
+                padding: 20px 16px 16px 16px;
+                margin-bottom: 16px;
             }
 
             .header h1 {
-                font-size: 32px;
-                letter-spacing: 3px;
+                font-size: 28px;
+                letter-spacing: 2px;
             }
 
             .header .subtitle {
-                font-size: 16px;
+                font-size: 14px;
             }
 
             .carousel-wrapper {
                 max-width: 100%;
-                max-height: 70vh;
+                max-height: 65vh;
                 aspect-ratio: 1 / 1;
             }
 
             .swiper-slide {
-                padding: 0 12px;
+                padding: 0 10px;
             }
 
             .swiper-button-prev,
             .swiper-button-next {
-                width: 50px;
+                width: 40px;
             }
 
             .swiper-button-prev svg,
             .swiper-button-next svg {
-                width: 28px;
-                height: 28px;
+                width: 24px;
+                height: 24px;
             }
 
             .card .info .name {
-                font-size: clamp(18px, 3vh, 28px);
-                letter-spacing: 1.5px;
+                font-size: clamp(16px, 2.8vh, 24px);
+                letter-spacing: 1px;
             }
 
             .card .info .price {
-                font-size: clamp(14px, 2vh, 20px);
-                letter-spacing: 1.5px;
+                font-size: clamp(13px, 1.8vh, 18px);
+                letter-spacing: 1px;
             }
 
             .card .info .description {
-                font-size: clamp(11px, 1.4vh, 15px);
+                font-size: clamp(10px, 1.2vh, 14px);
             }
 
             .geo-shape:nth-child(1),
@@ -1819,6 +1641,7 @@
                 display: none;
             }
 
+            /* Модальные окна на мобильных */
             .modal .specs-grid {
                 grid-template-columns: 1fr;
                 gap: 4px;
@@ -1861,49 +1684,50 @@
 
         @media (max-width: 480px) {
             body {
-                padding: 8px;
+                padding: 6px;
             }
 
             .top-bar .logo-center img {
-                width: 150px;
-                max-height: 40px;
+                width: 130px;
+                max-height: 35px;
             }
 
             .top-bar .social-left .social-icon {
-                width: 34px;
-                height: 34px;
+                width: 30px;
+                height: 30px;
             }
 
             .top-bar .social-left .social-icon svg {
-                width: 17px;
-                height: 17px;
+                width: 15px;
+                height: 15px;
             }
 
             .header {
-                padding: 16px 14px 14px 14px;
-                margin-bottom: 14px;
-                border-radius: 12px;
+                padding: 14px 12px 12px 12px;
+                margin-bottom: 12px;
+                border-radius: 10px;
             }
 
             .header h1 {
-                font-size: 24px;
-                letter-spacing: 2px;
+                font-size: 20px;
+                letter-spacing: 1.5px;
             }
 
             .header .subtitle {
-                font-size: 14px;
+                font-size: 12px;
+                margin-top: 4px;
             }
 
             .carousel-wrapper {
-                max-height: 60vh;
+                max-height: 55vh;
             }
 
             .swiper-slide {
-                padding: 0 8px;
+                padding: 0 6px;
             }
 
             .card {
-                border-radius: 14px;
+                border-radius: 12px;
             }
 
             .card .image {
@@ -1915,46 +1739,46 @@
             }
 
             .card .info {
-                padding: 8px 10px 10px;
-                gap: 2px 6px;
+                padding: 6px 8px 8px;
+                gap: 2px 4px;
             }
 
             .card .info .name {
-                font-size: clamp(14px, 2.5vh, 20px);
-                letter-spacing: 1px;
+                font-size: clamp(13px, 2.2vh, 18px);
+                letter-spacing: 0.5px;
             }
 
             .card .info .price {
-                font-size: clamp(11px, 1.8vh, 16px);
-                letter-spacing: 1px;
+                font-size: clamp(10px, 1.5vh, 14px);
+                letter-spacing: 0.5px;
                 margin-top: 1px;
             }
 
             .card .info .description {
-                font-size: clamp(9px, 1.2vh, 12px);
+                font-size: clamp(8px, 1vh, 11px);
                 padding-left: 2px;
                 padding-top: 1px;
             }
 
             .swiper-button-prev,
             .swiper-button-next {
-                width: 40px;
+                width: 30px;
             }
 
             .swiper-button-prev svg,
             .swiper-button-next svg {
-                width: 20px;
-                height: 20px;
+                width: 16px;
+                height: 16px;
             }
 
             .swiper-pagination {
-                padding: 10px 0 4px 0;
-                gap: 6px;
+                padding: 8px 0 4px 0;
+                gap: 5px;
             }
 
             .swiper-pagination-bullet {
-                width: 8px;
-                height: 8px;
+                width: 6px;
+                height: 6px;
             }
 
             .geo-shape:nth-child(3),
@@ -1962,87 +1786,242 @@
                 display: none;
             }
 
+            /* Модальные окна на маленьких экранах */
+            .modal-overlay,
+            .modal-calc-overlay,
+            .modal-consult-overlay,
+            .modal-messenger-overlay,
+            .modal-success-overlay {
+                padding: 8px;
+            }
+
             .modal {
-                padding: 18px 14px 20px;
-                max-width: 98%;
-                border-radius: 14px;
+                padding: 16px 12px 18px;
+                max-width: 100%;
+                border-radius: 12px;
+                max-height: 95vh;
             }
 
             .modal-calc {
-                padding: 22px 16px 24px;
-                max-width: 98%;
-                border-radius: 14px;
+                padding: 18px 14px 20px;
+                max-width: 100%;
+                border-radius: 12px;
+                max-height: 95vh;
             }
 
             .modal-consult {
-                padding: 22px 16px 24px;
-                max-width: 98%;
-                border-radius: 14px;
+                padding: 18px 14px 20px;
+                max-width: 100%;
+                border-radius: 12px;
+                max-height: 95vh;
             }
 
             .modal-messenger {
-                padding: 22px 16px 24px;
-                max-width: 98%;
-                border-radius: 14px;
+                padding: 18px 14px 20px;
+                max-width: 100%;
+                border-radius: 12px;
+            }
+
+            .modal-success {
+                padding: 20px 14px 24px;
+                max-width: 100%;
+                border-radius: 12px;
+            }
+
+            .modal-success .success-logo {
+                max-width: 120px;
+                margin-bottom: 12px;
+            }
+
+            .modal-success .success-message {
+                font-size: 15px;
             }
 
             .modal-messenger .messenger-buttons {
                 grid-template-columns: 1fr;
+                gap: 8px;
             }
 
-            .modal-success {
-                padding: 24px 16px 28px;
-                max-width: 98%;
-                border-radius: 14px;
+            .modal .modal-header h2 {
+                font-size: 18px;
             }
 
-            .modal-success .success-logo {
-                max-width: 140px;
+            .modal .modal-header .modal-price {
+                font-size: 14px;
+            }
+
+            .modal .modal-desc {
+                font-size: 13px;
+            }
+
+            .modal .spec-item .spec-label {
+                font-size: 10px;
+            }
+
+            .modal .spec-item .spec-value {
+                font-size: 12px;
+            }
+
+            .modal .modal-extra p {
+                font-size: 12px;
+            }
+
+            .modal .modal-actions .btn {
+                font-size: 12px;
+                padding: 12px;
+            }
+
+            .modal-calc .calc-title {
+                font-size: 18px;
+            }
+
+            .modal-calc .calc-subtitle {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            .modal-calc .calc-material {
+                font-size: 12px;
+                padding: 8px 12px;
+            }
+
+            .modal-calc .calc-row label {
+                font-size: 13px;
+                min-width: 100%;
+            }
+
+            .modal-calc .calc-row input {
+                font-size: 15px;
+                padding: 8px 12px;
+            }
+
+            .modal-calc .calc-row .calc-unit {
+                font-size: 13px;
+            }
+
+            .modal-calc .calc-info .info-item .info-label {
+                font-size: 10px;
+            }
+
+            .modal-calc .calc-info .info-item .info-value {
+                font-size: 14px;
+            }
+
+            .modal-calc .calc-total .total-label {
+                font-size: 14px;
+            }
+
+            .modal-calc .calc-total .total-value {
+                font-size: 20px;
+            }
+
+            .modal-calc .calc-field label {
+                font-size: 12px;
+            }
+
+            .modal-calc .calc-field input {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .modal-calc .calc-actions .btn {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            .modal-consult .consult-title {
+                font-size: 18px;
+            }
+
+            .modal-consult .consult-subtitle {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            .modal-consult .consult-field label {
+                font-size: 12px;
+            }
+
+            .modal-consult .consult-field input {
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .modal-consult .consult-actions .btn {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            .modal-messenger .messenger-title {
+                font-size: 18px;
+            }
+
+            .modal-messenger .messenger-subtitle {
+                font-size: 13px;
+                margin-bottom: 16px;
+            }
+
+            .modal-messenger .messenger-buttons .btn-messenger {
+                font-size: 13px;
+                padding: 12px;
+            }
+
+            .modal-messenger .messenger-note {
+                font-size: 12px;
+                margin-top: 12px;
             }
         }
 
         @media (max-width: 360px) {
             .top-bar .social-left .social-icon {
-                width: 28px;
-                height: 28px;
+                width: 24px;
+                height: 24px;
             }
 
             .top-bar .social-left .social-icon svg {
-                width: 14px;
-                height: 14px;
+                width: 12px;
+                height: 12px;
             }
 
             .top-bar .social-left {
-                gap: 6px;
+                gap: 4px;
             }
 
             .top-bar .logo-center img {
-                width: 120px;
-                max-height: 32px;
+                width: 100px;
+                max-height: 28px;
             }
 
             .header h1 {
-                font-size: 18px;
+                font-size: 16px;
             }
 
             .header .subtitle {
-                font-size: 12px;
-            }
-
-            .carousel-wrapper {
-                max-height: 50vh;
-            }
-
-            .card .info .name {
-                font-size: 12px;
-            }
-
-            .card .info .price {
                 font-size: 10px;
             }
 
+            .carousel-wrapper {
+                max-height: 45vh;
+            }
+
+            .card .info .name {
+                font-size: 11px;
+            }
+
+            .card .info .price {
+                font-size: 9px;
+            }
+
             .card .info .description {
-                font-size: 8px;
+                font-size: 7px;
+            }
+
+            .modal-success .success-logo {
+                max-width: 100px;
+            }
+
+            .modal-success .success-message {
+                font-size: 13px;
             }
         }
 
@@ -2913,10 +2892,10 @@
             document.querySelectorAll('.btn-messenger').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const messenger = this.dataset.messenger;
-        
+                    
                     let name = '';
                     let phone = '';
-        
+                    
                     if (messengerType === 'consult') {
                         name = consultName;
                         phone = consultPhone;
@@ -2924,18 +2903,18 @@
                         name = calcName;
                         phone = calcPhone;
                     }
-        
-        // Сообщение с именем
+                    
+                    // Сообщение с именем
                     const successMessage = 
                         `${name}, спасибо, что выбрали нас!<br>` +
                         `Мы свяжемся с Вами в ближайшее время!`;
-        
+                    
                     closeMessengerModal();
-        
+                    
                     setTimeout(() => {
                         openSuccessModal(successMessage);
                     }, 300);
-        
+                    
                     if (messengerType === 'consult') {
                         sendToTelegram(name, phone, messenger, 'consult');
                     } else {
