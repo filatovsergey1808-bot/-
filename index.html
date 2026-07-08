@@ -38,7 +38,7 @@
             justify-content: center;
         }
 
-        /* Геометрический фон */
+        /* Геометрический фон (сокращен для экономии места) */
         body::before {
             content: '';
             position: fixed;
@@ -84,26 +84,6 @@
                     rgba(0, 85, 164, 0.025) 204px,
                     transparent 206px,
                     transparent 400px
-                ),
-                repeating-linear-gradient(
-                    30deg,
-                    transparent 0px,
-                    transparent 140px,
-                    rgba(0, 85, 164, 0.02) 140px,
-                    rgba(0, 85, 164, 0.05) 141px,
-                    rgba(0, 85, 164, 0.02) 142px,
-                    transparent 143px,
-                    transparent 280px
-                ),
-                repeating-linear-gradient(
-                    -30deg,
-                    transparent 0px,
-                    transparent 90px,
-                    rgba(0, 85, 164, 0.03) 90px,
-                    rgba(0, 85, 164, 0.08) 92px,
-                    rgba(0, 85, 164, 0.03) 94px,
-                    transparent 96px,
-                    transparent 180px
                 );
             transform: rotate(0deg) scale(1.1);
             animation: gridFloat 25s ease-in-out infinite alternate;
@@ -112,11 +92,8 @@
 
         @keyframes gridFloat {
             0% { transform: rotate(0deg) scale(1.05) translate(0, 0); }
-            20% { transform: rotate(0.5deg) scale(1.08) translate(1%, -1%); }
-            40% { transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%); }
-            60% { transform: rotate(0.8deg) scale(1.1) translate(1%, 1%); }
-            80% { transform: rotate(-0.5deg) scale(1.06) translate(-1%, -1%); }
-            100% { transform: rotate(0.3deg) scale(1.12) translate(0, 0); }
+            50% { transform: rotate(0.5deg) scale(1.08) translate(1%, -1%); }
+            100% { transform: rotate(-0.3deg) scale(1.03) translate(-1%, 1%); }
         }
 
         .geo-shapes {
@@ -263,7 +240,7 @@
         }
 
         /* ================================================================
-           ВЕРХНЯЯ ПАНЕЛЬ — логотип и контакты
+           ВЕРХНЯЯ ПАНЕЛЬ
            ================================================================ */
         .top-bar {
             display: flex;
@@ -445,7 +422,7 @@
         }
 
         /* ================================================================
-           КАРУСЕЛЬ — АДАПТИВНАЯ
+           КАРУСЕЛЬ
            ================================================================ */
         .carousel-wrapper {
             position: relative;
@@ -547,9 +524,6 @@
             flex-shrink: 0;
         }
 
-        /* ================================================================
-           ИНФОРМАЦИОННАЯ ОБЛАСТЬ — 2 КОЛОНКИ
-           ================================================================ */
         .card .info {
             padding: clamp(8px, 1.2vh, 18px) clamp(12px, 1.5vw, 22px);
             flex: 1;
@@ -816,7 +790,6 @@
             }
         }
 
-        /* Кнопка закрытия */
         .modal .modal-close {
             position: absolute;
             top: clamp(12px, 1.5vh, 20px);
@@ -844,7 +817,6 @@
             box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
         }
 
-        /* Заголовок модального окна */
         .modal .modal-header {
             display: flex;
             flex-direction: column;
@@ -872,7 +844,6 @@
             margin-top: 2px;
         }
 
-        /* Описание */
         .modal .modal-desc {
             font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             font-size: clamp(14px, 1.6vh, 18px);
@@ -884,7 +855,6 @@
             border-bottom: 1px solid rgba(0, 85, 164, 0.06);
         }
 
-        /* Характеристики — сетка */
         .modal .specs-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -917,7 +887,6 @@
             letter-spacing: 0.3px;
         }
 
-        /* Блок с дополнительной информацией */
         .modal .modal-extra {
             background: rgba(0, 85, 164, 0.03);
             border-radius: clamp(10px, 1vh, 14px);
@@ -939,7 +908,6 @@
             font-weight: 400;
         }
 
-        /* Кнопки действий */
         .modal .modal-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -1273,7 +1241,7 @@
         }
 
         /* ================================================================
-           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ)
+           МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (С ФОРМОЙ)
            ================================================================ */
         .modal-consult-overlay {
             display: none;
@@ -1301,7 +1269,7 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: clamp(16px, 2.5vh, 28px);
-            max-width: clamp(340px, 45vw, 560px);
+            max-width: clamp(340px, 45vw, 500px);
             width: 100%;
             padding: clamp(28px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
             box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
@@ -1376,21 +1344,46 @@
             letter-spacing: 0.3px;
         }
 
-        /* Убираем блок с материалом */
-        .modal-consult .consult-material {
-            display: none;
+        .modal-consult .consult-field {
+            margin-bottom: clamp(12px, 1.2vh, 18px);
         }
 
-        /* Убираем поле для количества */
-        .modal-consult .consult-row {
-            display: none;
+        .modal-consult .consult-field label {
+            display: block;
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(13px, 1.3vh, 16px);
+            color: #1A1A2E;
+            font-weight: 400;
+            margin-bottom: 4px;
+        }
+
+        .modal-consult .consult-field input {
+            width: 100%;
+            padding: clamp(10px, 1vh, 14px) clamp(12px, 1.2vw, 16px);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: clamp(8px, 0.8vh, 10px);
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(14px, 1.4vh, 17px);
+            color: #1A1A2E;
+            background: rgba(255, 255, 255, 0.8);
+            transition: border-color 0.3s ease;
+            outline: none;
+        }
+
+        .modal-consult .consult-field input:focus {
+            border-color: #0055A4;
+            box-shadow: 0 0 0 3px rgba(0, 85, 164, 0.1);
+        }
+
+        .modal-consult .consult-field input::placeholder {
+            color: #B0B8C0;
         }
 
         .modal-consult .consult-actions {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: clamp(10px, 1.2vw, 16px);
-            margin-top: clamp(4px, 0.5vh, 8px);
+            margin-top: clamp(8px, 0.8vh, 14px);
         }
 
         .modal-consult .consult-actions .btn {
@@ -1613,6 +1606,87 @@
             text-align: center;
             margin-top: clamp(16px, 2vh, 24px);
             line-height: 1.5;
+        }
+
+        /* ================================================================
+           МОДАЛЬНОЕ ОКНО — УСПЕШНАЯ ОТПРАВКА
+           ================================================================ */
+        .modal-success-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 85, 164, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 4000;
+            justify-content: center;
+            align-items: center;
+            padding: clamp(16px, 3vh, 40px);
+            animation: overlayFade 0.3s ease;
+        }
+
+        .modal-success-overlay.active {
+            display: flex;
+        }
+
+        .modal-success {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: clamp(16px, 2.5vh, 28px);
+            max-width: clamp(340px, 45vw, 480px);
+            width: 100%;
+            padding: clamp(32px, 4.5vh, 48px) clamp(24px, 3.5vw, 44px);
+            box-shadow: 0 40px 160px rgba(0, 85, 164, 0.25);
+            animation: modalSlideUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
+            border-top: none;
+            text-align: center;
+        }
+
+        .modal-success .modal-close {
+            position: absolute;
+            top: clamp(12px, 1.5vh, 20px);
+            right: clamp(12px, 1.5vw, 20px);
+            background: rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 50%;
+            width: clamp(36px, 4vh, 44px);
+            height: clamp(36px, 4vh, 44px);
+            font-size: clamp(18px, 2.2vh, 24px);
+            color: #4A4A5A;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
+        .modal-success .modal-close:hover {
+            background: #0055A4;
+            color: #ffffff;
+            border-color: #0055A4;
+            transform: rotate(90deg);
+            box-shadow: 0 4px 16px rgba(0, 85, 164, 0.25);
+        }
+
+        .modal-success .success-logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: clamp(16px, 2vh, 24px);
+        }
+
+        .modal-success .success-message {
+            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            font-size: clamp(16px, 1.8vh, 22px);
+            color: #1A1A2E;
+            font-weight: 300;
+            line-height: 1.6;
+            letter-spacing: 0.3px;
         }
 
         /* ================================================================
@@ -1872,6 +1946,16 @@
             .modal-messenger .messenger-buttons {
                 grid-template-columns: 1fr;
             }
+
+            .modal-success {
+                padding: 24px 16px 28px;
+                max-width: 98%;
+                border-radius: 14px;
+            }
+
+            .modal-success .success-logo {
+                max-width: 140px;
+            }
         }
 
         @media (max-width: 360px) {
@@ -2107,7 +2191,7 @@
         </div>
     </div>
 
-    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ) -->
+    <!-- МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (С ФОРМОЙ) -->
     <div class="modal-consult-overlay" id="modalConsultOverlay">
         <div class="modal-consult">
             <button class="modal-close" id="modalConsultClose">✕</button>
@@ -2115,8 +2199,18 @@
             <div class="consult-title">Запрос консультации</div>
             <div class="consult-subtitle">Оставьте свои контакты, и мы свяжемся с вами</div>
             
+            <div class="consult-field">
+                <label for="consultName">Ваше имя</label>
+                <input type="text" id="consultName" placeholder="Введите ваше имя">
+            </div>
+            
+            <div class="consult-field">
+                <label for="consultPhone">Номер телефона</label>
+                <input type="tel" id="consultPhone" placeholder="+7 (___) ___-__-__">
+            </div>
+            
             <div class="consult-actions">
-                <button class="btn btn-primary" id="consultSend">Отправить запрос</button>
+                <button class="btn btn-primary" id="consultSend">Отправить</button>
                 <button class="btn btn-secondary" id="consultClear">Очистить</button>
             </div>
         </div>
@@ -2138,6 +2232,21 @@
             </div>
             
             <div class="messenger-note">Мы свяжемся с вами в выбранном мессенджере или по телефону</div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО — УСПЕШНАЯ ОТПРАВКА -->
+    <div class="modal-success-overlay" id="modalSuccessOverlay">
+        <div class="modal-success">
+            <button class="modal-close" id="modalSuccessClose">✕</button>
+            <div class="success-content">
+                <img src="https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png" 
+                     alt="PRINCIP FLOOR" class="success-logo">
+                <p class="success-message" id="successMessage">
+                    Спасибо, что выбрали нас!<br>
+                    Мы свяжемся с Вами в ближайшее время!
+                </p>
+            </div>
         </div>
     </div>
 
@@ -2283,6 +2392,9 @@
         let currentArea = 0;
         let currentTotal = '';
         let currentWithTrim = '';
+        let consultName = '';
+        let consultPhone = '';
+        let messengerType = '';
 
         // ================================================================
         // ИНИЦИАЛИЗАЦИЯ SWIPER
@@ -2391,21 +2503,14 @@
                 return;
             }
             
-            // Добавляем 10% на подрезку
             const withTrim = area * 1.1;
-            
-            // Округляем в большую сторону (убираем десятые)
             const roundedArea = Math.ceil(withTrim);
-            
-            // Рассчитываем стоимость
             const total = roundedArea * currentPriceValue;
             
-            // Сохраняем для отправки
             currentArea = area;
             currentTotal = total.toLocaleString('ru-RU') + ' ₽';
             currentWithTrim = roundedArea + ' м²';
             
-            // Обновляем отображение
             document.getElementById('calcWithTrim').textContent = currentWithTrim;
             document.getElementById('calcTotal').textContent = currentTotal;
             document.getElementById('calcPricePerM2').textContent = `${currentPriceValue.toLocaleString('ru-RU')} ₽`;
@@ -2415,16 +2520,16 @@
         // ОТПРАВКА В TELEGRAM
         // ================================================================
         function sendToTelegram(name, phone, messenger, type) {
-            let message = '';
+            let caption = '';
             
             if (type === 'consult') {
-                message = 
+                caption = 
                     `📋 НОВЫЙ ЗАПРОС НА КОНСУЛЬТАЦИЮ\n\n` +
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
                     `💬 Мессенджер: ${messenger}`;
             } else {
-                message = 
+                caption = 
                     `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
@@ -2434,7 +2539,8 @@
                     `💵 Примерная стоимость: ${currentTotal}`;
             }
             
-            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+            const logoUrl = 'https://principfloor.ru/bitrix/templates/dresscodeV2/images/logo.png';
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`;
             
             return fetch(url, {
                 method: 'POST',
@@ -2443,7 +2549,8 @@
                 },
                 body: JSON.stringify({
                     chat_id: CHAT_ID,
-                    text: message,
+                    photo: logoUrl,
+                    caption: caption,
                     parse_mode: 'Markdown'
                 })
             });
@@ -2456,17 +2563,14 @@
             const data = categories.find(c => c.id === id);
             if (!data) return;
 
-            // Сохраняем данные для калькулятора
             currentPriceValue = data.priceValue;
             currentName = data.name;
             currentPrice = data.price;
 
-            // Заполняем заголовок и цену
             document.getElementById('modalName').textContent = data.name;
             document.getElementById('modalPrice').textContent = data.price;
             document.getElementById('modalDesc').textContent = data.description;
             
-            // Заполняем характеристики
             const specsGrid = document.getElementById('specsGrid');
             specsGrid.innerHTML = '';
             
@@ -2495,7 +2599,6 @@
                 }
             });
             
-            // Заполняем дополнительную информацию
             document.getElementById('modalExtra').innerHTML = `<p><strong>Рекомендация:</strong> ${data.extra}</p>`;
 
             document.getElementById('modalOverlay').classList.add('active');
@@ -2519,12 +2622,10 @@
         // МОДАЛЬНОЕ ОКНО — КАЛЬКУЛЯТОР
         // ================================================================
         function openCalcModal() {
-            // Передаём данные в калькулятор
             document.getElementById('calcMaterialName').textContent = currentName;
             document.getElementById('calcMaterialPrice').textContent = currentPrice;
             document.getElementById('calcPricePerM2').textContent = `${currentPriceValue.toLocaleString('ru-RU')} ₽`;
             
-            // Сбрасываем поля
             document.getElementById('calcArea').value = '';
             document.getElementById('calcWithTrim').textContent = '0 м²';
             document.getElementById('calcTotal').textContent = '0 ₽';
@@ -2535,7 +2636,6 @@
             document.getElementById('modalCalcOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
             
-            // Фокусируемся на поле ввода
             setTimeout(() => {
                 document.getElementById('calcArea').focus();
             }, 300);
@@ -2547,11 +2647,17 @@
         }
 
         // ================================================================
-        // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ)
+        // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ
         // ================================================================
         function openConsultModal() {
+            document.getElementById('consultName').value = '';
+            document.getElementById('consultPhone').value = '';
             document.getElementById('modalConsultOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            setTimeout(() => {
+                document.getElementById('consultName').focus();
+            }, 300);
         }
 
         function closeConsultModal() {
@@ -2562,8 +2668,6 @@
         // ================================================================
         // МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
         // ================================================================
-        let messengerType = '';
-
         function openMessengerModal(type) {
             messengerType = type;
             document.getElementById('modalMessengerOverlay').classList.add('active');
@@ -2572,6 +2676,20 @@
 
         function closeMessengerModal() {
             document.getElementById('modalMessengerOverlay').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ================================================================
+        // МОДАЛЬНОЕ ОКНО — УСПЕШНАЯ ОТПРАВКА
+        // ================================================================
+        function openSuccessModal(message) {
+            document.getElementById('successMessage').innerHTML = message;
+            document.getElementById('modalSuccessOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('modalSuccessOverlay').classList.remove('active');
             document.body.style.overflow = 'auto';
         }
 
@@ -2605,6 +2723,12 @@
                 if (e.target === e.currentTarget) closeMessengerModal();
             };
 
+            // Закрытие модального окна успешной отправки
+            document.getElementById('modalSuccessClose').onclick = closeSuccessModal;
+            document.getElementById('modalSuccessOverlay').onclick = (e) => {
+                if (e.target === e.currentTarget) closeSuccessModal();
+            };
+
             // Клавиша Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
@@ -2612,10 +2736,11 @@
                     closeCalcModal();
                     closeConsultModal();
                     closeMessengerModal();
+                    closeSuccessModal();
                 }
             });
             
-            // Кнопка "Консультация" — открывает форму консультации
+            // Кнопка "Консультация"
             document.getElementById('btnConsult').addEventListener('click', () => {
                 closeModal();
                 setTimeout(() => {
@@ -2623,7 +2748,7 @@
                 }, 400);
             });
             
-            // Кнопка "Рассчитать" — открывает калькулятор
+            // Кнопка "Рассчитать"
             document.getElementById('btnCalc').addEventListener('click', () => {
                 closeModal();
                 setTimeout(() => {
@@ -2635,11 +2760,9 @@
             // КАЛЬКУЛЯТОР
             // ================================================================
             
-            // Событие изменения в поле ввода площади
             document.getElementById('calcArea').addEventListener('input', updateCalculator);
             document.getElementById('calcArea').addEventListener('change', updateCalculator);
             
-            // Кнопка "Очистить"
             document.getElementById('calcClear').addEventListener('click', () => {
                 document.getElementById('calcArea').value = '';
                 document.getElementById('calcWithTrim').textContent = '0 м²';
@@ -2650,7 +2773,6 @@
                 currentWithTrim = '';
             });
             
-            // Кнопка "Отправить расчёт" — открывает выбор мессенджера
             document.getElementById('calcSend').addEventListener('click', () => {
                 const areaInput = document.getElementById('calcArea');
                 const area = parseFloat(areaInput.value);
@@ -2661,10 +2783,7 @@
                     return;
                 }
                 
-                // Обновляем данные
                 updateCalculator();
-                
-                // Открываем окно выбора мессенджера
                 closeCalcModal();
                 setTimeout(() => {
                     openMessengerModal('calc');
@@ -2675,75 +2794,87 @@
             // КОНСУЛЬТАЦИЯ
             // ================================================================
             
-            // Кнопка "Отправить запрос" — открывает выбор мессенджера
+            document.getElementById('consultClear').addEventListener('click', () => {
+                document.getElementById('consultName').value = '';
+                document.getElementById('consultPhone').value = '';
+                document.getElementById('consultName').focus();
+            });
+            
             document.getElementById('consultSend').addEventListener('click', () => {
+                const name = document.getElementById('consultName').value.trim();
+                const phone = document.getElementById('consultPhone').value.trim();
+                
+                if (!name) {
+                    alert('Пожалуйста, введите ваше имя');
+                    document.getElementById('consultName').focus();
+                    return;
+                }
+                
+                if (!phone) {
+                    alert('Пожалуйста, введите номер телефона');
+                    document.getElementById('consultPhone').focus();
+                    return;
+                }
+                
+                consultName = name;
+                consultPhone = phone;
+                
                 closeConsultModal();
                 setTimeout(() => {
                     openMessengerModal('consult');
                 }, 400);
             });
             
-            // Кнопка "Очистить" — просто закрывает окно
-            document.getElementById('consultClear').addEventListener('click', () => {
-                closeConsultModal();
-            });
-            
             // ================================================================
             // ВЫБОР МЕССЕНДЖЕРА
             // ================================================================
             
-            // Обработчики кнопок выбора мессенджера
             document.querySelectorAll('.btn-messenger').forEach(btn => {
                 btn.addEventListener('click', function() {
                     const messenger = this.dataset.messenger;
                     
-                    // Запрашиваем контакты
-                    const nameContact = prompt('Ваше имя:');
-                    if (!nameContact) {
-                        alert('Для отправки необходимо указать имя.');
-                        return;
-                    }
-                    
-                    const phone = prompt('Ваш номер телефона для связи:');
-                    if (!phone) {
-                        alert('Для отправки необходимо указать номер телефона.');
-                        return;
-                    }
-                    
-                    // Формируем сообщение в зависимости от типа
+                    let name = '';
+                    let phone = '';
                     let successMessage = '';
-                    if (messengerType === 'consult') {
-                        successMessage = 
-                            `Спасибо, что выбрали PRINCIP FLOOR!\n\n` +
-                            `Мы свяжемся с Вами в ближайшее время!`;
-                    } else {
-                        successMessage = 
-                            `Спасибо, ${nameContact}!\n\n` +
-                            `Ваш расчёт отправлен менеджеру.\n` +
-                            `Мы свяжемся с вами в ${messenger}.\n\n` +
-                            `Спасибо, что воспользовались предварительным расчётом! Мы уточним сроки поставки и сообщим их Вам!`;
-                    }
                     
-                    alert(successMessage);
-                    
-                    // Отправляем в Telegram
                     if (messengerType === 'consult') {
-                        sendToTelegram(
-                            nameContact,
-                            phone,
-                            messenger,
-                            'consult'
-                        );
+                        name = consultName;
+                        phone = consultPhone;
+                        successMessage = 
+                            'Спасибо, что выбрали нас!<br>' +
+                            'Мы свяжемся с Вами в ближайшее время!';
                     } else {
-                        sendToTelegram(
-                            nameContact,
-                            phone,
-                            messenger,
-                            'calc'
-                        );
+                        // Для расчёта запрашиваем имя и телефон через модальное окно
+                        // Так как у нас нет отдельной формы для расчёта, используем prompt
+                        name = prompt('Ваше имя:');
+                        if (!name) {
+                            alert('Для отправки необходимо указать имя.');
+                            return;
+                        }
+                        phone = prompt('Ваш номер телефона для связи:');
+                        if (!phone) {
+                            alert('Для отправки необходимо указать номер телефона.');
+                            return;
+                        }
+                        successMessage = 
+                            `Спасибо, ${name}!<br><br>` +
+                            `Ваш расчёт отправлен менеджеру.<br>` +
+                            `Мы свяжемся с вами в ${messenger}.<br><br>` +
+                            `Спасибо, что воспользовались предварительным расчётом!<br>Мы уточним сроки поставки и сообщим их Вам!`;
                     }
                     
                     closeMessengerModal();
+                    
+                    setTimeout(() => {
+                        openSuccessModal(successMessage);
+                    }, 300);
+                    
+                    // Отправляем в Telegram
+                    if (messengerType === 'consult') {
+                        sendToTelegram(name, phone, messenger, 'consult');
+                    } else {
+                        sendToTelegram(name, phone, messenger, 'calc');
+                    }
                 });
             });
         });
