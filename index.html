@@ -1376,21 +1376,9 @@
             letter-spacing: 0.3px;
         }
 
+        /* Убираем блок с материалом */
         .modal-consult .consult-material {
-            font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-            font-size: clamp(13px, 1.3vh, 16px);
-            color: #8A8A9A;
-            font-weight: 300;
-            margin-bottom: clamp(16px, 2vh, 24px);
-            padding: clamp(10px, 1vh, 16px);
-            background: rgba(0, 85, 164, 0.04);
-            border-radius: clamp(8px, 0.8vh, 12px);
-            border: 1px solid rgba(0, 85, 164, 0.06);
-        }
-
-        .modal-consult .consult-material strong {
-            color: #1A1A2E;
-            font-weight: 500;
+            display: none;
         }
 
         /* Убираем поле для количества */
@@ -2127,19 +2115,6 @@
             <div class="consult-title">Запрос консультации</div>
             <div class="consult-subtitle">Оставьте свои контакты, и мы свяжемся с вами</div>
             
-            <div class="consult-material" id="consultMaterial">
-                <strong>Материал:</strong> <span id="consultMaterialName">Лиственница</span>
-                &nbsp;·&nbsp;
-                <span id="consultMaterialPrice">4 500 ₽/м²</span>
-            </div>
-            
-            <!-- Поле количества скрыто -->
-            <div class="consult-row" style="display:none;">
-                <label for="consultQuantity">Количество:</label>
-                <input type="number" id="consultQuantity" placeholder="Введите количество м²" step="0.1" min="0">
-                <span class="consult-unit">м²</span>
-            </div>
-            
             <div class="consult-actions">
                 <button class="btn btn-primary" id="consultSend">Отправить запрос</button>
                 <button class="btn btn-secondary" id="consultClear">Очистить</button>
@@ -2439,7 +2414,7 @@
         // ================================================================
         // ОТПРАВКА В TELEGRAM
         // ================================================================
-        function sendToTelegram(name, phone, messenger, material, type) {
+        function sendToTelegram(name, phone, messenger, type) {
             let message = '';
             
             if (type === 'consult') {
@@ -2447,15 +2422,13 @@
                     `📋 НОВЫЙ ЗАПРОС НА КОНСУЛЬТАЦИЮ\n\n` +
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
-                    `💬 Мессенджер: ${messenger}\n` +
-                    `📦 Материал: ${material}`;
+                    `💬 Мессенджер: ${messenger}`;
             } else {
                 message = 
                     `📋 НОВЫЙ ЗАПРОС НА РАСЧЁТ\n\n` +
                     `👤 Имя: ${name}\n` +
                     `📞 Телефон: ${phone}\n` +
                     `💬 Мессенджер: ${messenger}\n` +
-                    `📦 Материал: ${material}\n` +
                     `📐 Чистая площадь: ${currentArea} м²\n` +
                     `💰 С учётом подрезки (10%): ${currentWithTrim}\n` +
                     `💵 Примерная стоимость: ${currentTotal}`;
@@ -2483,7 +2456,7 @@
             const data = categories.find(c => c.id === id);
             if (!data) return;
 
-            // Сохраняем данные для калькулятора и консультации
+            // Сохраняем данные для калькулятора
             currentPriceValue = data.priceValue;
             currentName = data.name;
             currentPrice = data.price;
@@ -2576,13 +2549,7 @@
         // ================================================================
         // МОДАЛЬНОЕ ОКНО — КОНСУЛЬТАЦИЯ (УПРОЩЁННАЯ)
         // ================================================================
-        let consultData = {};
-
         function openConsultModal() {
-            // Передаём данные в форму консультации
-            document.getElementById('consultMaterialName').textContent = currentName;
-            document.getElementById('consultMaterialPrice').textContent = currentPrice;
-            
             document.getElementById('modalConsultOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -2595,11 +2562,9 @@
         // ================================================================
         // МОДАЛЬНОЕ ОКНО — ВЫБОР МЕССЕНДЖЕРА
         // ================================================================
-        let messengerData = {};
         let messengerType = '';
 
-        function openMessengerModal(data, type) {
-            messengerData = data;
+        function openMessengerModal(type) {
             messengerType = type;
             document.getElementById('modalMessengerOverlay').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -2699,15 +2664,10 @@
                 // Обновляем данные
                 updateCalculator();
                 
-                // Сохраняем данные для отправки
-                const data = {
-                    material: document.getElementById('calcMaterialName').textContent
-                };
-                
                 // Открываем окно выбора мессенджера
                 closeCalcModal();
                 setTimeout(() => {
-                    openMessengerModal(data, 'calc');
+                    openMessengerModal('calc');
                 }, 400);
             });
             
@@ -2717,15 +2677,9 @@
             
             // Кнопка "Отправить запрос" — открывает выбор мессенджера
             document.getElementById('consultSend').addEventListener('click', () => {
-                // Сохраняем данные для отправки
-                const data = {
-                    material: document.getElementById('consultMaterialName').textContent
-                };
-                
-                // Открываем окно выбора мессенджера
                 closeConsultModal();
                 setTimeout(() => {
-                    openMessengerModal(data, 'consult');
+                    openMessengerModal('consult');
                 }, 400);
             });
             
@@ -2778,7 +2732,6 @@
                             nameContact,
                             phone,
                             messenger,
-                            messengerData.material,
                             'consult'
                         );
                     } else {
@@ -2786,7 +2739,6 @@
                             nameContact,
                             phone,
                             messenger,
-                            messengerData.material,
                             'calc'
                         );
                     }
